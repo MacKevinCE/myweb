@@ -5,6 +5,7 @@
 import { escapeHtml } from '../utils';
 import { state, tr, slugify, getLocale } from './state';
 import { getNode, resolvePath } from './filesystem';
+import { APP_VERSION, BUILD_DATE } from '../../../data/version';
 import { settings, saveSettings } from '../settings/persist';
 import { applyAppearance } from '../settings/appearance';
 import { applyAccentColor } from '../settings/accent';
@@ -97,6 +98,7 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
       ['matrix', tr('matrixDesc')],
       ['shortcuts', tr('shortcutsDesc')],
       ['set &lt;key&gt; [value]', tr('setDesc')],
+      ['version', tr('versionDesc')],
     ];
 
     // Measure display length (decode HTML entities for accurate padding)
@@ -554,6 +556,16 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
     }
 
     return def.apply(value);
+  },
+
+  version() {
+    const os = tr('osName') || 'MacKevinOS';
+    return [
+      `<span class="term-green term-bold">${escapeHtml(os)}</span> <span class="term-cyan">v${escapeHtml(APP_VERSION)}</span>`,
+      `  <span class="term-blue">${escapeHtml(tr('versionBuild'))}</span>  ${escapeHtml(BUILD_DATE)}`,
+      `  <span class="term-blue">${escapeHtml(tr('versionShell'))}</span>  ${escapeHtml(tr('shellName') || 'mksh 1.0')}`,
+      `  <span class="term-blue">${escapeHtml(tr('versionArch'))}</span>   x86_64`,
+    ].join('\n');
   },
 };
 

@@ -228,7 +228,11 @@
     "setClock24hDesc": "Alternar reloj 24 horas",
     "setReduceMotionDesc": "Alternar reducir movimiento",
     "setFontSizeDesc": "Cambiar tamaño de fuente",
-    "setHighContrastDesc": "Alternar alto contraste"
+    "setHighContrastDesc": "Alternar alto contraste",
+    "versionDesc": "Mostrar versión del sistema",
+    "versionBuild": "Build:",
+    "versionShell": "Shell:",
+    "versionArch": "Arq:"
   },
   "preview": {
     "of": "de",

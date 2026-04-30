@@ -229,7 +229,11 @@
     "setClock24hDesc": "Toggle 24-hour clock",
     "setReduceMotionDesc": "Toggle reduce motion",
     "setFontSizeDesc": "Change font size",
-    "setHighContrastDesc": "Toggle high contrast"
+    "setHighContrastDesc": "Toggle high contrast",
+    "versionDesc": "Show system version",
+    "versionBuild": "Build:",
+    "versionShell": "Shell:",
+    "versionArch": "Arch:"
   },
   "preview": {
     "of": "of",
