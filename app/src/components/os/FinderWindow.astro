@@ -338,7 +338,7 @@ const expSidebarTags = uniqueTags(displayJobs);
         <div class="finder-header-div"></div>
         <div class="finder-rows">
           {
-            allProjects.map((project, i) => (
+            allProjects.map((project) => (
               <div
                 class="finder-row"
                 data-row-tags={project.tags.join(',')}
@@ -447,7 +447,7 @@ const expSidebarTags = uniqueTags(displayJobs);
         <div class="finder-header-div"></div>
         <div class="finder-rows">
           {
-            displayJobs.map((job, i) => (
+            displayJobs.map((job) => (
               <div
                 class="finder-row"
                 data-row-tags={job.tags.join(',')}

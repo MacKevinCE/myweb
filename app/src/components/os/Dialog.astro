@@ -3,7 +3,7 @@ import type { OsContent } from '../../types';
 interface Props {
   content: OsContent;
 }
-const { content } = Astro.props;
+const { content: _content } = Astro.props;
 ---
 
 <div class="os-dialog-overlay" id="os-dialog" style="display: none;">
