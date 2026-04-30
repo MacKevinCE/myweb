@@ -7,7 +7,9 @@ interface Props {
 
 const { content } = Astro.props;
 const { footer } = content;
-const brand = (content.about?.avatarName ?? '').toLowerCase().replace(/\s+/g, '_');
+const brand = (content.about?.avatarName ?? '')
+  .toLowerCase()
+  .replace(/\s+/g, '_');
 ---
 
 <footer

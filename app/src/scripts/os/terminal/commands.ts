@@ -9,7 +9,11 @@ import { APP_VERSION, BUILD_DATE } from '../../../data/version';
 import { settings, saveSettings } from '../settings/persist';
 import { applyAppearance } from '../settings/appearance';
 import { applyAccentColor } from '../settings/accent';
-import { applyFontSize, applyReduceMotion, applyHighContrast } from '../settings/accessibility';
+import {
+  applyFontSize,
+  applyReduceMotion,
+  applyHighContrast,
+} from '../settings/accessibility';
 import { track } from '../achievements';
 
 // ---------------------------------------------------------------------------
@@ -35,7 +39,11 @@ function skillColor(level: number): string {
 // Command Parser
 // ---------------------------------------------------------------------------
 
-export function parse(input: string): { cmd: string; args: string[]; flags: Record<string, string | boolean> } {
+export function parse(input: string): {
+  cmd: string;
+  args: string[];
+  flags: Record<string, string | boolean>;
+} {
   const tokens = input.trim().split(/\s+/);
   const cmd = tokens[0]?.toLowerCase() ?? '';
   const args: string[] = [];
@@ -69,10 +77,14 @@ export function parse(input: string): { cmd: string; args: string[]; flags: Reco
 
 // Forward-declared — set by core.ts at init time
 let _updatePrompt: () => void = () => {};
-export function setUpdatePrompt(fn: () => void) { _updatePrompt = fn; }
+export function setUpdatePrompt(fn: () => void) {
+  _updatePrompt = fn;
+}
 
-export const commands: Record<string, (args: string[], flags: Record<string, string | boolean>) => string> = {
-
+export const commands: Record<
+  string,
+  (args: string[], flags: Record<string, string | boolean>) => string
+> = {
   help() {
     const cmds: [string, string][] = [
       ['help', tr('helpDesc')],
@@ -102,7 +114,9 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
     ];
 
     // Measure display length (decode HTML entities for accurate padding)
-    const displayLen = (s: string) => s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&').length;
+    const displayLen = (s: string) =>
+      s.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+        .length;
     const maxLen = Math.max(...cmds.map(([name]) => displayLen(name)));
     const rows = cmds.map(([name, desc]) => {
       const pad = maxLen + 2 - displayLen(name);
@@ -115,22 +129,28 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
   ls(args) {
     const target = args[0] || '.';
     const node = target === '.' ? getNode(state.cwd) : getNode(target);
-    if (!node) return `<span class="term-red">${escapeHtml(tr('noSuchFile', { cmd: 'ls', path: target }))}</span>`;
+    if (!node)
+      return `<span class="term-red">${escapeHtml(tr('noSuchFile', { cmd: 'ls', path: target }))}</span>`;
     if (node.type === 'file') return node.name;
     if (!node.children || node.children.length === 0) return '';
 
     return node.children
-      .map((c) => c.type === 'dir'
-        ? `<span class="term-blue">${escapeHtml(c.name)}/</span>`
-        : escapeHtml(c.name))
+      .map((c) =>
+        c.type === 'dir'
+          ? `<span class="term-blue">${escapeHtml(c.name)}/</span>`
+          : escapeHtml(c.name)
+      )
       .join('  ');
   },
 
   cat(args) {
-    if (!args[0]) return `<span class="term-red">${escapeHtml(tr('missingOperand', { cmd: 'cat' }))}</span>`;
+    if (!args[0])
+      return `<span class="term-red">${escapeHtml(tr('missingOperand', { cmd: 'cat' }))}</span>`;
     const node = getNode(args[0]);
-    if (!node) return `<span class="term-red">${escapeHtml(tr('noSuchFile', { cmd: 'cat', path: args[0] }))}</span>`;
-    if (node.type === 'dir') return `<span class="term-red">${escapeHtml(tr('isDirectory', { cmd: 'cat', path: args[0] }))}</span>`;
+    if (!node)
+      return `<span class="term-red">${escapeHtml(tr('noSuchFile', { cmd: 'cat', path: args[0] }))}</span>`;
+    if (node.type === 'dir')
+      return `<span class="term-red">${escapeHtml(tr('isDirectory', { cmd: 'cat', path: args[0] }))}</span>`;
     if (!node.content) return '';
 
     if (node.name.endsWith('.json')) {
@@ -143,8 +163,10 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
     const target = args[0] || '~';
     const resolved = resolvePath(target);
     const node = getNode(resolved);
-    if (!node) return `<span class="term-red">${escapeHtml(tr('noSuchFile', { cmd: 'cd', path: target }))}</span>`;
-    if (node.type !== 'dir') return `<span class="term-red">${escapeHtml(tr('notADirectory', { cmd: 'cd', path: target }))}</span>`;
+    if (!node)
+      return `<span class="term-red">${escapeHtml(tr('noSuchFile', { cmd: 'cd', path: target }))}</span>`;
+    if (node.type !== 'dir')
+      return `<span class="term-red">${escapeHtml(tr('notADirectory', { cmd: 'cd', path: target }))}</span>`;
     state.cwd = resolved;
     _updatePrompt();
     return '';
@@ -206,7 +228,9 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
 
   projects() {
     const all = [
-      ...(state.profileData.projects.featured?.visible ? [state.profileData.projects.featured] : []),
+      ...(state.profileData.projects.featured?.visible
+        ? [state.profileData.projects.featured]
+        : []),
       ...state.profileData.projects.items,
     ];
     return all
@@ -225,16 +249,18 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
     return Object.values(links)
       .map((l) => {
         const label = `<span class="term-green">${escapeHtml(l.label).padEnd(10)}</span>`;
-        const link = l.url.startsWith('mailto:') || l.url === '#'
-          ? `<span class="term-blue">${escapeHtml(l.displayText)}</span>`
-          : `<a href="${escapeHtml(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.displayText)}</a>`;
+        const link =
+          l.url.startsWith('mailto:') || l.url === '#'
+            ? `<span class="term-blue">${escapeHtml(l.displayText)}</span>`
+            : `<a href="${escapeHtml(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.displayText)}</a>`;
         return `  ${label}${link}`;
       })
       .join('\n');
   },
 
   open(args) {
-    if (!args[0]) return `<span class="term-red">${escapeHtml(tr('openMissing'))}</span>`;
+    if (!args[0])
+      return `<span class="term-red">${escapeHtml(tr('openMissing'))}</span>`;
     const target = args[0].toLowerCase();
     const links = state.profileData.contact.links;
 
@@ -246,10 +272,15 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
 
     // Check projects
     const allProjects = [
-      ...(state.profileData.projects.featured?.visible ? [state.profileData.projects.featured] : []),
+      ...(state.profileData.projects.featured?.visible
+        ? [state.profileData.projects.featured]
+        : []),
       ...state.profileData.projects.items,
     ];
-    const proj = allProjects.find((p) => slugify(p.name) === slugify(target) || p.name.toLowerCase() === target);
+    const proj = allProjects.find(
+      (p) =>
+        slugify(p.name) === slugify(target) || p.name.toLowerCase() === target
+    );
     if (proj) {
       window.open(proj.repo, '_blank');
       return `<span class="term-muted">${escapeHtml(tr('openingRepo', { name: proj.name }))}</span>`;
@@ -260,11 +291,20 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
 
   launch(args) {
     const appMap: Record<string, string> = {
-      about: 'about-window', skills: 'skills-window', education: 'education-window',
-      preview: 'preview-window', contact: 'contact-window', finder: 'finder-window',
-      browser: 'browser-window', settings: 'settings-window', appstore: 'app-store-window',
-      speedtest: 'speed-test-window', terminal: 'terminal-window', notes: 'notes-window',
-      playgrounds: 'playground-window', stickies: 'stickies-window',
+      about: 'about-window',
+      skills: 'skills-window',
+      education: 'education-window',
+      preview: 'preview-window',
+      contact: 'contact-window',
+      finder: 'finder-window',
+      browser: 'browser-window',
+      settings: 'settings-window',
+      appstore: 'app-store-window',
+      speedtest: 'speed-test-window',
+      terminal: 'terminal-window',
+      notes: 'notes-window',
+      playgrounds: 'playground-window',
+      stickies: 'stickies-window',
       gamecenter: 'achievements-window',
     };
     if (!args[0]) {
@@ -280,7 +320,9 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
     }
     const win = document.getElementById(windowId);
     if (win) {
-      document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
+      document.dispatchEvent(
+        new CustomEvent('open-window', { detail: { el: win } })
+      );
       return `<span class="term-muted">${escapeHtml(tr('launching', { app: name }))}</span>`;
     }
     return `<span class="term-red">${escapeHtml(tr('launchNotFound', { app: name }))}</span>`;
@@ -288,7 +330,10 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
 
   history() {
     return state.history
-      .map((cmd, i) => `  <span class="term-muted">${String(i + 1).padStart(4)}</span>  ${escapeHtml(cmd)}`)
+      .map(
+        (cmd, i) =>
+          `  <span class="term-muted">${String(i + 1).padStart(4)}</span>  ${escapeHtml(cmd)}`
+      )
       .join('\n');
   },
 
@@ -326,12 +371,24 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
       '    ╚══════════╝',
     ].join('\n');
 
-    const totalSkills = state.profileData.skills.categories.reduce((sum, c) => sum + c.items.length, 0);
-    const totalProjects = (state.profileData.projects.featured?.visible ? 1 : 0) + state.profileData.projects.items.length;
-    const firstJob = state.profileData.experience.jobs[state.profileData.experience.jobs.length - 1];
-    const startYear = parseInt(firstJob?.startDate?.match(/\d{4}/)?.[0] ?? '2019', 10);
+    const totalSkills = state.profileData.skills.categories.reduce(
+      (sum, c) => sum + c.items.length,
+      0
+    );
+    const totalProjects =
+      (state.profileData.projects.featured?.visible ? 1 : 0) +
+      state.profileData.projects.items.length;
+    const firstJob =
+      state.profileData.experience.jobs[
+        state.profileData.experience.jobs.length - 1
+      ];
+    const startYear = parseInt(
+      firstJob?.startDate?.match(/\d{4}/)?.[0] ?? '2019',
+      10
+    );
     const yearsExp = new Date().getFullYear() - startYear;
-    const langs = state.profileData.about.languages?.map((l) => l.text).join(', ') ?? '';
+    const langs =
+      state.profileData.about.languages?.map((l) => l.text).join(', ') ?? '';
 
     const info = [
       `<span class="term-green term-bold">${escapeHtml(tr('userName') || 'kevin')}</span>@<span class="term-green term-bold">${escapeHtml(tr('hostName') || 'portfolio')}</span>`,
@@ -367,7 +424,9 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
 
   ping(args) {
     const host = args[0] || 'localhost';
-    const lines: string[] = [`PING ${escapeHtml(host)} (127.0.0.1): 56 data bytes`];
+    const lines: string[] = [
+      `PING ${escapeHtml(host)} (127.0.0.1): 56 data bytes`,
+    ];
     let totalMs = 0;
     let minMs = Infinity;
     let maxMs = 0;
@@ -382,14 +441,17 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
     lines.push('');
     lines.push(`--- ${escapeHtml(host)} ping statistics ---`);
     lines.push(`4 packets transmitted, 4 packets received, 0.0% packet loss`);
-    lines.push(`round-trip min/avg/max = ${minMs.toFixed(3)}/${(totalMs / 4).toFixed(3)}/${maxMs.toFixed(3)} ms`);
+    lines.push(
+      `round-trip min/avg/max = ${minMs.toFixed(3)}/${(totalMs / 4).toFixed(3)}/${maxMs.toFixed(3)} ms`
+    );
     return lines.join('\n');
   },
 
   matrix() {
     const container = document.createElement('div');
     container.className = 'term-matrix';
-    const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
+    const chars =
+      'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
     const colCount = Math.floor(state.bodyEl.offsetWidth / 16);
 
     for (let c = 0; c < colCount; c++) {
@@ -436,20 +498,35 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
 
   set(args) {
     const ACCENT_MAP: Record<string, string> = {
-      blue: 'var(--os-stg-blue)', purple: 'var(--os-stg-purple)',
-      pink: 'var(--os-stg-pink)', red: 'var(--os-stg-red)',
-      amber: 'var(--os-stg-amber)', green: 'var(--os-stg-green)',
+      blue: 'var(--os-stg-blue)',
+      purple: 'var(--os-stg-purple)',
+      pink: 'var(--os-stg-pink)',
+      red: 'var(--os-stg-red)',
+      amber: 'var(--os-stg-amber)',
+      green: 'var(--os-stg-green)',
     };
 
-    const settingsDefs: Record<string, { values?: string[]; desc: string; get: () => string; apply: (v: string) => string }> = {
+    const settingsDefs: Record<
+      string,
+      {
+        values?: string[];
+        desc: string;
+        get: () => string;
+        apply: (v: string) => string;
+      }
+    > = {
       language: {
         values: ['en', 'es', 'pt'],
         desc: tr('setLangDesc') || 'Change interface language',
         get: () => getLocale(),
         apply(v) {
           track('lang-changed');
-          const prefix = window.location.pathname.startsWith('/os/') ? '/os/' : '/';
-          setTimeout(() => { window.location.href = `${prefix}${v}`; }, 300);
+          const prefix = window.location.pathname.startsWith('/os/')
+            ? '/os/'
+            : '/';
+          setTimeout(() => {
+            window.location.href = `${prefix}${v}`;
+          }, 300);
           return `<span class="term-green">${escapeHtml((tr('setLangChanging') || 'Switching to {lang}...').replace('{lang}', v.toUpperCase()))}</span>`;
         },
       },
@@ -467,10 +544,14 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
       accent: {
         values: Object.keys(ACCENT_MAP),
         desc: tr('setAccentDesc') || 'Change accent color',
-        get: () => Object.entries(ACCENT_MAP).find(([, css]) => css === settings.accentColor)?.[0] || 'blue',
+        get: () =>
+          Object.entries(ACCENT_MAP).find(
+            ([, css]) => css === settings.accentColor
+          )?.[0] || 'blue',
         apply(v) {
           const css = ACCENT_MAP[v];
-          if (!css) return `<span class="term-red">set: accent '${escapeHtml(v)}' invalid. ${escapeHtml((tr('setOptions') || 'Options: {opts}').replace('{opts}', Object.keys(ACCENT_MAP).join(', ')))}</span>`;
+          if (!css)
+            return `<span class="term-red">set: accent '${escapeHtml(v)}' invalid. ${escapeHtml((tr('setOptions') || 'Options: {opts}').replace('{opts}', Object.keys(ACCENT_MAP).join(', ')))}</span>`;
           settings.accentColor = css;
           applyAccentColor(css);
           saveSettings(settings, 'accentColor');
@@ -480,7 +561,7 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
       clock24h: {
         values: ['on', 'off'],
         desc: tr('setClock24hDesc') || 'Toggle 24-hour clock',
-        get: () => settings.clock24h ? 'on' : 'off',
+        get: () => (settings.clock24h ? 'on' : 'off'),
         apply(v) {
           settings.clock24h = v === 'on';
           saveSettings(settings, 'clock24h');
@@ -490,7 +571,7 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
       'reduce-motion': {
         values: ['on', 'off'],
         desc: tr('setReduceMotionDesc') || 'Toggle reduce motion',
-        get: () => settings.reduceMotion ? 'on' : 'off',
+        get: () => (settings.reduceMotion ? 'on' : 'off'),
         apply(v) {
           settings.reduceMotion = v === 'on';
           applyReduceMotion(settings.reduceMotion);
@@ -501,10 +582,18 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
       'font-size': {
         values: ['small', 'default', 'large', 'largest'],
         desc: tr('setFontSizeDesc') || 'Change font size',
-        get: () => ['small', 'default', 'large', 'largest'][settings.fontSize + 1] || 'default',
+        get: () =>
+          ['small', 'default', 'large', 'largest'][settings.fontSize + 1] ||
+          'default',
         apply(v) {
-          const map: Record<string, number> = { small: -1, default: 0, large: 1, largest: 2 };
-          if (!(v in map)) return `<span class="term-red">set: font-size '${escapeHtml(v)}' invalid. ${escapeHtml((tr('setOptions') || 'Options: {opts}').replace('{opts}', 'small, default, large, largest'))}</span>`;
+          const map: Record<string, number> = {
+            small: -1,
+            default: 0,
+            large: 1,
+            largest: 2,
+          };
+          if (!(v in map))
+            return `<span class="term-red">set: font-size '${escapeHtml(v)}' invalid. ${escapeHtml((tr('setOptions') || 'Options: {opts}').replace('{opts}', 'small, default, large, largest'))}</span>`;
           settings.fontSize = map[v];
           applyFontSize(settings.fontSize);
           saveSettings(settings, 'fontSize');
@@ -514,7 +603,7 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
       'high-contrast': {
         values: ['on', 'off'],
         desc: tr('setHighContrastDesc') || 'Toggle high contrast',
-        get: () => settings.highContrast ? 'on' : 'off',
+        get: () => (settings.highContrast ? 'on' : 'off'),
         apply(v) {
           settings.highContrast = v === 'on';
           applyHighContrast(settings.highContrast);
@@ -526,7 +615,9 @@ export const commands: Record<string, (args: string[], flags: Record<string, str
 
     // No args: show all settings
     if (args.length === 0) {
-      const maxKey = Math.max(...Object.keys(settingsDefs).map(k => k.length));
+      const maxKey = Math.max(
+        ...Object.keys(settingsDefs).map((k) => k.length)
+      );
       const rows = Object.entries(settingsDefs).map(([key, def]) => {
         const current = def.get();
         const vals = def.values ? `[${def.values.join('|')}]` : '';

@@ -15,10 +15,25 @@ const avatarUrl = content.about?.avatarUrl ?? '';
 
 <div class="lockscreen" id="lock-screen">
   <!-- Blurred wallpaper -->
-  <div class="lockscreen-bg" style={defaultWallpaper.category !== 'image' ? '' : `background-image: url('${defaultWallpaper.src}');`}>
-    {defaultWallpaper.category !== 'image' && (
-      <video src={defaultWallpaper.src} muted loop playsinline webkit-playsinline preload="auto" class="os-wallpaper-video"></video>
-    )}
+  <div
+    class="lockscreen-bg"
+    style={defaultWallpaper.category !== 'image'
+      ? ''
+      : `background-image: url('${defaultWallpaper.src}');`}
+  >
+    {
+      defaultWallpaper.category !== 'image' && (
+        <video
+          src={defaultWallpaper.src}
+          muted
+          loop
+          playsinline
+          webkit-playsinline
+          preload="auto"
+          class="os-wallpaper-video"
+        />
+      )
+    }
   </div>
   <!-- Dark overlay -->
   <div class="lockscreen-overlay"></div>
@@ -34,7 +49,13 @@ const avatarUrl = content.about?.avatarUrl ?? '';
     <div class="lockscreen-avatar-container">
       <div class="lockscreen-avatar-ring">
         <div class="lockscreen-avatar-inner">
-          <ImageWithFallback src={avatarUrl} alt={userName} fallback={userName[0] || '?'} imgClass="lockscreen-avatar-img" fallbackClass="lockscreen-avatar-img" />
+          <ImageWithFallback
+            src={avatarUrl}
+            alt={userName}
+            fallback={userName[0] || '?'}
+            imgClass="lockscreen-avatar-img"
+            fallbackClass="lockscreen-avatar-img"
+          />
         </div>
       </div>
       <span class="lockscreen-username">{userName}</span>
@@ -43,7 +64,9 @@ const avatarUrl = content.about?.avatarUrl ?? '';
 
     <!-- Mobile: notifications + swipe hint (hidden on desktop) -->
     <div class="lockscreen-notifs" id="lockscreen-notifs"></div>
-    <span class="lockscreen-swipe-hint" id="lockscreen-swipe-hint">{content.lockScreen.swipeToUnlock}</span>
+    <span class="lockscreen-swipe-hint" id="lockscreen-swipe-hint"
+      >{content.lockScreen.swipeToUnlock}</span
+    >
   </div>
   <!-- Mobile: home indicator inside lockscreen so it swipes with it -->
   <div class="lockscreen-home-indicator" aria-hidden="true"></div>

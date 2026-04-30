@@ -25,7 +25,9 @@ const { contact } = content;
       {contact.headline}
     </h2>
 
-    <p class="glass-reveal text-[var(--text-secondary)] text-base leading-[1.7]">
+    <p
+      class="glass-reveal text-[var(--text-secondary)] text-base leading-[1.7]"
+    >
       {contact.subtitle}
     </p>
 
@@ -51,7 +53,11 @@ const { contact } = content;
       {
         contact.links.email && (
           <a
-            href={contact.links.email.url === '#' ? '#contact' : `mailto:${contact.links.email.url}`}
+            href={
+              contact.links.email.url === '#'
+                ? '#contact'
+                : `mailto:${contact.links.email.url}`
+            }
             class="contact-link-gradient text-white text-sm font-semibold"
           >
             <EmailIcon />

@@ -16,9 +16,7 @@ const hasItems = projects.items && projects.items.length > 0;
 const showSection = showFeatured || hasItems;
 
 const allTags = hasItems
-  ? ([
-      ...new Set(projects.items.flatMap((p) => p.tags)),
-    ].sort() as string[])
+  ? ([...new Set(projects.items.flatMap((p) => p.tags))].sort() as string[])
   : [];
 const filterChips = [projects.allLabel, ...allTags];
 ---
@@ -30,10 +28,7 @@ const filterChips = [projects.allLabel, ...allTags];
       style="padding: var(--section-padding-y) var(--section-padding-x);"
     >
       <div class="flex flex-col items-center gap-[60px]">
-        <SectionLabel
-          label={projects.label}
-          color="var(--accent-blue)"
-        />
+        <SectionLabel label={projects.label} color="var(--accent-blue)" />
         <h2 class="section-title">{projects.subtitle || projects.title}</h2>
 
         {/* Featured project */}
@@ -161,20 +156,18 @@ const filterChips = [projects.allLabel, ...allTags];
 <script>
   document.querySelectorAll('#filter-chips button').forEach((chip) => {
     chip.addEventListener('click', () => {
-      document
-        .querySelectorAll('#filter-chips button')
-        .forEach((c) => {
-          c.classList.remove(
-            'border-[var(--accent-blue)]',
-            'text-[var(--accent-blue)]',
-            'bg-[var(--accent-blue-10)]'
-          );
-          c.classList.add(
-            'border-[var(--border-glass)]',
-            'text-[var(--text-secondary)]',
-            'bg-transparent'
-          );
-        });
+      document.querySelectorAll('#filter-chips button').forEach((c) => {
+        c.classList.remove(
+          'border-[var(--accent-blue)]',
+          'text-[var(--accent-blue)]',
+          'bg-[var(--accent-blue-10)]'
+        );
+        c.classList.add(
+          'border-[var(--border-glass)]',
+          'text-[var(--text-secondary)]',
+          'bg-transparent'
+        );
+      });
       chip.classList.remove(
         'border-[var(--border-glass)]',
         'text-[var(--text-secondary)]',

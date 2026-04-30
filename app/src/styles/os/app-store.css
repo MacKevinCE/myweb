@@ -13,7 +13,9 @@
 }
 
 /* ---- Sidebar overrides ---- */
-.as-sidebar { width: 200px; }
+.as-sidebar {
+  width: 200px;
+}
 
 .as-search {
   display: flex;
@@ -35,10 +37,16 @@
   font-size: var(--os-fs-12);
   color: var(--os-text-primary);
 }
-.as-search-input::placeholder { color: var(--os-text-secondary); }
+.as-search-input::placeholder {
+  color: var(--os-text-secondary);
+}
 
-.as-sidebar-spacer-sm { height: 8px; }
-.as-sidebar-spacer { flex: 1; }
+.as-sidebar-spacer-sm {
+  height: 8px;
+}
+.as-sidebar-spacer {
+  flex: 1;
+}
 
 /* User section */
 
@@ -214,7 +222,9 @@
   overflow-x: auto;
 }
 
-.as-preview-scroll::-webkit-scrollbar { display: none; }
+.as-preview-scroll::-webkit-scrollbar {
+  display: none;
+}
 
 .as-preview-img {
   width: 270px;
@@ -310,7 +320,9 @@
   text-overflow: ellipsis;
 }
 
-.as-card-spacer { height: 6px; }
+.as-card-spacer {
+  height: 6px;
+}
 
 .as-card-btn {
   width: 68px;
@@ -329,7 +341,9 @@
   justify-content: center;
 }
 
-.as-card-btn:hover { filter: brightness(1.15); }
+.as-card-btn:hover {
+  filter: brightness(1.15);
+}
 
 /* Card icon image */
 .as-card-img {

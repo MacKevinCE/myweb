@@ -41,7 +41,7 @@ function resolve(value: boolean) {
 export function confirm(
   message: string,
   confirmLabel?: string,
-  cancelLabel?: string,
+  cancelLabel?: string
 ): Promise<boolean> {
   if (!dialogEl || !messageEl || !confirmBtn || !cancelBtn) {
     // Fallback to native confirm if dialog not available

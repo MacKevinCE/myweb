@@ -8,9 +8,10 @@ interface Props {
 
 const { tag, size = 'sm' } = Astro.props;
 const c = tagColor(tag);
-const cls = size === 'md'
-  ? 'px-2.5 py-1 text-[11px] rounded-full'
-  : 'px-2 py-0.5 text-[10px] rounded-full';
+const cls =
+  size === 'md'
+    ? 'px-2.5 py-1 text-[11px] rounded-full'
+    : 'px-2 py-0.5 text-[10px] rounded-full';
 ---
 
 <span class={cls} style={`background: ${c.bg}; color: ${c.text};`}>

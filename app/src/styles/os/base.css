@@ -38,7 +38,7 @@ body {
 }
 
 /* Desktop gradient */
-[data-os-mode="light"] .os-desktop {
+[data-os-mode='light'] .os-desktop {
   background: radial-gradient(
     ellipse 150% 150% at 50% 30%,
     #f0f0f5 0%,
@@ -130,7 +130,7 @@ body {
 }
 
 /* Language Suggest (OS theme) */
-[data-theme="os"].lang-banner {
+[data-theme='os'].lang-banner {
   position: absolute;
   top: var(--os-menubar-h);
   right: 150px;
@@ -148,18 +148,20 @@ body {
   box-shadow: var(--os-shadow-popup);
   opacity: 0;
   transform: scale(0.95) translateY(-4px);
-  transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+  transition:
+    opacity 0.15s ease-out,
+    transform 0.15s ease-out;
   pointer-events: none;
 }
 
-[data-theme="os"].lang-banner.lang-banner--open {
+[data-theme='os'].lang-banner.lang-banner--open {
   opacity: 1;
   transform: scale(1) translateY(0);
   pointer-events: auto;
   animation: osMenuIn 0.12s ease-out;
 }
 
-[data-theme="os"].lang-banner::before {
+[data-theme='os'].lang-banner::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -174,7 +176,7 @@ body {
   pointer-events: none;
 }
 
-[data-theme="os"].lang-banner .lang-banner__badge {
+[data-theme='os'].lang-banner .lang-banner__badge {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -191,7 +193,7 @@ body {
   letter-spacing: 0.5px;
 }
 
-[data-theme="os"].lang-banner .lang-banner__text {
+[data-theme='os'].lang-banner .lang-banner__text {
   font-family: 'Inter', sans-serif;
   font-size: var(--os-fs-12);
   font-weight: 400;
@@ -200,14 +202,14 @@ body {
   line-height: 1.4;
 }
 
-[data-theme="os"].lang-banner .lang-banner__actions {
+[data-theme='os'].lang-banner .lang-banner__actions {
   display: flex;
   flex-direction: column;
   gap: 6px;
   width: 100%;
 }
 
-[data-theme="os"].lang-banner .lang-banner__btn {
+[data-theme='os'].lang-banner .lang-banner__btn {
   height: var(--os-menubar-h);
   border-radius: var(--os-radius-sm);
   border: none;
@@ -222,21 +224,21 @@ body {
   text-decoration: none;
 }
 
-[data-theme="os"].lang-banner .lang-banner__accept {
+[data-theme='os'].lang-banner .lang-banner__accept {
   background: var(--os-accent);
   color: #fff;
 }
 
-[data-theme="os"].lang-banner .lang-banner__accept:hover {
+[data-theme='os'].lang-banner .lang-banner__accept:hover {
   filter: brightness(1.1);
 }
 
-[data-theme="os"].lang-banner .lang-banner__dismiss {
+[data-theme='os'].lang-banner .lang-banner__dismiss {
   background: var(--os-fill-border);
   color: var(--os-text-secondary);
 }
 
-[data-theme="os"].lang-banner .lang-banner__dismiss:hover {
+[data-theme='os'].lang-banner .lang-banner__dismiss:hover {
   background: var(--os-fill-strong);
 }
 
@@ -384,7 +386,6 @@ body {
   color: var(--os-text-secondary);
 }
 
-
 /* Contact window */
 .os-window--contact {
   width: 450px;
@@ -443,7 +444,9 @@ body {
   background: var(--os-fill);
   border: 0.5px solid color-mix(in srgb, var(--link-color) 31%, transparent);
   text-decoration: none;
-  transition: background 0.15s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
 }
 
 .contact-link:hover {
@@ -480,7 +483,9 @@ body {
   flex-shrink: 0;
 }
 
-.edu-header-block--active { display: flex; }
+.edu-header-block--active {
+  display: flex;
+}
 
 .edu-content-header {
   display: flex;
@@ -508,7 +513,9 @@ body {
   gap: 12px;
 }
 
-.edu-panel--active { display: flex; }
+.edu-panel--active {
+  display: flex;
+}
 
 .edu-degree-card {
   display: flex;
@@ -532,11 +539,33 @@ body {
   background: color-mix(in srgb, var(--item-color) 19%, transparent);
 }
 
-.edu-degree-name { font-family: 'JetBrains Mono', monospace; font-size: var(--os-fs-16); font-weight: 700; color: var(--os-text-primary); }
-.edu-degree-loc { font-family: 'Inter', sans-serif; font-size: var(--os-fs-12); font-weight: 400; color: var(--os-text-secondary); }
-.edu-degree-extra { display: flex; align-items: center; gap: 6px; }
-.edu-degree-extra-dot { font-size: var(--os-fs-10); color: var(--item-alt); }
-.edu-degree-extra-text { font-family: 'Inter', sans-serif; font-size: var(--os-fs-12); font-weight: 400; color: var(--item-alt); }
+.edu-degree-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--os-fs-16);
+  font-weight: 700;
+  color: var(--os-text-primary);
+}
+.edu-degree-loc {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-12);
+  font-weight: 400;
+  color: var(--os-text-secondary);
+}
+.edu-degree-extra {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.edu-degree-extra-dot {
+  font-size: var(--os-fs-10);
+  color: var(--item-alt);
+}
+.edu-degree-extra-text {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-12);
+  font-weight: 400;
+  color: var(--item-alt);
+}
 
 .edu-cert-card {
   display: flex;
@@ -566,9 +595,23 @@ body {
   font-family: Inter, sans-serif;
 }
 
-.edu-cert-info { display: flex; flex-direction: column; gap: 2px; }
-.edu-cert-name { font-family: 'Inter', sans-serif; font-size: var(--os-fs-12); font-weight: 500; color: var(--os-text-primary); }
-.edu-cert-by { font-family: 'Inter', sans-serif; font-size: var(--os-fs-10); font-weight: 400; color: var(--os-text-secondary); }
+.edu-cert-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.edu-cert-name {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-12);
+  font-weight: 500;
+  color: var(--os-text-primary);
+}
+.edu-cert-by {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-10);
+  font-weight: 400;
+  color: var(--os-text-secondary);
+}
 
 /* Skills window */
 .os-window--skills {
@@ -591,7 +634,9 @@ body {
   flex-shrink: 0;
 }
 
-.skills-header-block--active { display: flex; }
+.skills-header-block--active {
+  display: flex;
+}
 
 .skills-content-header {
   display: flex;
@@ -619,7 +664,9 @@ body {
   gap: 10px;
 }
 
-.skills-panel--active { display: flex; }
+.skills-panel--active {
+  display: flex;
+}
 
 .skills-card {
   display: flex;
@@ -632,8 +679,18 @@ body {
   border: 0.5px solid var(--os-fill-border);
 }
 
-.skills-card-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.skills-card-name { font-family: 'Inter', sans-serif; font-size: var(--os-fs-14); font-weight: 500; color: var(--os-text-primary); }
+.skills-card-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.skills-card-name {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-14);
+  font-weight: 500;
+  color: var(--os-text-primary);
+}
 
 /* ============================================
    ACCESSIBILITY — Reduce Motion
@@ -658,7 +715,7 @@ body {
   --os-text-muted: rgba(255, 255, 255, 0.6);
 }
 
-.os-high-contrast[data-os-mode="light"] {
+.os-high-contrast[data-os-mode='light'] {
   --os-fill-border: rgba(0, 0, 0, 0.2);
   --os-fill-strong: rgba(0, 0, 0, 0.25);
   --os-text-secondary: #444;

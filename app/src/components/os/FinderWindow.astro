@@ -16,13 +16,17 @@ const featured = content.projects?.featured ?? {};
 const items = content.projects?.items ?? [];
 
 const allProjects = [
-  ...(featured.visible ? [{
-    name: featured.name,
-    description: featured.description,
-    tags: featured.tags ?? [],
-    image: featured.image,
-    repo: featured.repo,
-  }] : []),
+  ...(featured.visible
+    ? [
+        {
+          name: featured.name,
+          description: featured.description,
+          tags: featured.tags ?? [],
+          image: featured.image,
+          repo: featured.repo,
+        },
+      ]
+    : []),
   ...items.map((p) => ({
     name: p.name,
     description: p.description,
@@ -46,7 +50,9 @@ const displayJobs = jobs.map((job) => ({
 }));
 
 /* ---- Dynamic sidebar tags from profile data ---- */
-function uniqueTags(items: { tags: string[] }[]): { key: string; label: string }[] {
+function uniqueTags(
+  items: { tags: string[] }[]
+): { key: string; label: string }[] {
   const seen = new Set<string>();
   const result: { key: string; label: string }[] = [];
   for (const item of items) {
@@ -76,24 +82,73 @@ const expSidebarTags = uniqueTags(displayJobs);
   data-finder-footer-items={f.footerItems}
 >
   <!-- Title Bar -->
-  <WindowChrome title={`${content.finder.pathPrefix} — ${windowTitles[W.FINDER]}`} windowId="finder" />
+  <WindowChrome
+    title={`${content.finder.pathPrefix} — ${windowTitles[W.FINDER]}`}
+    windowId="finder"
+  />
 
   <!-- Finder Toolbar -->
   <div class="finder-toolbar">
-    <button class="finder-toolbar-btn" id="finder-toggle-sidebar" aria-label="Toggle sidebar">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <button
+      class="finder-toolbar-btn"
+      id="finder-toggle-sidebar"
+      aria-label="Toggle sidebar"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <Fragment set:html={uiIcons.sidebarLeft} />
       </svg>
     </button>
-    <span class="finder-path" id="finder-path-text">{content.finder.pathPrefix}</span>
+    <span class="finder-path" id="finder-path-text"
+      >{content.finder.pathPrefix}</span
+    >
     <div class="finder-toolbar-spacer"></div>
-    <button class="finder-toolbar-btn finder-toolbar-btn--disabled" id="finder-open-item" aria-label="Open selected" disabled>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <button
+      class="finder-toolbar-btn finder-toolbar-btn--disabled"
+      id="finder-open-item"
+      aria-label="Open selected"
+      disabled
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <Fragment set:html={uiIcons.externalLink} />
       </svg>
     </button>
-    <button class="finder-toolbar-btn finder-toolbar-btn--disabled" id="finder-toggle-detail" aria-label="Toggle detail panel" disabled>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <button
+      class="finder-toolbar-btn finder-toolbar-btn--disabled"
+      id="finder-toggle-detail"
+      aria-label="Toggle detail panel"
+      disabled
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <Fragment set:html={uiIcons.sidebarRight} />
       </svg>
     </button>
@@ -107,15 +162,45 @@ const expSidebarTags = uniqueTags(displayJobs);
     <div class="os-sidebar finder-sidebar">
       <span class="finder-sidebar-label">{content.finder.favorites}</span>
       <div class="finder-sidebar-spacer"></div>
-      <div class="os-nav finder-sidebar-item finder-sidebar-item--active" data-finder-fav="projects">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"/>
+      <div
+        class="os-nav finder-sidebar-item finder-sidebar-item--active"
+        data-finder-fav="projects"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"
+          ></path>
         </svg>
         <span>{content.finder.projects}</span>
       </div>
       <div class="os-nav finder-sidebar-item" data-finder-fav="experience">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path><rect
+            width="20"
+            height="14"
+            x="2"
+            y="6"
+            rx="2"></rect>
         </svg>
         <span>{content.finder.experience}</span>
       </div>
@@ -125,38 +210,92 @@ const expSidebarTags = uniqueTags(displayJobs);
       <div data-finder-tags="projects">
         <span class="finder-sidebar-label">{content.finder.tags}</span>
         <div class="finder-sidebar-spacer"></div>
-        <div class="os-nav finder-sidebar-item finder-sidebar-item--active" data-finder-tag="All">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" style="color: var(--os-text-secondary);" stroke-width="1.3">
-            <rect x="0.5" y="0.5" width="5" height="4" rx="1"/><rect x="8.5" y="0.5" width="5" height="4" rx="1"/>
-            <rect x="0.5" y="5.5" width="5" height="4" rx="1"/><rect x="8.5" y="5.5" width="5" height="4" rx="1"/>
+        <div
+          class="os-nav finder-sidebar-item finder-sidebar-item--active"
+          data-finder-tag="All"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="10"
+            viewBox="0 0 14 10"
+            fill="none"
+            stroke="currentColor"
+            style="color: var(--os-text-secondary);"
+            stroke-width="1.3"
+          >
+            <rect x="0.5" y="0.5" width="5" height="4" rx="1"></rect><rect
+              x="8.5"
+              y="0.5"
+              width="5"
+              height="4"
+              rx="1"></rect>
+            <rect x="0.5" y="5.5" width="5" height="4" rx="1"></rect><rect
+              x="8.5"
+              y="5.5"
+              width="5"
+              height="4"
+              rx="1"></rect>
           </svg>
           <span>{content.finder.all}</span>
         </div>
-        {projSidebarTags.map((tag) => (
-          <div class="os-nav finder-sidebar-item" data-finder-tag={tag.key}>
-            <div class="finder-tag-dot" style={`background: ${tagColor(tag.key).text};`}></div>
-            <span>{tag.label}</span>
-          </div>
-        ))}
+        {
+          projSidebarTags.map((tag) => (
+            <div class="os-nav finder-sidebar-item" data-finder-tag={tag.key}>
+              <div
+                class="finder-tag-dot"
+                style={`background: ${tagColor(tag.key).text};`}
+              />
+              <span>{tag.label}</span>
+            </div>
+          ))
+        }
       </div>
 
       <!-- Experience tags -->
       <div data-finder-tags="experience" style="display: none;">
         <span class="finder-sidebar-label">{content.finder.tags}</span>
         <div class="finder-sidebar-spacer"></div>
-        <div class="os-nav finder-sidebar-item finder-sidebar-item--active" data-finder-tag="All">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" style="color: var(--os-text-secondary);" stroke-width="1.3">
-            <rect x="0.5" y="0.5" width="5" height="4" rx="1"/><rect x="8.5" y="0.5" width="5" height="4" rx="1"/>
-            <rect x="0.5" y="5.5" width="5" height="4" rx="1"/><rect x="8.5" y="5.5" width="5" height="4" rx="1"/>
+        <div
+          class="os-nav finder-sidebar-item finder-sidebar-item--active"
+          data-finder-tag="All"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="10"
+            viewBox="0 0 14 10"
+            fill="none"
+            stroke="currentColor"
+            style="color: var(--os-text-secondary);"
+            stroke-width="1.3"
+          >
+            <rect x="0.5" y="0.5" width="5" height="4" rx="1"></rect><rect
+              x="8.5"
+              y="0.5"
+              width="5"
+              height="4"
+              rx="1"></rect>
+            <rect x="0.5" y="5.5" width="5" height="4" rx="1"></rect><rect
+              x="8.5"
+              y="5.5"
+              width="5"
+              height="4"
+              rx="1"></rect>
           </svg>
           <span>{content.finder.all}</span>
         </div>
-        {expSidebarTags.map((tag) => (
-          <div class="os-nav finder-sidebar-item" data-finder-tag={tag.key}>
-            <div class="finder-tag-dot" style={`background: ${tagColor(tag.key).text};`}></div>
-            <span>{tag.label}</span>
-          </div>
-        ))}
+        {
+          expSidebarTags.map((tag) => (
+            <div class="os-nav finder-sidebar-item" data-finder-tag={tag.key}>
+              <div
+                class="finder-tag-dot"
+                style={`background: ${tagColor(tag.key).text};`}
+              />
+              <span>{tag.label}</span>
+            </div>
+          ))
+        }
       </div>
     </div>
 
@@ -166,39 +305,82 @@ const expSidebarTags = uniqueTags(displayJobs);
         <div class="finder-col-headers">
           <div class="finder-col-name">
             <span>{content.finder.colName}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><Fragment set:html={uiIcons.chevronUp} /></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><Fragment set:html={uiIcons.chevronUp} /></svg
+            >
           </div>
           <div class="finder-col-sep"></div>
           <div class="finder-col-second">
             <span>{content.finder.colTags}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><Fragment set:html={uiIcons.chevronUp} /></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><Fragment set:html={uiIcons.chevronUp} /></svg
+            >
           </div>
         </div>
         <div class="finder-header-div"></div>
         <div class="finder-rows">
-          {allProjects.map((project, i) => (
-            <div
-              class="finder-row"
-              data-row-tags={project.tags.join(',')}
-              data-row-name={project.name}
-              data-row-desc={project.description || ''}
-              data-row-image={project.image || ''}
-              data-row-repo={project.repo || ''}
-            >
-              <div class="finder-row-name">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style={`stroke: ${tagColor(project.name).text};`}><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
-                <span class="finder-row-text">{project.name}</span>
-                <div class="finder-row-dots" style={`width: ${Math.max(12, (Math.min(project.tags.length, 3) - 1) * 8 + 12)}px;`}>
-                  {project.tags.slice(0, 3).map((tag, ti) => (
-                    <div class="finder-row-tagdot" style={`left: ${ti * 8}px; background: ${tagColor(tag).text};`}></div>
-                  ))}
+          {
+            allProjects.map((project, i) => (
+              <div
+                class="finder-row"
+                data-row-tags={project.tags.join(',')}
+                data-row-name={project.name}
+                data-row-desc={project.description || ''}
+                data-row-image={project.image || ''}
+                data-row-repo={project.repo || ''}
+              >
+                <div class="finder-row-name">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style={`stroke: ${tagColor(project.name).text};`}
+                  >
+                    <path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z" />
+                  </svg>
+                  <span class="finder-row-text">{project.name}</span>
+                  <div
+                    class="finder-row-dots"
+                    style={`width: ${Math.max(12, (Math.min(project.tags.length, 3) - 1) * 8 + 12)}px;`}
+                  >
+                    {project.tags.slice(0, 3).map((tag, ti) => (
+                      <div
+                        class="finder-row-tagdot"
+                        style={`left: ${ti * 8}px; background: ${tagColor(tag).text};`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div class="finder-row-second">
+                  <span>{project.tags.join(', ')}</span>
                 </div>
               </div>
-              <div class="finder-row-second">
-                <span>{project.tags.join(', ')}</span>
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
 
@@ -207,57 +389,116 @@ const expSidebarTags = uniqueTags(displayJobs);
     </div>
 
     <!-- ==================== EXPERIENCE PANEL ==================== -->
-    <div class="finder-panel" data-finder-panel="experience" style="display: none;">
+    <div
+      class="finder-panel"
+      data-finder-panel="experience"
+      style="display: none;"
+    >
       <div class="finder-filelist finder-filelist--3col">
         <div class="finder-col-headers">
           <div class="finder-col-name">
             <span>{content.finder.colName}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><Fragment set:html={uiIcons.chevronUp} /></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><Fragment set:html={uiIcons.chevronUp} /></svg
+            >
           </div>
           <div class="finder-col-sep"></div>
           <div class="finder-col-date">
             <span>{content.finder.colDate}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><Fragment set:html={uiIcons.chevronUp} /></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><Fragment set:html={uiIcons.chevronUp} /></svg
+            >
           </div>
           <div class="finder-col-sep"></div>
           <div class="finder-col-second">
             <span>{content.finder.colTags}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><Fragment set:html={uiIcons.chevronUp} /></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              ><Fragment set:html={uiIcons.chevronUp} /></svg
+            >
           </div>
         </div>
         <div class="finder-header-div"></div>
         <div class="finder-rows">
-          {displayJobs.map((job, i) => (
-            <div
-              class="finder-row"
-              data-row-tags={job.tags.join(',')}
-              data-row-name={job.company}
-              data-row-desc={job.description || ''}
-              data-row-role={job.role}
-              data-row-start-date={job.startDate}
-              data-row-end-date={job.endDate}
-              data-row-location={job.location}
-            >
-              <div class="finder-row-name">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style={`stroke: ${tagColor(job.company).text};`}>
-                  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>
-                </svg>
-                <span class="finder-row-text">{job.company}</span>
-                <span class="finder-row-role">{job.role}</span>
-                <div class="finder-row-dots" style={`width: ${Math.max(12, (Math.min(job.tags.length, 3) - 1) * 8 + 12)}px;`}>
-                  {job.tags.slice(0, 3).map((tag, ti) => (
-                    <div class="finder-row-tagdot" style={`left: ${ti * 8}px; background: ${tagColor(tag).text};`}></div>
-                  ))}
+          {
+            displayJobs.map((job, i) => (
+              <div
+                class="finder-row"
+                data-row-tags={job.tags.join(',')}
+                data-row-name={job.company}
+                data-row-desc={job.description || ''}
+                data-row-role={job.role}
+                data-row-start-date={job.startDate}
+                data-row-end-date={job.endDate}
+                data-row-location={job.location}
+              >
+                <div class="finder-row-name">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style={`stroke: ${tagColor(job.company).text};`}
+                  >
+                    <>
+                      <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                      <rect width="20" height="14" x="2" y="6" rx="2" />
+                    </>
+                  </svg>
+                  <span class="finder-row-text">{job.company}</span>
+                  <span class="finder-row-role">{job.role}</span>
+                  <div
+                    class="finder-row-dots"
+                    style={`width: ${Math.max(12, (Math.min(job.tags.length, 3) - 1) * 8 + 12)}px;`}
+                  >
+                    {job.tags.slice(0, 3).map((tag, ti) => (
+                      <div
+                        class="finder-row-tagdot"
+                        style={`left: ${ti * 8}px; background: ${tagColor(tag).text};`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div class="finder-row-date">
+                  <span>{job.startDate}</span>
+                </div>
+                <div class="finder-row-second">
+                  <span>{job.tags.join(', ')}</span>
                 </div>
               </div>
-              <div class="finder-row-date">
-                <span>{job.startDate}</span>
-              </div>
-              <div class="finder-row-second">
-                <span>{job.tags.join(', ')}</span>
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
 
@@ -271,4 +512,3 @@ const expSidebarTags = uniqueTags(displayJobs);
     <span id="finder-footer-text"></span>
   </div>
 </div>
-

@@ -12,7 +12,10 @@ vi.mock('../../../src/scripts/os/achievements', () => ({
   track: vi.fn(),
 }));
 
-import { loadSettings, saveSettings } from '../../../src/scripts/os/settings/persist';
+import {
+  loadSettings,
+  saveSettings,
+} from '../../../src/scripts/os/settings/persist';
 
 const STORAGE_KEY = 'os-settings';
 
@@ -33,11 +36,14 @@ describe('settings persistence', () => {
   });
 
   it('returns stored values when valid data exists', () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      appearance: 'dark',
-      dockSize: 80,
-      clock24h: true,
-    }));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        appearance: 'dark',
+        dockSize: 80,
+        clock24h: true,
+      })
+    );
 
     const s = loadSettings();
 
@@ -58,17 +64,20 @@ describe('settings persistence', () => {
   });
 
   it('sanitizes invalid field values back to defaults', () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({
-      appearance: 'invalid-theme',
-      dockSize: 'not-a-number',
-      fontSize: 99, // out of valid range (-1..2)
-    }));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({
+        appearance: 'invalid-theme',
+        dockSize: 'not-a-number',
+        fontSize: 99, // out of valid range (-1..2)
+      })
+    );
 
     const s = loadSettings();
 
-    expect(s.appearance).toBe('auto');   // invalid enum -> default
-    expect(s.dockSize).toBe(100);        // wrong type -> default
-    expect(s.fontSize).toBe(0);          // out of range -> default
+    expect(s.appearance).toBe('auto'); // invalid enum -> default
+    expect(s.dockSize).toBe(100); // wrong type -> default
+    expect(s.fontSize).toBe(0); // out of range -> default
   });
 
   it('persists settings to localStorage via saveSettings', () => {

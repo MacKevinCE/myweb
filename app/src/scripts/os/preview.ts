@@ -31,18 +31,23 @@ function updateView() {
     fallback.className = 'pv-image-fallback';
     fallback.textContent = cert.name[0] || '?';
     fallback.style.display = 'none';
-    img.onerror = () => { img.style.display = 'none'; fallback.style.display = ''; };
+    img.onerror = () => {
+      img.style.display = 'none';
+      fallback.style.display = '';
+    };
     wrap.appendChild(img);
     wrap.appendChild(fallback);
   }
 
   // Update counter
   const counter = getEl('pv-counter');
-  if (counter) counter.textContent = `${currentIndex + 1} ${i18n.of || 'of'} ${certs.length}`;
+  if (counter)
+    counter.textContent = `${currentIndex + 1} ${i18n.of || 'of'} ${certs.length}`;
 
   // Update issuer
   const issuer = getEl('pv-issuer');
-  if (issuer) issuer.textContent = `${i18n.issuer || 'Issued by'} ${cert.issuer}`;
+  if (issuer)
+    issuer.textContent = `${i18n.issuer || 'Issued by'} ${cert.issuer}`;
 
   // Update verify button
   const verify = getEl('pv-verify') as HTMLAnchorElement | null;
@@ -62,7 +67,8 @@ function updateView() {
 
   // Scroll active thumb into view
   const activeThumb = document.querySelector('.pv-thumb--active');
-  if (activeThumb) activeThumb.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  if (activeThumb)
+    activeThumb.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
 function goPrev() {
@@ -86,10 +92,18 @@ export function initPreview() {
   const dataEl = getEl('pv-data');
   const i18nEl = getEl('pv-i18n');
   if (dataEl) {
-    try { certs = JSON.parse(dataEl.textContent || '[]'); } catch { /* ignore */ }
+    try {
+      certs = JSON.parse(dataEl.textContent || '[]');
+    } catch {
+      /* ignore */
+    }
   }
   if (i18nEl) {
-    try { i18n = JSON.parse(i18nEl.textContent || '{}'); } catch { /* ignore */ }
+    try {
+      i18n = JSON.parse(i18nEl.textContent || '{}');
+    } catch {
+      /* ignore */
+    }
   }
 
   // Track first certificate as viewed
@@ -115,7 +129,11 @@ export function initPreview() {
     const win = getEl('preview-window');
     if (!win || win.style.display === 'none') return;
     // Only handle if no input is focused
-    if (document.activeElement?.tagName === 'INPUT' || document.activeElement?.tagName === 'TEXTAREA') return;
+    if (
+      document.activeElement?.tagName === 'INPUT' ||
+      document.activeElement?.tagName === 'TEXTAREA'
+    )
+      return;
     if (e.key === 'ArrowLeft') goPrev();
     if (e.key === 'ArrowRight') goNext();
   });

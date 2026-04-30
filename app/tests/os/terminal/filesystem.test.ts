@@ -1,7 +1,14 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { buildFS, resolvePath, getNode } from '../../../src/scripts/os/terminal/filesystem';
+import {
+  buildFS,
+  resolvePath,
+  getNode,
+} from '../../../src/scripts/os/terminal/filesystem';
 import { state } from '../../../src/scripts/os/terminal/state';
-import type { FSNode, ProfileData } from '../../../src/scripts/os/terminal/types';
+import type {
+  FSNode,
+  ProfileData,
+} from '../../../src/scripts/os/terminal/types';
 
 // Minimal mock profile data for building a filesystem
 const mockProfile: ProfileData = {
@@ -43,12 +50,24 @@ const mockProfile: ProfileData = {
     items: [],
   },
   education: {
-    degrees: [{ badge: '🎓', title: 'CS', institution: 'MIT', period: '2016-2020', details: '' }],
+    degrees: [
+      {
+        badge: '🎓',
+        title: 'CS',
+        institution: 'MIT',
+        period: '2016-2020',
+        details: '',
+      },
+    ],
     certifications: [{ name: 'AWS', year: '2023' }],
   },
   contact: {
     links: {
-      email: { label: 'Email', url: 'mailto:test@test.com', displayText: 'test@test.com' },
+      email: {
+        label: 'Email',
+        url: 'mailto:test@test.com',
+        displayText: 'test@test.com',
+      },
     },
   },
 };

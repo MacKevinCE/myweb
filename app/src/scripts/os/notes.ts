@@ -22,7 +22,11 @@ function readTime(text: string): number {
 
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr);
-  return d.toLocaleDateString(i18n.lang || 'en', { year: 'numeric', month: 'short', day: 'numeric' });
+  return d.toLocaleDateString(i18n.lang || 'en', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
 }
 
 /**
@@ -31,36 +35,48 @@ function formatDate(dateStr: string): string {
  */
 function renderContent(text: string): string {
   const blocks = text.split('\n\n');
-  return blocks.map(block => {
-    block = block.trim();
-    if (!block) return '';
+  return blocks
+    .map((block) => {
+      block = block.trim();
+      if (!block) return '';
 
-    // Heading
-    if (block.startsWith('## ')) {
-      return `<h2 class="nt-h2">${escapeHtml(block.slice(3))}</h2>`;
-    }
+      // Heading
+      if (block.startsWith('## ')) {
+        return `<h2 class="nt-h2">${escapeHtml(block.slice(3))}</h2>`;
+      }
 
-    // Bullet list
-    if (block.split('\n').every(line => line.trimStart().startsWith('- '))) {
-      const items = block.split('\n').map(line => {
-        const text = line.trimStart().slice(2);
-        return `<li>${formatInline(text)}</li>`;
-      }).join('');
-      return `<ul class="nt-list-ul">${items}</ul>`;
-    }
+      // Bullet list
+      if (
+        block.split('\n').every((line) => line.trimStart().startsWith('- '))
+      ) {
+        const items = block
+          .split('\n')
+          .map((line) => {
+            const text = line.trimStart().slice(2);
+            return `<li>${formatInline(text)}</li>`;
+          })
+          .join('');
+        return `<ul class="nt-list-ul">${items}</ul>`;
+      }
 
-    // Numbered list
-    if (block.split('\n').every(line => /^\d+\.\s/.test(line.trimStart()))) {
-      const items = block.split('\n').map(line => {
-        const text = line.trimStart().replace(/^\d+\.\s/, '');
-        return `<li>${formatInline(text)}</li>`;
-      }).join('');
-      return `<ol class="nt-list-ol">${items}</ol>`;
-    }
+      // Numbered list
+      if (
+        block.split('\n').every((line) => /^\d+\.\s/.test(line.trimStart()))
+      ) {
+        const items = block
+          .split('\n')
+          .map((line) => {
+            const text = line.trimStart().replace(/^\d+\.\s/, '');
+            return `<li>${formatInline(text)}</li>`;
+          })
+          .join('');
+        return `<ol class="nt-list-ol">${items}</ol>`;
+      }
 
-    // Paragraph
-    return `<p class="nt-p">${formatInline(block)}</p>`;
-  }).join('');
+      // Paragraph
+      return `<p class="nt-p">${formatInline(block)}</p>`;
+    })
+    .join('');
 }
 
 function formatInline(text: string): string {
@@ -87,11 +103,16 @@ function showArticle(index: number) {
 
   if (titleEl) titleEl.textContent = article.title;
   if (metaEl) {
-    const rt = (i18n.readTime || '{min} min').replace('{min}', String(readTime(article.content)));
+    const rt = (i18n.readTime || '{min} min').replace(
+      '{min}',
+      String(readTime(article.content))
+    );
     metaEl.innerHTML = `<span>${formatDate(article.date)}</span><span>&middot;</span><span>${rt}</span>`;
   }
   if (tagsEl) {
-    tagsEl.innerHTML = article.tags.map(tag => `<span class="nt-tag">${escapeHtml(tag)}</span>`).join('');
+    tagsEl.innerHTML = article.tags
+      .map((tag) => `<span class="nt-tag">${escapeHtml(tag)}</span>`)
+      .join('');
   }
   if (bodyEl) {
     bodyEl.innerHTML = renderContent(article.content);
@@ -110,7 +131,8 @@ function showArticle(index: number) {
 
   // Scroll active item into view
   const activeItem = document.querySelector('.nt-item--active');
-  if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  if (activeItem)
+    activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
 function filterArticles(query: string) {
@@ -120,10 +142,11 @@ function filterArticles(query: string) {
 
   items.forEach((item, i) => {
     const article = articles[i];
-    const match = !q ||
+    const match =
+      !q ||
       article.title.toLowerCase().includes(q) ||
       article.summary.toLowerCase().includes(q) ||
-      article.tags.some(tag => tag.toLowerCase().includes(q));
+      article.tags.some((tag) => tag.toLowerCase().includes(q));
 
     item.style.display = match ? '' : 'none';
     if (match && firstVisible === -1) firstVisible = i;
@@ -139,10 +162,18 @@ export function initNotes() {
   const dataEl = getEl('nt-data');
   const i18nEl = getEl('nt-i18n');
   if (dataEl) {
-    try { articles = JSON.parse(dataEl.textContent || '[]'); } catch { /* ignore */ }
+    try {
+      articles = JSON.parse(dataEl.textContent || '[]');
+    } catch {
+      /* ignore */
+    }
   }
   if (i18nEl) {
-    try { i18n = JSON.parse(i18nEl.textContent || '{}'); } catch { /* ignore */ }
+    try {
+      i18n = JSON.parse(i18nEl.textContent || '{}');
+    } catch {
+      /* ignore */
+    }
   }
 
   // Show first article

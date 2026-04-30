@@ -18,7 +18,9 @@ function getOpenTargets(): string[] {
   }
   // Project names (slugified)
   const allProjects = [
-    ...(state.profileData.projects?.featured?.visible ? [state.profileData.projects.featured] : []),
+    ...(state.profileData.projects?.featured?.visible
+      ? [state.profileData.projects.featured]
+      : []),
     ...(state.profileData.projects?.items ?? []),
   ];
   allProjects.forEach((p) => targets.push(slugify(p.name)));
@@ -47,14 +49,34 @@ export function getCompletions(partial: string): string[] {
   }
   if (cmd === 'launch') {
     const apps = [
-      'about', 'skills', 'education', 'preview', 'contact', 'finder',
-      'browser', 'settings', 'appstore', 'speedtest', 'terminal',
-      'notes', 'playgrounds', 'stickies', 'gamecenter',
+      'about',
+      'skills',
+      'education',
+      'preview',
+      'contact',
+      'finder',
+      'browser',
+      'settings',
+      'appstore',
+      'speedtest',
+      'terminal',
+      'notes',
+      'playgrounds',
+      'stickies',
+      'gamecenter',
     ];
     return apps.filter((a) => a.startsWith(argPart));
   }
   if (cmd === 'set') {
-    const setKeys = ['language', 'appearance', 'accent', 'clock24h', 'reduce-motion', 'font-size', 'high-contrast'];
+    const setKeys = [
+      'language',
+      'appearance',
+      'accent',
+      'clock24h',
+      'reduce-motion',
+      'font-size',
+      'high-contrast',
+    ];
     const setValues: Record<string, string[]> = {
       language: ['en', 'es', 'pt'],
       appearance: ['light', 'dark', 'auto'],
@@ -87,7 +109,9 @@ export function getCompletions(partial: string): string[] {
     dirPath = state.cwd;
     prefix = pathPart;
   } else {
-    dirPath = pathPart.slice(0, lastSlash) || (pathPart.startsWith('~') ? '~' : state.cwd);
+    dirPath =
+      pathPart.slice(0, lastSlash) ||
+      (pathPart.startsWith('~') ? '~' : state.cwd);
     prefix = pathPart.slice(lastSlash + 1);
   }
 

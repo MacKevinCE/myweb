@@ -12,7 +12,7 @@ import type { ValidationResult } from './validateData';
 export function validateUiData(
   data: Record<string, unknown>,
   theme: string,
-  lang: string,
+  lang: string
 ): ValidationResult {
   const errors: string[] = [];
   const prefix = `[${theme}/${lang}]`;

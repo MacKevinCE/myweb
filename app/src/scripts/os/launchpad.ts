@@ -15,16 +15,20 @@ let appButtons: HTMLElement[] = [];
 export function initLaunchpad() {
   backdrop = document.getElementById('launchpad-backdrop');
   panel = document.getElementById('launchpad-panel');
-  searchInput = document.getElementById('launchpad-search') as HTMLInputElement | null;
+  searchInput = document.getElementById(
+    'launchpad-search'
+  ) as HTMLInputElement | null;
   const grid = document.getElementById('launchpad-grid');
   if (!backdrop || !grid) return;
 
   appButtons = Array.from(grid.querySelectorAll<HTMLElement>('.lp-app'));
 
   // Launchpad trigger — dock icon with no openWindow
-  document.querySelectorAll<HTMLElement>('[data-open-launchpad]').forEach((el) => {
-    el.addEventListener('click', () => toggleLaunchpad());
-  });
+  document
+    .querySelectorAll<HTMLElement>('[data-open-launchpad]')
+    .forEach((el) => {
+      el.addEventListener('click', () => toggleLaunchpad());
+    });
 
   // Click on backdrop (outside panel) → close
   backdrop.addEventListener('click', (e) => {
@@ -101,10 +105,14 @@ function openLaunchpad() {
     if (panel) panel.style.minHeight = `${panel.offsetHeight}px`;
   });
 
-  backdrop.addEventListener('animationend', () => {
-    if (!backdrop) return;
-    backdrop.classList.remove('lp-backdrop--opening');
-  }, { once: true });
+  backdrop.addEventListener(
+    'animationend',
+    () => {
+      if (!backdrop) return;
+      backdrop.classList.remove('lp-backdrop--opening');
+    },
+    { once: true }
+  );
 }
 
 function closeLaunchpad() {
@@ -117,11 +125,15 @@ function closeLaunchpad() {
   }
 
   backdrop.classList.add('lp-backdrop--closing');
-  backdrop.addEventListener('animationend', () => {
-    if (!backdrop) return;
-    backdrop.style.display = 'none';
-    backdrop.classList.remove('lp-backdrop--closing');
-    // Release locked height for next open
-    if (panel) panel.style.minHeight = '';
-  }, { once: true });
+  backdrop.addEventListener(
+    'animationend',
+    () => {
+      if (!backdrop) return;
+      backdrop.style.display = 'none';
+      backdrop.classList.remove('lp-backdrop--closing');
+      // Release locked height for next open
+      if (panel) panel.style.minHeight = '';
+    },
+    { once: true }
+  );
 }

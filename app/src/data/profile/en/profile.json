@@ -141,13 +141,7 @@
         "endDate": "Present",
         "location": "Lima, Peru",
         "description": "Developing iOS applications for Scotiabank Peru using MVC architecture and Swift Package Manager. Building dynamic interfaces and reusable components in Swift. Driving performance optimization, tech debt reduction, and unit testing automation to improve coverage and reduce production incidents.",
-        "tags": [
-          "Swift",
-          "MVC",
-          "SPM",
-          "Unit Testing",
-          "UIKit"
-        ]
+        "tags": ["Swift", "MVC", "SPM", "Unit Testing", "UIKit"]
       },
       {
         "company": "NTT DATA Europe & Latam",
@@ -156,13 +150,7 @@
         "endDate": "Jun 2022",
         "location": "Madrid, Spain",
         "description": "Led iOS development for the Transbank app (Chile), implementing sales and payment processing flows. Managed UI development with Storyboard/XIB and dependency management with CocoaPods.",
-        "tags": [
-          "Swift",
-          "UIKit",
-          "CocoaPods",
-          "Storyboard",
-          "XIB"
-        ]
+        "tags": ["Swift", "UIKit", "CocoaPods", "Storyboard", "XIB"]
       },
       {
         "company": "Indra",
@@ -171,13 +159,7 @@
         "endDate": "Dec 2021",
         "location": "Lima, Peru",
         "description": "Developed the Mundo Rimac app for Rimac Insurance (Peru) using VIPER architecture. Built network services with Alamofire and PromiseKit. Managed Firebase integration and TestFlight distribution.",
-        "tags": [
-          "Swift",
-          "VIPER",
-          "Alamofire",
-          "PromiseKit",
-          "Firebase"
-        ]
+        "tags": ["Swift", "VIPER", "Alamofire", "PromiseKit", "Firebase"]
       },
       {
         "company": "Everis Peru S.A.C.",
@@ -186,13 +168,7 @@
         "endDate": "Oct 2020",
         "location": "Madrid, Spain",
         "description": "Built iOS healthcare applications for hospitals in Spain and Mexico, including ehCOS Remote Health and SJD Hospital. Implemented telemedicine features, patient data management, push notifications, and modular libraries for medical device integration using VIPER pattern.",
-        "tags": [
-          "Swift",
-          "VIPER",
-          "Healthcare",
-          "Push Notifications",
-          "UIKit"
-        ]
+        "tags": ["Swift", "VIPER", "Healthcare", "Push Notifications", "UIKit"]
       },
       {
         "company": "Freelancer",
@@ -201,13 +177,7 @@
         "endDate": "Jul 2020",
         "location": "Remote",
         "description": "Developed BlackBook and QManage applications using Cocoa Touch and native iOS frameworks. Integrated calendar, messages, and events system APIs for rich user experiences.",
-        "tags": [
-          "Swift",
-          "Cocoa Touch",
-          "UIKit",
-          "MVC",
-          "Native APIs"
-        ]
+        "tags": ["Swift", "Cocoa Touch", "UIKit", "MVC", "Native APIs"]
       },
       {
         "company": "Freelancer",
@@ -216,13 +186,7 @@
         "endDate": "Jun 2019",
         "location": "Remote",
         "description": "Developed interactive map features for apps like Instafit and Trident. Implemented frontend in React Native and backend with Django (Python).",
-        "tags": [
-          "React Native",
-          "Django",
-          "Python",
-          "Maps",
-          "Mobile"
-        ]
+        "tags": ["React Native", "Django", "Python", "Maps", "Mobile"]
       },
       {
         "company": "Cooperativa de Ahorro y Crédito Integra Perú",
@@ -231,11 +195,7 @@
         "endDate": "Mar 2019",
         "location": "Lima, Peru",
         "description": "Redesigned mobile interfaces to improve usability and response times. Modeled and optimized internal business processes.",
-        "tags": [
-          "Mobile",
-          "UX/UI",
-          "Process Optimization"
-        ]
+        "tags": ["Mobile", "UX/UI", "Process Optimization"]
       }
     ]
   },
@@ -246,12 +206,7 @@
       "shortDesc": "macOS-style interactive portfolio",
       "category": "portfolio",
       "description": "Interactive portfolio that replicates a full macOS desktop environment in the browser. Features draggable/resizable windows, dock magnification, virtual filesystem terminal, achievement system, notification center, settings persistence, and PWA support. Built with Astro SSG and vanilla TypeScript.",
-      "tags": [
-        "Astro",
-        "TypeScript",
-        "CSS",
-        "PWA"
-      ],
+      "tags": ["Astro", "TypeScript", "CSS", "PWA"],
       "image": "/icons/icon.svg",
       "repo": "https://github.com/MacKevinCE/Portfolio-web"
     },
@@ -261,12 +216,7 @@
         "shortDesc": "CRT hacker-style terminal portfolio",
         "category": "portfolio",
         "description": "Developer portfolio with a retro CRT terminal aesthetic. Boot sequence animation, interactive shell with syntax-highlighted sections, scanline effects, and responsive design. Built with Astro and Tailwind CSS.",
-        "tags": [
-          "Astro",
-          "Tailwind CSS",
-          "TypeScript",
-          "CRT"
-        ],
+        "tags": ["Astro", "Tailwind CSS", "TypeScript", "CRT"],
         "repo": "https://github.com/MacKevinCE/Portfolio-web"
       },
       {
@@ -274,12 +224,7 @@
         "shortDesc": "Glassmorphism design portfolio",
         "category": "portfolio",
         "description": "Modern portfolio with glassmorphism design language. Frosted glass panels, gradient accents, smooth scroll animations, and elegant typography. Built with Astro and Tailwind CSS.",
-        "tags": [
-          "Astro",
-          "Tailwind CSS",
-          "Glassmorphism",
-          "Design"
-        ],
+        "tags": ["Astro", "Tailwind CSS", "Glassmorphism", "Design"],
         "repo": "https://github.com/MacKevinCE/Portfolio-web"
       },
       {
@@ -287,12 +232,7 @@
         "shortDesc": "Dynamic CRUD API generator",
         "category": "open-source",
         "description": "TypeScript RESTful API that auto-generates CRUD endpoints from PostgreSQL database schema. Supports dynamic queries, stored procedures, bulk operations, JWT authentication, Socket.io real-time, and pagination — zero manual route/controller boilerplate.",
-        "tags": [
-          "TypeScript",
-          "Node.js",
-          "PostgreSQL",
-          "JWT"
-        ],
+        "tags": ["TypeScript", "Node.js", "PostgreSQL", "JWT"],
         "repo": "https://github.com/MacKevinCE/MasterApi"
       },
       {
@@ -300,12 +240,7 @@
         "shortDesc": "Family photo restoration with computer vision",
         "category": "open-source",
         "description": "Python image restoration system for damaged family photographs. Uses Gaussian pyramid interpolation, Canny edge detection, 8-directional inpainting, and bicubic interpolation for multi-scale reconstruction. Includes MSE quality metrics and Jupyter notebook demos.",
-        "tags": [
-          "Python",
-          "NumPy",
-          "Computer Vision",
-          "Image Processing"
-        ],
+        "tags": ["Python", "NumPy", "Computer Vision", "Image Processing"],
         "repo": "https://github.com/MacKevinCE/ProcesamientoImagen"
       },
       {
@@ -313,13 +248,7 @@
         "shortDesc": "Open-source iOS development toolkit",
         "category": "open-source",
         "description": "Comprehensive open-source Swift library providing solutions for networking (Repository pattern with Combine), secure storage (Keychain + encrypted UserDefaults), real-time debugging (Chuck), icon font management (Fonts), cryptography (AES-GCM, HMAC-SHA512), and reusable UI components. Used in production apps.",
-        "tags": [
-          "Swift",
-          "Open Source",
-          "CocoaPods",
-          "Combine",
-          "CryptoKit"
-        ],
+        "tags": ["Swift", "Open Source", "CocoaPods", "Combine", "CryptoKit"],
         "repo": "https://github.com/MacKevinCE/Decele"
       },
       {
@@ -327,12 +256,7 @@
         "shortDesc": "Real-time iOS logging & debugging tool",
         "category": "open-source",
         "description": "In-app debugging tool that captures logs, network requests, data persistence changes, and memory events in real-time. Triggered by shake gesture, it displays a visual debug panel with search, filtering, and detailed inspection — no need for Xcode console.",
-        "tags": [
-          "Swift",
-          "UIKit",
-          "Combine",
-          "Debugging"
-        ],
+        "tags": ["Swift", "UIKit", "Combine", "Debugging"],
         "repo": "https://github.com/MacKevinCE/Decele"
       },
       {
@@ -340,12 +264,7 @@
         "shortDesc": "Dynamic icon font loader for iOS",
         "category": "open-source",
         "description": "Icon font management system that dynamically loads custom fonts (TTF, OTF, WOFF) via CoreText and generates styled UIImages from icon characters. Supports Bootstrap Icons, Font Awesome, and Material Icons with a unified protocol-based API.",
-        "tags": [
-          "Swift",
-          "CoreText",
-          "UIKit",
-          "Icon Fonts"
-        ],
+        "tags": ["Swift", "CoreText", "UIKit", "Icon Fonts"],
         "repo": "https://github.com/MacKevinCE/Decele"
       }
     ]

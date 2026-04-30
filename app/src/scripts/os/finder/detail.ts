@@ -13,7 +13,9 @@ export function showMobileDetail(panel: HTMLElement, detail: HTMLElement) {
   detail.style.display = '';
   detail.classList.add('finder-detail--mobile');
   // Trigger slide-in animation
-  requestAnimationFrame(() => detail.classList.add('finder-detail--mobile-visible'));
+  requestAnimationFrame(() =>
+    detail.classList.add('finder-detail--mobile-visible')
+  );
 }
 
 export function hideMobileDetail(panel: HTMLElement, onComplete?: () => void) {
@@ -30,9 +32,9 @@ export function hideMobileDetail(panel: HTMLElement, onComplete?: () => void) {
     detail.innerHTML = '';
     if (filelist) filelist.style.display = '';
     // Clear selection
-    panel.querySelectorAll<HTMLElement>('.finder-row').forEach((r) =>
-      r.classList.remove('finder-row--selected')
-    );
+    panel
+      .querySelectorAll<HTMLElement>('.finder-row')
+      .forEach((r) => r.classList.remove('finder-row--selected'));
     onComplete?.();
   };
 
@@ -42,7 +44,9 @@ export function hideMobileDetail(panel: HTMLElement, onComplete?: () => void) {
 /* ---- Detail panel rendering ---- */
 
 export function renderDetail(section: string, row: HTMLElement) {
-  const detail = document.querySelector<HTMLElement>(`[data-finder-detail="${section}"]`);
+  const detail = document.querySelector<HTMLElement>(
+    `[data-finder-detail="${section}"]`
+  );
   if (!detail) return;
 
   const ds = document.getElementById('finder-window')?.dataset;
@@ -63,10 +67,12 @@ export function renderDetail(section: string, row: HTMLElement) {
       </button>`
     : '';
 
-  const tagsHtml = tags.map((t) => {
-    const c = tagColor(t.trim()).text;
-    return `<div class="fd-tag"><div class="fd-tag-dot" style="background: ${c};"></div><span>${escapeHtml(t.trim())}</span></div>`;
-  }).join('');
+  const tagsHtml = tags
+    .map((t) => {
+      const c = tagColor(t.trim()).text;
+      return `<div class="fd-tag"><div class="fd-tag-dot" style="background: ${c};"></div><span>${escapeHtml(t.trim())}</span></div>`;
+    })
+    .join('');
 
   if (section === 'projects') {
     const image = row.dataset.rowImage || '';
@@ -139,7 +145,9 @@ export function renderDetail(section: string, row: HTMLElement) {
 /* ---- Selection helpers ---- */
 
 export function clearSelection(section: string) {
-  const panel = document.querySelector<HTMLElement>(`[data-finder-panel="${section}"]`);
+  const panel = document.querySelector<HTMLElement>(
+    `[data-finder-panel="${section}"]`
+  );
   if (!panel) return;
 
   panel.querySelectorAll<HTMLElement>('.finder-row').forEach((r) => {
@@ -148,7 +156,10 @@ export function clearSelection(section: string) {
 
   const detail = panel.querySelector<HTMLElement>('.finder-detail');
   if (detail) {
-    detail.classList.remove('finder-detail--mobile', 'finder-detail--mobile-visible');
+    detail.classList.remove(
+      'finder-detail--mobile',
+      'finder-detail--mobile-visible'
+    );
     detail.innerHTML = '';
     detail.style.display = 'none';
   }

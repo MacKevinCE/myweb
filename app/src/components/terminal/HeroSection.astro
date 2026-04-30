@@ -103,15 +103,19 @@ const codeBlock: CodeBlockLine[] = content.codeBlock ?? [];
         >
       </div>
       <div class="flex flex-col gap-1.5">
-        {codeBlock.map((line) => (
-          <div class="terminal-code-line terminal-line">
-            {line.map((tk) =>
-              tk.c
-                ? <span class={`terminal-code-${tk.c}`}>{tk.t}</span>
-                : <span>{tk.t}</span>
-            )}
-          </div>
-        ))}
+        {
+          codeBlock.map((line) => (
+            <div class="terminal-code-line terminal-line">
+              {line.map((tk) =>
+                tk.c ? (
+                  <span class={`terminal-code-${tk.c}`}>{tk.t}</span>
+                ) : (
+                  <span>{tk.t}</span>
+                )
+              )}
+            </div>
+          ))
+        }
       </div>
     </div>
 
@@ -125,7 +129,8 @@ const codeBlock: CodeBlockLine[] = content.codeBlock ?? [];
               style={`background: ${cycleColor(i)}`}
             />
             <span class="text-[var(--text-secondary)] font-mono text-xs">
-              {item.key.replace(/\s+/g, '_')}: {item.value.replace(/\s+/g, '_').replace(/_\/_/g, ' / ')}
+              {item.key.replace(/\s+/g, '_')}:{' '}
+              {item.value.replace(/\s+/g, '_').replace(/_\/_/g, ' / ')}
             </span>
           </div>
         ))

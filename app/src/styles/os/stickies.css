@@ -77,7 +77,9 @@
   background: var(--sk-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   animation: skNoteIn 0.2s ease-out;
-  transition: box-shadow 0.15s, min-height 0.2s ease;
+  transition:
+    box-shadow 0.15s,
+    min-height 0.2s ease;
 }
 
 .sk-note:hover {
@@ -85,8 +87,14 @@
 }
 
 @keyframes skNoteIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .sk-note--removing {
@@ -94,8 +102,14 @@
 }
 
 @keyframes skNoteOut {
-  from { opacity: 1; transform: scale(1); }
-  to { opacity: 0; transform: scale(0.9); }
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
 }
 
 /* Note header */
@@ -126,7 +140,9 @@
   border: 1.5px solid rgba(0, 0, 0, 0.15);
   padding: 0;
   cursor: pointer;
-  transition: transform 0.1s, border-color 0.1s;
+  transition:
+    transform 0.1s,
+    border-color 0.1s;
   flex-shrink: 0;
 }
 
@@ -155,7 +171,9 @@
   line-height: 1;
   padding: 2px 4px;
   border-radius: var(--os-radius-sm);
-  transition: color 0.15s, background 0.15s;
+  transition:
+    color 0.15s,
+    background 0.15s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -180,7 +198,9 @@
   line-height: 1;
   padding: 0 4px;
   border-radius: 50%;
-  transition: color 0.15s, background 0.15s;
+  transition:
+    color 0.15s,
+    background 0.15s;
 }
 
 .sk-note-delete:hover {
@@ -218,6 +238,13 @@
 }
 
 /* Scrollbar */
-.sk-grid::-webkit-scrollbar { width: 6px; }
-.sk-grid::-webkit-scrollbar-track { background: transparent; }
-.sk-grid::-webkit-scrollbar-thumb { background: var(--os-fill-border); border-radius: 3px; }
+.sk-grid::-webkit-scrollbar {
+  width: 6px;
+}
+.sk-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sk-grid::-webkit-scrollbar-thumb {
+  background: var(--os-fill-border);
+  border-radius: 3px;
+}

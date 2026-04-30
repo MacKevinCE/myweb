@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-    background: var(--os-bg-glass);
+  background: var(--os-bg-glass);
   backdrop-filter: blur(var(--os-blur-lg));
   -webkit-backdrop-filter: blur(var(--os-blur-lg));
 }
@@ -54,7 +54,7 @@
 }
 
 /* Menu bar shadow */
-[data-os-mode="light"] .os-menubar {
+[data-os-mode='light'] .os-menubar {
   box-shadow: 0 0.5px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -206,7 +206,9 @@
 }
 
 .mb-wifi-arc {
-  transition: opacity 0.3s ease, stroke 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    stroke 0.3s ease;
 }
 
 .mb-wifi-badge {

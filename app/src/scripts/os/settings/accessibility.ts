@@ -4,12 +4,17 @@ import { settings, saveSettings } from './persist';
 export function applyFontSize(size: number) {
   const root = document.documentElement;
   // Scale factors: -1=smaller, 0=default, 1=larger, 2=largest
-  const scales: Record<number, number> = { '-1': 0.85, '0': 1, '1': 1.15, '2': 1.3 };
+  const scales: Record<number, number> = {
+    '-1': 0.85,
+    '0': 1,
+    '1': 1.15,
+    '2': 1.3,
+  };
   const s = scales[size] ?? 1;
 
   // Base sizes used throughout the OS theme
   const bases = [7, 9, 10, 11, 12, 13, 14, 16, 18, 20, 22, 24, 26];
-  bases.forEach(px => {
+  bases.forEach((px) => {
     root.style.setProperty(`--os-fs-${px}`, `${Math.round(px * s)}px`);
   });
 }
@@ -26,13 +31,15 @@ export function applyHighContrast(contrast: boolean) {
 
 export function initAccessibility() {
   // Font size buttons
-  const fontBtns = document.querySelectorAll<HTMLElement>('[data-stg-fontsize]');
-  fontBtns.forEach(btn => {
+  const fontBtns = document.querySelectorAll<HTMLElement>(
+    '[data-stg-fontsize]'
+  );
+  fontBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const size = parseInt(btn.dataset.stgFontsize || '0', 10);
       if (size === settings.fontSize) return;
 
-      fontBtns.forEach(b => b.classList.remove('stg-font-btn--active'));
+      fontBtns.forEach((b) => b.classList.remove('stg-font-btn--active'));
       btn.classList.add('stg-font-btn--active');
 
       settings.fontSize = size;
@@ -55,7 +62,8 @@ export function initAccessibility() {
   const contrastToggle = document.getElementById('stg-high-contrast-toggle');
   if (contrastToggle) {
     contrastToggle.addEventListener('click', () => {
-      settings.highContrast = contrastToggle.classList.contains('stg-toggle--on');
+      settings.highContrast =
+        contrastToggle.classList.contains('stg-toggle--on');
       applyHighContrast(settings.highContrast);
       saveSettings(settings, 'highContrast');
     });
@@ -68,8 +76,10 @@ export function restoreAccessibility() {
   applyHighContrast(settings.highContrast);
 
   // Restore font size button
-  const fontBtns = document.querySelectorAll<HTMLElement>('[data-stg-fontsize]');
-  fontBtns.forEach(btn => {
+  const fontBtns = document.querySelectorAll<HTMLElement>(
+    '[data-stg-fontsize]'
+  );
+  fontBtns.forEach((btn) => {
     const size = parseInt(btn.dataset.stgFontsize || '0', 10);
     btn.classList.toggle('stg-font-btn--active', size === settings.fontSize);
   });

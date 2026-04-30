@@ -28,20 +28,41 @@ const avatarUrl = content.about?.avatarUrl ?? '';
   id="about-window"
   style="display: none;"
 >
-  <WindowChrome title={windowTitles[W.ABOUT]} windowId="about" titleClass="os-window-title--inter" />
+  <WindowChrome
+    title={windowTitles[W.ABOUT]}
+    windowId="about"
+    titleClass="os-window-title--inter"
+  />
 
   <!-- Body -->
   <div class="os-window-body about-body">
     <!-- Profile section -->
     <div class="about-profile">
       <div class="about-avatar">
-        <ImageWithFallback src={avatarUrl} alt={name} fallback={name[0]} imgClass="about-avatar-img" fallbackClass="about-avatar-img" />
+        <ImageWithFallback
+          src={avatarUrl}
+          alt={name}
+          fallback={name[0]}
+          imgClass="about-avatar-img"
+          fallbackClass="about-avatar-img"
+        />
       </div>
       <div class="about-info">
         <h2 class="about-name">{name.toUpperCase()}</h2>
         <span class="about-role">{role}</span>
         <div class="about-location">
-          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--os-text-secondary);">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="color: var(--os-text-secondary);"
+          >
             <Fragment set:html={uiIcons.mapPin} />
           </svg>
           <span class="about-location-text">{location}</span>
@@ -61,12 +82,16 @@ const avatarUrl = content.about?.avatarUrl ?? '';
 
     <!-- Metrics -->
     <div class="about-metrics">
-      {metrics.map((m, i) => (
-        <div class="about-metric">
-          <span class="about-metric-value" style={`color: ${cycleColor(i)};`}>{m.value}</span>
-          <span class="about-metric-label">{m.label}</span>
-        </div>
-      ))}
+      {
+        metrics.map((m, i) => (
+          <div class="about-metric">
+            <span class="about-metric-value" style={`color: ${cycleColor(i)};`}>
+              {m.value}
+            </span>
+            <span class="about-metric-label">{m.label}</span>
+          </div>
+        ))
+      }
     </div>
   </div>
 </div>

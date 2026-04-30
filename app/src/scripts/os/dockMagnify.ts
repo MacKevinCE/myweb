@@ -30,7 +30,9 @@ export function initDockMagnify() {
   if (!dock) return;
 
   // Read initial dock scale from CSS (may have been set by persisted settings)
-  const initialScale = parseFloat(dock.style.getPropertyValue('--dock-scale') || '1');
+  const initialScale = parseFloat(
+    dock.style.getPropertyValue('--dock-scale') || '1'
+  );
   if (initialScale > 0) userDockScale = initialScale;
 
   collectSlots();
@@ -42,7 +44,10 @@ export function initDockMagnify() {
   // When mouse enters dock, keep it visible and clear hide timer
   dock.addEventListener('mouseenter', () => {
     if (!autoHide || !dock) return;
-    if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
+    if (hideTimeout) {
+      clearTimeout(hideTimeout);
+      hideTimeout = null;
+    }
     dock.classList.add('os-dock--peek');
   });
 
@@ -86,7 +91,9 @@ function detachMagnifyListeners() {
 function collectSlots() {
   if (!dock) return;
   slots = Array.from(dock.querySelectorAll<HTMLElement>('.os-dock-slot'));
-  icons = slots.map((s) => s.querySelector('.os-dock-icon') as HTMLElement).filter(Boolean);
+  icons = slots
+    .map((s) => s.querySelector('.os-dock-icon') as HTMLElement)
+    .filter(Boolean);
   fitDock();
 }
 
@@ -115,7 +122,8 @@ function fitDock() {
   const gap = (slotCount - 1) * 4; // 4px gap between slots
   const availableWidth = window.innerWidth - 40; // 20px margin each side of screen
   const iconSizeAtUserScale = BASE_ICON_SIZE * userDockScale;
-  const neededWidth = (slotCount * iconSizeAtUserScale) + gap + dividerWidth + padding;
+  const neededWidth =
+    slotCount * iconSizeAtUserScale + gap + dividerWidth + padding;
 
   if (neededWidth <= availableWidth) {
     // Fits fine at user scale
@@ -129,7 +137,10 @@ function fitDock() {
   const clampedSize = Math.max(MIN_ICON_SIZE, idealIconSize);
   const newScale = clampedSize / BASE_ICON_SIZE;
 
-  dock.style.setProperty('--dock-scale', String(Math.min(newScale, userDockScale)));
+  dock.style.setProperty(
+    '--dock-scale',
+    String(Math.min(newScale, userDockScale))
+  );
 
   // If even at min size it doesn't fit, add scroll as last resort
   if (clampedSize <= MIN_ICON_SIZE) {
@@ -170,7 +181,10 @@ export function setAutoHide(enabled: boolean) {
     scheduleHide();
   } else {
     // Show immediately
-    if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
+    if (hideTimeout) {
+      clearTimeout(hideTimeout);
+      hideTimeout = null;
+    }
     dock.classList.remove('os-dock--autohide', 'os-dock--peek');
   }
 }
@@ -190,16 +204,24 @@ function onEdgeDetect(e: MouseEvent) {
   if (!autoHide || !dock) return;
   const nearBottom = e.clientY >= window.innerHeight - EDGE_ZONE;
   if (nearBottom) {
-    if (hideTimeout) { clearTimeout(hideTimeout); hideTimeout = null; }
+    if (hideTimeout) {
+      clearTimeout(hideTimeout);
+      hideTimeout = null;
+    }
     dock.classList.add('os-dock--peek');
   }
 }
 
 function onMove(e: MouseEvent) {
-  if (maxScale <= 1) { resetIcons(); return; }
+  if (maxScale <= 1) {
+    resetIcons();
+    return;
+  }
   if (!dock) return;
 
-  const scale = parseFloat(dock.style.getPropertyValue('--dock-scale') || String(userDockScale));
+  const scale = parseFloat(
+    dock.style.getPropertyValue('--dock-scale') || String(userDockScale)
+  );
   baseSize = BASE_ICON_SIZE * scale;
 
   for (let i = 0; i < icons.length; i++) {
@@ -215,7 +237,7 @@ function onMove(e: MouseEvent) {
 
     icon.style.width = size + 'px';
     icon.style.height = size + 'px';
-    icon.style.borderRadius = Math.round((16 * scale) * s) + 'px';
+    icon.style.borderRadius = Math.round(16 * scale * s) + 'px';
     icon.style.transform = `translateY(${-Math.round((size - baseSize) * 0.5)}px)`;
   }
 }

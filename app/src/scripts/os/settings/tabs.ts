@@ -67,8 +67,15 @@ function initSlider(opts: SliderOpts) {
   update(opts.initial);
 }
 
-export function updateSliderUI(fillId: string, thumbId: string, labelId: string,
-  value: number, min: number, max: number, fmt: (v: number) => string) {
+export function updateSliderUI(
+  fillId: string,
+  thumbId: string,
+  labelId: string,
+  value: number,
+  min: number,
+  max: number,
+  fmt: (v: number) => string
+) {
   const fill = document.getElementById(fillId);
   const thumb = document.getElementById(thumbId);
   const label = document.getElementById(labelId);
@@ -81,8 +88,15 @@ export function updateSliderUI(fillId: string, thumbId: string, labelId: string,
 
 function applyDockSize(value: number) {
   setDockScale(value / 100);
-  updateSliderUI('stg-dock-slider-fill', 'stg-dock-slider-thumb', 'stg-dock-size-val',
-    value, 50, 200, (v) => v + '%');
+  updateSliderUI(
+    'stg-dock-slider-fill',
+    'stg-dock-slider-thumb',
+    'stg-dock-size-val',
+    value,
+    50,
+    200,
+    (v) => v + '%'
+  );
 }
 
 /* ---- Dock size slider (50% – 200%) ---- */
@@ -186,7 +200,9 @@ export function initAutoHideToggle(): HTMLElement | null {
 }
 
 /* ---- DateTime toggles ---- */
-type BooleanSettingsKey = { [K in keyof Settings]: Settings[K] extends boolean ? K : never }[keyof Settings];
+type BooleanSettingsKey = {
+  [K in keyof Settings]: Settings[K] extends boolean ? K : never;
+}[keyof Settings];
 
 export function initDateTimeToggles(updateMenuBarClock: () => void) {
   const isMobile = getLayoutMode() === 'mobile';
@@ -196,9 +212,11 @@ export function initDateTimeToggles(updateMenuBarClock: () => void) {
     const note = document.getElementById('stg-mobile-note');
     if (note) note.style.display = '';
 
-    document.querySelectorAll<HTMLElement>('.stg-info-row--mobile-disabled').forEach((row) => {
-      row.classList.add('stg-info-row--disabled');
-    });
+    document
+      .querySelectorAll<HTMLElement>('.stg-info-row--mobile-disabled')
+      .forEach((row) => {
+        row.classList.add('stg-info-row--disabled');
+      });
   }
 
   const map: [string, BooleanSettingsKey][] = [
@@ -245,9 +263,15 @@ export function restoreDock(autoHideToggle: HTMLElement | null) {
 
   // Magnification
   setMagnification(settings.magnification);
-  updateSliderUI('stg-mag-slider-fill', 'stg-mag-slider-thumb', 'stg-mag-val',
-    settings.magnification, 0, 50,
-    (v) => v === 0 ? 'Off' : v + '%');
+  updateSliderUI(
+    'stg-mag-slider-fill',
+    'stg-mag-slider-thumb',
+    'stg-mag-val',
+    settings.magnification,
+    0,
+    50,
+    (v) => (v === 0 ? 'Off' : v + '%')
+  );
 
   // Auto-hide
   if (autoHideToggle) {
@@ -335,7 +359,7 @@ function getCurrentLang(): string {
 /* ---- Settings shortcuts (lang button, clock click) ---- */
 export function initSettingsShortcuts(
   navButtons: NodeListOf<HTMLElement>,
-  panels: NodeListOf<HTMLElement>,
+  panels: NodeListOf<HTMLElement>
 ) {
   // Lang button → set text and open Settings on Idioma y región
   const langBtn = document.getElementById('os-lang-btn');
@@ -346,9 +370,16 @@ export function initSettingsShortcuts(
       const win = document.getElementById('settings-window');
       if (win) openWindow(win);
       navButtons.forEach((b) => b.classList.remove('os-nav--active'));
-      const langNav = document.querySelector<HTMLElement>('[data-stg-tab="language"]');
+      const langNav = document.querySelector<HTMLElement>(
+        '[data-stg-tab="language"]'
+      );
       if (langNav) langNav.classList.add('os-nav--active');
-      panels.forEach((p) => p.classList.toggle('stg-panel--active', p.dataset.stgPanel === 'language'));
+      panels.forEach((p) =>
+        p.classList.toggle(
+          'stg-panel--active',
+          p.dataset.stgPanel === 'language'
+        )
+      );
     });
   }
 }

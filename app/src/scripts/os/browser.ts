@@ -19,12 +19,16 @@ export function initBrowser() {
   startPage = document.getElementById('brw-start');
   content = document.getElementById('brw-content');
   fallback = document.getElementById('brw-fallback');
-  fallbackLink = document.getElementById('brw-fallback-link') as HTMLAnchorElement | null;
+  fallbackLink = document.getElementById(
+    'brw-fallback-link'
+  ) as HTMLAnchorElement | null;
   loadingBar = document.getElementById('brw-loading');
 
   homeBtn = document.getElementById('brw-home') as HTMLButtonElement | null;
   reloadBtn = document.getElementById('brw-reload') as HTMLButtonElement | null;
-  externalBtn = document.getElementById('brw-external') as HTMLButtonElement | null;
+  externalBtn = document.getElementById(
+    'brw-external'
+  ) as HTMLButtonElement | null;
 
   // Home button → show start page
   homeBtn?.addEventListener('click', showStartPage);

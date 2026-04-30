@@ -1,4 +1,7 @@
-function merge(target: Record<string, unknown>, source: Record<string, unknown>): Record<string, unknown> {
+function merge(
+  target: Record<string, unknown>,
+  source: Record<string, unknown>
+): Record<string, unknown> {
   const result = { ...target };
   for (const key of Object.keys(source)) {
     if (
@@ -11,7 +14,7 @@ function merge(target: Record<string, unknown>, source: Record<string, unknown>)
     ) {
       result[key] = merge(
         target[key] as Record<string, unknown>,
-        source[key] as Record<string, unknown>,
+        source[key] as Record<string, unknown>
       );
     } else {
       result[key] = source[key];
@@ -20,6 +23,8 @@ function merge(target: Record<string, unknown>, source: Record<string, unknown>)
   return result;
 }
 
-export function deepMerge(...sources: Record<string, unknown>[]): Record<string, unknown> {
+export function deepMerge(
+  ...sources: Record<string, unknown>[]
+): Record<string, unknown> {
   return sources.reduce((acc, src) => merge(acc, src), {});
 }

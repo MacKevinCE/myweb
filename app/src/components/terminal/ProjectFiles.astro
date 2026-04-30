@@ -16,9 +16,7 @@ const hasItems = projects.items && projects.items.length > 0;
 const showSection = showFeatured || hasItems;
 
 const allTags = hasItems
-  ? ([
-      ...new Set(projects.items.flatMap((p) => p.tags)),
-    ].sort() as string[])
+  ? ([...new Set(projects.items.flatMap((p) => p.tags))].sort() as string[])
   : [];
 const filterChips: string[] = [projects.allLabel, ...allTags];
 ---

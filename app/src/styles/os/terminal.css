@@ -70,13 +70,27 @@
 }
 
 /* Color classes */
-.term-green { color: #22c55e; }
-.term-blue { color: #60a5fa; }
-.term-yellow { color: #fbbf24; }
-.term-red { color: #ef4444; }
-.term-cyan { color: #22d3ee; }
-.term-muted { color: #666; }
-.term-bold { font-weight: 700; }
+.term-green {
+  color: #22c55e;
+}
+.term-blue {
+  color: #60a5fa;
+}
+.term-yellow {
+  color: #fbbf24;
+}
+.term-red {
+  color: #ef4444;
+}
+.term-cyan {
+  color: #22d3ee;
+}
+.term-muted {
+  color: #666;
+}
+.term-bold {
+  font-weight: 700;
+}
 
 /* Links in terminal */
 .term-body a {
@@ -147,8 +161,14 @@
 
 /* Matrix animation */
 @keyframes matrixFall {
-  0% { transform: translateY(-100%); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
+  0% {
+    transform: translateY(-100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
 }
 
 .term-matrix {
@@ -170,7 +190,16 @@
 }
 
 /* Scrollbar */
-.term-output::-webkit-scrollbar { width: 6px; }
-.term-output::-webkit-scrollbar-track { background: transparent; }
-.term-output::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 3px; }
-.term-output::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
+.term-output::-webkit-scrollbar {
+  width: 6px;
+}
+.term-output::-webkit-scrollbar-track {
+  background: transparent;
+}
+.term-output::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+.term-output::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}

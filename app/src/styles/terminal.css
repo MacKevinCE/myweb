@@ -14,11 +14,20 @@
   --bg-surface: #141414;
   --bg-card: #1a1a1a;
   --bg-deep: #050505;
-  --bg-hero-mid: #0F1A14;
+  --bg-hero-mid: #0f1a14;
 
   /* Semantic backgrounds */
-  --bg-hero: radial-gradient(ellipse at center 40%, var(--bg-hero-mid) 0%, var(--bg-primary) 70%, var(--bg-deep) 100%);
-  --bg-contact: radial-gradient(ellipse at center 30%, var(--bg-hero-mid) 0%, var(--bg-primary) 80%);
+  --bg-hero: radial-gradient(
+    ellipse at center 40%,
+    var(--bg-hero-mid) 0%,
+    var(--bg-primary) 70%,
+    var(--bg-deep) 100%
+  );
+  --bg-contact: radial-gradient(
+    ellipse at center 30%,
+    var(--bg-hero-mid) 0%,
+    var(--bg-primary) 80%
+  );
 
   /* Palette with alpha */
   --palette-0-alpha: #10b98120;
@@ -373,12 +382,27 @@
 }
 
 /* Code syntax highlighting (semantic tokens) */
-.terminal-code-line    { font-family: var(--font-mono); font-size: 13px; white-space: pre; color: var(--text-primary); }
-.terminal-code-keyword { color: var(--code-keyword); }
-.terminal-code-type    { color: var(--code-type); }
-.terminal-code-string  { color: var(--code-string); }
-.terminal-code-number  { color: var(--code-number); }
-.terminal-code-value   { color: var(--code-value); }
+.terminal-code-line {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  white-space: pre;
+  color: var(--text-primary);
+}
+.terminal-code-keyword {
+  color: var(--code-keyword);
+}
+.terminal-code-type {
+  color: var(--code-type);
+}
+.terminal-code-string {
+  color: var(--code-string);
+}
+.terminal-code-number {
+  color: var(--code-number);
+}
+.terminal-code-value {
+  color: var(--code-value);
+}
 
 /* ============================================
    PROJECT CARDS — FILE DECRYPT EFFECT
@@ -563,7 +587,7 @@
    Language Suggestion Banner — Terminal
    ============================================ */
 
-[data-theme="terminal"].lang-banner {
+[data-theme='terminal'].lang-banner {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -585,32 +609,32 @@
     opacity 0.3s ease;
 }
 
-[data-theme="terminal"].lang-banner .lang-banner__badge {
+[data-theme='terminal'].lang-banner .lang-banner__badge {
   display: none;
 }
 
-[data-theme="terminal"].lang-banner.lang-banner--open {
+[data-theme='terminal'].lang-banner.lang-banner--open {
   transform: translateY(0);
   opacity: 1;
 }
 
-[data-theme="terminal"].lang-banner .lang-banner__text {
+[data-theme='terminal'].lang-banner .lang-banner__text {
   color: var(--text-secondary);
 }
 
-[data-theme="terminal"].lang-banner .lang-banner__text::before {
+[data-theme='terminal'].lang-banner .lang-banner__text::before {
   content: '>';
   color: var(--green-terminal);
   margin-right: 6px;
 }
 
-[data-theme="terminal"].lang-banner .lang-banner__actions {
+[data-theme='terminal'].lang-banner .lang-banner__actions {
   display: flex;
   gap: 8px;
   flex-shrink: 0;
 }
 
-[data-theme="terminal"].lang-banner .lang-banner__btn {
+[data-theme='terminal'].lang-banner .lang-banner__btn {
   padding: 4px 12px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11px;
@@ -618,31 +642,31 @@
   transition: all 0.2s;
 }
 
-[data-theme="terminal"].lang-banner .lang-banner__accept {
+[data-theme='terminal'].lang-banner .lang-banner__accept {
   color: var(--bg-primary);
   background: var(--green-terminal);
   border: 1px solid var(--green-terminal);
   text-decoration: none;
 }
 
-[data-theme="terminal"].lang-banner .lang-banner__accept:hover {
+[data-theme='terminal'].lang-banner .lang-banner__accept:hover {
   background: transparent;
   color: var(--green-terminal);
 }
 
-[data-theme="terminal"].lang-banner .lang-banner__dismiss {
+[data-theme='terminal'].lang-banner .lang-banner__dismiss {
   color: var(--text-muted);
   background: transparent;
   border: 1px solid var(--border-primary);
 }
 
-[data-theme="terminal"].lang-banner .lang-banner__dismiss:hover {
+[data-theme='terminal'].lang-banner .lang-banner__dismiss:hover {
   border-color: var(--text-muted);
   color: var(--text-secondary);
 }
 
 @media (max-width: 640px) {
-  [data-theme="terminal"].lang-banner {
+  [data-theme='terminal'].lang-banner {
     flex-direction: column;
     text-align: center;
     padding: 12px 16px;

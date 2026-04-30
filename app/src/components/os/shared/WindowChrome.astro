@@ -11,9 +11,18 @@ const titleCls = ['os-window-title', titleClass].filter(Boolean).join(' ');
 
 <div class="os-window-titlebar" id={`${windowId}-titlebar`}>
   <div class="os-window-dots">
-    <button class="os-dot os-dot--red" id={`${windowId}-close`} aria-label="Close"></button>
-    <button class="os-dot os-dot--yellow" id={`${windowId}-minimize`} aria-label="Minimize"></button>
-    <button class="os-dot os-dot--green" id={`${windowId}-fullscreen`} aria-label="Fullscreen"></button>
+    <button
+      class="os-dot os-dot--red"
+      id={`${windowId}-close`}
+      aria-label="Close"></button>
+    <button
+      class="os-dot os-dot--yellow"
+      id={`${windowId}-minimize`}
+      aria-label="Minimize"></button>
+    <button
+      class="os-dot os-dot--green"
+      id={`${windowId}-fullscreen`}
+      aria-label="Fullscreen"></button>
   </div>
   <span class={titleCls}>{title}</span>
   <div class="os-window-titlespacer"></div>

@@ -60,7 +60,9 @@ export function resetFinder() {
   // Reset favs to Projects
   const favs = document.querySelectorAll<HTMLElement>('[data-finder-fav]');
   favs.forEach((f) => f.classList.remove('finder-sidebar-item--active'));
-  const projFav = document.querySelector<HTMLElement>('[data-finder-fav="projects"]');
+  const projFav = document.querySelector<HTMLElement>(
+    '[data-finder-fav="projects"]'
+  );
   if (projFav) projFav.classList.add('finder-sidebar-item--active');
 
   // Show projects panel, hide experience
@@ -79,19 +81,25 @@ export function resetFinder() {
   });
 
   // Reset column widths and sort state
-  document.querySelectorAll<HTMLElement>('.finder-filelist').forEach((filelist) => {
-    // Recalculate column widths from content
-    userResized.delete(filelist);
-    applyDefaultWidths(filelist);
+  document
+    .querySelectorAll<HTMLElement>('.finder-filelist')
+    .forEach((filelist) => {
+      // Recalculate column widths from content
+      userResized.delete(filelist);
+      applyDefaultWidths(filelist);
 
-    // Reset sort to ascending by name
-    sortState.set(filelist, { col: 'name', asc: true });
-    filelist.querySelectorAll<HTMLElement>('.finder-col-name svg, .finder-col-date svg, .finder-col-second svg').forEach((svg) => {
-      (svg as HTMLElement).style.transition = '';
-      (svg as HTMLElement).style.transform = '';
+      // Reset sort to ascending by name
+      sortState.set(filelist, { col: 'name', asc: true });
+      filelist
+        .querySelectorAll<HTMLElement>(
+          '.finder-col-name svg, .finder-col-date svg, .finder-col-second svg'
+        )
+        .forEach((svg) => {
+          (svg as HTMLElement).style.transition = '';
+          (svg as HTMLElement).style.transform = '';
+        });
+      sortRows(filelist, 'name', true);
     });
-    sortRows(filelist, 'name', true);
-  });
 
   // Show all rows, clear selection in both panels
   ['projects', 'experience'].forEach((s) => {
@@ -101,7 +109,9 @@ export function resetFinder() {
   });
 
   // Reset title & path
-  const titleEl = document.querySelector<HTMLElement>('#finder-titlebar .os-window-title');
+  const titleEl = document.querySelector<HTMLElement>(
+    '#finder-titlebar .os-window-title'
+  );
   const pathEl = document.getElementById('finder-path-text');
   if (titleEl) titleEl.textContent = META.projects.title;
   if (pathEl) pathEl.textContent = META.projects.path;

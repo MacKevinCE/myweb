@@ -7,6 +7,12 @@ export let activeSection = 'projects';
 export let sidebarVisible = true;
 export let detailManuallyHidden = false;
 
-export function setActiveSection(val: string) { activeSection = val; }
-export function setSidebarVisible(val: boolean) { sidebarVisible = val; }
-export function setDetailManuallyHidden(val: boolean) { detailManuallyHidden = val; }
+export function setActiveSection(val: string) {
+  activeSection = val;
+}
+export function setSidebarVisible(val: boolean) {
+  sidebarVisible = val;
+}
+export function setDetailManuallyHidden(val: boolean) {
+  detailManuallyHidden = val;
+}

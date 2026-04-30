@@ -16,7 +16,9 @@ function getWallpaperMode(): 'loop' | 'frame' {
       if (cat === 'image') return 'frame';
       if (s.wallpaperMode === 'frame') return 'frame';
     }
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
   return 'loop';
 }
 
@@ -56,11 +58,14 @@ function updateLockClock() {
   const hours = now.getHours();
   const minutes = now.getMinutes().toString().padStart(2, '0');
   timeEl.textContent = `${hours}:${minutes}`;
-  dateEl.textContent = now.toLocaleDateString(document.documentElement.lang || 'en', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-  });
+  dateEl.textContent = now.toLocaleDateString(
+    document.documentElement.lang || 'en',
+    {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+    }
+  );
 }
 
 function unlock() {
@@ -69,7 +74,9 @@ function unlock() {
 
   // User clicked — first interaction: start videos only if mode is loop
   if (mode === 'loop') {
-    const desktopVid = document.querySelector('.os-wallpaper video') as HTMLVideoElement | null;
+    const desktopVid = document.querySelector(
+      '.os-wallpaper video'
+    ) as HTMLVideoElement | null;
     if (desktopVid && desktopVid.paused) {
       desktopVid.play().catch(() => {});
     }
@@ -134,23 +141,31 @@ function initMobileSwipe() {
   let startTime = 0;
   let dragging = false;
 
-  lockEl.addEventListener('touchstart', (e) => {
-    if (window.innerWidth >= 768) return;
-    startY = e.touches[0].clientY;
-    startTime = Date.now();
-    dragging = true;
-    lockEl!.classList.add('lockscreen--swiping');
-    // Reveal desktop underneath while swiping
-    document.documentElement.classList.add('os-unlocked');
-  }, { passive: true });
+  lockEl.addEventListener(
+    'touchstart',
+    (e) => {
+      if (window.innerWidth >= 768) return;
+      startY = e.touches[0].clientY;
+      startTime = Date.now();
+      dragging = true;
+      lockEl!.classList.add('lockscreen--swiping');
+      // Reveal desktop underneath while swiping
+      document.documentElement.classList.add('os-unlocked');
+    },
+    { passive: true }
+  );
 
-  lockEl.addEventListener('touchmove', (e) => {
-    if (!dragging || window.innerWidth >= 768) return;
-    const dy = e.touches[0].clientY - startY;
-    if (dy < 0) {
-      lockEl!.style.transform = `translateY(${dy}px)`;
-    }
-  }, { passive: true });
+  lockEl.addEventListener(
+    'touchmove',
+    (e) => {
+      if (!dragging || window.innerWidth >= 768) return;
+      const dy = e.touches[0].clientY - startY;
+      if (dy < 0) {
+        lockEl!.style.transform = `translateY(${dy}px)`;
+      }
+    },
+    { passive: true }
+  );
 
   lockEl.addEventListener('touchend', (e) => {
     if (!dragging || window.innerWidth >= 768) return;
@@ -166,19 +181,27 @@ function initMobileSwipe() {
       // Animate out
       lockEl!.style.transition = 'transform 0.3s ease-out';
       lockEl!.style.transform = 'translateY(-100%)';
-      lockEl!.addEventListener('transitionend', () => {
-        unlock(); // call existing unlock function
-        lockEl!.style.transform = '';
-        lockEl!.style.transition = '';
-      }, { once: true });
+      lockEl!.addEventListener(
+        'transitionend',
+        () => {
+          unlock(); // call existing unlock function
+          lockEl!.style.transform = '';
+          lockEl!.style.transition = '';
+        },
+        { once: true }
+      );
     } else {
       // Snap back — hide desktop again
       lockEl!.style.transition = 'transform 0.3s ease-out';
       lockEl!.style.transform = '';
-      lockEl!.addEventListener('transitionend', () => {
-        lockEl!.style.transition = '';
-        document.documentElement.classList.remove('os-unlocked');
-      }, { once: true });
+      lockEl!.addEventListener(
+        'transitionend',
+        () => {
+          lockEl!.style.transition = '';
+          document.documentElement.classList.remove('os-unlocked');
+        },
+        { once: true }
+      );
     }
   });
 }
@@ -193,28 +216,36 @@ function initMobileSwipeDown() {
   let startTime = 0;
   let swiping = false;
 
-  menubar.addEventListener('touchstart', (e) => {
-    if (window.innerWidth >= 768) return;
-    // Only if lockscreen is NOT visible
-    if (lockEl!.style.visibility !== 'hidden') return;
-    startY = e.touches[0].clientY;
-    startTime = Date.now();
-    swiping = true;
-  }, { passive: true });
+  menubar.addEventListener(
+    'touchstart',
+    (e) => {
+      if (window.innerWidth >= 768) return;
+      // Only if lockscreen is NOT visible
+      if (lockEl!.style.visibility !== 'hidden') return;
+      startY = e.touches[0].clientY;
+      startTime = Date.now();
+      swiping = true;
+    },
+    { passive: true }
+  );
 
-  document.addEventListener('touchmove', (e) => {
-    if (!swiping || window.innerWidth >= 768) return;
-    const dy = e.touches[0].clientY - startY;
-    if (dy > 0) {
-      // Show lockscreen partially — it comes from top
-      lockEl!.style.visibility = '';
-      lockEl!.style.pointerEvents = '';
-      lockEl!.style.opacity = '1';
-      lockEl!.classList.remove('lockscreen--unlocking');
-      lockEl!.style.transition = 'none';
-      lockEl!.style.transform = `translateY(${-window.innerHeight + dy}px)`;
-    }
-  }, { passive: true });
+  document.addEventListener(
+    'touchmove',
+    (e) => {
+      if (!swiping || window.innerWidth >= 768) return;
+      const dy = e.touches[0].clientY - startY;
+      if (dy > 0) {
+        // Show lockscreen partially — it comes from top
+        lockEl!.style.visibility = '';
+        lockEl!.style.pointerEvents = '';
+        lockEl!.style.opacity = '1';
+        lockEl!.classList.remove('lockscreen--unlocking');
+        lockEl!.style.transition = 'none';
+        lockEl!.style.transform = `translateY(${-window.innerHeight + dy}px)`;
+      }
+    },
+    { passive: true }
+  );
 
   document.addEventListener('touchend', (e) => {
     if (!swiping || window.innerWidth >= 768) return;
@@ -228,21 +259,29 @@ function initMobileSwipeDown() {
       // Complete lock
       lockEl!.style.transition = 'transform 0.3s ease-out';
       lockEl!.style.transform = 'translateY(0)';
-      lockEl!.addEventListener('transitionend', () => {
-        lockEl!.style.transform = '';
-        lockEl!.style.transition = '';
-        showLockScreen(); // existing function
-        renderLockscreenNotifs(); // show notifications
-      }, { once: true });
+      lockEl!.addEventListener(
+        'transitionend',
+        () => {
+          lockEl!.style.transform = '';
+          lockEl!.style.transition = '';
+          showLockScreen(); // existing function
+          renderLockscreenNotifs(); // show notifications
+        },
+        { once: true }
+      );
     } else {
       // Snap back — hide lockscreen
       lockEl!.style.transition = 'transform 0.3s ease-out';
       lockEl!.style.transform = 'translateY(-100%)';
-      lockEl!.addEventListener('transitionend', () => {
-        lockEl!.style.visibility = 'hidden';
-        lockEl!.style.transform = '';
-        lockEl!.style.transition = '';
-      }, { once: true });
+      lockEl!.addEventListener(
+        'transitionend',
+        () => {
+          lockEl!.style.visibility = 'hidden';
+          lockEl!.style.transform = '';
+          lockEl!.style.transition = '';
+        },
+        { once: true }
+      );
     }
   });
 }
@@ -257,7 +296,8 @@ function renderLockscreenNotifs() {
   const history = getNotificationHistory();
   container.innerHTML = '';
 
-  for (const notif of history.slice(0, 5)) { // max 5 on lockscreen
+  for (const notif of history.slice(0, 5)) {
+    // max 5 on lockscreen
     const card = document.createElement('div');
     card.className = 'lockscreen-notif-card';
 
@@ -300,14 +340,20 @@ function swipeUnlockAndOpen(windowId: string) {
   document.documentElement.classList.add('os-unlocked');
   lockEl.style.transition = 'transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)';
   lockEl.style.transform = 'translateY(-100%)';
-  lockEl.addEventListener('transitionend', () => {
-    unlock();
-    lockEl!.style.transform = '';
-    lockEl!.style.transition = '';
-    // Open the linked window
-    const win = document.getElementById(windowId);
-    if (win) {
-      document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
-    }
-  }, { once: true });
+  lockEl.addEventListener(
+    'transitionend',
+    () => {
+      unlock();
+      lockEl!.style.transform = '';
+      lockEl!.style.transition = '';
+      // Open the linked window
+      const win = document.getElementById(windowId);
+      if (win) {
+        document.dispatchEvent(
+          new CustomEvent('open-window', { detail: { el: win } })
+        );
+      }
+    },
+    { once: true }
+  );
 }

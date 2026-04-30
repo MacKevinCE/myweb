@@ -11,8 +11,16 @@ interface Props {
 const { content } = Astro.props;
 
 const navItems = [
-  { key: 'education', label: content.education.navEducation, icon: '<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>' },
-  { key: 'certifications', label: content.education.navCertifications, icon: '<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>' },
+  {
+    key: 'education',
+    label: content.education.navEducation,
+    icon: '<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>',
+  },
+  {
+    key: 'certifications',
+    label: content.education.navCertifications,
+    icon: '<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>',
+  },
 ];
 
 const degrees = content.education?.degrees ?? [];
@@ -24,81 +32,134 @@ const certifications = content.education?.certifications ?? [];
   id="education-window"
   style="display: none;"
 >
-  <WindowChrome title={windowTitles[W.EDUCATION]} windowId="education" titleClass="os-window-title--inter" />
+  <WindowChrome
+    title={windowTitles[W.EDUCATION]}
+    windowId="education"
+    titleClass="os-window-title--inter"
+  />
 
   <!-- Window Body -->
   <div class="os-window-body">
     <!-- Sidebar -->
     <nav class="os-sidebar">
-      {navItems.map((nav, i) => (
-        <button
-          class={`os-nav ${i === 0 ? 'os-nav--active' : ''}`}
-          data-edu-tab={nav.key}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="os-nav-icon">
-            <Fragment set:html={nav.icon} />
-          </svg>
-          <span class="os-nav-text">{nav.label}</span>
-        </button>
-      ))}
+      {
+        navItems.map((nav, i) => (
+          <button
+            class={`os-nav ${i === 0 ? 'os-nav--active' : ''}`}
+            data-edu-tab={nav.key}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="os-nav-icon"
+            >
+              <Fragment set:html={nav.icon} />
+            </svg>
+            <span class="os-nav-text">{nav.label}</span>
+          </button>
+        ))
+      }
     </nav>
 
     <!-- Content -->
     <div class="edu-content">
       <!-- Fixed headers -->
-      <div class="edu-header-block edu-header-block--active" data-edu-header="education">
+      <div
+        class="edu-header-block edu-header-block--active"
+        data-edu-header="education"
+      >
         <div class="edu-content-header">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--os-purple-from);">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="color: var(--os-purple-from);"
+          >
             <Fragment set:html={navItems[0].icon} />
           </svg>
-          <span class="edu-content-title">{content.education.navEducation}</span>
+          <span class="edu-content-title">{content.education.navEducation}</span
+          >
         </div>
-        <div class="os-divider" />
+        <div class="os-divider"></div>
       </div>
       <div class="edu-header-block" data-edu-header="certifications">
         <div class="edu-content-header">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--os-purple-from);">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="color: var(--os-purple-from);"
+          >
             <Fragment set:html={navItems[1].icon} />
           </svg>
-          <span class="edu-content-title">{content.education.navCertifications}</span>
+          <span class="edu-content-title"
+            >{content.education.navCertifications}</span
+          >
         </div>
-        <div class="os-divider" />
+        <div class="os-divider"></div>
       </div>
 
       <!-- Scrollable panels -->
       <div class="edu-scroll">
         <!-- Education panel -->
         <div class="edu-panel edu-panel--active" data-edu-panel="education">
-          {degrees.map((deg, i) => (
-            <div class="edu-degree-card" style={`--item-color: ${cycleColor(i)}; --item-alt: ${cycleColor(i + 1)};`}>
-              <div class="edu-badge">
-                {deg.title}
+          {
+            degrees.map((deg, i) => (
+              <div
+                class="edu-degree-card"
+                style={`--item-color: ${cycleColor(i)}; --item-alt: ${cycleColor(i + 1)};`}
+              >
+                <div class="edu-badge">{deg.title}</div>
+                <span class="edu-degree-name">{deg.institution}</span>
+                <span class="edu-degree-loc">{deg.period}</span>
+                {deg.details && (
+                  <div class="edu-degree-extra">
+                    <span class="edu-degree-extra-dot">▸</span>
+                    <span class="edu-degree-extra-text">{deg.details}</span>
+                  </div>
+                )}
               </div>
-              <span class="edu-degree-name">{deg.institution}</span>
-              <span class="edu-degree-loc">{deg.period}</span>
-              {deg.details && (
-                <div class="edu-degree-extra">
-                  <span class="edu-degree-extra-dot">▸</span>
-                  <span class="edu-degree-extra-text">{deg.details}</span>
-                </div>
-              )}
-            </div>
-          ))}
+            ))
+          }
         </div>
 
         <!-- Certifications panel -->
         <div class="edu-panel" data-edu-panel="certifications">
-          {certifications.map((cert, i) => (
-            <div class="edu-cert-card" style={`--item-color: ${cycleColor(i)};`}>
-              <div class="edu-cert-icon">
-                <span class="edu-cert-check">✓</span>
+          {
+            certifications.map((cert, i) => (
+              <div
+                class="edu-cert-card"
+                style={`--item-color: ${cycleColor(i)};`}
+              >
+                <div class="edu-cert-icon">
+                  <span class="edu-cert-check">✓</span>
+                </div>
+                <div class="edu-cert-info">
+                  <span class="edu-cert-name">{cert.name}</span>
+                  <span class="edu-cert-by">{cert.year}</span>
+                </div>
               </div>
-              <div class="edu-cert-info">
-                <span class="edu-cert-name">{cert.name}</span>
-                <span class="edu-cert-by">{cert.year}</span>
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
     </div>

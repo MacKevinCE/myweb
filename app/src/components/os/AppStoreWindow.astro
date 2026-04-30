@@ -18,16 +18,24 @@ const asStats = as.stats ?? {};
 
 /* ---- Nav items ---- */
 const navIcons: Record<string, string> = {
-  'layout-grid': '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
-  'landmark':    '<line x1="3" x2="3" y1="22" y2="12"/><line x1="9" x2="9" y1="22" y2="8"/><line x1="15" x2="15" y1="22" y2="2"/><line x1="21" x2="21" y1="22" y2="14"/>',
-  'heart-pulse': '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>',
-  'palette':     '<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',
+  'layout-grid':
+    '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
+  landmark:
+    '<line x1="3" x2="3" y1="22" y2="12"/><line x1="9" x2="9" y1="22" y2="8"/><line x1="15" x2="15" y1="22" y2="2"/><line x1="21" x2="21" y1="22" y2="14"/>',
+  'heart-pulse':
+    '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>',
+  palette:
+    '<circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>',
 };
 
 const sidebarNav = [
-  { icon: 'layout-grid', label: as.navAll ?? 'All',                 key: 'all' },
-  { icon: 'heart-pulse', label: as.navOpenSource ?? 'Open Source',  key: 'open-source' },
-  { icon: 'palette',     label: as.navPortfolio ?? 'Portfolio',     key: 'portfolio' },
+  { icon: 'layout-grid', label: as.navAll ?? 'All', key: 'all' },
+  {
+    icon: 'heart-pulse',
+    label: as.navOpenSource ?? 'Open Source',
+    key: 'open-source',
+  },
+  { icon: 'palette', label: as.navPortfolio ?? 'Portfolio', key: 'portfolio' },
 ];
 
 /* ---- Build projects array from profile data ---- */
@@ -45,16 +53,20 @@ interface AppProject {
 }
 
 const allProjects: AppProject[] = [
-  ...(featured ? [{
-    name: featured.name,
-    shortDesc: featured.shortDesc ?? '',
-    category: featured.category ?? '',
-    description: featured.description ?? '',
-    tags: featured.tags ?? [],
-    image: featured.image,
-    repo: featured.repo ?? '',
-  }] : []),
-  ...items.map(item => ({
+  ...(featured
+    ? [
+        {
+          name: featured.name,
+          shortDesc: featured.shortDesc ?? '',
+          category: featured.category ?? '',
+          description: featured.description ?? '',
+          tags: featured.tags ?? [],
+          image: featured.image,
+          repo: featured.repo ?? '',
+        },
+      ]
+    : []),
+  ...items.map((item) => ({
     name: item.name,
     shortDesc: item.shortDesc ?? '',
     category: item.category ?? '',
@@ -67,13 +79,15 @@ const allProjects: AppProject[] = [
 
 /* ---- Gradient / shadow by category ---- */
 const categoryStyles: Record<string, { gradient: string; shadow: string }> = {
-  enterprise:  { gradient: 'os-gradient-blue',   shadow: 'os-shadow-blue' },
-  'open-source': { gradient: 'os-gradient-green',  shadow: 'os-shadow-green' },
-  portfolio:   { gradient: 'os-gradient-purple', shadow: 'os-shadow-purple' },
+  enterprise: { gradient: 'os-gradient-blue', shadow: 'os-shadow-blue' },
+  'open-source': { gradient: 'os-gradient-green', shadow: 'os-shadow-green' },
+  portfolio: { gradient: 'os-gradient-purple', shadow: 'os-shadow-purple' },
 };
 
 function getStyles(category: string) {
-  return categoryStyles[category] ?? { gradient: 'os-gradient-slate', shadow: '' };
+  return (
+    categoryStyles[category] ?? { gradient: 'os-gradient-slate', shadow: '' }
+  );
 }
 ---
 
@@ -82,7 +96,11 @@ function getStyles(category: string) {
   id="app-store-window"
   style="display: none;"
 >
-  <WindowChrome title={windowTitles[W.APP_STORE]} windowId="app-store" titleClass="os-window-title--inter" />
+  <WindowChrome
+    title={windowTitles[W.APP_STORE]}
+    windowId="app-store"
+    titleClass="os-window-title--inter"
+  />
 
   <!-- Body: Sidebar + Content -->
   <div class="os-window-body as-body">
@@ -90,7 +108,17 @@ function getStyles(category: string) {
     <aside class="os-sidebar as-sidebar">
       <!-- Search -->
       <div class="as-search" id="as-search-bar">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <Fragment set:html={uiIcons.search} />
         </svg>
         <input
@@ -105,24 +133,41 @@ function getStyles(category: string) {
       <div class="as-sidebar-spacer-sm"></div>
 
       <!-- Nav items -->
-      {sidebarNav.map((item, idx) => (
-        <button
-          class:list={['os-nav', { 'os-nav--active': idx === 0 }]}
-          data-as-category={item.key}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="os-nav-icon">
-            <Fragment set:html={navIcons[item.icon]} />
-          </svg>
-          <span class="os-nav-text">{item.label}</span>
-        </button>
-      ))}
+      {
+        sidebarNav.map((item, idx) => (
+          <button
+            class:list={['os-nav', { 'os-nav--active': idx === 0 }]}
+            data-as-category={item.key}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="os-nav-icon"
+            >
+              <Fragment set:html={navIcons[item.icon]} />
+            </svg>
+            <span class="os-nav-text">{item.label}</span>
+          </button>
+        ))
+      }
 
       <div class="as-sidebar-spacer"></div>
 
       <!-- User section -->
       <div class="stg-profile">
         <div class="stg-avatar">
-          {avatarUrl && <img src={avatarUrl} alt={name} class="stg-avatar-img" />}
+          {
+            avatarUrl && (
+              <img src={avatarUrl} alt={name} class="stg-avatar-img" />
+            )
+          }
         </div>
         <div class="stg-profile-info">
           <span class="stg-profile-name">{name}</span>
@@ -133,27 +178,45 @@ function getStyles(category: string) {
 
     <!-- ===== CATEGORY VIEW (grid of apps) ===== -->
     <div class="as-content as-view" id="as-category-view">
-      <h2 class="as-category-title" id="as-category-title">{as.navAll ?? 'All'}</h2>
+      <h2 class="as-category-title" id="as-category-title">
+        {as.navAll ?? 'All'}
+      </h2>
       <div class="as-grid" id="as-grid">
-        {allProjects.map((project, i) => {
-          const styles = getStyles(project.category);
-          return (
-            <div class="as-card" data-as-index={i} data-as-category={project.category}>
-              <div class:list={['as-card-icon', styles.gradient]}>
-                <ImageWithFallback src={project.image} alt={project.name} fallback={project.name[0]} imgClass="as-card-img" fallbackClass="as-card-letter" />
+        {
+          allProjects.map((project, i) => {
+            const styles = getStyles(project.category);
+            return (
+              <div
+                class="as-card"
+                data-as-index={i}
+                data-as-category={project.category}
+              >
+                <div class:list={['as-card-icon', styles.gradient]}>
+                  <ImageWithFallback
+                    src={project.image}
+                    alt={project.name}
+                    fallback={project.name[0]}
+                    imgClass="as-card-img"
+                    fallbackClass="as-card-letter"
+                  />
+                </div>
+                <div class="as-card-info">
+                  <span class="as-card-name">{project.name}</span>
+                  <span class="as-card-desc">{project.shortDesc}</span>
+                  <div class="as-card-spacer" />
+                  <button class="as-card-btn as-card-open-btn">
+                    {as.open ?? 'Open'}
+                  </button>
+                </div>
               </div>
-              <div class="as-card-info">
-                <span class="as-card-name">{project.name}</span>
-                <span class="as-card-desc">{project.shortDesc}</span>
-                <div class="as-card-spacer"></div>
-                <button class="as-card-btn as-card-open-btn">{as.open ?? 'Open'}</button>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })
+        }
       </div>
       <div class="as-grid-empty" id="as-grid-empty" style="display:none;">
-        <span class="as-grid-empty-text">{as.noAppsFound ?? 'No apps found'}</span>
+        <span class="as-grid-empty-text"
+          >{as.noAppsFound ?? 'No apps found'}</span
+        >
       </div>
     </div>
 
@@ -162,13 +225,42 @@ function getStyles(category: string) {
       <!-- Back row -->
       <div class="as-back-row">
         <button class="as-back-btn" id="as-back-btn" aria-label="Back">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <Fragment set:html={uiIcons.chevronLeft} />
           </svg>
         </button>
-        <button class="as-share-btn" id="as-share-btn" aria-label={as.share ?? 'Share'}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/>
+        <button
+          class="as-share-btn"
+          id="as-share-btn"
+          aria-label={as.share ?? 'Share'}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline
+              points="16 6 12 2 8 6"></polyline><line
+              x1="12"
+              x2="12"
+              y1="2"
+              y2="15"></line>
           </svg>
         </button>
       </div>
@@ -179,7 +271,9 @@ function getStyles(category: string) {
         <div class="as-app-info">
           <h2 class="as-app-name" id="as-detail-name"></h2>
           <p class="as-app-desc" id="as-detail-desc"></p>
-          <button class="as-get-btn" id="as-detail-btn">{as.open ?? 'Open'}</button>
+          <button class="as-get-btn" id="as-detail-btn"
+            >{as.open ?? 'Open'}</button
+          >
         </div>
       </div>
 
@@ -206,8 +300,23 @@ function getStyles(category: string) {
 
       <!-- Bottom row -->
       <div class="as-bottom-row">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="as-bottom-icon">
-          <rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="as-bottom-icon"
+        >
+          <rect width="20" height="14" x="2" y="3" rx="2"></rect><line
+            x1="8"
+            x2="16"
+            y1="21"
+            y2="21"></line><line x1="12" x2="12" y1="17" y2="21"></line>
         </svg>
         <span class="as-bottom-label">{as.platform ?? 'Mac'}</span>
       </div>
@@ -218,14 +327,24 @@ function getStyles(category: string) {
 </div>
 
 <!-- Projects data for JS -->
-<script is:inline id="as-projects" type="application/json" set:html={JSON.stringify(allProjects)} />
+<script
+  is:inline
+  id="as-projects"
+  type="application/json"
+  set:html={JSON.stringify(allProjects)}
+/>
 <!-- i18n data for JS -->
-<script is:inline id="as-i18n" type="application/json" set:html={JSON.stringify({
-  open: as.open ?? 'Open',
-  share: as.share ?? 'Share',
-  noAppsFound: as.noAppsFound ?? 'No apps found',
-  navAll: as.navAll ?? 'All',
-  navOpenSource: as.navOpenSource ?? 'Open Source',
-  navPortfolio: as.navPortfolio ?? 'Portfolio',
-  description: as.description ?? 'Description',
-})} />
+<script
+  is:inline
+  id="as-i18n"
+  type="application/json"
+  set:html={JSON.stringify({
+    open: as.open ?? 'Open',
+    share: as.share ?? 'Share',
+    noAppsFound: as.noAppsFound ?? 'No apps found',
+    navAll: as.navAll ?? 'All',
+    navOpenSource: as.navOpenSource ?? 'Open Source',
+    navPortfolio: as.navPortfolio ?? 'Portfolio',
+    description: as.description ?? 'Description',
+  })}
+/>

@@ -38,7 +38,8 @@ function safariPlay(vid: HTMLVideoElement) {
 
 /** Flush all pending videos — call this on any user interaction */
 function flushPendingVideos() {
-  const effectiveMode = settings.wallpaperCategory === 'image' ? 'frame' : settings.wallpaperMode;
+  const effectiveMode =
+    settings.wallpaperCategory === 'image' ? 'frame' : settings.wallpaperMode;
   if (effectiveMode === 'frame') {
     _pendingVideos.clear();
   } else {
@@ -58,12 +59,19 @@ function flushPendingVideos() {
 // Listen for the very first user interaction to unblock Safari autoplay
 const _interactionEvents = ['click', 'touchstart', 'keydown'];
 _interactionEvents.forEach((evt) => {
-  document.addEventListener(evt, flushPendingVideos, { once: true, passive: true });
+  document.addEventListener(evt, flushPendingVideos, {
+    once: true,
+    passive: true,
+  });
 });
 
 export function applyWallpaper(src: string, name: string) {
-  const wpImg = document.getElementById('stg-wp-current') as HTMLImageElement | null;
-  const wpVideo = document.getElementById('stg-wp-current-video') as HTMLVideoElement | null;
+  const wpImg = document.getElementById(
+    'stg-wp-current'
+  ) as HTMLImageElement | null;
+  const wpVideo = document.getElementById(
+    'stg-wp-current-video'
+  ) as HTMLVideoElement | null;
   const wpName = document.getElementById('stg-wp-name');
   const videoControls = document.getElementById('stg-wp-video-controls');
   const wpBg = document.querySelector('.os-wallpaper') as HTMLElement | null;
@@ -82,8 +90,14 @@ export function applyWallpaper(src: string, name: string) {
     }
     if (videoControls) videoControls.style.display = '';
   } else {
-    if (wpImg) { wpImg.style.display = ''; wpImg.src = src; }
-    if (wpVideo) { wpVideo.style.display = 'none'; wpVideo.src = ''; }
+    if (wpImg) {
+      wpImg.style.display = '';
+      wpImg.src = src;
+    }
+    if (wpVideo) {
+      wpVideo.style.display = 'none';
+      wpVideo.src = '';
+    }
     if (videoControls) videoControls.style.display = 'none';
   }
 
@@ -111,7 +125,8 @@ export function applyWallpaper(src: string, name: string) {
   // Apply to lock screen — same config as desktop
   if (lockBg) {
     const existingLockVideo = lockBg.querySelector('video');
-    const sameSrc = existingLockVideo && existingLockVideo.getAttribute('src') === src;
+    const sameSrc =
+      existingLockVideo && existingLockVideo.getAttribute('src') === src;
 
     if (isVideo && sameSrc && existingLockVideo) {
       applyVideoState(existingLockVideo);
@@ -131,7 +146,8 @@ export function applyWallpaper(src: string, name: string) {
 
 /** Create a new wallpaper <video> element with proper attributes */
 function createWallpaperVideo(src: string): HTMLVideoElement {
-  const mode = settings.wallpaperCategory === 'image' ? 'frame' : settings.wallpaperMode;
+  const mode =
+    settings.wallpaperCategory === 'image' ? 'frame' : settings.wallpaperMode;
 
   const vid = document.createElement('video');
   vid.setAttribute('src', src);
@@ -144,7 +160,14 @@ function createWallpaperVideo(src: string): HTMLVideoElement {
   vid.setAttribute('muted', '');
   vid.loop = mode === 'loop';
   if (mode === 'frame') {
-    vid.addEventListener('loadeddata', () => { vid.currentTime = 0.001; vid.pause(); }, { once: true });
+    vid.addEventListener(
+      'loadeddata',
+      () => {
+        vid.currentTime = 0.001;
+        vid.pause();
+      },
+      { once: true }
+    );
   } else {
     safariPlay(vid);
   }
@@ -174,13 +197,17 @@ export function updateWallpaperControls() {
   // image → show frame active; animation → restore user preference
   const displayMode = cat === 'image' ? 'frame' : settings.wallpaperMode;
   modeBtns.forEach((b) => {
-    b.classList.toggle('stg-wp-mode-btn--active', b.dataset.wpMode === displayMode);
+    b.classList.toggle(
+      'stg-wp-mode-btn--active',
+      b.dataset.wpMode === displayMode
+    );
   });
 }
 
 function applyVideoState(vid: HTMLVideoElement) {
   // All videos are always muted (no audio tracks)
-  const mode = settings.wallpaperCategory === 'image' ? 'frame' : settings.wallpaperMode;
+  const mode =
+    settings.wallpaperCategory === 'image' ? 'frame' : settings.wallpaperMode;
 
   vid.muted = true;
   vid.setAttribute('muted', '');
@@ -193,10 +220,14 @@ function applyVideoState(vid: HTMLVideoElement) {
     if (vid.readyState >= 2) {
       vid.currentTime = 0.001;
     } else {
-      vid.addEventListener('loadeddata', () => {
-        vid.currentTime = 0.001;
-        vid.pause();
-      }, { once: true });
+      vid.addEventListener(
+        'loadeddata',
+        () => {
+          vid.currentTime = 0.001;
+          vid.pause();
+        },
+        { once: true }
+      );
     }
   } else {
     safariPlay(vid);
@@ -205,19 +236,25 @@ function applyVideoState(vid: HTMLVideoElement) {
 
 function applyWallpaperVideoSettings() {
   // Update preview video
-  const previewVid = document.getElementById('stg-wp-current-video') as HTMLVideoElement | null;
+  const previewVid = document.getElementById(
+    'stg-wp-current-video'
+  ) as HTMLVideoElement | null;
   if (previewVid && previewVid.src) {
     applyVideoState(previewVid);
   }
 
   // Update desktop video
-  const desktopVid = document.querySelector('.os-wallpaper video') as HTMLVideoElement | null;
+  const desktopVid = document.querySelector(
+    '.os-wallpaper video'
+  ) as HTMLVideoElement | null;
   if (desktopVid) {
     applyVideoState(desktopVid);
   }
 
   // Update lock screen video
-  const lockVid = document.querySelector('.lockscreen-bg video') as HTMLVideoElement | null;
+  const lockVid = document.querySelector(
+    '.lockscreen-bg video'
+  ) as HTMLVideoElement | null;
   if (lockVid) {
     applyVideoState(lockVid);
   }
@@ -232,7 +269,8 @@ export function initWallpaperPicker() {
 
       const src = thumb.dataset.wp!;
       const name = thumb.dataset.wpName || '';
-      const category = (thumb.dataset.wpCategory || 'image') as WallpaperCategory;
+      const category = (thumb.dataset.wpCategory ||
+        'image') as WallpaperCategory;
 
       wpThumbs.forEach((t) => t.classList.remove('stg-wp-thumb--active'));
       thumb.classList.add('stg-wp-thumb--active');
@@ -244,14 +282,27 @@ export function initWallpaperPicker() {
       updateWallpaperControls();
       saveSettings(settings, 'wallpaper');
       const nt = getNotifI18n();
-      notify(nt.settingsTitle || 'Settings', nt.wallpaperChanged || 'Wallpaper updated', undefined, 'settings-window');
+      notify(
+        nt.settingsTitle || 'Settings',
+        nt.wallpaperChanged || 'Wallpaper updated',
+        undefined,
+        'settings-window'
+      );
     });
   });
 
   // Force Safari to show first frame on video thumbnails
-  document.querySelectorAll<HTMLVideoElement>('.stg-wp-thumb-video').forEach((vid) => {
-    vid.addEventListener('loadedmetadata', () => { vid.currentTime = 0.001; }, { once: true });
-  });
+  document
+    .querySelectorAll<HTMLVideoElement>('.stg-wp-thumb-video')
+    .forEach((vid) => {
+      vid.addEventListener(
+        'loadedmetadata',
+        () => {
+          vid.currentTime = 0.001;
+        },
+        { once: true }
+      );
+    });
 
   // Mode buttons (frame / loop)
   const modeBtns = document.querySelectorAll<HTMLElement>('[data-wp-mode]');
@@ -270,16 +321,23 @@ export function initWallpaperPicker() {
 export function restoreWallpaper() {
   // Wallpaper
   applyWallpaper(settings.wallpaper, settings.wallpaperName);
-  const activeThumb = document.querySelector<HTMLElement>(`[data-wp="${settings.wallpaper}"]`);
+  const activeThumb = document.querySelector<HTMLElement>(
+    `[data-wp="${settings.wallpaper}"]`
+  );
   if (activeThumb) {
-    document.querySelectorAll('[data-wp]').forEach((t) => t.classList.remove('stg-wp-thumb--active'));
+    document
+      .querySelectorAll('[data-wp]')
+      .forEach((t) => t.classList.remove('stg-wp-thumb--active'));
     activeThumb.classList.add('stg-wp-thumb--active');
   }
 
   // Restore video controls state
   const modeBtns = document.querySelectorAll<HTMLElement>('[data-wp-mode]');
   modeBtns.forEach((b) => {
-    b.classList.toggle('stg-wp-mode-btn--active', b.dataset.wpMode === settings.wallpaperMode);
+    b.classList.toggle(
+      'stg-wp-mode-btn--active',
+      b.dataset.wpMode === settings.wallpaperMode
+    );
   });
 
   // Update controls visibility based on category

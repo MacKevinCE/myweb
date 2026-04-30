@@ -12,7 +12,12 @@ const { content } = Astro.props;
 const { experience } = content;
 
 const dotColors = [cycleColor(0), cycleColor(1), cycleColor(2), cycleColor(3)];
-const borderColors = ['var(--accent-blue-20)', 'var(--accent-violet-15)', 'var(--accent-cyan-18)', 'var(--glass-light)'];
+const borderColors = [
+  'var(--accent-blue-20)',
+  'var(--accent-violet-15)',
+  'var(--accent-cyan-18)',
+  'var(--glass-light)',
+];
 
 const jobCount = experience.jobs?.length ?? 0;
 const expSubtitle =
@@ -26,13 +31,8 @@ const expSubtitle =
       style="padding: var(--section-padding-y) var(--section-padding-x);"
     >
       <div class="flex flex-col items-center gap-[60px]">
-        <SectionLabel
-          label={experience.label}
-          color="var(--accent-cyan)"
-        />
-        <h2 class="section-title">
-          {expSubtitle || experience.title}
-        </h2>
+        <SectionLabel label={experience.label} color="var(--accent-cyan)" />
+        <h2 class="section-title">{expSubtitle || experience.title}</h2>
 
         <div class="flex flex-col w-full">
           {experience.jobs.map((job, i) => {
@@ -42,10 +42,7 @@ const expSubtitle =
               <div class="glass-reveal flex gap-8 w-full">
                 {/* Left: period */}
                 <div class="hidden md:flex flex-col items-end gap-1 w-[160px] shrink-0 pt-4">
-                  <span
-                    class="text-xs font-medium"
-                    style={`color: ${color}`}
-                  >
+                  <span class="text-xs font-medium" style={`color: ${color}`}>
                     {job.startDate} — {job.endDate}
                   </span>
                 </div>
@@ -72,10 +69,7 @@ const expSubtitle =
                   <span class="md:hidden text-xs" style={`color: ${color}`}>
                     {job.startDate} — {job.endDate}
                   </span>
-                  <h3
-                    class="text-lg font-semibold"
-                    style={`color: ${color}`}
-                  >
+                  <h3 class="text-lg font-semibold" style={`color: ${color}`}>
                     {job.company}
                   </h3>
                   <span class="text-[var(--accent-blue)] text-sm">

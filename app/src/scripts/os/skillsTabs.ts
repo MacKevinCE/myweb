@@ -4,7 +4,9 @@ import { W } from '../../data/os-apps';
 export function resetSkills() {
   const tabs = document.querySelectorAll<HTMLElement>('[data-skills-tab]');
   const panels = document.querySelectorAll<HTMLElement>('[data-skills-panel]');
-  const headers = document.querySelectorAll<HTMLElement>('[data-skills-header]');
+  const headers = document.querySelectorAll<HTMLElement>(
+    '[data-skills-header]'
+  );
 
   const firstTab = tabs[0];
   if (!firstTab) return;
@@ -14,18 +16,26 @@ export function resetSkills() {
   firstTab.classList.add('os-nav--active');
 
   headers.forEach((h) => {
-    h.classList.toggle('skills-header-block--active', h.dataset.skillsHeader === firstKey);
+    h.classList.toggle(
+      'skills-header-block--active',
+      h.dataset.skillsHeader === firstKey
+    );
   });
 
   panels.forEach((p) => {
-    p.classList.toggle('skills-panel--active', p.dataset.skillsPanel === firstKey);
+    p.classList.toggle(
+      'skills-panel--active',
+      p.dataset.skillsPanel === firstKey
+    );
   });
 }
 
 export function initSkillsTabs() {
   const tabs = document.querySelectorAll<HTMLElement>('[data-skills-tab]');
   const panels = document.querySelectorAll<HTMLElement>('[data-skills-panel]');
-  const headers = document.querySelectorAll<HTMLElement>('[data-skills-header]');
+  const headers = document.querySelectorAll<HTMLElement>(
+    '[data-skills-header]'
+  );
 
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
@@ -35,11 +45,17 @@ export function initSkillsTabs() {
       tab.classList.add('os-nav--active');
 
       headers.forEach((h) => {
-        h.classList.toggle('skills-header-block--active', h.dataset.skillsHeader === key);
+        h.classList.toggle(
+          'skills-header-block--active',
+          h.dataset.skillsHeader === key
+        );
       });
 
       panels.forEach((p) => {
-        p.classList.toggle('skills-panel--active', p.dataset.skillsPanel === key);
+        p.classList.toggle(
+          'skills-panel--active',
+          p.dataset.skillsPanel === key
+        );
       });
     });
   });

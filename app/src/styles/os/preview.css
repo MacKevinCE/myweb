@@ -36,7 +36,9 @@
   border-radius: var(--os-radius-sm);
   background: none;
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 }
 
 .pv-thumb:hover {
@@ -126,7 +128,9 @@
   color: var(--os-text-secondary);
   cursor: pointer;
   border-radius: var(--os-radius-xs);
-  transition: color 0.15s, background 0.15s;
+  transition:
+    color 0.15s,
+    background 0.15s;
 }
 
 .pv-nav-btn:hover {
@@ -180,6 +184,13 @@
 }
 
 /* Scrollbar for sidebar */
-.pv-sidebar::-webkit-scrollbar { width: 4px; }
-.pv-sidebar::-webkit-scrollbar-track { background: transparent; }
-.pv-sidebar::-webkit-scrollbar-thumb { background: var(--os-fill-border); border-radius: 2px; }
+.pv-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.pv-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.pv-sidebar::-webkit-scrollbar-thumb {
+  background: var(--os-fill-border);
+  border-radius: 2px;
+}

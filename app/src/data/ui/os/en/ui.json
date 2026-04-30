@@ -353,16 +353,31 @@
     "dev": { "name": "Dev", "desc": "Run code in Playground" },
     "networker": { "name": "Networker", "desc": "Send a message via Contact" },
     "archivist": { "name": "Archivist", "desc": "Open 5 files in Finder" },
-    "certified": { "name": "Certified", "desc": "View at least 3 certificates" },
+    "certified": {
+      "name": "Certified",
+      "desc": "View at least 3 certificates"
+    },
     "mover": { "name": "Mover", "desc": "Drag 3 windows to a new position" },
-    "organizer": { "name": "Organizer", "desc": "Double-click the title bar of 2 different windows" },
-    "controller": { "name": "Controller", "desc": "Use the red, yellow, and green window buttons" },
+    "organizer": {
+      "name": "Organizer",
+      "desc": "Double-click the title bar of 2 different windows"
+    },
+    "controller": {
+      "name": "Controller",
+      "desc": "Use the red, yellow, and green window buttons"
+    },
     "launcher": { "name": "Launcher", "desc": "Open 2 apps from Launchpad" },
-    "cinema": { "name": "Cinema", "desc": "Enter fullscreen mode from the menu bar" },
+    "cinema": {
+      "name": "Cinema",
+      "desc": "Enter fullscreen mode from the menu bar"
+    },
     "menu": { "name": "Menu Master", "desc": "Open the main menu" },
     "recruiter": { "name": "Recruiter", "desc": "Download the CV" },
     "informed": { "name": "Informed", "desc": "Open the Notification Center" },
-    "resident": { "name": "Resident", "desc": "Stay on the page for 5 minutes" },
+    "resident": {
+      "name": "Resident",
+      "desc": "Stay on the page for 5 minutes"
+    },
     "completist": { "name": "Completist", "desc": "Unlock all achievements" },
     "hiddenDesc": "???"
   }

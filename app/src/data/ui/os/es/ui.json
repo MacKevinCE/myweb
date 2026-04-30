@@ -342,7 +342,10 @@
     "locked": "Bloqueado",
     "unlocked": "Desbloqueado",
     "unlockedAt": "Desbloqueado: {date}",
-    "explorer": { "name": "Explorador", "desc": "Visita 10 ventanas diferentes" },
+    "explorer": {
+      "name": "Explorador",
+      "desc": "Visita 10 ventanas diferentes"
+    },
     "hacker": { "name": "Hacker", "desc": "Ejecuta 5 comandos en la Terminal" },
     "curious": { "name": "Curioso", "desc": "Lee 3 artículos en Notas" },
     "artist": { "name": "Artista", "desc": "Crea 3 notas adhesivas" },
@@ -350,19 +353,46 @@
     "polyglot": { "name": "Políglota", "desc": "Cambia el idioma" },
     "customizer": { "name": "Personalizador", "desc": "Cambia un ajuste" },
     "dev": { "name": "Dev", "desc": "Ejecuta código en Playground" },
-    "networker": { "name": "Networker", "desc": "Envía un mensaje por Contacto" },
+    "networker": {
+      "name": "Networker",
+      "desc": "Envía un mensaje por Contacto"
+    },
     "archivist": { "name": "Archivero", "desc": "Abre 5 archivos en Finder" },
-    "certified": { "name": "Certificado", "desc": "Mira al menos 3 certificados" },
+    "certified": {
+      "name": "Certificado",
+      "desc": "Mira al menos 3 certificados"
+    },
     "mover": { "name": "Mover", "desc": "Arrastra 3 ventanas a otra posición" },
-    "organizer": { "name": "Organizador", "desc": "Haz doble clic en la barra de título de 2 ventanas diferentes" },
-    "controller": { "name": "Controlador", "desc": "Usa los botones rojo, amarillo y verde de las ventanas" },
-    "launcher": { "name": "Lanzador", "desc": "Abre 2 apps desde el Launchpad" },
-    "cinema": { "name": "Cinema", "desc": "Activa el modo pantalla completa desde el menú" },
+    "organizer": {
+      "name": "Organizador",
+      "desc": "Haz doble clic en la barra de título de 2 ventanas diferentes"
+    },
+    "controller": {
+      "name": "Controlador",
+      "desc": "Usa los botones rojo, amarillo y verde de las ventanas"
+    },
+    "launcher": {
+      "name": "Lanzador",
+      "desc": "Abre 2 apps desde el Launchpad"
+    },
+    "cinema": {
+      "name": "Cinema",
+      "desc": "Activa el modo pantalla completa desde el menú"
+    },
     "menu": { "name": "Menu Master", "desc": "Abre el menú principal" },
     "recruiter": { "name": "Reclutador", "desc": "Descarga el CV" },
-    "informed": { "name": "Informado", "desc": "Abre el Centro de Notificaciones" },
-    "resident": { "name": "Residente", "desc": "Permanece 5 minutos en la página" },
-    "completist": { "name": "Completista", "desc": "Desbloquea todos los logros" },
+    "informed": {
+      "name": "Informado",
+      "desc": "Abre el Centro de Notificaciones"
+    },
+    "resident": {
+      "name": "Residente",
+      "desc": "Permanece 5 minutos en la página"
+    },
+    "completist": {
+      "name": "Completista",
+      "desc": "Desbloquea todos los logros"
+    },
     "hiddenDesc": "???"
   }
 }

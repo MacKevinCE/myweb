@@ -343,7 +343,10 @@
     "locked": "Bloqueado",
     "unlocked": "Desbloqueado",
     "unlockedAt": "Desbloqueado: {date}",
-    "explorer": { "name": "Explorador", "desc": "Visite 10 janelas diferentes" },
+    "explorer": {
+      "name": "Explorador",
+      "desc": "Visite 10 janelas diferentes"
+    },
     "hacker": { "name": "Hacker", "desc": "Execute 5 comandos no Terminal" },
     "curious": { "name": "Curioso", "desc": "Leia 3 artigos em Notas" },
     "artist": { "name": "Artista", "desc": "Crie 3 notas adesivas" },
@@ -351,19 +354,40 @@
     "polyglot": { "name": "Poliglota", "desc": "Mude o idioma" },
     "customizer": { "name": "Personalizador", "desc": "Mude uma configuração" },
     "dev": { "name": "Dev", "desc": "Execute código no Playground" },
-    "networker": { "name": "Networker", "desc": "Envie uma mensagem pelo Contato" },
+    "networker": {
+      "name": "Networker",
+      "desc": "Envie uma mensagem pelo Contato"
+    },
     "archivist": { "name": "Arquivista", "desc": "Abra 5 arquivos no Finder" },
-    "certified": { "name": "Certificado", "desc": "Veja pelo menos 3 certificados" },
-    "mover": { "name": "Mover", "desc": "Arraste 3 janelas para outra posição" },
-    "organizer": { "name": "Organizador", "desc": "Dê duplo clique na barra de título de 2 janelas diferentes" },
-    "controller": { "name": "Controlador", "desc": "Use os botões vermelho, amarelo e verde das janelas" },
+    "certified": {
+      "name": "Certificado",
+      "desc": "Veja pelo menos 3 certificados"
+    },
+    "mover": {
+      "name": "Mover",
+      "desc": "Arraste 3 janelas para outra posição"
+    },
+    "organizer": {
+      "name": "Organizador",
+      "desc": "Dê duplo clique na barra de título de 2 janelas diferentes"
+    },
+    "controller": {
+      "name": "Controlador",
+      "desc": "Use os botões vermelho, amarelo e verde das janelas"
+    },
     "launcher": { "name": "Lançador", "desc": "Abra 2 apps pelo Launchpad" },
     "cinema": { "name": "Cinema", "desc": "Ative o modo tela cheia pelo menu" },
     "menu": { "name": "Menu Master", "desc": "Abra o menu principal" },
     "recruiter": { "name": "Recrutador", "desc": "Baixe o CV" },
-    "informed": { "name": "Informado", "desc": "Abra o Centro de Notificações" },
+    "informed": {
+      "name": "Informado",
+      "desc": "Abra o Centro de Notificações"
+    },
     "resident": { "name": "Residente", "desc": "Fique 5 minutos na página" },
-    "completist": { "name": "Completista", "desc": "Desbloqueie todas as conquistas" },
+    "completist": {
+      "name": "Completista",
+      "desc": "Desbloqueie todas as conquistas"
+    },
     "hiddenDesc": "???"
   }
 }

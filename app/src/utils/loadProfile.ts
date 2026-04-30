@@ -14,7 +14,9 @@ interface LangSwitchTexts {
 const dataModules = import.meta.glob('../data/**/*.json', { eager: true });
 
 function get(path: string): Record<string, unknown> {
-  const mod = dataModules[path] as { default?: Record<string, unknown> } | undefined;
+  const mod = dataModules[path] as
+    | { default?: Record<string, unknown> }
+    | undefined;
   return mod?.default ?? {};
 }
 
@@ -39,11 +41,17 @@ function asThemeContent(data: Record<string, unknown>): ThemeContent {
  * Returns the data at `path`, falling back to the English equivalent
  * when the requested language file doesn't exist.
  */
-function getWithFallback(path: string, fallbackPath: string, label: string): Record<string, unknown> {
+function getWithFallback(
+  path: string,
+  fallbackPath: string,
+  label: string
+): Record<string, unknown> {
   const data = get(path);
   if (!isEmpty(data)) return data;
 
-  console.warn(`[loadProfile] Missing ${label} "${path}", falling back to English`);
+  console.warn(
+    `[loadProfile] Missing ${label} "${path}", falling back to English`
+  );
   return get(fallbackPath);
 }
 
@@ -72,19 +80,19 @@ export function loadContent(lang: string, theme: Theme): ThemeContent {
   const profile = getWithFallback(
     `../data/profile/${lang}/profile.json`,
     '../data/profile/en/profile.json',
-    'profile',
+    'profile'
   );
 
   const sharedUi = getWithFallback(
     `../data/ui/shared/${lang}.json`,
     '../data/ui/shared/en.json',
-    'shared UI',
+    'shared UI'
   );
 
   const themeUi = getWithFallback(
     `../data/ui/${theme}/${lang}/ui.json`,
     `../data/ui/${theme}/en/ui.json`,
-    `theme UI (${theme})`,
+    `theme UI (${theme})`
   );
 
   const merged = deepMerge(
@@ -92,7 +100,7 @@ export function loadContent(lang: string, theme: Theme): ThemeContent {
     profile,
     get('../data/ui/base.json'),
     sharedUi,
-    themeUi,
+    themeUi
   );
 
   const profileResult = validateProfileData(merged, lang);
@@ -115,7 +123,10 @@ export function loadContent(lang: string, theme: Theme): ThemeContent {
 export function loadLangSwitchTexts(): Record<string, LangSwitchTexts> {
   const result: Record<string, LangSwitchTexts> = {};
   for (const l of languages) {
-    const ui = get(`../data/ui/shared/${l}.json`) as Record<string, Record<string, string>>;
+    const ui = get(`../data/ui/shared/${l}.json`) as Record<
+      string,
+      Record<string, string>
+    >;
     const ls = ui.langSwitch;
     if (ls) {
       result[l] = {

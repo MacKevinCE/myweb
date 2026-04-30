@@ -8,7 +8,9 @@ interface Props {
 }
 
 const { content, lang } = Astro.props;
-const brand = (content.about?.avatarName ?? '').toLowerCase().replace(/\s+/g, '_');
+const brand = (content.about?.avatarName ?? '')
+  .toLowerCase()
+  .replace(/\s+/g, '_');
 const topBarTitle = `${brand} — ${content.hero?.topBarSuffix ?? ''}`;
 
 const navItems = [
@@ -51,7 +53,6 @@ const navItems = [
     }
     <LanguageSwitch
       currentLang={lang}
-
       selectLabel={content.langSwitch?.selectLabel}
     />
   </nav>
@@ -59,7 +60,6 @@ const navItems = [
   <div class="flex items-center gap-4 lg:hidden">
     <LanguageSwitch
       currentLang={lang}
-
       selectLabel={content.langSwitch?.selectLabel}
     />
     <button

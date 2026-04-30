@@ -31,7 +31,9 @@ export const windowStates = new Map<string, WindowState>();
 
 /** Read --os-web-border and return desktop-available dimensions */
 export function getWebBorder(): number {
-  const raw = getComputedStyle(document.documentElement).getPropertyValue('--os-web-border').trim();
+  const raw = getComputedStyle(document.documentElement)
+    .getPropertyValue('--os-web-border')
+    .trim();
   return parseFloat(raw) || 0;
 }
 
@@ -50,7 +52,12 @@ export function cfg(id: string): WindowConfig {
 }
 
 export function getDefaultSize(id: string): [number, number] {
-  return cfg(id).defaultSize ?? [Math.round(getDesktopSize().w / 2), Math.round(getDesktopSize().h / 2)];
+  return (
+    cfg(id).defaultSize ?? [
+      Math.round(getDesktopSize().w / 2),
+      Math.round(getDesktopSize().h / 2),
+    ]
+  );
 }
 
 export function getMinSize(id: string): [number, number] | undefined {
@@ -66,7 +73,11 @@ export function getOrigin(id: string): [number, number] {
 }
 
 /** Clamp origin so window fits within the desktop area */
-export function clampOrigin(windowId: string, left: number, top: number): [number, number] {
+export function clampOrigin(
+  windowId: string,
+  left: number,
+  top: number
+): [number, number] {
   const ds = getDesktopSize();
   const size = getDefaultSize(windowId);
   const maxLeft = Math.max(0, ds.w - size[0]);

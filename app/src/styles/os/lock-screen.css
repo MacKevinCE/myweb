@@ -12,10 +12,15 @@
   border-radius: var(--os-radius-window);
 }
 
-.lockscreen--unlocking { opacity: 0; pointer-events: none; }
+.lockscreen--unlocking {
+  opacity: 0;
+  pointer-events: none;
+}
 
 /* Hide desktop while locked — prevents flash of desktop before lockscreen paints */
-html:not(.os-unlocked) .os-desktop { visibility: hidden; }
+html:not(.os-unlocked) .os-desktop {
+  visibility: hidden;
+}
 
 .lockscreen-bg {
   position: absolute;
@@ -25,7 +30,11 @@ html:not(.os-unlocked) .os-desktop { visibility: hidden; }
   filter: blur(var(--os-blur-sm));
 }
 
-.lockscreen-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.25); }
+.lockscreen-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
 
 .lockscreen-center {
   position: absolute;
@@ -56,9 +65,16 @@ html:not(.os-unlocked) .os-desktop { visibility: hidden; }
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
 }
 
-.lockscreen-spacer { height: 60px; }
+.lockscreen-spacer {
+  height: 60px;
+}
 
-.lockscreen-avatar-container { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.lockscreen-avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
 
 .lockscreen-avatar-ring {
   width: 74px;
@@ -72,10 +88,30 @@ html:not(.os-unlocked) .os-desktop { visibility: hidden; }
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-.lockscreen-avatar-inner { width: 64px; height: 64px; border-radius: 32px; overflow: hidden; }
-.lockscreen-avatar-img { width: 100%; height: 100%; object-fit: cover; }
-.lockscreen-username { font-family: 'Inter', sans-serif; font-size: var(--os-fs-16); font-weight: 400; color: #ffffff; letter-spacing: 0.2px; }
-.lockscreen-hint { font-family: 'Inter', sans-serif; font-size: var(--os-fs-12); font-weight: 400; color: rgba(255, 255, 255, 0.375); }
+.lockscreen-avatar-inner {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  overflow: hidden;
+}
+.lockscreen-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.lockscreen-username {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-16);
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+}
+.lockscreen-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-12);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.375);
+}
 
 .lockscreen-bottom {
   position: absolute;
@@ -89,9 +125,20 @@ html:not(.os-unlocked) .os-desktop { visibility: hidden; }
   padding: 0 24px;
 }
 
-.lockscreen-bottom-left, .lockscreen-bottom-right { display: flex; align-items: center; gap: 8px; }
-.lockscreen-bottom-right { gap: 14px; }
-.lockscreen-bottom-text { font-family: 'Inter', sans-serif; font-size: var(--os-fs-12); font-weight: 400; }
+.lockscreen-bottom-left,
+.lockscreen-bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lockscreen-bottom-right {
+  gap: 14px;
+}
+.lockscreen-bottom-text {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-12);
+  font-weight: 400;
+}
 
 /* Lock screen - keep dark as it overlays wallpaper */
 
@@ -105,8 +152,12 @@ html:not(.os-unlocked) .os-desktop { visibility: hidden; }
   }
 
   /* Hide avatar on mobile */
-  .lockscreen-avatar-container { display: none; }
-  .lockscreen-spacer { display: none; }
+  .lockscreen-avatar-container {
+    display: none;
+  }
+  .lockscreen-spacer {
+    display: none;
+  }
 
   /* Notification list in center */
   .lockscreen-notifs {
@@ -184,8 +235,15 @@ html:not(.os-unlocked) .os-desktop { visibility: hidden; }
   }
 
   @keyframes swipeHintPulse {
-    0%, 100% { transform: translateY(0); opacity: 0.5; }
-    50% { transform: translateY(-6px); opacity: 1; }
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(-6px);
+      opacity: 1;
+    }
   }
 
   /* Home indicator inside lockscreen */
@@ -213,7 +271,13 @@ html:not(.os-unlocked) .os-desktop { visibility: hidden; }
 
 /* Desktop: hide mobile-only elements */
 @media (min-width: 768px) {
-  .lockscreen-notifs { display: none; }
-  .lockscreen-swipe-hint { display: none; }
-  .lockscreen-home-indicator { display: none; }
+  .lockscreen-notifs {
+    display: none;
+  }
+  .lockscreen-swipe-hint {
+    display: none;
+  }
+  .lockscreen-home-indicator {
+    display: none;
+  }
 }

@@ -4,12 +4,18 @@
  * Mobile mode: gesture navigation (swipe for launchpad, swipe-up to minimize).
  */
 
-import { windowStates, getDesktopSize, getDefaultSize, MENU_BAR_H } from './window/state';
-
+import {
+  windowStates,
+  getDesktopSize,
+  getDefaultSize,
+  MENU_BAR_H,
+} from './window/state';
 
 export type LayoutMode = 'desktop' | 'tablet' | 'mobile';
 
-const MQ_TABLET = window.matchMedia('(max-width: 1023px) and (min-width: 768px)');
+const MQ_TABLET = window.matchMedia(
+  '(max-width: 1023px) and (min-width: 768px)'
+);
 const MQ_MOBILE = window.matchMedia('(max-width: 767px)');
 
 let currentMode: LayoutMode = 'desktop';
@@ -88,42 +94,61 @@ function initMobileGestures() {
   let tracking = false;
 
   // --- Swipe on desktop: left → show launchpad ---
-  desktop.addEventListener('touchstart', (e) => {
-    // Don't track if touching a window or interactive element
-    if ((e.target as HTMLElement).closest('.os-window, .os-menubar, .os-footer')) return;
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    tracking = true;
-  }, { passive: true });
+  desktop.addEventListener(
+    'touchstart',
+    (e) => {
+      // Don't track if touching a window or interactive element
+      if (
+        (e.target as HTMLElement).closest('.os-window, .os-menubar, .os-footer')
+      )
+        return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      tracking = true;
+    },
+    { passive: true }
+  );
 
-  desktop.addEventListener('touchend', (e) => {
-    if (!tracking) return;
-    tracking = false;
-    const dx = e.changedTouches[0].clientX - startX;
-    const dy = Math.abs(e.changedTouches[0].clientY - startY);
-    // Swipe left (negative dx) with enough distance and mostly horizontal
-    if (dx < -60 && dy < Math.abs(dx)) {
-      showMobileLaunchpad();
-    }
-  }, { passive: true });
+  desktop.addEventListener(
+    'touchend',
+    (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = Math.abs(e.changedTouches[0].clientY - startY);
+      // Swipe left (negative dx) with enough distance and mostly horizontal
+      if (dx < -60 && dy < Math.abs(dx)) {
+        showMobileLaunchpad();
+      }
+    },
+    { passive: true }
+  );
 
   // --- Swipe on launchpad: right → back to desktop ---
-  launchpad.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    tracking = true;
-  }, { passive: true });
+  launchpad.addEventListener(
+    'touchstart',
+    (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      tracking = true;
+    },
+    { passive: true }
+  );
 
-  launchpad.addEventListener('touchend', (e) => {
-    if (!tracking) return;
-    tracking = false;
-    const dx = e.changedTouches[0].clientX - startX;
-    const dy = Math.abs(e.changedTouches[0].clientY - startY);
-    // Swipe right (positive dx) with enough distance and mostly horizontal
-    if (dx > 60 && dy < Math.abs(dx)) {
-      hideMobileLaunchpad();
-    }
-  }, { passive: true });
+  launchpad.addEventListener(
+    'touchend',
+    (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = Math.abs(e.changedTouches[0].clientY - startY);
+      // Swipe right (positive dx) with enough distance and mostly horizontal
+      if (dx > 60 && dy < Math.abs(dx)) {
+        hideMobileLaunchpad();
+      }
+    },
+    { passive: true }
+  );
 }
 
 /** Show/hide the home indicator based on whether a window is open. */
@@ -155,46 +180,61 @@ function initWindowSwipeUp() {
     let swiping = false;
     let activeWin: HTMLElement | null = null;
 
-    indicator.addEventListener('touchstart', (e) => {
-      if (getLayoutMode() !== 'mobile') return;
-      e.preventDefault();
+    indicator.addEventListener(
+      'touchstart',
+      (e) => {
+        if (getLayoutMode() !== 'mobile') return;
+        e.preventDefault();
 
-      // Find the topmost visible window
-      let topWin: HTMLElement | null = null;
-      let topZ = -1;
-      windowStates.forEach((_s, id) => {
-        const win = document.getElementById(id);
-        if (!win || win.style.display === 'none') return;
-        const z = parseInt(win.style.zIndex || '0');
-        if (z > topZ) { topZ = z; topWin = win; }
-      });
+        // Find the topmost visible window
+        let topWin: HTMLElement | null = null;
+        let topZ = -1;
+        windowStates.forEach((_s, id) => {
+          const win = document.getElementById(id);
+          if (!win || win.style.display === 'none') return;
+          const z = parseInt(win.style.zIndex || '0');
+          if (z > topZ) {
+            topZ = z;
+            topWin = win;
+          }
+        });
 
-      if (!topWin) return;
-      activeWin = topWin;
-      startY = e.touches[0].clientY;
-      startTime = Date.now();
-      swiping = true;
-    }, { passive: false });
+        if (!topWin) return;
+        activeWin = topWin;
+        startY = e.touches[0].clientY;
+        startTime = Date.now();
+        swiping = true;
+      },
+      { passive: false }
+    );
 
-    document.addEventListener('touchmove', (e) => {
-      if (!swiping || !activeWin || getLayoutMode() !== 'mobile') return;
-      const dy = startY - e.touches[0].clientY; // positive = swiping up
-      if (dy <= 0) return;
+    document.addEventListener(
+      'touchmove',
+      (e) => {
+        if (!swiping || !activeWin || getLayoutMode() !== 'mobile') return;
+        const dy = startY - e.touches[0].clientY; // positive = swiping up
+        if (dy <= 0) return;
 
-      e.preventDefault();
+        e.preventDefault();
 
-      // Progress 0→1 based on how far the finger has traveled
-      const progress = Math.min(dy / (window.innerHeight * 0.4), 1);
-      const scale = 1 - (progress * 0.3);       // 1.0 → 0.7
-      const radius = progress * 24;              // 0 → 24px
-      const opacity = 1 - (progress * 0.3);      // 1.0 → 0.7
+        // Progress 0→1 based on how far the finger has traveled
+        const progress = Math.min(dy / (window.innerHeight * 0.4), 1);
+        const scale = 1 - progress * 0.3; // 1.0 → 0.7
+        const radius = progress * 24; // 0 → 24px
+        const opacity = 1 - progress * 0.3; // 1.0 → 0.7
 
-      activeWin.style.transition = 'none';
-      activeWin.style.transform = `scale(${scale})`;
-      activeWin.style.setProperty('border-radius', `${radius}px`, 'important');
-      activeWin.style.opacity = `${opacity}`;
-      activeWin.style.transformOrigin = 'center bottom';
-    }, { passive: false });
+        activeWin.style.transition = 'none';
+        activeWin.style.transform = `scale(${scale})`;
+        activeWin.style.setProperty(
+          'border-radius',
+          `${radius}px`,
+          'important'
+        );
+        activeWin.style.opacity = `${opacity}`;
+        activeWin.style.transformOrigin = 'center bottom';
+      },
+      { passive: false }
+    );
 
     document.addEventListener('touchend', (e) => {
       if (!swiping || !activeWin || getLayoutMode() !== 'mobile') return;
@@ -209,7 +249,8 @@ function initWindowSwipeUp() {
 
       if (dy > window.innerHeight * 0.2 || (dy > 50 && velocity > 0.5)) {
         // Threshold met — animate out and minimize
-        win.style.transition = 'transform 0.3s ease-out, border-radius 0.3s ease-out, opacity 0.3s ease-out';
+        win.style.transition =
+          'transform 0.3s ease-out, border-radius 0.3s ease-out, opacity 0.3s ease-out';
         win.style.transform = 'scale(0.5)';
         win.style.opacity = '0';
         win.style.setProperty('border-radius', '24px', 'important');
@@ -228,7 +269,8 @@ function initWindowSwipeUp() {
         win.addEventListener('transitionend', onEnd);
       } else {
         // Snap back to full size
-        win.style.transition = 'transform 0.25s ease-out, border-radius 0.25s ease-out, opacity 0.25s ease-out';
+        win.style.transition =
+          'transform 0.25s ease-out, border-radius 0.25s ease-out, opacity 0.25s ease-out';
         win.style.transform = '';
         win.style.setProperty('border-radius', '0px', 'important');
         win.style.opacity = '';

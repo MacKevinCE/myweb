@@ -61,12 +61,17 @@ function showWelcome() {
   const welcomeText = tr('welcome');
   // Split welcome into lines for styling: first line gets bold green for "MacKevinOS 1.0"
   const welcomeLines = welcomeText.split('\n').map((line) => {
-    return line.replace(/MacKevinOS \d+\.\d+/g, '<span class="term-green term-bold">$&</span>')
-               .replace(/'help'/g, '\'<span class="term-green">help</span>\'');
+    return line
+      .replace(
+        /MacKevinOS \d+\.\d+/g,
+        '<span class="term-green term-bold">$&</span>'
+      )
+      .replace(/'help'/g, '\'<span class="term-green">help</span>\'');
   });
   appendOutput(
     `<span class="term-muted">${escapeHtml(lastLoginText)}</span>\n` +
-    welcomeLines.join('\n') + '\n'
+      welcomeLines.join('\n') +
+      '\n'
   );
 }
 
@@ -133,7 +138,14 @@ function handleKeyDown(e: KeyboardEvent) {
     }
     state.inputEl.value = state.history[state.historyIndex];
     // Move cursor to end
-    setTimeout(() => state.inputEl.setSelectionRange(state.inputEl.value.length, state.inputEl.value.length), 0);
+    setTimeout(
+      () =>
+        state.inputEl.setSelectionRange(
+          state.inputEl.value.length,
+          state.inputEl.value.length
+        ),
+      0
+    );
     return;
   }
 
@@ -181,7 +193,9 @@ function handleBodyClick(e: Event) {
 }
 
 function handleChipClick(e: Event) {
-  const chip = (e.target as HTMLElement).closest('.term-chip') as HTMLElement | null;
+  const chip = (e.target as HTMLElement).closest(
+    '.term-chip'
+  ) as HTMLElement | null;
   if (!chip) return;
   const cmd = chip.dataset.cmd;
   if (!cmd) return;
@@ -211,14 +225,21 @@ function observeVisibility() {
       }
     }
   });
-  visibilityObserver.observe(windowEl, { attributes: true, attributeFilter: ['style'] });
+  visibilityObserver.observe(windowEl, {
+    attributes: true,
+    attributeFilter: ['style'],
+  });
 
   // Auto-focus input when terminal window receives focus (e.g. brought to front)
-  windowEl.addEventListener('focus', () => {
-    if (windowEl.style.display !== 'none') {
-      state.inputEl.focus();
-    }
-  }, true); // capture phase to catch focus on the window itself
+  windowEl.addEventListener(
+    'focus',
+    () => {
+      if (windowEl.style.display !== 'none') {
+        state.inputEl.focus();
+      }
+    },
+    true
+  ); // capture phase to catch focus on the window itself
 }
 
 // ---------------------------------------------------------------------------
@@ -237,11 +258,17 @@ export function initTerminal() {
 
   const i18nEl = document.getElementById('term-i18n');
   if (i18nEl) {
-    try { state.t = JSON.parse(i18nEl.textContent || '{}'); } catch { /* use defaults */ }
+    try {
+      state.t = JSON.parse(i18nEl.textContent || '{}');
+    } catch {
+      /* use defaults */
+    }
   }
 
   const _output = document.getElementById('term-output');
-  const _input = document.getElementById('term-input') as HTMLInputElement | null;
+  const _input = document.getElementById(
+    'term-input'
+  ) as HTMLInputElement | null;
   const _prompt = document.getElementById('term-prompt');
   const _body = document.getElementById('term-body');
   const _suggestions = document.getElementById('term-suggestions');
@@ -286,16 +313,29 @@ export function initTerminal() {
   const termWin = document.getElementById('terminal-window');
   if (termWin) {
     const termObserver = new MutationObserver(() => {
-      if (!terminalNotified && termWin.style.display !== 'none' && termWin.style.visibility !== 'hidden') {
+      if (
+        !terminalNotified &&
+        termWin.style.display !== 'none' &&
+        termWin.style.visibility !== 'hidden'
+      ) {
         terminalNotified = true;
         termObserver.disconnect();
         setTimeout(() => {
           const nt = getNotifI18n();
-          if (nt.terminalTitle) notify(nt.terminalTitle, nt.terminalBody || '', undefined, 'terminal-window');
+          if (nt.terminalTitle)
+            notify(
+              nt.terminalTitle,
+              nt.terminalBody || '',
+              undefined,
+              'terminal-window'
+            );
         }, 500);
       }
     });
-    termObserver.observe(termWin, { attributes: true, attributeFilter: ['style'] });
+    termObserver.observe(termWin, {
+      attributes: true,
+      attributeFilter: ['style'],
+    });
   }
 
   registerReset(W.TERMINAL, resetTerminal);

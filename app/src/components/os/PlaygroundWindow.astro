@@ -17,20 +17,26 @@ const pg = content.playground;
   id="playground-window"
   style="display: none;"
 >
-  <WindowChrome title={windowTitles[W.PLAYGROUND]} windowId="playground" titleClass="os-window-title--inter" />
+  <WindowChrome
+    title={windowTitles[W.PLAYGROUND]}
+    windowId="playground"
+    titleClass="os-window-title--inter"
+  />
 
   <div class="pg-body">
     <!-- Sidebar: snippet list -->
     <div class="pg-sidebar">
-      {snippets.map((sn, i) => (
-        <button
-          class={`pg-item ${i === 0 ? 'pg-item--active' : ''}`}
-          data-pg-index={i}
-        >
-          <span class="pg-item-title">{sn.title}</span>
-          <span class="pg-item-lang">{sn.language}</span>
-        </button>
-      ))}
+      {
+        snippets.map((sn, i) => (
+          <button
+            class={`pg-item ${i === 0 ? 'pg-item--active' : ''}`}
+            data-pg-index={i}
+          >
+            <span class="pg-item-title">{sn.title}</span>
+            <span class="pg-item-lang">{sn.language}</span>
+          </button>
+        ))
+      }
     </div>
 
     <!-- Main area -->
@@ -38,18 +44,40 @@ const pg = content.playground;
       <!-- Code area -->
       <div class="pg-code-area">
         <div class="pg-code-toolbar">
-          <span class="pg-code-lang" id="pg-lang">{snippets.length > 0 ? snippets[0].language : ''}</span>
+          <span class="pg-code-lang" id="pg-lang"
+            >{snippets.length > 0 ? snippets[0].language : ''}</span
+          >
           <div class="pg-code-actions">
             <button class="pg-action-btn" id="pg-copy" title={pg.copy}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><rect width="14" height="14" x="8" y="8" rx="2"></rect><path
+                  d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                ></path></svg
+              >
             </button>
             <button class="pg-run-btn" id="pg-run">
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M5 3l14 9-14 9V3z"/></svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                stroke="none"><path d="M5 3l14 9-14 9V3z"></path></svg
+              >
               <span>{pg.run}</span>
             </button>
           </div>
         </div>
-        <pre class="pg-code" id="pg-code"><code id="pg-code-inner"></code></pre>
+        <pre class="pg-code" id="pg-code"><code id="pg-code-inner" /></pre>
       </div>
 
       <!-- Output area (hidden until Run) -->
@@ -66,7 +94,11 @@ const pg = content.playground;
   </div>
 
   <!-- Data -->
-  <script type="application/json" id="pg-data" set:html={JSON.stringify(snippets)} />
+  <script
+    type="application/json"
+    id="pg-data"
+    set:html={JSON.stringify(snippets)}
+  />
   <script type="application/json" id="pg-i18n" set:html={JSON.stringify(pg)} />
 </div>
 

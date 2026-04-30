@@ -14,7 +14,10 @@ export function resetEducation() {
   firstTab.classList.add('os-nav--active');
 
   headers.forEach((h) => {
-    h.classList.toggle('edu-header-block--active', h.dataset.eduHeader === firstKey);
+    h.classList.toggle(
+      'edu-header-block--active',
+      h.dataset.eduHeader === firstKey
+    );
   });
 
   panels.forEach((p) => {
@@ -35,7 +38,10 @@ export function initEducationTabs() {
       tab.classList.add('os-nav--active');
 
       headers.forEach((h) => {
-        h.classList.toggle('edu-header-block--active', h.dataset.eduHeader === key);
+        h.classList.toggle(
+          'edu-header-block--active',
+          h.dataset.eduHeader === key
+        );
       });
 
       panels.forEach((p) => {

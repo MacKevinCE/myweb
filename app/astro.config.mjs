@@ -10,9 +10,13 @@ import { readFileSync, cpSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const baseProfile = JSON.parse(readFileSync('./src/data/profile/base.json', 'utf-8'));
+const baseProfile = JSON.parse(
+  readFileSync('./src/data/profile/base.json', 'utf-8')
+);
 const themes = ['terminal', 'liquid-glass', 'os'];
-const defaultTheme = themes.includes(baseProfile.theme) ? baseProfile.theme : 'terminal';
+const defaultTheme = themes.includes(baseProfile.theme)
+  ? baseProfile.theme
+  : 'terminal';
 
 /** Validate all profile JSON data at build start and warn about missing fields */
 function validateDataIntegration() {
@@ -20,7 +24,9 @@ function validateDataIntegration() {
     name: 'validate-data',
     hooks: {
       'astro:build:start': () => {
-        const base = JSON.parse(readFileSync('./src/data/profile/base.json', 'utf-8'));
+        const base = JSON.parse(
+          readFileSync('./src/data/profile/base.json', 'utf-8')
+        );
 
         for (const lang of languages) {
           const profilePath = `./src/data/profile/${lang}/profile.json`;
@@ -64,16 +70,26 @@ function rootLangPages() {
       'astro:build:done': (/** @type {{ dir: URL }} */ { dir }) => {
         const dist = fileURLToPath(dir);
         for (const lang of languages) {
-          cpSync(join(dist, defaultTheme, lang), join(dist, lang), { recursive: true });
+          cpSync(join(dist, defaultTheme, lang), join(dist, lang), {
+            recursive: true,
+          });
         }
-        console.log(`[root-lang-pages] Copied /${defaultTheme}/{lang} → /{lang}`);
+        console.log(
+          `[root-lang-pages] Copied /${defaultTheme}/{lang} → /{lang}`
+        );
       },
     },
   };
 }
 
 export default defineConfig({
-  integrations: [validateDataIntegration(), tailwind(), sitemap(), rootLangPages(), compressor()],
+  integrations: [
+    validateDataIntegration(),
+    tailwind(),
+    sitemap(),
+    rootLangPages(),
+    compressor(),
+  ],
   i18n: {
     defaultLocale: defaultLang,
     locales: [...languages],

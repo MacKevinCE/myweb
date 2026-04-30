@@ -15,13 +15,28 @@ interface ColDef {
 /** Return ordered column definitions for a filelist. Last entry is the filler. */
 function getColDefs(filelist: HTMLElement): ColDef[] {
   const base: ColDef[] = [
-    { cssVar: '--finder-name-w', headerSelector: '.finder-col-name', rowSelector: '.finder-row-name', floorMin: 120 },
+    {
+      cssVar: '--finder-name-w',
+      headerSelector: '.finder-col-name',
+      rowSelector: '.finder-row-name',
+      floorMin: 120,
+    },
   ];
   if (filelist.classList.contains('finder-filelist--3col')) {
-    base.push({ cssVar: '--finder-date-w', headerSelector: '.finder-col-date', rowSelector: '.finder-row-date', floorMin: 80 });
+    base.push({
+      cssVar: '--finder-date-w',
+      headerSelector: '.finder-col-date',
+      rowSelector: '.finder-row-date',
+      floorMin: 80,
+    });
   }
   // Last column (filler) -- Tags
-  base.push({ cssVar: '--finder-tags-w', headerSelector: '.finder-col-second', rowSelector: '.finder-row-second', floorMin: 80 });
+  base.push({
+    cssVar: '--finder-tags-w',
+    headerSelector: '.finder-col-second',
+    rowSelector: '.finder-row-second',
+    floorMin: 80,
+  });
   return base;
 }
 
@@ -74,7 +89,11 @@ function measureColMins(filelist: HTMLElement): Map<string, number> {
 }
 
 /** Read current width of a column from its CSS variable. */
-function readColW(filelist: HTMLElement, cssVar: string, fallback: number): number {
+function readColW(
+  filelist: HTMLElement,
+  cssVar: string,
+  fallback: number
+): number {
   const raw = filelist.style.getPropertyValue(cssVar);
   return parseFloat(raw) || fallback;
 }
@@ -142,29 +161,31 @@ function adjustFillerCol(filelist: HTMLElement) {
 export const userResized = new WeakSet<HTMLElement>();
 
 export function initColumnSizing() {
-  document.querySelectorAll<HTMLElement>('.finder-filelist').forEach((filelist) => {
-    applyDefaultWidths(filelist);
+  document
+    .querySelectorAll<HTMLElement>('.finder-filelist')
+    .forEach((filelist) => {
+      applyDefaultWidths(filelist);
 
-    let prevW = 0;
-    let resizeTimer: ReturnType<typeof setTimeout>;
-    const ro = new ResizeObserver((entries) => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        for (const entry of entries) {
-          const w = entry.contentRect.width;
-          if (w > 0 && w !== prevW) {
-            if (prevW === 0) {
-              applyDefaultWidths(filelist);
-            } else {
-              adjustFillerCol(filelist);
+      let prevW = 0;
+      let resizeTimer: ReturnType<typeof setTimeout>;
+      const ro = new ResizeObserver((entries) => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          for (const entry of entries) {
+            const w = entry.contentRect.width;
+            if (w > 0 && w !== prevW) {
+              if (prevW === 0) {
+                applyDefaultWidths(filelist);
+              } else {
+                adjustFillerCol(filelist);
+              }
+              prevW = w;
             }
-            prevW = w;
           }
-        }
-      }, 100);
+        }, 100);
+      });
+      ro.observe(filelist);
     });
-    ro.observe(filelist);
-  });
 }
 
 /**
@@ -172,81 +193,91 @@ export function initColumnSizing() {
  * The last column always adjusts to fill remaining space.
  */
 export function initColumnResize() {
-  document.querySelectorAll<HTMLElement>('.finder-filelist').forEach((filelist) => {
-    const seps = Array.from(filelist.querySelectorAll<HTMLElement>('.finder-col-sep'));
-    if (!seps.length) return;
+  document
+    .querySelectorAll<HTMLElement>('.finder-filelist')
+    .forEach((filelist) => {
+      const seps = Array.from(
+        filelist.querySelectorAll<HTMLElement>('.finder-col-sep')
+      );
+      if (!seps.length) return;
 
-    const cols = getColDefs(filelist);
+      const cols = getColDefs(filelist);
 
-    seps.forEach((sep, sepIndex) => {
-      // This separator controls the column at sepIndex (0-based)
-      const col = cols[sepIndex];
-      if (!col) return;
+      seps.forEach((sep, sepIndex) => {
+        // This separator controls the column at sepIndex (0-based)
+        const col = cols[sepIndex];
+        if (!col) return;
 
-      let startX = 0;
-      let startW = 0;
+        let startX = 0;
+        let startW = 0;
 
-      const onStart = (clientX: number) => {
-        const mins = measureColMins(filelist);
-        const colMin = mins.get(col.cssVar)!;
-        startX = clientX;
-        startW = readColW(filelist, col.cssVar, col.floorMin);
-        document.body.style.userSelect = 'none';
-        document.body.style.cursor = 'col-resize';
+        const onStart = (clientX: number) => {
+          const mins = measureColMins(filelist);
+          const colMin = mins.get(col.cssVar)!;
+          startX = clientX;
+          startW = readColW(filelist, col.cssVar, col.floorMin);
+          document.body.style.userSelect = 'none';
+          document.body.style.cursor = 'col-resize';
 
-        // Max: available - other non-filler cols - filler min
-        const filler = cols[cols.length - 1];
-        const fillerMin = mins.get(filler.cssVar)!;
-        const availW = getPanelAvail(filelist);
-        let othersW = 0;
-        for (let i = 0; i < cols.length - 1; i++) {
-          if (i !== sepIndex) {
-            othersW += readColW(filelist, cols[i].cssVar, cols[i].floorMin);
+          // Max: available - other non-filler cols - filler min
+          const filler = cols[cols.length - 1];
+          const fillerMin = mins.get(filler.cssVar)!;
+          const availW = getPanelAvail(filelist);
+          let othersW = 0;
+          for (let i = 0; i < cols.length - 1; i++) {
+            if (i !== sepIndex) {
+              othersW += readColW(filelist, cols[i].cssVar, cols[i].floorMin);
+            }
           }
-        }
-        const colMax = availW - othersW - fillerMin;
+          const colMax = availW - othersW - fillerMin;
 
-        const onMove = (cx: number) => {
-          const dx = cx - startX;
-          const newW = Math.max(colMin, Math.min(colMax, startW + dx));
-          filelist.style.setProperty(col.cssVar, `${newW}px`);
-          adjustFillerCol(filelist);
+          const onMove = (cx: number) => {
+            const dx = cx - startX;
+            const newW = Math.max(colMin, Math.min(colMax, startW + dx));
+            filelist.style.setProperty(col.cssVar, `${newW}px`);
+            adjustFillerCol(filelist);
+          };
+
+          const onEnd = () => {
+            userResized.add(filelist);
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+            document.removeEventListener('touchmove', handleTouchMove);
+            document.removeEventListener('touchend', handleTouchEnd);
+            document.body.style.userSelect = '';
+            document.body.style.cursor = '';
+          };
+
+          const handleMouseMove = (ev: MouseEvent) => onMove(ev.clientX);
+          const handleMouseUp = () => onEnd();
+          const handleTouchMove = (ev: TouchEvent) => {
+            if (ev.touches.length > 0) onMove(ev.touches[0].clientX);
+          };
+          const handleTouchEnd = () => onEnd();
+
+          document.addEventListener('mousemove', handleMouseMove);
+          document.addEventListener('mouseup', handleMouseUp);
+          document.addEventListener('touchmove', handleTouchMove, {
+            passive: true,
+          });
+          document.addEventListener('touchend', handleTouchEnd);
         };
 
-        const onEnd = () => {
-          userResized.add(filelist);
-          document.removeEventListener('mousemove', handleMouseMove);
-          document.removeEventListener('mouseup', handleMouseUp);
-          document.removeEventListener('touchmove', handleTouchMove);
-          document.removeEventListener('touchend', handleTouchEnd);
-          document.body.style.userSelect = '';
-          document.body.style.cursor = '';
-        };
-
-        const handleMouseMove = (ev: MouseEvent) => onMove(ev.clientX);
-        const handleMouseUp = () => onEnd();
-        const handleTouchMove = (ev: TouchEvent) => {
-          if (ev.touches.length > 0) onMove(ev.touches[0].clientX);
-        };
-        const handleTouchEnd = () => onEnd();
-
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
-        document.addEventListener('touchmove', handleTouchMove, { passive: true });
-        document.addEventListener('touchend', handleTouchEnd);
-      };
-
-      sep.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        onStart(e.clientX);
-      });
-
-      sep.addEventListener('touchstart', (e) => {
-        if (e.touches.length > 0) {
+        sep.addEventListener('mousedown', (e) => {
           e.preventDefault();
-          onStart(e.touches[0].clientX);
-        }
-      }, { passive: false });
+          onStart(e.clientX);
+        });
+
+        sep.addEventListener(
+          'touchstart',
+          (e) => {
+            if (e.touches.length > 0) {
+              e.preventDefault();
+              onStart(e.touches[0].clientX);
+            }
+          },
+          { passive: false }
+        );
+      });
     });
-  });
 }

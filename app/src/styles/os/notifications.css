@@ -32,8 +32,9 @@
   /* Slide-in animation */
   transform: translateX(calc(100% + 20px));
   opacity: 0;
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-              opacity 0.35s ease;
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.35s ease;
 }
 
 .os-notif--visible {
@@ -44,8 +45,9 @@
 .os-notif--dismissing {
   transform: translateX(calc(100% + 20px));
   opacity: 0;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 1, 1),
-              opacity 0.25s ease;
+  transition:
+    transform 0.25s cubic-bezier(0.4, 0, 1, 1),
+    opacity 0.25s ease;
 }
 
 .os-notif-icon {

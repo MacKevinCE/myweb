@@ -124,7 +124,12 @@ export function initOS() {
         observer.disconnect();
         setTimeout(() => {
           const t = getNotifI18n();
-          notify(t.welcomeTitle || 'Welcome', t.welcomeBody || 'Explore the portfolio', undefined, 'about-window');
+          notify(
+            t.welcomeTitle || 'Welcome',
+            t.welcomeBody || 'Explore the portfolio',
+            undefined,
+            'about-window'
+          );
         }, 2000);
       }
     });
@@ -133,7 +138,12 @@ export function initOS() {
     // No lock screen — notify immediately after a delay
     setTimeout(() => {
       const t = getNotifI18n();
-      notify(t.welcomeTitle || 'Welcome', t.welcomeBody || 'Explore the portfolio', undefined, 'about-window');
+      notify(
+        t.welcomeTitle || 'Welcome',
+        t.welcomeBody || 'Explore the portfolio',
+        undefined,
+        'about-window'
+      );
     }, 2000);
   }
 }

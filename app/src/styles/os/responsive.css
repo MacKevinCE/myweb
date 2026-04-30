@@ -20,31 +20,55 @@
     padding: calc(6px * var(--dock-scale)) 12px;
   }
 
-  .os-dock-tooltip { display: none !important; }
+  .os-dock-tooltip {
+    display: none !important;
+  }
 
   /* ---- Menu Bar ---- */
   .os-menubar-left,
-  .os-menubar-right { gap: 10px; }
+  .os-menubar-right {
+    gap: 10px;
+  }
 
-  .os-menubar-item:empty { display: none; }
+  .os-menubar-item:empty {
+    display: none;
+  }
 
   /* ---- Desktop Icons ---- */
-  .os-icon-wrapper { width: 64px; }
-  .os-icon-box { width: 44px; height: 44px; }
-  .os-icon-box svg { width: 22px; height: 22px; }
-  .os-icon-label { font-size: var(--os-fs-10); }
+  .os-icon-wrapper {
+    width: 64px;
+  }
+  .os-icon-box {
+    width: 44px;
+    height: 44px;
+  }
+  .os-icon-box svg {
+    width: 22px;
+    height: 22px;
+  }
+  .os-icon-label {
+    font-size: var(--os-fs-10);
+  }
 
   /* ---- Lock Screen ---- */
-  .lockscreen-time { font-size: 80px; }
-  .lockscreen-date { font-size: var(--os-fs-20); }
+  .lockscreen-time {
+    font-size: 80px;
+  }
+  .lockscreen-date {
+    font-size: var(--os-fs-20);
+  }
 
   /* ---- Launchpad ---- */
   .lp-grid {
     grid-template-columns: repeat(4, 72px);
   }
 
-  .lp-app { width: 72px; }
-  .lp-app-label { width: 72px; }
+  .lp-app {
+    width: 72px;
+  }
+  .lp-app-label {
+    width: 72px;
+  }
 }
 
 /* ---- Mobile (< 768px) — mobile-style gesture navigation ---- */
@@ -59,7 +83,9 @@
   }
 
   /* ---- Dock: hidden on mobile (swipe gestures replace it) ---- */
-  .os-dock { display: none !important; }
+  .os-dock {
+    display: none !important;
+  }
 
   /* ---- Menu Bar → Mobile Status Bar ---- */
   .os-menubar {
@@ -75,10 +101,18 @@
     gap: 0 !important;
   }
 
-  .os-menu-btn { display: none !important; }
-  .os-menubar-item { display: none !important; }
-  .os-menubar-app { display: none !important; }
-  .os-menu { display: none !important; }
+  .os-menu-btn {
+    display: none !important;
+  }
+  .os-menubar-item {
+    display: none !important;
+  }
+  .os-menubar-app {
+    display: none !important;
+  }
+  .os-menu {
+    display: none !important;
+  }
 
   /* Right: wifi only */
   .os-menubar-right {
@@ -87,8 +121,12 @@
     gap: 0 !important;
   }
 
-  .os-menubar-fs-btn { display: none !important; }
-  .os-menubar-lang-btn { display: none !important; }
+  .os-menubar-fs-btn {
+    display: none !important;
+  }
+  .os-menubar-lang-btn {
+    display: none !important;
+  }
 
   /* Clock: position absolute on the left side (mobile style) */
   .os-menubar-clock {
@@ -106,8 +144,12 @@
     width: 15px !important;
     height: 15px !important;
   }
-  .mb-wifi-badge { display: none !important; }
-  .mb-wifi-tooltip { display: none !important; }
+  .mb-wifi-badge {
+    display: none !important;
+  }
+  .mb-wifi-tooltip {
+    display: none !important;
+  }
 
   /* ---- Status Pill ---- */
   .os-notch {
@@ -133,13 +175,23 @@
     padding-bottom: 30px !important;
   }
 
-  .os-resize { display: none !important; }
+  .os-resize {
+    display: none !important;
+  }
 
   /* Hide titlebar completely on mobile */
-  .os-window-titlebar { display: none !important; }
-  .os-window-dots { display: none !important; }
-  .os-window-title { display: none !important; }
-  .os-window-titlespacer { display: none !important; }
+  .os-window-titlebar {
+    display: none !important;
+  }
+  .os-window-dots {
+    display: none !important;
+  }
+  .os-window-title {
+    display: none !important;
+  }
+  .os-window-titlespacer {
+    display: none !important;
+  }
 
   /* Window animations — mobile style zoom in/out from center */
   .os-window--opening,
@@ -169,10 +221,20 @@
     padding: 16px;
   }
 
-  .os-icon-wrapper { width: auto; }
-  .os-icon-box { width: 48px; height: 48px; }
-  .os-icon-box svg { width: 24px; height: 24px; }
-  .os-icon-label { font-size: var(--os-fs-10); }
+  .os-icon-wrapper {
+    width: auto;
+  }
+  .os-icon-box {
+    width: 48px;
+    height: 48px;
+  }
+  .os-icon-box svg {
+    width: 24px;
+    height: 24px;
+  }
+  .os-icon-label {
+    font-size: var(--os-fs-10);
+  }
 
   /* ---- Lock Screen ---- */
   .lockscreen {
@@ -180,8 +242,12 @@
     inset: 0;
   }
 
-  .lockscreen-time { font-size: 64px; }
-  .lockscreen-date { font-size: var(--os-fs-18); }
+  .lockscreen-time {
+    font-size: 64px;
+  }
+  .lockscreen-date {
+    font-size: var(--os-fs-18);
+  }
 
   /* ---- Sidebars → Horizontal tabs ---- */
   .os-sidebar,
@@ -200,8 +266,12 @@
     flex-shrink: 0;
   }
 
-  .stg-profile { display: none; }
-  .stg-sidebar-spacer { display: none; }
+  .stg-profile {
+    display: none;
+  }
+  .stg-sidebar-spacer {
+    display: none;
+  }
 
   /* Sidebar nav items become horizontal pills */
   .os-nav {
@@ -210,11 +280,17 @@
     padding: 6px 12px;
   }
 
-  .os-nav-icon { display: none; }
+  .os-nav-icon {
+    display: none;
+  }
 
   /* Finder-specific sidebar overrides */
-  .finder-sidebar-label { display: none; }
-  .finder-sidebar-spacer { display: none; }
+  .finder-sidebar-label {
+    display: none;
+  }
+  .finder-sidebar-spacer {
+    display: none;
+  }
   .finder-sidebar-divider {
     width: 1px;
     height: 20px;
@@ -234,7 +310,9 @@
   }
 
   /* Finder detail: hidden by default, shown as full-screen slide-in */
-  .finder-detail { display: none !important; }
+  .finder-detail {
+    display: none !important;
+  }
 
   .finder-detail.finder-detail--mobile {
     display: flex !important;
@@ -263,8 +341,9 @@
     position: fixed;
     inset: var(--os-web-border);
     transform: translateX(calc(100% + var(--os-web-border)));
-    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                visibility 0s 0.3s;
+    transition:
+      transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      visibility 0s 0.3s;
     z-index: 9500;
     display: flex !important;
     opacity: 1 !important;
@@ -294,22 +373,27 @@
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
-
   .lp-panel {
     width: 100%;
     height: 100%;
     border-radius: 0;
   }
 
-  .lp-panel::before { border-radius: 0; }
+  .lp-panel::before {
+    border-radius: 0;
+  }
 
   .lp-grid {
     grid-template-columns: repeat(4, 64px);
   }
 
-  .lp-app { width: 64px; }
-  .lp-app-label { width: 64px; font-size: var(--os-fs-9); }
-
+  .lp-app {
+    width: 64px;
+  }
+  .lp-app-label {
+    width: 64px;
+    font-size: var(--os-fs-9);
+  }
 
   /* Center the grid vertically on mobile */
   .lp-grid {
@@ -365,8 +449,15 @@
   }
 
   @keyframes swipeHintPulse {
-    0%, 100% { opacity: 0.1; transform: translateY(-50%) translateX(0); }
-    50% { opacity: 0.5; transform: translateY(-50%) translateX(-10px); }
+    0%,
+    100% {
+      opacity: 0.1;
+      transform: translateY(-50%) translateX(0);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateY(-50%) translateX(-10px);
+    }
   }
 
   /* ---- Footer ---- */
@@ -378,10 +469,16 @@
   /* ---- Per-window mobile overrides ---- */
 
   /* Finder: touch-friendly rows, hide toolbar buttons */
-  .finder-toolbar-btn { display: none; }
-  .finder-toolbar-spacer { display: none; }
+  .finder-toolbar-btn {
+    display: none;
+  }
+  .finder-toolbar-spacer {
+    display: none;
+  }
 
-  .finder-row { height: 44px; }
+  .finder-row {
+    height: 44px;
+  }
 
   /* Browser: compact URL bar */
   .brw-urlbar {
@@ -389,8 +486,13 @@
     gap: 6px;
   }
 
-  .brw-url-input { height: 32px; }
-  .brw-home-btn { width: 32px; height: 32px; }
+  .brw-url-input {
+    height: 32px;
+  }
+  .brw-home-btn {
+    width: 32px;
+    height: 32px;
+  }
 
   /* About: smaller layout */
   .about-avatar {
@@ -403,14 +505,19 @@
     letter-spacing: 2px;
   }
 
-  .about-body { padding: 20px 16px; gap: 16px; }
+  .about-body {
+    padding: 20px 16px;
+    gap: 16px;
+  }
 
   .about-metrics {
     flex-direction: column;
     gap: 10px;
   }
 
-  .about-bio { font-size: var(--os-fs-12); }
+  .about-bio {
+    font-size: var(--os-fs-12);
+  }
 
   /* Contact: vertical + touch-friendly */
   .contact-body {
@@ -423,13 +530,17 @@
     letter-spacing: 1px;
   }
 
-  .contact-sub { font-size: var(--os-fs-13); }
+  .contact-sub {
+    font-size: var(--os-fs-13);
+  }
 
   .contact-link {
     padding: 12px 16px;
   }
 
-  .contact-link-text { font-size: var(--os-fs-13); }
+  .contact-link-text {
+    font-size: var(--os-fs-13);
+  }
 
   /* AppStore: mobile-optimized */
   .as-app-header {
@@ -439,7 +550,9 @@
     gap: 12px;
   }
 
-  .as-app-info { align-items: center; }
+  .as-app-info {
+    align-items: center;
+  }
 
   .as-grid {
     grid-template-columns: 1fr;
@@ -450,11 +563,18 @@
     height: 125px;
   }
 
-  .as-content { padding: 16px; gap: 16px; }
+  .as-content {
+    padding: 16px;
+    gap: 16px;
+  }
 
   /* AppStore sidebar overrides */
-  .as-sidebar-spacer { display: none; }
-  .as-sidebar-spacer-sm { display: none; }
+  .as-sidebar-spacer {
+    display: none;
+  }
+  .as-sidebar-spacer-sm {
+    display: none;
+  }
 
   .as-search {
     position: sticky;
@@ -464,44 +584,86 @@
   }
 
   /* Settings: adjust panel padding */
-  .stg-panel { padding: 20px 16px; gap: 16px; }
-  .stg-content-title { font-size: var(--os-fs-16); }
+  .stg-panel {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+  .stg-content-title {
+    font-size: var(--os-fs-16);
+  }
 
   /* Settings theme previews smaller */
-  .stg-themes { flex-wrap: wrap; gap: 12px; }
-  .stg-theme-preview { width: 64px; height: 44px; }
+  .stg-themes {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .stg-theme-preview {
+    width: 64px;
+    height: 44px;
+  }
 
   /* Education: smaller padding */
-  .edu-header-block { padding: 20px 16px 0; }
-  .edu-scroll { padding: 16px; }
-  .edu-content-title { font-size: var(--os-fs-16); }
+  .edu-header-block {
+    padding: 20px 16px 0;
+  }
+  .edu-scroll {
+    padding: 16px;
+  }
+  .edu-content-title {
+    font-size: var(--os-fs-16);
+  }
 
   /* Skills: smaller padding */
-  .skills-header-block { padding: 20px 16px 0; }
-  .skills-scroll { padding: 16px; }
-  .skills-content-title { font-size: var(--os-fs-16); }
-
+  .skills-header-block {
+    padding: 20px 16px 0;
+  }
+  .skills-scroll {
+    padding: 16px;
+  }
+  .skills-content-title {
+    font-size: var(--os-fs-16);
+  }
 
   /* Contact window: auto height */
-  .os-window--contact { width: 100% !important; height: 100% !important; }
+  .os-window--contact {
+    width: 100% !important;
+    height: 100% !important;
+  }
 
   /* Education window: auto height */
-  .os-window--education { width: 100% !important; height: 100% !important; }
+  .os-window--education {
+    width: 100% !important;
+    height: 100% !important;
+  }
 
   /* Preview: hide sidebar on mobile, full-width image */
-  .pv-sidebar { display: none !important; }
-  .pv-issuer { display: none; }
+  .pv-sidebar {
+    display: none !important;
+  }
+  .pv-issuer {
+    display: none;
+  }
 
   /* Notes: hide sidebar on mobile, full-width content */
-  .nt-sidebar { display: none !important; }
-  .nt-content { padding: 16px !important; }
+  .nt-sidebar {
+    display: none !important;
+  }
+  .nt-content {
+    padding: 16px !important;
+  }
 
   /* Playground: hide sidebar, full-width code */
-  .pg-sidebar { display: none !important; }
-  .pg-code { font-size: var(--os-fs-11); }
+  .pg-sidebar {
+    display: none !important;
+  }
+  .pg-code {
+    font-size: var(--os-fs-11);
+  }
 
   /* Stickies: single column on mobile */
-  .sk-grid { grid-template-columns: 1fr; }
+  .sk-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---- Mobile back button — hidden by default ---- */
@@ -612,4 +774,3 @@
     display: none !important;
   }
 }
-

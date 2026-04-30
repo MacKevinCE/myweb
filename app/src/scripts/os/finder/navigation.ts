@@ -9,14 +9,20 @@ import {
   setSidebarVisible,
   setDetailManuallyHidden,
 } from './state';
-import { renderDetail, showMobileDetail, hideMobileDetail, clearSelection } from './detail';
+import {
+  renderDetail,
+  showMobileDetail,
+  hideMobileDetail,
+  clearSelection,
+} from './detail';
 
 /* ---- Favoritos tab switching ---- */
 
 export function initFavTabs() {
   const favs = document.querySelectorAll<HTMLElement>('[data-finder-fav]');
   const panels = document.querySelectorAll<HTMLElement>('[data-finder-panel]');
-  const tagGroups = document.querySelectorAll<HTMLElement>('[data-finder-tags]');
+  const tagGroups =
+    document.querySelectorAll<HTMLElement>('[data-finder-tags]');
 
   favs.forEach((fav) => {
     fav.addEventListener('click', () => {
@@ -36,8 +42,12 @@ export function initFavTabs() {
         g.style.display = isActive ? '' : 'none';
         if (isActive) {
           const tagItems = g.querySelectorAll<HTMLElement>('[data-finder-tag]');
-          tagItems.forEach((t) => t.classList.remove('finder-sidebar-item--active'));
-          const allTag = g.querySelector<HTMLElement>('[data-finder-tag="All"]');
+          tagItems.forEach((t) =>
+            t.classList.remove('finder-sidebar-item--active')
+          );
+          const allTag = g.querySelector<HTMLElement>(
+            '[data-finder-tag="All"]'
+          );
           if (allTag) allTag.classList.add('finder-sidebar-item--active');
         }
       });
@@ -45,7 +55,9 @@ export function initFavTabs() {
       showAllRows(key);
       clearSelection(key);
 
-      const titleEl = document.querySelector<HTMLElement>('#finder-titlebar .os-window-title');
+      const titleEl = document.querySelector<HTMLElement>(
+        '#finder-titlebar .os-window-title'
+      );
       const pathEl = document.getElementById('finder-path-text');
       if (titleEl) titleEl.textContent = META[key].title;
       if (pathEl) pathEl.textContent = META[key].path;
@@ -58,7 +70,8 @@ export function initFavTabs() {
 /* ---- Tag filter ---- */
 
 export function initTagFilters() {
-  const tagGroups = document.querySelectorAll<HTMLElement>('[data-finder-tags]');
+  const tagGroups =
+    document.querySelectorAll<HTMLElement>('[data-finder-tags]');
 
   tagGroups.forEach((group) => {
     const section = group.dataset.finderTags!;
@@ -69,7 +82,9 @@ export function initTagFilters() {
         if (item.classList.contains('finder-sidebar-item--active')) return;
         const tag = item.dataset.finderTag!;
 
-        tagItems.forEach((t) => t.classList.remove('finder-sidebar-item--active'));
+        tagItems.forEach((t) =>
+          t.classList.remove('finder-sidebar-item--active')
+        );
         item.classList.add('finder-sidebar-item--active');
 
         filterRows(section, tag);
@@ -82,7 +97,9 @@ export function initTagFilters() {
 }
 
 function filterRows(section: string, tag: string) {
-  const panel = document.querySelector<HTMLElement>(`[data-finder-panel="${section}"]`);
+  const panel = document.querySelector<HTMLElement>(
+    `[data-finder-panel="${section}"]`
+  );
   if (!panel) return;
 
   const rows = panel.querySelectorAll<HTMLElement>('.finder-row');
@@ -91,14 +108,18 @@ function filterRows(section: string, tag: string) {
       row.classList.remove('finder-row--hidden');
     } else {
       const rowTags = (row.dataset.rowTags || '').split(',');
-      const match = rowTags.some((t) => t.trim().toLowerCase().includes(tag.toLowerCase()));
+      const match = rowTags.some((t) =>
+        t.trim().toLowerCase().includes(tag.toLowerCase())
+      );
       row.classList.toggle('finder-row--hidden', !match);
     }
   });
 }
 
 export function showAllRows(section: string) {
-  const panel = document.querySelector<HTMLElement>(`[data-finder-panel="${section}"]`);
+  const panel = document.querySelector<HTMLElement>(
+    `[data-finder-panel="${section}"]`
+  );
   if (!panel) return;
   panel.querySelectorAll<HTMLElement>('.finder-row').forEach((r) => {
     r.classList.remove('finder-row--hidden');
@@ -131,7 +152,9 @@ export function initRowSelection() {
       if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
       e.preventDefault();
 
-      const panel = document.querySelector<HTMLElement>(`[data-finder-panel="${activeSection}"]`);
+      const panel = document.querySelector<HTMLElement>(
+        `[data-finder-panel="${activeSection}"]`
+      );
       if (!panel) return;
 
       // Get visible rows only (not hidden by tag filter)
@@ -141,7 +164,9 @@ export function initRowSelection() {
 
       if (visibleRows.length === 0) return;
 
-      const currentIdx = visibleRows.findIndex((r) => r.classList.contains('finder-row--selected'));
+      const currentIdx = visibleRows.findIndex((r) =>
+        r.classList.contains('finder-row--selected')
+      );
       let nextIdx: number;
 
       if (e.key === 'ArrowDown') {
@@ -160,7 +185,9 @@ function selectRow(panel: HTMLElement, section: string, row: HTMLElement) {
   const rows = panel.querySelectorAll<HTMLElement>('.finder-row');
   rows.forEach((r) => r.classList.remove('finder-row--selected'));
   row.classList.add('finder-row--selected');
-  track('finder-opened', { id: row.dataset.rowName || row.dataset.rowRole || '' });
+  track('finder-opened', {
+    id: row.dataset.rowName || row.dataset.rowRole || '',
+  });
 
   const detail = panel.querySelector<HTMLElement>('.finder-detail');
   if (!detail) return;
@@ -180,17 +207,25 @@ function selectRow(panel: HTMLElement, section: string, row: HTMLElement) {
 /* ---- Footer ---- */
 
 export function updateFooter(section: string) {
-  const panel = document.querySelector<HTMLElement>(`[data-finder-panel="${section}"]`);
+  const panel = document.querySelector<HTMLElement>(
+    `[data-finder-panel="${section}"]`
+  );
   const footerEl = document.getElementById('finder-footer-text');
   if (!panel || !footerEl) return;
 
   const ds = document.getElementById('finder-window')?.dataset;
-  const visible = panel.querySelectorAll('.finder-row:not(.finder-row--hidden)').length;
+  const visible = panel.querySelectorAll(
+    '.finder-row:not(.finder-row--hidden)'
+  ).length;
   const selected = panel.querySelectorAll('.finder-row--selected').length;
 
   if (selected > 0) {
-    const tpl = ds?.finderFooterSelected ?? '{selected} of {visible} selected, 128.5 GB available';
-    footerEl.textContent = tpl.replace('{selected}', String(selected)).replace('{visible}', String(visible));
+    const tpl =
+      ds?.finderFooterSelected ??
+      '{selected} of {visible} selected, 128.5 GB available';
+    footerEl.textContent = tpl
+      .replace('{selected}', String(selected))
+      .replace('{visible}', String(visible));
   } else {
     const tpl = ds?.finderFooterItems ?? '{count} items, 128.5 GB available';
     footerEl.textContent = tpl.replace('{count}', String(visible));
@@ -200,9 +235,15 @@ export function updateFooter(section: string) {
 /* ---- Toolbar buttons ---- */
 
 export function initToolbarButtons() {
-  const sidebarBtn = document.getElementById('finder-toggle-sidebar') as HTMLButtonElement | null;
-  const openBtn = document.getElementById('finder-open-item') as HTMLButtonElement | null;
-  const detailBtn = document.getElementById('finder-toggle-detail') as HTMLButtonElement | null;
+  const sidebarBtn = document.getElementById(
+    'finder-toggle-sidebar'
+  ) as HTMLButtonElement | null;
+  const openBtn = document.getElementById(
+    'finder-open-item'
+  ) as HTMLButtonElement | null;
+  const detailBtn = document.getElementById(
+    'finder-toggle-detail'
+  ) as HTMLButtonElement | null;
   const sidebar = document.querySelector<HTMLElement>('.finder-sidebar');
 
   // Toggle sidebar
@@ -223,7 +264,9 @@ export function initToolbarButtons() {
 
   // Toggle detail panel
   detailBtn?.addEventListener('click', () => {
-    const panel = document.querySelector<HTMLElement>(`[data-finder-panel="${activeSection}"]`);
+    const panel = document.querySelector<HTMLElement>(
+      `[data-finder-panel="${activeSection}"]`
+    );
     if (!panel) return;
     const detail = panel.querySelector<HTMLElement>('.finder-detail');
     if (!detail) return;
@@ -239,18 +282,24 @@ export function initToolbarButtons() {
 }
 
 export function getSelectedRow(): HTMLElement | null {
-  const panel = document.querySelector<HTMLElement>(`[data-finder-panel="${activeSection}"]`);
+  const panel = document.querySelector<HTMLElement>(
+    `[data-finder-panel="${activeSection}"]`
+  );
   if (!panel) return null;
   return panel.querySelector<HTMLElement>('.finder-row--selected');
 }
 
 export function updateToolbarButtons() {
-  const openBtn = document.getElementById('finder-open-item') as HTMLButtonElement | null;
-  const detailBtn = document.getElementById('finder-toggle-detail') as HTMLButtonElement | null;
+  const openBtn = document.getElementById(
+    'finder-open-item'
+  ) as HTMLButtonElement | null;
+  const detailBtn = document.getElementById(
+    'finder-toggle-detail'
+  ) as HTMLButtonElement | null;
 
   const selected = getSelectedRow();
   const hasSelection = !!selected;
-  const hasRepo = !!(selected?.dataset.rowRepo);
+  const hasRepo = !!selected?.dataset.rowRepo;
 
   // Open button: enabled only if selected item has a repo
   if (openBtn) {

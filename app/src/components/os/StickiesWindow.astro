@@ -16,13 +16,28 @@ const sk = content.stickies;
   id="stickies-window"
   style="display: none;"
 >
-  <WindowChrome title={windowTitles[W.STICKIES]} windowId="stickies" titleClass="os-window-title--inter" />
+  <WindowChrome
+    title={windowTitles[W.STICKIES]}
+    windowId="stickies"
+    titleClass="os-window-title--inter"
+  />
 
   <div class="sk-body">
     <!-- Toolbar -->
     <div class="sk-toolbar">
       <button class="sk-add-btn" id="sk-add" title={sk.newNote}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><path d="M12 5v14"></path><path d="M5 12h14"></path></svg
+        >
         <span>{sk.newNote}</span>
       </button>
     </div>

@@ -17,7 +17,11 @@ export function initContextMenu() {
   // Load i18n
   const i18nEl = getEl('ctx-i18n');
   if (i18nEl) {
-    try { i18n = JSON.parse(i18nEl.textContent || '{}'); } catch { /* ignore */ }
+    try {
+      i18n = JSON.parse(i18nEl.textContent || '{}');
+    } catch {
+      /* ignore */
+    }
   }
 
   // Close on click outside
@@ -104,10 +108,16 @@ function handleContextMenu(e: MouseEvent): boolean {
   }
 
   // 4. Desktop background (wallpaper area, not on any window or UI element)
-  const onDesktop = target.closest('.os-wallpaper') ||
-                     target.closest('.os-desktop-icons') ||
-                     (target.classList.contains('os-desktop'));
-  if (onDesktop && !target.closest('.os-window') && !target.closest('.os-dock') && !target.closest('.os-menubar')) {
+  const onDesktop =
+    target.closest('.os-wallpaper') ||
+    target.closest('.os-desktop-icons') ||
+    target.classList.contains('os-desktop');
+  if (
+    onDesktop &&
+    !target.closest('.os-window') &&
+    !target.closest('.os-dock') &&
+    !target.closest('.os-menubar')
+  ) {
     e.preventDefault();
     handleDesktopContext(e.clientX, e.clientY);
     return true;
@@ -129,8 +139,11 @@ function handleDockContext(x: number, y: number, slot: HTMLElement) {
     items.push({
       label: i18n.showWindow || 'Show Window',
       action: () => {
-        if (win) document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
-      }
+        if (win)
+          document.dispatchEvent(
+            new CustomEvent('open-window', { detail: { el: win } })
+          );
+      },
     });
     items.push({ separator: true, label: '', action: () => {} });
     items.push({
@@ -139,14 +152,17 @@ function handleDockContext(x: number, y: number, slot: HTMLElement) {
         const prefix = windowId.replace('-window', '');
         const closeBtn = document.getElementById(`${prefix}-close`);
         if (closeBtn) closeBtn.click();
-      }
+      },
     });
   } else {
     items.push({
       label: i18n.open || 'Open',
       action: () => {
-        if (win) document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
-      }
+        if (win)
+          document.dispatchEvent(
+            new CustomEvent('open-window', { detail: { el: win } })
+          );
+      },
     });
   }
 
@@ -155,14 +171,19 @@ function handleDockContext(x: number, y: number, slot: HTMLElement) {
 
 function handleDockDividerContext(x: number, y: number) {
   const autoHideToggle = document.getElementById('stg-autohide-toggle');
-  const isHiding = autoHideToggle?.classList.contains('stg-toggle--on') ?? false;
+  const isHiding =
+    autoHideToggle?.classList.contains('stg-toggle--on') ?? false;
 
-  const items: ContextMenuItem[] = [{
-    label: isHiding ? (i18n.turnHidingOff || 'Turn Hiding Off') : (i18n.turnHidingOn || 'Turn Hiding On'),
-    action: () => {
-      if (autoHideToggle) autoHideToggle.click();
-    }
-  }];
+  const items: ContextMenuItem[] = [
+    {
+      label: isHiding
+        ? i18n.turnHidingOff || 'Turn Hiding Off'
+        : i18n.turnHidingOn || 'Turn Hiding On',
+      action: () => {
+        if (autoHideToggle) autoHideToggle.click();
+      },
+    },
+  ];
 
   showMenu(x, y, items);
 }
@@ -171,23 +192,32 @@ function handleDesktopIconContext(x: number, y: number, icon: HTMLElement) {
   const windowId = icon.dataset.openWindow;
   if (!windowId) return;
 
-  const items: ContextMenuItem[] = [{
-    label: i18n.open || 'Open',
-    action: () => {
-      const win = document.getElementById(windowId);
-      if (win) document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
-    }
-  }];
+  const items: ContextMenuItem[] = [
+    {
+      label: i18n.open || 'Open',
+      action: () => {
+        const win = document.getElementById(windowId);
+        if (win)
+          document.dispatchEvent(
+            new CustomEvent('open-window', { detail: { el: win } })
+          );
+      },
+    },
+  ];
 
   // If it's a Finder alias (Projects, Experience), add "Show in Finder"
-  const isFinderContent = windowId === 'projects-window' || windowId === 'experience-window';
+  const isFinderContent =
+    windowId === 'projects-window' || windowId === 'experience-window';
   if (isFinderContent) {
     items.push({
       label: i18n.showInFinder || 'Show in Finder',
       action: () => {
         const finderWin = document.getElementById('finder-window');
-        if (finderWin) document.dispatchEvent(new CustomEvent('open-window', { detail: { el: finderWin } }));
-      }
+        if (finderWin)
+          document.dispatchEvent(
+            new CustomEvent('open-window', { detail: { el: finderWin } })
+          );
+      },
     });
   }
 
@@ -201,21 +231,28 @@ function handleDesktopContext(x: number, y: number) {
       action: () => {
         const win = document.getElementById('settings-window');
         if (win) {
-          document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
+          document.dispatchEvent(
+            new CustomEvent('open-window', { detail: { el: win } })
+          );
           // Navigate to wallpaper tab after window opens
           requestAnimationFrame(() => {
-            const wpTab = win.querySelector<HTMLElement>('[data-stg-tab="wallpaper"]');
+            const wpTab = win.querySelector<HTMLElement>(
+              '[data-stg-tab="wallpaper"]'
+            );
             if (wpTab) wpTab.click();
           });
         }
-      }
+      },
     },
     {
       label: i18n.settings || 'Settings',
       action: () => {
         const win = document.getElementById('settings-window');
-        if (win) document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
-      }
+        if (win)
+          document.dispatchEvent(
+            new CustomEvent('open-window', { detail: { el: win } })
+          );
+      },
     },
     {
       label: i18n.keyboardShortcuts || 'Keyboard Shortcuts',
@@ -225,19 +262,24 @@ function handleDesktopContext(x: number, y: number) {
           overlay.style.display = '';
           overlay.classList.add('shortcuts-overlay--visible');
         }
-      }
+      },
     },
     { separator: true, label: '', action: () => {} },
     {
       label: i18n.aboutThisMac || 'About This Mac',
       action: () => {
         const win = document.getElementById('about-window');
-        if (win) document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
-      }
-    }
+        if (win)
+          document.dispatchEvent(
+            new CustomEvent('open-window', { detail: { el: win } })
+          );
+      },
+    },
   ];
 
   showMenu(x, y, items);
 }
 
-export function getContextI18n() { return i18n; }
+export function getContextI18n() {
+  return i18n;
+}

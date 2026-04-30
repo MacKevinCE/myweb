@@ -1,7 +1,13 @@
 import { toggleLaunchpad } from './launchpad';
-import { showAppSwitcher, cycleNext, isAppSwitcherVisible } from './appSwitcher';
+import {
+  showAppSwitcher,
+  cycleNext,
+  isAppSwitcherVisible,
+} from './appSwitcher';
 
-const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.userAgent);
+const isMac =
+  typeof navigator !== 'undefined' &&
+  /Mac|iPhone|iPad/.test(navigator.userAgent);
 
 export function initShortcuts() {
   document.addEventListener('keydown', handleShortcut);
@@ -48,7 +54,13 @@ function handleShortcut(e: KeyboardEvent) {
   if (e.key === '?' || (e.shiftKey && e.key === '/')) {
     // Don't trigger if user is typing in an input/textarea
     const active = document.activeElement;
-    if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || (active as HTMLElement).isContentEditable)) return;
+    if (
+      active &&
+      (active.tagName === 'INPUT' ||
+        active.tagName === 'TEXTAREA' ||
+        (active as HTMLElement).isContentEditable)
+    )
+      return;
 
     e.preventDefault();
     toggleShortcutsOverlay();
@@ -60,7 +72,9 @@ function handleShortcut(e: KeyboardEvent) {
     e.preventDefault();
     const win = document.getElementById('settings-window');
     if (win) {
-      document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
+      document.dispatchEvent(
+        new CustomEvent('open-window', { detail: { el: win } })
+      );
     }
     return;
   }

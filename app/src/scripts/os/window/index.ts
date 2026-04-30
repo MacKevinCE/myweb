@@ -29,7 +29,8 @@ export function initWindowManager() {
 
   // Setup finder tab aliases from windowConfigs
   Object.entries(windowConfigs).forEach(([id, c]) => {
-    if (c?.finderAlias) setupFinderAlias(id, c.finderAlias as 'projects' | 'experience');
+    if (c?.finderAlias)
+      setupFinderAlias(id, c.finderAlias as 'projects' | 'experience');
   });
 
   // Auto-open windows after lock screen unlocks
@@ -65,5 +66,4 @@ export function initWindowManager() {
     // No lock screen — open immediately
     openAutoWindows();
   }
-
 }

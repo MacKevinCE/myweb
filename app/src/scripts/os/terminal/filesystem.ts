@@ -40,7 +40,11 @@ export function buildFS(data: ProfileData): FSNode {
   ];
   for (const p of allProjects) {
     const content = `# ${p.name}\n\n${p.description}\n\nTags: ${p.tags.join(', ')}${p.repo ? `\nRepo: ${p.repo}` : ''}`;
-    projDir.children!.push({ type: 'file', name: `${slugify(p.name)}.md`, content });
+    projDir.children!.push({
+      type: 'file',
+      name: `${slugify(p.name)}.md`,
+      content,
+    });
   }
   root.children!.push(projDir);
 
@@ -63,7 +67,11 @@ export function buildFS(data: ProfileData): FSNode {
   const skillsDir: FSNode = { type: 'dir', name: 'skills', children: [] };
   for (const cat of data.skills.categories) {
     const content = JSON.stringify(cat.items, null, 2);
-    skillsDir.children!.push({ type: 'file', name: `${slugify(cat.title)}.json`, content });
+    skillsDir.children!.push({
+      type: 'file',
+      name: `${slugify(cat.title)}.json`,
+      content,
+    });
   }
   root.children!.push(skillsDir);
 
@@ -91,8 +99,10 @@ export function buildFS(data: ProfileData): FSNode {
 export function resolvePath(path: string): string {
   // Normalize: / and ~ both mean home
   if (path === '/' || path === '~' || path === '') return '~';
-  if (path.startsWith('~/')) return normParts(['~', ...path.slice(2).split('/')]);
-  if (path.startsWith('/')) return normParts(['~', ...path.slice(1).split('/')]);
+  if (path.startsWith('~/'))
+    return normParts(['~', ...path.slice(2).split('/')]);
+  if (path.startsWith('/'))
+    return normParts(['~', ...path.slice(1).split('/')]);
 
   // Relative path
   const base = state.cwd === '~' ? ['~'] : state.cwd.split('/');

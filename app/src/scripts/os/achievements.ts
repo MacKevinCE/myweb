@@ -58,27 +58,63 @@ interface AchievementStore {
 // ---------------------------------------------------------------------------
 
 const ACHIEVEMENTS: AchievementDef[] = [
-  { id: 'explorer',   icon: '🗺️',  event: 'window-opened',    threshold: 10, trackUnique: true },
-  { id: 'hacker',     icon: '💻',   event: 'terminal-command', threshold: 5 },
-  { id: 'curious',    icon: '📖',   event: 'article-read',     threshold: 3,  trackUnique: true },
-  { id: 'artist',     icon: '🎨',   event: 'sticky-created',   threshold: 3 },
-  { id: 'speedster',  icon: '⚡',   event: 'speedtest-run',    threshold: 1 },
-  { id: 'polyglot',   icon: '🌍',   event: 'lang-changed',     threshold: 1 },
-  { id: 'customizer', icon: '⚙️',   event: 'setting-changed',  threshold: 1 },
-  { id: 'dev',        icon: '🧑‍💻', event: 'playground-run',   threshold: 1 },
-  { id: 'networker',  icon: '📬',   event: 'contact-sent',     threshold: 1 },
-  { id: 'archivist',  icon: '🗂️',  event: 'finder-opened',    threshold: 5,  trackUnique: true },
-  { id: 'certified',  icon: '🏅',   event: 'certs-viewed',     threshold: 3, trackUnique: true },
-  { id: 'mover',      icon: '🪟',   event: 'window-moved',     threshold: 3 },
-  { id: 'organizer',  icon: '📐',   event: 'titlebar-dblclick', threshold: 2, trackUnique: true },
-  { id: 'controller', icon: '🔴 🟠 🟢',   event: 'window-button',    threshold: 3, trackUnique: true },
-  { id: 'launcher',   icon: '🚀',   event: 'launchpad-open',   threshold: 2 },
-  { id: 'cinema',     icon: '🎬',   event: 'web-fullscreen',   threshold: 1 },
-  { id: 'menu',       icon: '🖥️',   event: 'os-menu',       threshold: 1 },
-  { id: 'recruiter',  icon: '📄',   event: 'cv-download',      threshold: 1 },
-  { id: 'informed',   icon: '🔔',   event: 'notif-center',     threshold: 1 },
-  { id: 'resident',   icon: '🏠',   event: 'time-spent',       threshold: 1 },
-  { id: 'completist', icon: '🏆',   event: 'all-complete',     threshold: 1 },
+  {
+    id: 'explorer',
+    icon: '🗺️',
+    event: 'window-opened',
+    threshold: 10,
+    trackUnique: true,
+  },
+  { id: 'hacker', icon: '💻', event: 'terminal-command', threshold: 5 },
+  {
+    id: 'curious',
+    icon: '📖',
+    event: 'article-read',
+    threshold: 3,
+    trackUnique: true,
+  },
+  { id: 'artist', icon: '🎨', event: 'sticky-created', threshold: 3 },
+  { id: 'speedster', icon: '⚡', event: 'speedtest-run', threshold: 1 },
+  { id: 'polyglot', icon: '🌍', event: 'lang-changed', threshold: 1 },
+  { id: 'customizer', icon: '⚙️', event: 'setting-changed', threshold: 1 },
+  { id: 'dev', icon: '🧑‍💻', event: 'playground-run', threshold: 1 },
+  { id: 'networker', icon: '📬', event: 'contact-sent', threshold: 1 },
+  {
+    id: 'archivist',
+    icon: '🗂️',
+    event: 'finder-opened',
+    threshold: 5,
+    trackUnique: true,
+  },
+  {
+    id: 'certified',
+    icon: '🏅',
+    event: 'certs-viewed',
+    threshold: 3,
+    trackUnique: true,
+  },
+  { id: 'mover', icon: '🪟', event: 'window-moved', threshold: 3 },
+  {
+    id: 'organizer',
+    icon: '📐',
+    event: 'titlebar-dblclick',
+    threshold: 2,
+    trackUnique: true,
+  },
+  {
+    id: 'controller',
+    icon: '🔴 🟠 🟢',
+    event: 'window-button',
+    threshold: 3,
+    trackUnique: true,
+  },
+  { id: 'launcher', icon: '🚀', event: 'launchpad-open', threshold: 2 },
+  { id: 'cinema', icon: '🎬', event: 'web-fullscreen', threshold: 1 },
+  { id: 'menu', icon: '🖥️', event: 'os-menu', threshold: 1 },
+  { id: 'recruiter', icon: '📄', event: 'cv-download', threshold: 1 },
+  { id: 'informed', icon: '🔔', event: 'notif-center', threshold: 1 },
+  { id: 'resident', icon: '🏠', event: 'time-spent', threshold: 1 },
+  { id: 'completist', icon: '🏆', event: 'all-complete', threshold: 1 },
 ];
 
 // ---------------------------------------------------------------------------
@@ -109,8 +145,11 @@ const uniqueSets = new Map<string, Set<string>>();
 function load(): AchievementStore {
   try {
     const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    if (raw.version === STORE_VERSION && raw.states) return raw as AchievementStore;
-  } catch { /* ignore corrupt data */ }
+    if (raw.version === STORE_VERSION && raw.states)
+      return raw as AchievementStore;
+  } catch {
+    /* ignore corrupt data */
+  }
   return { version: STORE_VERSION, states: {} };
 }
 
@@ -121,7 +160,11 @@ function save() {
       store.states[id].uniqueSet = [...set];
     }
   }
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(store)); } catch { /* ignore */ }
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+  } catch {
+    /* ignore */
+  }
 }
 
 // Fix 1: Lazy init — load from localStorage only on first access
@@ -170,7 +213,10 @@ export function track(event: AchievementEvent, payload?: { id?: string }) {
     if (def.trackUnique) {
       // Fix 4: Use runtime Set for O(1) has/add
       let set = uniqueSets.get(def.id);
-      if (!set) { set = new Set(); uniqueSets.set(def.id, set); }
+      if (!set) {
+        set = new Set();
+        uniqueSets.set(def.id, set);
+      }
       const uid = payload?.id ?? '';
       if (uid && !set.has(uid)) {
         set.add(uid);
@@ -188,7 +234,7 @@ export function track(event: AchievementEvent, payload?: { id?: string }) {
       dirty = true;
       notifyUnlock(def);
       document.dispatchEvent(
-        new CustomEvent('achievement-unlocked', { detail: { id: def.id } }),
+        new CustomEvent('achievement-unlocked', { detail: { id: def.id } })
       );
     }
   }
@@ -199,18 +245,20 @@ export function track(event: AchievementEvent, payload?: { id?: string }) {
   // Check meta-achievement: completist (all others unlocked)
   const completistState = store.states['completist'];
   if (completistState && !completistState.unlocked) {
-    const allOthersUnlocked = ACHIEVEMENTS
-      .filter(a => a.id !== 'completist')
-      .every(a => store.states[a.id]?.unlocked);
+    const allOthersUnlocked = ACHIEVEMENTS.filter(
+      (a) => a.id !== 'completist'
+    ).every((a) => store.states[a.id]?.unlocked);
     if (allOthersUnlocked) {
       completistState.unlocked = true;
       completistState.unlockedAt = new Date().toISOString();
       completistState.progress = 1;
       save();
-      const completistDef = ACHIEVEMENTS.find(a => a.id === 'completist')!;
+      const completistDef = ACHIEVEMENTS.find((a) => a.id === 'completist')!;
       notifyUnlock(completistDef);
       document.dispatchEvent(
-        new CustomEvent('achievement-unlocked', { detail: { id: 'completist' } }),
+        new CustomEvent('achievement-unlocked', {
+          detail: { id: 'completist' },
+        })
       );
     }
   }
@@ -219,7 +267,7 @@ export function track(event: AchievementEvent, payload?: { id?: string }) {
 /** Returns all 21 achievements merged with their current state. */
 export function getAchievements(): Array<AchievementDef & AchievementState> {
   ensureInit();
-  return ACHIEVEMENTS.map(def => ({
+  return ACHIEVEMENTS.map((def) => ({
     ...def,
     ...store.states[def.id],
   }));

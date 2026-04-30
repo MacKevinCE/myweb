@@ -27,11 +27,11 @@ export function makeDraggable(win: HTMLElement, handle: HTMLElement) {
       const state = windowStates.get(win.id);
       if (state) {
         const prevW = state.fullscreen
-          ? (parseFloat(state.preFullWidth) || win.offsetWidth * 0.6)
-          : (parseFloat(state.preZoomWidth) || win.offsetWidth * 0.6);
+          ? parseFloat(state.preFullWidth) || win.offsetWidth * 0.6
+          : parseFloat(state.preZoomWidth) || win.offsetWidth * 0.6;
         const prevH = state.fullscreen
-          ? (parseFloat(state.preFullHeight) || win.offsetHeight * 0.6)
-          : (parseFloat(state.preZoomHeight) || win.offsetHeight * 0.6);
+          ? parseFloat(state.preFullHeight) || win.offsetHeight * 0.6
+          : parseFloat(state.preZoomHeight) || win.offsetHeight * 0.6;
 
         if (state.fullscreen) {
           state.fullscreen = false;
@@ -58,8 +58,14 @@ export function makeDraggable(win: HTMLElement, handle: HTMLElement) {
     const ww = win.offsetWidth;
     const wh = win.offsetHeight;
 
-    const x = Math.max(DESKTOP_PADDING, Math.min(e.clientX - offsetX, dw - ww - DESKTOP_PADDING));
-    const y = Math.max(MENU_BAR_H + DESKTOP_PADDING, Math.min(e.clientY - offsetY, dh - wh - DESKTOP_PADDING));
+    const x = Math.max(
+      DESKTOP_PADDING,
+      Math.min(e.clientX - offsetX, dw - ww - DESKTOP_PADDING)
+    );
+    const y = Math.max(
+      MENU_BAR_H + DESKTOP_PADDING,
+      Math.min(e.clientY - offsetY, dh - wh - DESKTOP_PADDING)
+    );
 
     win.style.left = `${x}px`;
     win.style.top = `${y}px`;

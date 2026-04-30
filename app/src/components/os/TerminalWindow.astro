@@ -57,9 +57,17 @@ const terminalData = {
   </div>
 
   <!-- Profile data for terminal filesystem -->
-  <script type="application/json" id="term-data" set:html={JSON.stringify(terminalData)} />
+  <script
+    type="application/json"
+    id="term-data"
+    set:html={JSON.stringify(terminalData)}
+  />
   <!-- Terminal UI i18n strings -->
-  <script type="application/json" id="term-i18n" set:html={JSON.stringify(content.terminal)} />
+  <script
+    type="application/json"
+    id="term-i18n"
+    set:html={JSON.stringify(content.terminal)}
+  />
 </div>
 
 <style is:global>

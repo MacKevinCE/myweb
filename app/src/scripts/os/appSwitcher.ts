@@ -8,23 +8,25 @@ let selectedIndex = 0;
 let isVisible = false;
 
 /** Lookup: windowId -> { name, gradient, iconSvg } from the central osApps registry */
-const appLookup: Record<string, { name: string; gradient: string; iconSvg: string }> =
-  Object.fromEntries(
-    osApps
-      .filter((a) => a.id !== W.LAUNCHPAD)
-      .map((a) => [
-        a.id,
-        {
-          name: a.name,
-          gradient: a.gradient,
-          iconSvg: a.isText
-            ? ''
-            : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+const appLookup: Record<
+  string,
+  { name: string; gradient: string; iconSvg: string }
+> = Object.fromEntries(
+  osApps
+    .filter((a) => a.id !== W.LAUNCHPAD)
+    .map((a) => [
+      a.id,
+      {
+        name: a.name,
+        gradient: a.gradient,
+        iconSvg: a.isText
+          ? ''
+          : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                  fill="none" stroke="currentColor" stroke-width="1.5"
                  stroke-linecap="round" stroke-linejoin="round">${icons[a.icon] || ''}</svg>`,
-        },
-      ]),
-  );
+      },
+    ])
+);
 
 export function initAppSwitcher() {
   switcherEl = document.getElementById('app-switcher');
@@ -49,7 +51,7 @@ export function showAppSwitcher() {
   });
   openWindows.sort(
     (a, b) =>
-      parseInt(b.style.zIndex || '0', 10) - parseInt(a.style.zIndex || '0', 10),
+      parseInt(b.style.zIndex || '0', 10) - parseInt(a.style.zIndex || '0', 10)
   );
 
   if (openWindows.length === 0) return;
@@ -111,7 +113,9 @@ function confirmSelection() {
   if (!switcherEl || openWindows.length === 0) return;
   const win = openWindows[selectedIndex];
   if (win) {
-    document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
+    document.dispatchEvent(
+      new CustomEvent('open-window', { detail: { el: win } })
+    );
   }
   hideSwitcher();
 }

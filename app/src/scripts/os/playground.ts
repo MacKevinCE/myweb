@@ -19,7 +19,7 @@ let typewriterTimer: number | null = null;
 // Simple syntax highlighter
 function highlightCode(code: string): string {
   const lines = code.split('\n');
-  return lines.map(line => highlightLine(line)).join('\n');
+  return lines.map((line) => highlightLine(line)).join('\n');
 }
 
 function highlightLine(line: string): string {
@@ -47,7 +47,10 @@ function highlightLine(line: string): string {
     }
 
     // Numbers
-    if (/\d/.test(src[i]) && (i === 0 || /[\s(,=:<\[{+\-*/]/.test(src[i-1]))) {
+    if (
+      /\d/.test(src[i]) &&
+      (i === 0 || /[\s(,=:<\[{+\-*/]/.test(src[i - 1]))
+    ) {
       let end = i;
       while (end < src.length && /[\d.]/.test(src[end])) end++;
       result += `<span class="pg-number">${escapeHtml(src.slice(i, end))}</span>`;
@@ -84,20 +87,82 @@ function highlightLine(line: string): string {
 }
 
 const SWIFT_KEYWORDS = new Set([
-  'func', 'var', 'let', 'class', 'struct', 'enum', 'protocol', 'extension',
-  'import', 'return', 'if', 'else', 'guard', 'switch', 'case', 'for', 'in',
-  'while', 'do', 'try', 'catch', 'throw', 'throws', 'async', 'await',
-  'private', 'public', 'internal', 'fileprivate', 'open', 'static', 'final',
-  'override', 'init', 'deinit', 'self', 'super', 'true', 'false', 'nil',
-  'weak', 'unowned', 'lazy', 'where', 'as', 'is', 'typealias', 'associatedtype',
+  'func',
+  'var',
+  'let',
+  'class',
+  'struct',
+  'enum',
+  'protocol',
+  'extension',
+  'import',
+  'return',
+  'if',
+  'else',
+  'guard',
+  'switch',
+  'case',
+  'for',
+  'in',
+  'while',
+  'do',
+  'try',
+  'catch',
+  'throw',
+  'throws',
+  'async',
+  'await',
+  'private',
+  'public',
+  'internal',
+  'fileprivate',
+  'open',
+  'static',
+  'final',
+  'override',
+  'init',
+  'deinit',
+  'self',
+  'super',
+  'true',
+  'false',
+  'nil',
+  'weak',
+  'unowned',
+  'lazy',
+  'where',
+  'as',
+  'is',
+  'typealias',
+  'associatedtype',
 ]);
 
 const SWIFT_TYPES = new Set([
-  'String', 'Int', 'Double', 'Float', 'Bool', 'Array', 'Dictionary', 'Set',
-  'Optional', 'Result', 'Void', 'Any', 'AnyObject', 'Error',
-  'UIViewController', 'UIView', 'URLSession', 'JSONDecoder', 'Data',
-  'URLRequest', 'HTTPURLResponse', 'AnyCancellable', 'Published',
-  'ObservableObject', 'XCTestCase',
+  'String',
+  'Int',
+  'Double',
+  'Float',
+  'Bool',
+  'Array',
+  'Dictionary',
+  'Set',
+  'Optional',
+  'Result',
+  'Void',
+  'Any',
+  'AnyObject',
+  'Error',
+  'UIViewController',
+  'UIView',
+  'URLSession',
+  'JSONDecoder',
+  'Data',
+  'URLRequest',
+  'HTTPURLResponse',
+  'AnyCancellable',
+  'Published',
+  'ObservableObject',
+  'XCTestCase',
 ]);
 
 function showSnippet(index: number) {
@@ -137,7 +202,8 @@ function showSnippet(index: number) {
 
   // Scroll active into view
   const activeItem = document.querySelector('.pg-item--active');
-  if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  if (activeItem)
+    activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
 function runCode() {
@@ -190,13 +256,19 @@ function copyCode() {
 export function initPlayground() {
   const dataEl = getEl('pg-data');
   const i18nEl = getEl('pg-i18n');
-  if (dataEl) try { snippets = JSON.parse(dataEl.textContent || '[]'); } catch {}
-  if (i18nEl) try { i18n = JSON.parse(i18nEl.textContent || '{}'); } catch {}
+  if (dataEl)
+    try {
+      snippets = JSON.parse(dataEl.textContent || '[]');
+    } catch {}
+  if (i18nEl)
+    try {
+      i18n = JSON.parse(i18nEl.textContent || '{}');
+    } catch {}
 
   if (snippets.length > 0) showSnippet(0);
 
   // Sidebar clicks
-  document.querySelectorAll<HTMLElement>('.pg-item').forEach(item => {
+  document.querySelectorAll<HTMLElement>('.pg-item').forEach((item) => {
     item.addEventListener('click', () => {
       const idx = parseInt(item.dataset.pgIndex || '0', 10);
       if (idx === currentIndex) return;

@@ -12,7 +12,13 @@ type Edge = 'n' | 's' | 'e' | 'w' | 'ne' | 'nw' | 'se' | 'sw';
 
 const EDGE_SIZE = 6;
 
-export function makeResizable(win: HTMLElement, minW = MIN_W, minH = MIN_H, maxW?: number, maxH?: number) {
+export function makeResizable(
+  win: HTMLElement,
+  minW = MIN_W,
+  minH = MIN_H,
+  maxW?: number,
+  maxH?: number
+) {
   const edges: Edge[] = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'];
 
   edges.forEach((edge) => {
@@ -24,28 +30,76 @@ export function makeResizable(win: HTMLElement, minW = MIN_W, minH = MIN_H, maxW
     // Position each handle
     switch (edge) {
       case 'n':
-        Object.assign(handle.style, { top: '0', left: `${EDGE_SIZE}px`, right: `${EDGE_SIZE}px`, height: `${EDGE_SIZE}px`, cursor: 'ns-resize' });
+        Object.assign(handle.style, {
+          top: '0',
+          left: `${EDGE_SIZE}px`,
+          right: `${EDGE_SIZE}px`,
+          height: `${EDGE_SIZE}px`,
+          cursor: 'ns-resize',
+        });
         break;
       case 's':
-        Object.assign(handle.style, { bottom: '0', left: `${EDGE_SIZE}px`, right: `${EDGE_SIZE}px`, height: `${EDGE_SIZE}px`, cursor: 'ns-resize' });
+        Object.assign(handle.style, {
+          bottom: '0',
+          left: `${EDGE_SIZE}px`,
+          right: `${EDGE_SIZE}px`,
+          height: `${EDGE_SIZE}px`,
+          cursor: 'ns-resize',
+        });
         break;
       case 'e':
-        Object.assign(handle.style, { top: `${EDGE_SIZE}px`, right: '0', bottom: `${EDGE_SIZE}px`, width: `${EDGE_SIZE}px`, cursor: 'ew-resize' });
+        Object.assign(handle.style, {
+          top: `${EDGE_SIZE}px`,
+          right: '0',
+          bottom: `${EDGE_SIZE}px`,
+          width: `${EDGE_SIZE}px`,
+          cursor: 'ew-resize',
+        });
         break;
       case 'w':
-        Object.assign(handle.style, { top: `${EDGE_SIZE}px`, left: '0', bottom: `${EDGE_SIZE}px`, width: `${EDGE_SIZE}px`, cursor: 'ew-resize' });
+        Object.assign(handle.style, {
+          top: `${EDGE_SIZE}px`,
+          left: '0',
+          bottom: `${EDGE_SIZE}px`,
+          width: `${EDGE_SIZE}px`,
+          cursor: 'ew-resize',
+        });
         break;
       case 'nw':
-        Object.assign(handle.style, { top: '0', left: '0', width: `${EDGE_SIZE}px`, height: `${EDGE_SIZE}px`, cursor: 'nwse-resize' });
+        Object.assign(handle.style, {
+          top: '0',
+          left: '0',
+          width: `${EDGE_SIZE}px`,
+          height: `${EDGE_SIZE}px`,
+          cursor: 'nwse-resize',
+        });
         break;
       case 'ne':
-        Object.assign(handle.style, { top: '0', right: '0', width: `${EDGE_SIZE}px`, height: `${EDGE_SIZE}px`, cursor: 'nesw-resize' });
+        Object.assign(handle.style, {
+          top: '0',
+          right: '0',
+          width: `${EDGE_SIZE}px`,
+          height: `${EDGE_SIZE}px`,
+          cursor: 'nesw-resize',
+        });
         break;
       case 'sw':
-        Object.assign(handle.style, { bottom: '0', left: '0', width: `${EDGE_SIZE}px`, height: `${EDGE_SIZE}px`, cursor: 'nesw-resize' });
+        Object.assign(handle.style, {
+          bottom: '0',
+          left: '0',
+          width: `${EDGE_SIZE}px`,
+          height: `${EDGE_SIZE}px`,
+          cursor: 'nesw-resize',
+        });
         break;
       case 'se':
-        Object.assign(handle.style, { bottom: '0', right: '0', width: `${EDGE_SIZE}px`, height: `${EDGE_SIZE}px`, cursor: 'nwse-resize' });
+        Object.assign(handle.style, {
+          bottom: '0',
+          right: '0',
+          width: `${EDGE_SIZE}px`,
+          height: `${EDGE_SIZE}px`,
+          cursor: 'nwse-resize',
+        });
         break;
     }
 
@@ -119,7 +173,8 @@ export function makeResizable(win: HTMLElement, minW = MIN_W, minH = MIN_H, maxW
           newW = maxW;
         }
         if (maxH && newH > maxH) {
-          if (edge === 'n' || edge === 'ne' || edge === 'nw') newTop = startTop + startH - maxH;
+          if (edge === 'n' || edge === 'ne' || edge === 'nw')
+            newTop = startTop + startH - maxH;
           newH = maxH;
         }
 
@@ -127,8 +182,10 @@ export function makeResizable(win: HTMLElement, minW = MIN_W, minH = MIN_H, maxW
         const { w: _dw, h: _dh } = getDesktopSize();
         newLeft = Math.max(DESKTOP_PADDING, newLeft);
         newTop = Math.max(MENU_BAR_H + DESKTOP_PADDING, newTop);
-        if (newLeft + newW > _dw - DESKTOP_PADDING) newW = _dw - DESKTOP_PADDING - newLeft;
-        if (newTop + newH > _dh - DESKTOP_PADDING) newH = _dh - DESKTOP_PADDING - newTop;
+        if (newLeft + newW > _dw - DESKTOP_PADDING)
+          newW = _dw - DESKTOP_PADDING - newLeft;
+        if (newTop + newH > _dh - DESKTOP_PADDING)
+          newH = _dh - DESKTOP_PADDING - newTop;
 
         win.style.left = `${newLeft}px`;
         win.style.top = `${newTop}px`;

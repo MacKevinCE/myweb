@@ -10,45 +10,40 @@ const { currentLang, selectLabel = '// select language' } = Astro.props;
 const otherLangs = languages.filter((l) => l !== currentLang);
 ---
 
-{otherLangs.length > 0 && (
-<div class="lang-dropdown relative">
-  <button
-    class="lang-toggle inline-flex items-center gap-2 px-3 py-1 border border-[var(--border-primary)] text-[var(--text-muted)] text-xs font-mono hover:border-[var(--green-terminal)] hover:text-[var(--green-terminal)] transition-all duration-200 cursor-pointer bg-transparent"
-    aria-expanded="false"
-    aria-haspopup="true"
-  >
-    <span class="text-[var(--green-terminal)]">&gt;</span>
-    <span>lang [{currentLang}]</span>
-    <span
-      class="text-[var(--text-muted)] transition-transform duration-200 arrow"
-      >▾</span
-    >
-  </button>
+{
+  otherLangs.length > 0 && (
+    <div class="lang-dropdown relative">
+      <button
+        class="lang-toggle inline-flex items-center gap-2 px-3 py-1 border border-[var(--border-primary)] text-[var(--text-muted)] text-xs font-mono hover:border-[var(--green-terminal)] hover:text-[var(--green-terminal)] transition-all duration-200 cursor-pointer bg-transparent"
+        aria-expanded="false"
+        aria-haspopup="true"
+      >
+        <span class="text-[var(--green-terminal)]">&gt;</span>
+        <span>lang [{currentLang}]</span>
+        <span class="text-[var(--text-muted)] transition-transform duration-200 arrow">
+          ▾
+        </span>
+      </button>
 
-  <div
-    class="lang-menu absolute right-0 top-full mt-1 min-w-[160px] border border-[var(--border-primary)] bg-[var(--bg-elevated)] shadow-lg shadow-black/40 opacity-0 invisible translate-y-[-4px] transition-all duration-150 z-50"
-  >
-    <div
-      class="px-3 py-1.5 text-[10px] text-[var(--text-muted)] font-mono border-b border-[var(--border-primary)]"
-    >
-      {selectLabel}
+      <div class="lang-menu absolute right-0 top-full mt-1 min-w-[160px] border border-[var(--border-primary)] bg-[var(--bg-elevated)] shadow-lg shadow-black/40 opacity-0 invisible translate-y-[-4px] transition-all duration-150 z-50">
+        <div class="px-3 py-1.5 text-[10px] text-[var(--text-muted)] font-mono border-b border-[var(--border-primary)]">
+          {selectLabel}
+        </div>
+        {otherLangs.map((lang) => (
+          <a
+            href={`/terminal/${lang}`}
+            data-lang-switch={lang}
+            aria-label={`lang --set ${lang}`}
+            class="flex items-center gap-2 px-3 py-1.5 text-[var(--text-muted)] text-xs font-mono hover:bg-[var(--green-terminal)]/10 hover:text-[var(--green-terminal)] transition-all duration-150"
+          >
+            <span class="text-[var(--green-terminal)]">$</span>
+            <span>lang --set {lang}</span>
+          </a>
+        ))}
+      </div>
     </div>
-    {
-      otherLangs.map((lang) => (
-        <a
-          href={`/terminal/${lang}`}
-          data-lang-switch={lang}
-          aria-label={`lang --set ${lang}`}
-          class="flex items-center gap-2 px-3 py-1.5 text-[var(--text-muted)] text-xs font-mono hover:bg-[var(--green-terminal)]/10 hover:text-[var(--green-terminal)] transition-all duration-150"
-        >
-          <span class="text-[var(--green-terminal)]">$</span>
-          <span>lang --set {lang}</span>
-        </a>
-      ))
-    }
-  </div>
-</div>
-)}
+  )
+}
 
 <style>
   .lang-dropdown.open .lang-menu {
@@ -80,12 +75,16 @@ const otherLangs = languages.filter((l) => l !== currentLang);
   });
 
   // Preserve /terminal/ prefix if present, otherwise navigate to root /{lang}
-  document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]').forEach((a) => {
-    a.addEventListener('click', (e) => {
-      e.preventDefault();
-      const lang = a.dataset.langSwitch;
-      const prefix = window.location.pathname.startsWith('/terminal/') ? '/terminal/' : '/';
-      window.location.href = `${prefix}${lang}`;
+  document
+    .querySelectorAll<HTMLAnchorElement>('[data-lang-switch]')
+    .forEach((a) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const lang = a.dataset.langSwitch;
+        const prefix = window.location.pathname.startsWith('/terminal/')
+          ? '/terminal/'
+          : '/';
+        window.location.href = `${prefix}${lang}`;
+      });
     });
-  });
 </script>

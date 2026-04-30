@@ -62,7 +62,10 @@
   border-radius: var(--os-radius-sm);
   border: 1px solid var(--os-fill-border);
   background: var(--os-fill);
-  transition: opacity 0.3s, filter 0.3s, transform 0.3s;
+  transition:
+    opacity 0.3s,
+    filter 0.3s,
+    transform 0.3s;
   will-change: transform;
   position: relative;
 }
@@ -91,9 +94,19 @@
 }
 
 @keyframes achUnlock {
-  0% { transform: scale(0.9); opacity: 0.5; filter: grayscale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); opacity: 1; filter: grayscale(0); }
+  0% {
+    transform: scale(0.9);
+    opacity: 0.5;
+    filter: grayscale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: grayscale(0);
+  }
 }
 
 /* Icon */
@@ -144,7 +157,7 @@
 .ach-progress-fill {
   height: 100%;
   border-radius: 2px;
-  background: var(--os-accent, #3B82F6);
+  background: var(--os-accent, #3b82f6);
   transition: width 0.4s ease;
 }
 
@@ -181,6 +194,13 @@
 }
 
 /* Scrollbar */
-.ach-grid::-webkit-scrollbar { width: 6px; }
-.ach-grid::-webkit-scrollbar-track { background: transparent; }
-.ach-grid::-webkit-scrollbar-thumb { background: var(--os-fill-border); border-radius: 3px; }
+.ach-grid::-webkit-scrollbar {
+  width: 6px;
+}
+.ach-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.ach-grid::-webkit-scrollbar-thumb {
+  background: var(--os-fill-border);
+  border-radius: 3px;
+}

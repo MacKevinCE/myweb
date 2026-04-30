@@ -10,8 +10,13 @@ interface Props {
 
 const { content } = Astro.props;
 const { about } = content;
-const brand = (content.about?.avatarName ?? '').toLowerCase().replace(/\s+/g, '_');
-const avatarLabel = (about.avatarLabel ?? '> {brand}.profile').replace('{brand}', brand);
+const brand = (content.about?.avatarName ?? '')
+  .toLowerCase()
+  .replace(/\s+/g, '_');
+const avatarLabel = (about.avatarLabel ?? '> {brand}.profile').replace(
+  '{brand}',
+  brand
+);
 ---
 
 <section

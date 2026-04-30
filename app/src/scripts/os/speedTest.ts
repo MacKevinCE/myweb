@@ -83,7 +83,11 @@ function updateLatency(ms: number | undefined) {
   setMetricValue('st-latency', Math.round(ms).toString());
   // Invert: low latency = good = high bar
   const pct =
-    ms <= LAT_GOOD ? 100 : ms >= LAT_MAX ? 5 : ((LAT_MAX - ms) / (LAT_MAX - LAT_GOOD)) * 100;
+    ms <= LAT_GOOD
+      ? 100
+      : ms >= LAT_MAX
+        ? 5
+        : ((LAT_MAX - ms) / (LAT_MAX - LAT_GOOD)) * 100;
   setBarFill('st-latency-bar', pct, getBarColor(pct));
 }
 
@@ -91,14 +95,18 @@ function updateJitter(ms: number | undefined) {
   if (ms === undefined) return;
   setMetricValue('st-jitter', Math.round(ms).toString());
   const pct =
-    ms <= JIT_GOOD ? 100 : ms >= JIT_MAX ? 5 : ((JIT_MAX - ms) / (JIT_MAX - JIT_GOOD)) * 100;
+    ms <= JIT_GOOD
+      ? 100
+      : ms >= JIT_MAX
+        ? 5
+        : ((JIT_MAX - ms) / (JIT_MAX - JIT_GOOD)) * 100;
   setBarFill('st-jitter-bar', pct, getBarColor(pct));
 }
 
 function showQuality(
   scores:
     | Record<string, { classificationName: string; classificationIdx: number }>
-    | undefined,
+    | undefined
 ) {
   const container = getEl('st-quality');
   if (!container || !scores) return;
@@ -135,7 +143,12 @@ function resetUI() {
   ['st-download', 'st-upload', 'st-latency', 'st-jitter'].forEach((id) => {
     setMetricValue(id, '\u2014');
   });
-  ['st-download-bar', 'st-upload-bar', 'st-latency-bar', 'st-jitter-bar'].forEach((id) => {
+  [
+    'st-download-bar',
+    'st-upload-bar',
+    'st-latency-bar',
+    'st-jitter-bar',
+  ].forEach((id) => {
     setBarFill(id, 0);
   });
   const quality = getEl('st-quality');
@@ -145,22 +158,32 @@ function resetUI() {
 /** Read i18n strings from data attributes on the window element. */
 function getI18n() {
   const win = getEl('speed-test-window');
-  if (!win) return { ready: '', testing: '', complete: '', failed: '', btnRun: '', btnRunning: '', btnRetry: '', quality: {} as Record<string, string> };
+  if (!win)
+    return {
+      ready: '',
+      testing: '',
+      complete: '',
+      failed: '',
+      btnRun: '',
+      btnRunning: '',
+      btnRetry: '',
+      quality: {} as Record<string, string>,
+    };
   const d = (win as HTMLElement).dataset;
   return {
-    ready:      d.stReady      || '',
-    testing:    d.stTesting    || '',
-    complete:   d.stComplete   || '',
-    failed:     d.stFailed     || '',
-    btnRun:     d.stBtnRun     || '',
+    ready: d.stReady || '',
+    testing: d.stTesting || '',
+    complete: d.stComplete || '',
+    failed: d.stFailed || '',
+    btnRun: d.stBtnRun || '',
     btnRunning: d.stBtnRunning || '',
-    btnRetry:   d.stBtnRetry   || '',
+    btnRetry: d.stBtnRetry || '',
     quality: {
-      bad:     d.stQBad     || 'Bad',
-      poor:    d.stQPoor    || 'Poor',
+      bad: d.stQBad || 'Bad',
+      poor: d.stQPoor || 'Poor',
       average: d.stQAverage || 'Average',
-      good:    d.stQGood    || 'Good',
-      great:   d.stQGreat   || 'Great',
+      good: d.stQGood || 'Good',
+      great: d.stQGreat || 'Great',
     } as Record<string, string>,
   };
 }
@@ -174,14 +197,20 @@ interface WifiState {
 }
 
 function saveWifiState(ws: WifiState) {
-  try { localStorage.setItem(WIFI_STORAGE_KEY, JSON.stringify(ws)); } catch { /* ignore */ }
+  try {
+    localStorage.setItem(WIFI_STORAGE_KEY, JSON.stringify(ws));
+  } catch {
+    /* ignore */
+  }
 }
 
 function loadWifiState(): WifiState | null {
   try {
     const raw = localStorage.getItem(WIFI_STORAGE_KEY);
     return raw ? JSON.parse(raw) : null;
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -194,22 +223,37 @@ function loadWifiState(): WifiState | null {
 /** Map classificationIdx back to key name for i18n lookup. */
 const IDX_TO_KEY = ['bad', 'poor', 'average', 'good', 'great'];
 
-function updateMenuBarWifi(mode: 'unknown' | 'error' | 'running' | 'quality', qualityIdx?: number) {
+function updateMenuBarWifi(
+  mode: 'unknown' | 'error' | 'running' | 'quality',
+  qualityIdx?: number
+) {
   const badge = getEl('mb-wifi-badge');
   const tooltip = getEl('mb-wifi-tooltip');
   const arcs = document.querySelectorAll<SVGElement>('.mb-wifi-arc');
   const t = getI18n();
 
   if (mode === 'unknown') {
-    arcs.forEach((a) => { a.style.opacity = '0.25'; });
-    if (badge) { badge.style.opacity = '1'; badge.textContent = '?'; }
+    arcs.forEach((a) => {
+      a.style.opacity = '0.25';
+    });
+    if (badge) {
+      badge.style.opacity = '1';
+      badge.textContent = '?';
+    }
     if (tooltip) tooltip.textContent = t.ready || 'Wi-Fi';
   } else if (mode === 'error') {
-    arcs.forEach((a) => { a.style.opacity = '0.25'; });
-    if (badge) { badge.style.opacity = '1'; badge.textContent = '!'; }
+    arcs.forEach((a) => {
+      a.style.opacity = '0.25';
+    });
+    if (badge) {
+      badge.style.opacity = '1';
+      badge.textContent = '!';
+    }
     if (tooltip) tooltip.textContent = t.failed || 'Error';
   } else if (mode === 'running') {
-    arcs.forEach((a) => { a.style.opacity = '0.25'; });
+    arcs.forEach((a) => {
+      a.style.opacity = '0.25';
+    });
     if (badge) badge.style.opacity = '0';
     if (tooltip) tooltip.textContent = t.testing || '...';
   } else if (mode === 'quality' && qualityIdx !== undefined) {
@@ -233,14 +277,22 @@ function setState(newState: TestState) {
   switch (state) {
     case 'idle':
       setStatus(t.ready);
-      if (btn) { btn.textContent = t.btnRun; btn.disabled = false; btn.style.display = ''; }
+      if (btn) {
+        btn.textContent = t.btnRun;
+        btn.disabled = false;
+        btn.style.display = '';
+      }
       if (icon) icon.classList.remove('st-icon--pulse');
       if (quality) quality.style.display = 'none';
       // Don't touch menubar WiFi — keep last known state
       break;
     case 'running':
       setStatus(t.testing);
-      if (btn) { btn.textContent = t.btnRunning; btn.disabled = true; btn.style.display = ''; }
+      if (btn) {
+        btn.textContent = t.btnRunning;
+        btn.disabled = true;
+        btn.style.display = '';
+      }
       if (icon) icon.classList.add('st-icon--pulse');
       if (quality) quality.style.display = 'none';
       updateMenuBarWifi('running');
@@ -253,7 +305,11 @@ function setState(newState: TestState) {
       break;
     case 'error':
       setStatus(t.failed);
-      if (btn) { btn.textContent = t.btnRetry; btn.disabled = false; btn.style.display = ''; }
+      if (btn) {
+        btn.textContent = t.btnRetry;
+        btn.disabled = false;
+        btn.style.display = '';
+      }
       if (icon) icon.classList.remove('st-icon--pulse');
       if (quality) quality.style.display = 'none';
       updateMenuBarWifi('error');
@@ -265,7 +321,11 @@ function setState(newState: TestState) {
 export function resetSpeedTest() {
   // Stop any running engine
   if (engine) {
-    try { engine.pause(); } catch { /* ignore */ }
+    try {
+      engine.pause();
+    } catch {
+      /* ignore */
+    }
     engine = null;
   }
   resetUI();
@@ -297,7 +357,11 @@ async function runTest() {
   // Safety timeout — abort if the test takes too long (e.g. localhost/CORS issues)
   const timeout = setTimeout(() => {
     if (engine && state === 'running') {
-      try { engine.pause(); } catch { /* ignore */ }
+      try {
+        engine.pause();
+      } catch {
+        /* ignore */
+      }
       engine = null;
       setState('error');
     }
@@ -344,7 +408,12 @@ async function runTest() {
     const qualityLabel = qualityEl?.textContent || '';
     const nt = getNotifI18n();
     if (nt.speedTestTitle) {
-      notify(nt.speedTestTitle, (nt.speedTestBody || '').replace('{quality}', qualityLabel), undefined, 'speed-test-window');
+      notify(
+        nt.speedTestTitle,
+        (nt.speedTestBody || '').replace('{quality}', qualityLabel),
+        undefined,
+        'speed-test-window'
+      );
     }
   };
 

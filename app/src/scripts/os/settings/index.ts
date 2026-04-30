@@ -1,10 +1,20 @@
 export type { Settings } from './persist';
-export { settings, loadSettings, saveSettings, reloadSettings, markSettingsReady } from './persist';
+export {
+  settings,
+  loadSettings,
+  saveSettings,
+  reloadSettings,
+  markSettingsReady,
+} from './persist';
 export { applyAppearance } from './appearance';
 export { applyAccentColor } from './accent';
 export { applyWallpaper, updateWallpaperControls } from './wallpaper';
 export { updateMenuBarClock, resetSettings } from './tabs';
-export { applyFontSize, applyReduceMotion, applyHighContrast } from './accessibility';
+export {
+  applyFontSize,
+  applyReduceMotion,
+  applyHighContrast,
+} from './accessibility';
 
 import { getLayoutMode } from '../responsive';
 import { registerReset } from '../window/lifecycle';
@@ -47,9 +57,11 @@ export function initSettingsTabs() {
     const dockNote = document.getElementById('stg-mobile-dock-note');
     if (dockNote) dockNote.style.display = '';
 
-    document.querySelectorAll<HTMLElement>('.stg-info-row--dock-disabled').forEach((row) => {
-      row.classList.add('stg-info-row--disabled');
-    });
+    document
+      .querySelectorAll<HTMLElement>('.stg-info-row--dock-disabled')
+      .forEach((row) => {
+        row.classList.add('stg-info-row--disabled');
+      });
   }
 
   // Wallpaper picker

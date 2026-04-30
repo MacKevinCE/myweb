@@ -38,7 +38,7 @@ describe('notification history', () => {
     notify('B', 'b');
 
     const history = getNotificationHistory();
-    const idToRemove = history.find(n => n.title === 'A')!.id;
+    const idToRemove = history.find((n) => n.title === 'A')!.id;
 
     dismissNotification(idToRemove);
 

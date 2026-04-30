@@ -74,7 +74,9 @@
   overflow-x: auto;
   flex-shrink: 0;
 }
-.brw-bookmarks::-webkit-scrollbar { height: 0; }
+.brw-bookmarks::-webkit-scrollbar {
+  height: 0;
+}
 
 .brw-bookmark {
   display: flex;
@@ -115,13 +117,17 @@
   left: 0;
   height: 100%;
   width: 30%;
-  background: var(--os-accent, #3B82F6);
+  background: var(--os-accent, #3b82f6);
   border-radius: 1px;
   animation: brwLoad 1.5s ease-in-out infinite;
 }
 @keyframes brwLoad {
-  0% { left: -30%; }
-  100% { left: 100%; }
+  0% {
+    left: -30%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 /* Start Page */
@@ -158,7 +164,9 @@
   background: var(--os-fill);
   border-radius: var(--os-radius-md);
   cursor: pointer;
-  transition: background 0.15s, transform 0.15s;
+  transition:
+    background 0.15s,
+    transform 0.15s;
 }
 .brw-tile:hover {
   background: var(--os-fill-strong);
@@ -216,4 +224,6 @@
   text-decoration: none;
 }
 
-.brw-fallback-link:hover { text-decoration: underline; }
+.brw-fallback-link:hover {
+  text-decoration: underline;
+}

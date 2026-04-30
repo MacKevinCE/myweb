@@ -74,7 +74,10 @@ function handleAction(action: string | undefined) {
     case 'download-cv': {
       const lang = document.documentElement.lang || 'en';
       const isThemeRoute = window.location.pathname.startsWith('/os/');
-      window.open(`/cv/${lang}?id=${isThemeRoute ? 'os' : 'default'}`, '_blank');
+      window.open(
+        `/cv/${lang}?id=${isThemeRoute ? 'os' : 'default'}`,
+        '_blank'
+      );
       track('cv-download');
       break;
     }
@@ -90,15 +93,21 @@ function handleAction(action: string | undefined) {
       overlay.style.opacity = '0';
       overlay.style.transition = 'opacity 0.8s ease';
       document.body.appendChild(overlay);
-      requestAnimationFrame(() => { overlay.style.opacity = '1'; });
+      requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+      });
 
       // Click to wake → show lock screen
       overlay.addEventListener('click', () => {
         overlay.style.opacity = '0';
-        overlay.addEventListener('transitionend', () => {
-          overlay.remove();
-          showLockScreen();
-        }, { once: true });
+        overlay.addEventListener(
+          'transitionend',
+          () => {
+            overlay.remove();
+            showLockScreen();
+          },
+          { once: true }
+        );
       });
       break;
     }

@@ -1,4 +1,9 @@
-import { getLayoutMode, shouldStage, hideMobileLaunchpad, updateHomeIndicator } from '../responsive';
+import {
+  getLayoutMode,
+  shouldStage,
+  hideMobileLaunchpad,
+  updateHomeIndicator,
+} from '../responsive';
 import { switchFinderTab } from '../finder';
 import { track } from '../achievements';
 import { isDockAutoHide } from '../dockMagnify';
@@ -41,7 +46,10 @@ function toggleFullscreen(win: HTMLElement) {
   }
 }
 
-function enterFullscreen(win: HTMLElement, state: import('./state').WindowState) {
+function enterFullscreen(
+  win: HTMLElement,
+  state: import('./state').WindowState
+) {
   // Save current geometry
   state.preFullLeft = win.style.left;
   state.preFullTop = win.style.top;
@@ -62,7 +70,8 @@ function enterFullscreen(win: HTMLElement, state: import('./state').WindowState)
     if (dock) dockReserve = dock.offsetHeight + 8; // 8px bottom margin
   }
 
-  win.style.transition = 'left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease';
+  win.style.transition =
+    'left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease';
   win.style.left = `${DESKTOP_PADDING}px`;
   win.style.top = `${MENU_BAR_H + DESKTOP_PADDING}px`;
   win.style.width = `${desktopW - DESKTOP_PADDING * 2}px`;
@@ -71,25 +80,37 @@ function enterFullscreen(win: HTMLElement, state: import('./state').WindowState)
     win.style.borderRadius = '0';
   }
 
-  win.addEventListener('transitionend', () => {
-    win.style.transition = '';
-  }, { once: true });
+  win.addEventListener(
+    'transitionend',
+    () => {
+      win.style.transition = '';
+    },
+    { once: true }
+  );
 }
 
-export function exitFullscreen(win: HTMLElement, state: import('./state').WindowState) {
+export function exitFullscreen(
+  win: HTMLElement,
+  state: import('./state').WindowState
+) {
   state.fullscreen = false;
   win.classList.remove('os-window--fullscreen');
 
-  win.style.transition = 'left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease';
+  win.style.transition =
+    'left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease, border-radius 0.3s ease';
   win.style.left = state.preFullLeft;
   win.style.top = state.preFullTop;
   win.style.width = state.preFullWidth;
   win.style.height = state.preFullHeight;
   win.style.borderRadius = '';
 
-  win.addEventListener('transitionend', () => {
-    win.style.transition = '';
-  }, { once: true });
+  win.addEventListener(
+    'transitionend',
+    () => {
+      win.style.transition = '';
+    },
+    { once: true }
+  );
 }
 
 /* ---- Zoom (expand from center, clamp to desktop) ---- */
@@ -105,7 +126,8 @@ function toggleZoom(win: HTMLElement, max?: [number, number]) {
     return;
   }
 
-  const anim = 'left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease';
+  const anim =
+    'left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease';
 
   if (state.zoomed) {
     // Restore previous size
@@ -115,7 +137,13 @@ function toggleZoom(win: HTMLElement, max?: [number, number]) {
     win.style.top = state.preZoomTop;
     win.style.width = state.preZoomWidth;
     win.style.height = state.preZoomHeight;
-    win.addEventListener('transitionend', () => { win.style.transition = ''; }, { once: true });
+    win.addEventListener(
+      'transitionend',
+      () => {
+        win.style.transition = '';
+      },
+      { once: true }
+    );
   } else {
     // Save current geometry
     const curLeft = win.offsetLeft;
@@ -142,15 +170,27 @@ function toggleZoom(win: HTMLElement, max?: [number, number]) {
     let newTop = Math.round(cy - targetH / 2);
 
     // Clamp to desktop margins
-    newLeft = Math.max(DESKTOP_PADDING, Math.min(newLeft, dsW - targetW - DESKTOP_PADDING));
-    newTop = Math.max(MENU_BAR_H + DESKTOP_PADDING, Math.min(newTop, dsH - targetH - DESKTOP_PADDING));
+    newLeft = Math.max(
+      DESKTOP_PADDING,
+      Math.min(newLeft, dsW - targetW - DESKTOP_PADDING)
+    );
+    newTop = Math.max(
+      MENU_BAR_H + DESKTOP_PADDING,
+      Math.min(newTop, dsH - targetH - DESKTOP_PADDING)
+    );
 
     win.style.transition = anim;
     win.style.left = `${newLeft}px`;
     win.style.top = `${newTop}px`;
     win.style.width = `${targetW}px`;
     win.style.height = `${targetH}px`;
-    win.addEventListener('transitionend', () => { win.style.transition = ''; }, { once: true });
+    win.addEventListener(
+      'transitionend',
+      () => {
+        win.style.transition = '';
+      },
+      { once: true }
+    );
   }
 }
 
@@ -174,7 +214,11 @@ export function openWindow(win: HTMLElement) {
       const other = document.getElementById(id);
       if (other && other.style.display !== 'none') {
         other.style.display = 'none';
-        other.classList.remove('os-window--opening', 'os-window--closing', 'os-window--minimizing');
+        other.classList.remove(
+          'os-window--opening',
+          'os-window--closing',
+          'os-window--minimizing'
+        );
       }
     });
   }
@@ -199,11 +243,17 @@ export function openWindow(win: HTMLElement) {
   const wasMinimized = state.minimized;
   state.minimized = false;
   win.style.display = 'flex';
-  win.classList.remove('os-window--closing', 'os-window--minimizing', 'os-window--restoring');
+  win.classList.remove(
+    'os-window--closing',
+    'os-window--minimizing',
+    'os-window--restoring'
+  );
 
   if (wasMinimized) {
     // Restore from dock: reverse genie animation
-    const dockIcon = document.querySelector<HTMLElement>(`[data-dock-id="${win.id}"]`);
+    const dockIcon = document.querySelector<HTMLElement>(
+      `[data-dock-id="${win.id}"]`
+    );
     const dockRect = dockIcon?.getBoundingClientRect();
     const winRect = win.getBoundingClientRect();
 
@@ -245,7 +295,9 @@ export function openWindow(win: HTMLElement) {
         enterFullscreen(win, state);
         // Disable green dot — can't exit fullscreen
         const prefix = win.id.replace('-window', '');
-        const greenDot = document.getElementById(`${prefix}-fullscreen`) as HTMLButtonElement | null;
+        const greenDot = document.getElementById(
+          `${prefix}-fullscreen`
+        ) as HTMLButtonElement | null;
         if (greenDot) {
           greenDot.disabled = true;
           greenDot.classList.add('os-dot--disabled');
@@ -265,7 +317,9 @@ function closeWindow(win: HTMLElement) {
     // Re-enable green dot if it was disabled by locked fullscreen
     if (state.lockedFullscreen) {
       const prefix = win.id.replace('-window', '');
-      const greenDot = document.getElementById(`${prefix}-fullscreen`) as HTMLButtonElement | null;
+      const greenDot = document.getElementById(
+        `${prefix}-fullscreen`
+      ) as HTMLButtonElement | null;
       if (greenDot) {
         greenDot.disabled = false;
         greenDot.classList.remove('os-dot--disabled');
@@ -287,12 +341,16 @@ function closeWindow(win: HTMLElement) {
       win.style.width = `${def[0]}px`;
       win.style.height = `${def[1]}px`;
       // Reset window to initial state on close (via registry)
-      resetRegistry.get(win.id)?.()
+      resetRegistry.get(win.id)?.();
 
       // Reset scroll position for all windows
-      win.querySelectorAll<HTMLElement>('.os-window-body, [class*="-body"], [class*="-scroll"]').forEach(el => {
-        el.scrollTop = 0;
-      });
+      win
+        .querySelectorAll<HTMLElement>(
+          '.os-window-body, [class*="-body"], [class*="-scroll"]'
+        )
+        .forEach((el) => {
+          el.scrollTop = 0;
+        });
 
       win.style.borderRadius = '';
       dockRemoveDynamic(win.id);
@@ -306,7 +364,10 @@ function closeWindow(win: HTMLElement) {
         const other = document.getElementById(id);
         if (!other || other.style.display === 'none') return;
         const z = parseInt(other.style.zIndex || '0', 10);
-        if (z > maxZ) { maxZ = z; topWin = other; }
+        if (z > maxZ) {
+          maxZ = z;
+          topWin = other;
+        }
       });
       if (topWin) (topWin as HTMLElement).focus();
       else document.body.focus();
@@ -320,7 +381,9 @@ export function minimizeWindow(win: HTMLElement) {
   if (state) state.minimized = true;
 
   // Find the dock icon to animate towards
-  const dockIcon = document.querySelector<HTMLElement>(`[data-dock-id="${win.id}"]`);
+  const dockIcon = document.querySelector<HTMLElement>(
+    `[data-dock-id="${win.id}"]`
+  );
   const dockRect = dockIcon?.getBoundingClientRect();
   const winRect = win.getBoundingClientRect();
 
@@ -397,7 +460,11 @@ export function setupWindow(windowId: string) {
   win.style.height = `${defaultSize[1]}px`;
 
   // Apply origin, clamped to desktop bounds
-  const [clampedLeft, clampedTop] = clampOrigin(windowId, rawOrigin[0], rawOrigin[1]);
+  const [clampedLeft, clampedTop] = clampOrigin(
+    windowId,
+    rawOrigin[0],
+    rawOrigin[1]
+  );
   win.style.left = `${clampedLeft}px`;
   win.style.top = `${clampedTop}px`;
 
@@ -421,17 +488,28 @@ export function setupWindow(windowId: string) {
   });
 
   // Open triggers
-  document.querySelectorAll(`[data-open-window="${windowId}"]`).forEach((el) => {
-    el.addEventListener('click', () => openWindow(win));
-  });
+  document
+    .querySelectorAll(`[data-open-window="${windowId}"]`)
+    .forEach((el) => {
+      el.addEventListener('click', () => openWindow(win));
+    });
 
-  closeBtn.addEventListener('click', () => { closeWindow(win); track('window-button', { id: 'red' }); });
-  minimizeBtn.addEventListener('click', () => { minimizeWindow(win); track('window-button', { id: 'yellow' }); });
+  closeBtn.addEventListener('click', () => {
+    closeWindow(win);
+    track('window-button', { id: 'red' });
+  });
+  minimizeBtn.addEventListener('click', () => {
+    minimizeWindow(win);
+    track('window-button', { id: 'yellow' });
+  });
 
   // Resizable if it has minSize or maxSize
   const resizable = !!(min || max);
   const ds = getDesktopSize();
-  const canFullscreen = !max || max[0] > (ds.w - DESKTOP_PADDING * 2) || max[1] > (ds.h - MENU_BAR_H - DESKTOP_PADDING * 2);
+  const canFullscreen =
+    !max ||
+    max[0] > ds.w - DESKTOP_PADDING * 2 ||
+    max[1] > ds.h - MENU_BAR_H - DESKTOP_PADDING * 2;
 
   if (resizable) {
     if (fullscreenBtn) {

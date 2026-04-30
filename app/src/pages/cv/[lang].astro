@@ -20,436 +20,557 @@ const contact = content.contact?.links;
 
 <!doctype html>
 <html lang={lang}>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CV — {content.about.avatarRole || 'Mac Kevin'}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    /* --- Reset & Base --- */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      font-size: 10pt;
-      line-height: 1.5;
-      color: #1a1a1a;
-      background: #f5f5f5;
-      padding: 20px;
-    }
-
-    .cv-page {
-      max-width: 210mm;
-      margin: 0 auto;
-      background: white;
-      padding: 40px 45px;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-    }
-
-    /* --- Header --- */
-    .cv-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 24px;
-      padding-bottom: 16px;
-      border-bottom: 2px solid #2563eb;
-    }
-
-    .cv-name {
-      font-size: 22pt;
-      font-weight: 700;
-      color: #1a1a1a;
-      letter-spacing: -0.5px;
-    }
-
-    .cv-role {
-      font-size: 11pt;
-      font-weight: 500;
-      color: #2563eb;
-      margin-top: 2px;
-    }
-
-    .cv-contact-info {
-      text-align: right;
-      font-size: 8.5pt;
-      color: #555;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .cv-contact-info a {
-      color: #2563eb;
-      text-decoration: none;
-    }
-
-    /* --- Sections --- */
-    .cv-section {
-      margin-bottom: 18px;
-    }
-
-    .cv-section-title {
-      font-size: 10pt;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: #2563eb;
-      margin-bottom: 8px;
-      padding-bottom: 4px;
-      border-bottom: 1px solid #e5e5e5;
-    }
-
-    /* --- Bio --- */
-    .cv-bio {
-      font-size: 9pt;
-      color: #444;
-      line-height: 1.6;
-    }
-
-    /* --- Experience --- */
-    .cv-job {
-      margin-bottom: 12px;
-    }
-
-    .cv-job-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-
-    .cv-job-company {
-      font-weight: 700;
-      font-size: 10pt;
-    }
-
-    .cv-job-period {
-      font-size: 8.5pt;
-      color: #888;
-      white-space: nowrap;
-    }
-
-    .cv-job-role {
-      font-size: 9pt;
-      color: #2563eb;
-      font-weight: 500;
-    }
-
-    .cv-job-location {
-      font-size: 8pt;
-      color: #999;
-    }
-
-    .cv-job-desc {
-      font-size: 8.5pt;
-      color: #444;
-      margin-top: 3px;
-      line-height: 1.5;
-    }
-
-    .cv-job-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 4px;
-    }
-
-    .cv-tag {
-      font-size: 7pt;
-      padding: 1px 6px;
-      border-radius: 3px;
-      background: #f0f4ff;
-      color: #2563eb;
-      font-weight: 500;
-    }
-
-    /* --- Skills --- */
-    .cv-skills-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px 24px;
-    }
-
-    .cv-skill-category {
-      margin-bottom: 4px;
-    }
-
-    .cv-skill-cat-title {
-      font-weight: 600;
-      font-size: 9pt;
-      margin-bottom: 2px;
-    }
-
-    .cv-skill-items {
-      font-size: 8.5pt;
-      color: #555;
-    }
-
-    /* --- Education --- */
-    .cv-edu-item {
-      margin-bottom: 8px;
-    }
-
-    .cv-edu-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-
-    .cv-edu-title {
-      font-weight: 600;
-      font-size: 9.5pt;
-    }
-
-    .cv-edu-period {
-      font-size: 8.5pt;
-      color: #888;
-    }
-
-    .cv-edu-institution {
-      font-size: 8.5pt;
-      color: #555;
-    }
-
-    /* --- Projects --- */
-    .cv-project {
-      margin-bottom: 6px;
-    }
-
-    .cv-project-name {
-      font-weight: 600;
-      font-size: 9pt;
-    }
-
-    .cv-project-desc {
-      font-size: 8.5pt;
-      color: #555;
-    }
-
-    /* --- Languages --- */
-    .cv-languages {
-      font-size: 9pt;
-      color: #444;
-    }
-
-    /* --- Footer --- */
-    .cv-footer {
-      margin-top: 20px;
-      padding-top: 12px;
-      border-top: 1px solid #e5e5e5;
-      font-size: 7.5pt;
-      color: #aaa;
-      text-align: center;
-    }
-
-    /* --- Print button (hidden when printing) --- */
-    .cv-actions {
-      max-width: 210mm;
-      margin: 0 auto 16px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-
-    .cv-print-btn {
-      padding: 8px 20px;
-      border-radius: 6px;
-      border: none;
-      background: #2563eb;
-      color: white;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .cv-print-btn:hover { opacity: 0.9; }
-
-    .cv-back-btn {
-      padding: 8px 20px;
-      border-radius: 6px;
-      border: 1px solid #ddd;
-      background: white;
-      color: #555;
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    /* --- Print styles --- */
-    @media print {
-      body {
-        background: white;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV — {content.about.avatarRole || 'Mac Kevin'}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* --- Reset & Base --- */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
         padding: 0;
+      }
+
+      body {
+        font-family:
+          'Inter',
+          -apple-system,
+          sans-serif;
         font-size: 10pt;
+        line-height: 1.5;
+        color: #1a1a1a;
+        background: #f5f5f5;
+        padding: 20px;
       }
 
       .cv-page {
-        box-shadow: none;
-        padding: 0;
-        max-width: none;
+        max-width: 210mm;
+        margin: 0 auto;
+        background: white;
+        padding: 40px 45px;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
       }
 
+      /* --- Header --- */
+      .cv-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 2px solid #2563eb;
+      }
+
+      .cv-name {
+        font-size: 22pt;
+        font-weight: 700;
+        color: #1a1a1a;
+        letter-spacing: -0.5px;
+      }
+
+      .cv-role {
+        font-size: 11pt;
+        font-weight: 500;
+        color: #2563eb;
+        margin-top: 2px;
+      }
+
+      .cv-contact-info {
+        text-align: right;
+        font-size: 8.5pt;
+        color: #555;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .cv-contact-info a {
+        color: #2563eb;
+        text-decoration: none;
+      }
+
+      /* --- Sections --- */
+      .cv-section {
+        margin-bottom: 18px;
+      }
+
+      .cv-section-title {
+        font-size: 10pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #2563eb;
+        margin-bottom: 8px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      /* --- Bio --- */
+      .cv-bio {
+        font-size: 9pt;
+        color: #444;
+        line-height: 1.6;
+      }
+
+      /* --- Experience --- */
+      .cv-job {
+        margin-bottom: 12px;
+      }
+
+      .cv-job-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .cv-job-company {
+        font-weight: 700;
+        font-size: 10pt;
+      }
+
+      .cv-job-period {
+        font-size: 8.5pt;
+        color: #888;
+        white-space: nowrap;
+      }
+
+      .cv-job-role {
+        font-size: 9pt;
+        color: #2563eb;
+        font-weight: 500;
+      }
+
+      .cv-job-location {
+        font-size: 8pt;
+        color: #999;
+      }
+
+      .cv-job-desc {
+        font-size: 8.5pt;
+        color: #444;
+        margin-top: 3px;
+        line-height: 1.5;
+      }
+
+      .cv-job-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: 4px;
+      }
+
+      .cv-tag {
+        font-size: 7pt;
+        padding: 1px 6px;
+        border-radius: 3px;
+        background: #f0f4ff;
+        color: #2563eb;
+        font-weight: 500;
+      }
+
+      /* --- Skills --- */
+      .cv-skills-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px 24px;
+      }
+
+      .cv-skill-category {
+        margin-bottom: 4px;
+      }
+
+      .cv-skill-cat-title {
+        font-weight: 600;
+        font-size: 9pt;
+        margin-bottom: 2px;
+      }
+
+      .cv-skill-items {
+        font-size: 8.5pt;
+        color: #555;
+      }
+
+      /* --- Education --- */
+      .cv-edu-item {
+        margin-bottom: 8px;
+      }
+
+      .cv-edu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+
+      .cv-edu-title {
+        font-weight: 600;
+        font-size: 9.5pt;
+      }
+
+      .cv-edu-period {
+        font-size: 8.5pt;
+        color: #888;
+      }
+
+      .cv-edu-institution {
+        font-size: 8.5pt;
+        color: #555;
+      }
+
+      /* --- Projects --- */
+      .cv-project {
+        margin-bottom: 6px;
+      }
+
+      .cv-project-name {
+        font-weight: 600;
+        font-size: 9pt;
+      }
+
+      .cv-project-desc {
+        font-size: 8.5pt;
+        color: #555;
+      }
+
+      /* --- Languages --- */
+      .cv-languages {
+        font-size: 9pt;
+        color: #444;
+      }
+
+      /* --- Footer --- */
+      .cv-footer {
+        margin-top: 20px;
+        padding-top: 12px;
+        border-top: 1px solid #e5e5e5;
+        font-size: 7.5pt;
+        color: #aaa;
+        text-align: center;
+      }
+
+      /* --- Print button (hidden when printing) --- */
       .cv-actions {
-        display: none !important;
+        max-width: 210mm;
+        margin: 0 auto 16px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
       }
 
-      .cv-job { break-inside: avoid; }
-      .cv-edu-item { break-inside: avoid; }
-      .cv-project { break-inside: avoid; }
-      .cv-skill-category { break-inside: avoid; }
-
-      a { color: #2563eb !important; }
-
-      @page {
-        margin: 15mm 12mm;
-        size: A4;
+      .cv-print-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        border: none;
+        background: #2563eb;
+        color: white;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
       }
-    }
-  </style>
-</head>
-<body>
-  <!-- Actions bar (hidden in print) -->
-  <div class="cv-actions">
-    <a class="cv-back-btn" id="cv-back-btn" href={`/${lang}`}>&larr; Back</a>
-    <button class="cv-print-btn" onclick="window.print()">Save as PDF</button>
-  </div>
 
-  <div class="cv-page">
-    <!-- Header -->
-    <header class="cv-header">
-      <div>
-        <h1 class="cv-name">{about.avatarName || 'Mac Kevin'}</h1>
-        <p class="cv-role">{about.role}</p>
-        <p style="font-size: 8.5pt; color: #777; margin-top: 2px;">{about.location}</p>
-      </div>
-      <div class="cv-contact-info">
-        {contact?.email && <a href={contact.email.url}>{contact.email.displayText || contact.email.label}</a>}
-        {contact?.github && <a href={contact.github.url}>{contact.github.displayText || contact.github.label}</a>}
-        {contact?.linkedin && <a href={contact.linkedin.url}>{contact.linkedin.displayText || contact.linkedin.label}</a>}
-      </div>
-    </header>
+      .cv-print-btn:hover {
+        opacity: 0.9;
+      }
 
-    <!-- Bio / Summary -->
-    <section class="cv-section">
-      <h2 class="cv-section-title">{lang === 'es' ? 'Perfil Profesional' : lang === 'pt' ? 'Perfil Profissional' : 'Professional Summary'}</h2>
-      <p class="cv-bio">{about.bio.join(' ')}</p>
-    </section>
+      .cv-back-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        background: white;
+        color: #555;
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+      }
 
-    <!-- Experience -->
-    <section class="cv-section">
-      <h2 class="cv-section-title">{lang === 'es' ? 'Experiencia Profesional' : lang === 'pt' ? 'Experiencia Profissional' : 'Professional Experience'}</h2>
-      {experience.jobs.map((job) => (
-        <div class="cv-job">
-          <div class="cv-job-header">
-            <span class="cv-job-company">{job.company}</span>
-            <span class="cv-job-period">{job.startDate} — {job.endDate}</span>
-          </div>
-          <div class="cv-job-role">{job.role}</div>
-          {job.location && <div class="cv-job-location">{job.location}</div>}
-          <p class="cv-job-desc">{job.description}</p>
-          <div class="cv-job-tags">
-            {job.tags.map((tag) => <span class="cv-tag">{tag}</span>)}
-          </div>
+      /* --- Print styles --- */
+      @media print {
+        body {
+          background: white;
+          padding: 0;
+          font-size: 10pt;
+        }
+
+        .cv-page {
+          box-shadow: none;
+          padding: 0;
+          max-width: none;
+        }
+
+        .cv-actions {
+          display: none !important;
+        }
+
+        .cv-job {
+          break-inside: avoid;
+        }
+        .cv-edu-item {
+          break-inside: avoid;
+        }
+        .cv-project {
+          break-inside: avoid;
+        }
+        .cv-skill-category {
+          break-inside: avoid;
+        }
+
+        a {
+          color: #2563eb !important;
+        }
+
+        @page {
+          margin: 15mm 12mm;
+          size: A4;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Actions bar (hidden in print) -->
+    <div class="cv-actions">
+      <a class="cv-back-btn" id="cv-back-btn" href={`/${lang}`}>&larr; Back</a>
+      <button class="cv-print-btn" onclick="window.print()">Save as PDF</button>
+    </div>
+
+    <div class="cv-page">
+      <!-- Header -->
+      <header class="cv-header">
+        <div>
+          <h1 class="cv-name">{about.avatarName || 'Mac Kevin'}</h1>
+          <p class="cv-role">{about.role}</p>
+          <p style="font-size: 8.5pt; color: #777; margin-top: 2px;">
+            {about.location}
+          </p>
         </div>
-      ))}
-    </section>
-
-    <!-- Skills -->
-    <section class="cv-section">
-      <h2 class="cv-section-title">{lang === 'es' ? 'Habilidades Tecnicas' : lang === 'pt' ? 'Habilidades Tecnicas' : 'Technical Skills'}</h2>
-      <div class="cv-skills-grid">
-        {skills.categories.map((cat) => (
-          <div class="cv-skill-category">
-            <div class="cv-skill-cat-title">{cat.title}</div>
-            <div class="cv-skill-items">{cat.items.map(s => s.name).join(', ')}</div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- Education -->
-    <section class="cv-section">
-      <h2 class="cv-section-title">{lang === 'es' ? 'Educacion' : lang === 'pt' ? 'Educacao' : 'Education'}</h2>
-      {education.degrees.map((deg) => (
-        <div class="cv-edu-item">
-          <div class="cv-edu-header">
-            <span class="cv-edu-title">{deg.title}</span>
-            <span class="cv-edu-period">{deg.period}</span>
-          </div>
-          <div class="cv-edu-institution">{deg.institution}</div>
+        <div class="cv-contact-info">
+          {
+            contact?.email && (
+              <a href={contact.email.url}>
+                {contact.email.displayText || contact.email.label}
+              </a>
+            )
+          }
+          {
+            contact?.github && (
+              <a href={contact.github.url}>
+                {contact.github.displayText || contact.github.label}
+              </a>
+            )
+          }
+          {
+            contact?.linkedin && (
+              <a href={contact.linkedin.url}>
+                {contact.linkedin.displayText || contact.linkedin.label}
+              </a>
+            )
+          }
         </div>
-      ))}
-    </section>
+      </header>
 
-    <!-- Certifications -->
-    {education.certifications && education.certifications.length > 0 && (
+      <!-- Bio / Summary -->
       <section class="cv-section">
-        <h2 class="cv-section-title">{lang === 'es' ? 'Certificaciones' : lang === 'pt' ? 'Certificacoes' : 'Certifications'}</h2>
-        {education.certifications.map((cert) => (
-          <div class="cv-edu-item">
-            <div class="cv-edu-header">
-              <span class="cv-edu-title">{cert.name}</span>
-              <span class="cv-edu-period">{cert.year}</span>
-            </div>
-            <div class="cv-edu-institution">{cert.issuer}</div>
-          </div>
-        ))}
+        <h2 class="cv-section-title">
+          {
+            lang === 'es'
+              ? 'Perfil Profesional'
+              : lang === 'pt'
+                ? 'Perfil Profissional'
+                : 'Professional Summary'
+          }
+        </h2>
+        <p class="cv-bio">{about.bio.join(' ')}</p>
       </section>
-    )}
 
-    <!-- Key Projects -->
-    <section class="cv-section">
-      <h2 class="cv-section-title">{lang === 'es' ? 'Proyectos Destacados' : lang === 'pt' ? 'Projetos Destacados' : 'Key Projects'}</h2>
-      {[...(projects.featured?.visible ? [projects.featured] : []), ...projects.items.slice(0, 4)].map((proj) => (
-        <div class="cv-project">
-          <span class="cv-project-name">{proj.name}</span> — <span class="cv-project-desc">{proj.description}</span>
+      <!-- Experience -->
+      <section class="cv-section">
+        <h2 class="cv-section-title">
+          {
+            lang === 'es'
+              ? 'Experiencia Profesional'
+              : lang === 'pt'
+                ? 'Experiencia Profissional'
+                : 'Professional Experience'
+          }
+        </h2>
+        {
+          experience.jobs.map((job) => (
+            <div class="cv-job">
+              <div class="cv-job-header">
+                <span class="cv-job-company">{job.company}</span>
+                <span class="cv-job-period">
+                  {job.startDate} — {job.endDate}
+                </span>
+              </div>
+              <div class="cv-job-role">{job.role}</div>
+              {job.location && (
+                <div class="cv-job-location">{job.location}</div>
+              )}
+              <p class="cv-job-desc">{job.description}</p>
+              <div class="cv-job-tags">
+                {job.tags.map((tag) => (
+                  <span class="cv-tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </section>
+
+      <!-- Skills -->
+      <section class="cv-section">
+        <h2 class="cv-section-title">
+          {
+            lang === 'es'
+              ? 'Habilidades Tecnicas'
+              : lang === 'pt'
+                ? 'Habilidades Tecnicas'
+                : 'Technical Skills'
+          }
+        </h2>
+        <div class="cv-skills-grid">
+          {
+            skills.categories.map((cat) => (
+              <div class="cv-skill-category">
+                <div class="cv-skill-cat-title">{cat.title}</div>
+                <div class="cv-skill-items">
+                  {cat.items.map((s) => s.name).join(', ')}
+                </div>
+              </div>
+            ))
+          }
         </div>
-      ))}
-    </section>
+      </section>
 
-    <!-- Languages -->
-    <section class="cv-section">
-      <h2 class="cv-section-title">{lang === 'es' ? 'Idiomas' : lang === 'pt' ? 'Idiomas' : 'Languages'}</h2>
-      <p class="cv-languages">{about.languages.map(l => l.text).join(' · ')}</p>
-    </section>
-  </div>
+      <!-- Education -->
+      <section class="cv-section">
+        <h2 class="cv-section-title">
+          {
+            lang === 'es'
+              ? 'Educacion'
+              : lang === 'pt'
+                ? 'Educacao'
+                : 'Education'
+          }
+        </h2>
+        {
+          education.degrees.map((deg) => (
+            <div class="cv-edu-item">
+              <div class="cv-edu-header">
+                <span class="cv-edu-title">{deg.title}</span>
+                <span class="cv-edu-period">{deg.period}</span>
+              </div>
+              <div class="cv-edu-institution">{deg.institution}</div>
+            </div>
+          ))
+        }
+      </section>
 
-  <script is:inline>
-    (function() {
-      var lang = document.documentElement.lang || 'en';
-
-      // Origin routes — id → path template ({lang} replaced at runtime)
-      var origins = [
-        { id: 'default', path: '/{lang}' },
-        { id: 'os', path: '/os/{lang}' },
-        { id: 'terminal', path: '/terminal/{lang}' },
-        { id: 'liquid-glass', path: '/liquid-glass/{lang}' }
-      ];
-
-      // Read ?id= from URL
-      var params = new URLSearchParams(window.location.search);
-      var originId = params.get('id') || 'default';
-
-      // Find matching origin or fallback to default
-      var origin = origins.find(function(o) { return o.id === originId; }) || origins[0];
-      var backUrl = origin.path.replace('{lang}', lang);
-
-      // Update back button href
-      var backBtn = document.getElementById('cv-back-btn');
-      if (backBtn) backBtn.href = backUrl;
-
-      // Auto-print if opened from portfolio (has ?id= param)
-      if (params.has('id')) {
-        window.addEventListener('load', function() {
-          setTimeout(function() { window.print(); }, 500);
-        });
+      <!-- Certifications -->
+      {
+        education.certifications && education.certifications.length > 0 && (
+          <section class="cv-section">
+            <h2 class="cv-section-title">
+              {lang === 'es'
+                ? 'Certificaciones'
+                : lang === 'pt'
+                  ? 'Certificacoes'
+                  : 'Certifications'}
+            </h2>
+            {education.certifications.map((cert) => (
+              <div class="cv-edu-item">
+                <div class="cv-edu-header">
+                  <span class="cv-edu-title">{cert.name}</span>
+                  <span class="cv-edu-period">{cert.year}</span>
+                </div>
+                <div class="cv-edu-institution">{cert.issuer}</div>
+              </div>
+            ))}
+          </section>
+        )
       }
-    })();
-  </script>
-</body>
+
+      <!-- Key Projects -->
+      <section class="cv-section">
+        <h2 class="cv-section-title">
+          {
+            lang === 'es'
+              ? 'Proyectos Destacados'
+              : lang === 'pt'
+                ? 'Projetos Destacados'
+                : 'Key Projects'
+          }
+        </h2>
+        {
+          [
+            ...(projects.featured?.visible ? [projects.featured] : []),
+            ...projects.items.slice(0, 4),
+          ].map((proj) => (
+            <div class="cv-project">
+              <span class="cv-project-name">{proj.name}</span> —{' '}
+              <span class="cv-project-desc">{proj.description}</span>
+            </div>
+          ))
+        }
+      </section>
+
+      <!-- Languages -->
+      <section class="cv-section">
+        <h2 class="cv-section-title">
+          {lang === 'es' ? 'Idiomas' : lang === 'pt' ? 'Idiomas' : 'Languages'}
+        </h2>
+        <p class="cv-languages">
+          {about.languages.map((l) => l.text).join(' · ')}
+        </p>
+      </section>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var lang = document.documentElement.lang || 'en';
+
+        // Origin routes — id → path template ({lang} replaced at runtime)
+        var origins = [
+          { id: 'default', path: '/{lang}' },
+          { id: 'os', path: '/os/{lang}' },
+          { id: 'terminal', path: '/terminal/{lang}' },
+          { id: 'liquid-glass', path: '/liquid-glass/{lang}' },
+        ];
+
+        // Read ?id= from URL
+        var params = new URLSearchParams(window.location.search);
+        var originId = params.get('id') || 'default';
+
+        // Find matching origin or fallback to default
+        var origin =
+          origins.find(function (o) {
+            return o.id === originId;
+          }) || origins[0];
+        var backUrl = origin.path.replace('{lang}', lang);
+
+        // Update back button href
+        var backBtn = document.getElementById('cv-back-btn');
+        if (backBtn) backBtn.href = backUrl;
+
+        // Auto-print if opened from portfolio (has ?id= param)
+        if (params.has('id')) {
+          window.addEventListener('load', function () {
+            setTimeout(function () {
+              window.print();
+            }, 500);
+          });
+        }
+      })();
+    </script>
+  </body>
 </html>

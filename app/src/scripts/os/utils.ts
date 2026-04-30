@@ -13,6 +13,8 @@ export function escapeHtml(s: string): string {
 }
 
 /** Shorthand for document.getElementById with proper typing. */
-export function getEl<T extends HTMLElement = HTMLElement>(id: string): T | null {
+export function getEl<T extends HTMLElement = HTMLElement>(
+  id: string
+): T | null {
   return document.getElementById(id) as T | null;
 }

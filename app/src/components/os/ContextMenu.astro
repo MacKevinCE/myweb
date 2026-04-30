@@ -1,6 +1,8 @@
 ---
 import type { OsContent } from '../../types';
-interface Props { content: OsContent; }
+interface Props {
+  content: OsContent;
+}
 const { content } = Astro.props;
 const cm = content.contextMenu;
 ---

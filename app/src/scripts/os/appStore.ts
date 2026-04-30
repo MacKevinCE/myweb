@@ -25,8 +25,8 @@ interface AsI18n {
 
 /* ---- Gradient / shadow by category ---- */
 const categoryStyles: Record<string, { gradient: string }> = {
-  finance:   { gradient: 'os-gradient-blue' },
-  health:    { gradient: 'os-gradient-green' },
+  finance: { gradient: 'os-gradient-blue' },
+  health: { gradient: 'os-gradient-green' },
   lifestyle: { gradient: 'os-gradient-purple' },
 };
 
@@ -36,12 +36,16 @@ function getGradientClass(category: string): string {
 
 export function resetAppStore() {
   const categoryView = document.getElementById('as-category-view');
-  const detailView   = document.getElementById('as-detail-view');
-  const searchInput  = document.getElementById('as-search-input') as HTMLInputElement | null;
-  const navItems     = document.querySelectorAll<HTMLElement>('[data-as-category].os-nav');
-  const cards        = document.querySelectorAll<HTMLElement>('.as-card');
-  const catTitle     = document.getElementById('as-category-title');
-  const gridEmpty    = document.getElementById('as-grid-empty');
+  const detailView = document.getElementById('as-detail-view');
+  const searchInput = document.getElementById(
+    'as-search-input'
+  ) as HTMLInputElement | null;
+  const navItems = document.querySelectorAll<HTMLElement>(
+    '[data-as-category].os-nav'
+  );
+  const cards = document.querySelectorAll<HTMLElement>('.as-card');
+  const catTitle = document.getElementById('as-category-title');
+  const gridEmpty = document.getElementById('as-grid-empty');
 
   // Clear search
   if (searchInput) searchInput.value = '';
@@ -52,7 +56,9 @@ export function resetAppStore() {
   });
 
   // Show all cards
-  cards.forEach((card) => { card.style.display = ''; });
+  cards.forEach((card) => {
+    card.style.display = '';
+  });
   if (gridEmpty) gridEmpty.style.display = 'none';
 
   // Reset title
@@ -72,26 +78,30 @@ export function resetAppStore() {
 
 export function initAppStore() {
   const categoryView = document.getElementById('as-category-view');
-  const detailView   = document.getElementById('as-detail-view');
-  const grid         = document.getElementById('as-grid');
-  const gridEmpty    = document.getElementById('as-grid-empty');
-  const catTitle     = document.getElementById('as-category-title');
-  const searchInput  = document.getElementById('as-search-input') as HTMLInputElement | null;
-  const backBtn      = document.getElementById('as-back-btn');
-  const shareBtn     = document.getElementById('as-share-btn');
-  const navItems     = document.querySelectorAll<HTMLElement>('[data-as-category].os-nav');
-  const cards        = document.querySelectorAll<HTMLElement>('.as-card');
+  const detailView = document.getElementById('as-detail-view');
+  const grid = document.getElementById('as-grid');
+  const gridEmpty = document.getElementById('as-grid-empty');
+  const catTitle = document.getElementById('as-category-title');
+  const searchInput = document.getElementById(
+    'as-search-input'
+  ) as HTMLInputElement | null;
+  const backBtn = document.getElementById('as-back-btn');
+  const shareBtn = document.getElementById('as-share-btn');
+  const navItems = document.querySelectorAll<HTMLElement>(
+    '[data-as-category].os-nav'
+  );
+  const cards = document.querySelectorAll<HTMLElement>('.as-card');
 
   // Detail elements
-  const detailIcon       = document.getElementById('as-detail-icon');
-  const detailName       = document.getElementById('as-detail-name');
-  const detailDesc       = document.getElementById('as-detail-desc');
-  const detailBtn        = document.getElementById('as-detail-btn');
-  const detailFullDesc   = document.getElementById('as-detail-full-desc');
-  const detailStats      = document.getElementById('as-detail-stats');
-  const detailPreview    = document.getElementById('as-detail-preview');
+  const detailIcon = document.getElementById('as-detail-icon');
+  const detailName = document.getElementById('as-detail-name');
+  const detailDesc = document.getElementById('as-detail-desc');
+  const detailBtn = document.getElementById('as-detail-btn');
+  const detailFullDesc = document.getElementById('as-detail-full-desc');
+  const detailStats = document.getElementById('as-detail-stats');
+  const detailPreview = document.getElementById('as-detail-preview');
   const detailScreenshots = document.getElementById('as-detail-screenshots');
-  const detailTags       = document.getElementById('as-detail-tags');
+  const detailTags = document.getElementById('as-detail-tags');
 
   if (!categoryView || !detailView || !grid) return;
 
@@ -107,9 +117,9 @@ export function initAppStore() {
 
   /* ---- Nav labels for title ---- */
   const navTitles: Record<string, string> = {
-    all:       i18n.navAll || 'All',
-    finance:   i18n.navFinance || 'Finance',
-    health:    i18n.navHealth || 'Health',
+    all: i18n.navAll || 'All',
+    finance: i18n.navFinance || 'Finance',
+    health: i18n.navHealth || 'Health',
     lifestyle: i18n.navLifestyle || 'Lifestyle',
   };
 
@@ -141,10 +151,12 @@ export function initAppStore() {
     let visible = 0;
 
     cards.forEach((card) => {
-      const cat  = card.dataset.asCategory || '';
-      const name = (card.querySelector('.as-card-name')?.textContent || '').toLowerCase();
+      const cat = card.dataset.asCategory || '';
+      const name = (
+        card.querySelector('.as-card-name')?.textContent || ''
+      ).toLowerCase();
 
-      const matchCat    = !activeNav || activeNav === 'all' || cat === activeNav;
+      const matchCat = !activeNav || activeNav === 'all' || cat === activeNav;
       const matchSearch = !query || name.includes(query);
       const show = matchCat && matchSearch;
 
@@ -157,7 +169,8 @@ export function initAppStore() {
 
   function showDetail(index: number) {
     const project = projects[index];
-    if (!project || !detailIcon || !detailName || !detailDesc || !detailBtn) return;
+    if (!project || !detailIcon || !detailName || !detailDesc || !detailBtn)
+      return;
 
     currentProject = project;
 

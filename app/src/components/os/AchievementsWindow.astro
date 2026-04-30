@@ -16,7 +16,11 @@ const ach = content.achievements;
   id="achievements-window"
   style="display: none;"
 >
-  <WindowChrome title={windowTitles[W.ACHIEVEMENTS]} windowId="achievements" titleClass="os-window-title--inter" />
+  <WindowChrome
+    title={windowTitles[W.ACHIEVEMENTS]}
+    windowId="achievements"
+    titleClass="os-window-title--inter"
+  />
 
   <div class="ach-body">
     <!-- Header -->
@@ -30,7 +34,11 @@ const ach = content.achievements;
   </div>
 
   <!-- i18n data -->
-  <script type="application/json" id="ach-i18n" set:html={JSON.stringify(ach)} />
+  <script
+    type="application/json"
+    id="ach-i18n"
+    set:html={JSON.stringify(ach)}
+  />
 </div>
 
 <style is:global>
@@ -47,16 +55,21 @@ const ach = content.achievements;
     try {
       const el = document.getElementById('ach-i18n');
       cachedI18n = el ? JSON.parse(el.textContent || '{}') : {};
-    } catch { cachedI18n = {}; }
+    } catch {
+      cachedI18n = {};
+    }
     return cachedI18n!;
   }
 
   function formatDate(iso: string): string {
     try {
       return new Date(iso).toLocaleDateString(undefined, {
-        month: 'short', day: 'numeric',
+        month: 'short',
+        day: 'numeric',
       });
-    } catch { return iso; }
+    } catch {
+      return iso;
+    }
   }
 
   /* --- 1c. Lightweight counter-only update --- */
@@ -135,8 +148,10 @@ const ach = content.achievements;
       if (isUnlocked && a.unlockedAt) {
         const dateEl = document.createElement('div');
         dateEl.className = 'ach-date';
-        dateEl.textContent = (t.unlockedAt || 'Unlocked: {date}')
-          .replace('{date}', formatDate(a.unlockedAt));
+        dateEl.textContent = (t.unlockedAt || 'Unlocked: {date}').replace(
+          '{date}',
+          formatDate(a.unlockedAt)
+        );
         card.appendChild(dateEl);
       }
 
@@ -167,7 +182,7 @@ const ach = content.achievements;
 
     const grid = document.getElementById('ach-grid');
     const card = grid?.querySelector<HTMLElement>(
-      `.ach-card[data-achievement-id="${id}"]`,
+      `.ach-card[data-achievement-id="${id}"]`
     );
 
     if (card) {
@@ -194,8 +209,10 @@ const ach = content.achievements;
       if (detail.unlockedAt) {
         const dateEl = document.createElement('div');
         dateEl.className = 'ach-date';
-        dateEl.textContent = (t.unlockedAt || 'Unlocked: {date}')
-          .replace('{date}', formatDate(detail.unlockedAt));
+        dateEl.textContent = (t.unlockedAt || 'Unlocked: {date}').replace(
+          '{date}',
+          formatDate(detail.unlockedAt)
+        );
         card.appendChild(dateEl);
       }
 
@@ -203,9 +220,13 @@ const ach = content.achievements;
       updateCounter();
 
       // Clean up animation class when done
-      card.addEventListener('animationend', () => {
-        card.classList.remove('ach-card--just-unlocked');
-      }, { once: true });
+      card.addEventListener(
+        'animationend',
+        () => {
+          card.classList.remove('ach-card--just-unlocked');
+        },
+        { once: true }
+      );
     } else {
       // Fallback: full render if card not found
       renderAchievements();

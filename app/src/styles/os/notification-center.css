@@ -38,8 +38,9 @@
   transform: translateX(calc(100% + 20px));
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .nc-panel--open {
@@ -136,10 +137,11 @@
   border: 1px solid var(--os-fill-border);
   position: relative;
   flex-shrink: 0;
-  transition: opacity 0.25s ease,
-              max-height 0.25s ease,
-              padding 0.25s ease,
-              margin 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    max-height 0.25s ease,
+    padding 0.25s ease,
+    margin 0.25s ease;
   max-height: 200px;
 }
 

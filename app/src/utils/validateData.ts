@@ -13,7 +13,7 @@ export interface ValidationResult {
  */
 export function validateProfileData(
   data: Record<string, unknown>,
-  lang: string,
+  lang: string
 ): ValidationResult {
   const errors: string[] = [];
   const prefix = `[${lang}]`;

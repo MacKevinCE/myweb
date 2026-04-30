@@ -8,7 +8,9 @@ const STORAGE_KEY = 'os-settings';
 let userInteracted = false;
 
 /** Call after all settings init is complete to enable achievement tracking */
-export function markSettingsReady() { userInteracted = true; }
+export function markSettingsReady() {
+  userInteracted = true;
+}
 
 export interface Settings {
   appearance: 'light' | 'dark' | 'auto';
@@ -59,7 +61,10 @@ const VALID_WALLPAPER_MODE = new Set<string>(['loop', 'frame']);
 function sanitize(data: Record<string, unknown>): Partial<Settings> {
   const result: Partial<Settings> = {};
 
-  if (typeof data.appearance === 'string' && VALID_APPEARANCE.has(data.appearance)) {
+  if (
+    typeof data.appearance === 'string' &&
+    VALID_APPEARANCE.has(data.appearance)
+  ) {
     result.appearance = data.appearance as Settings['appearance'];
   }
   if (typeof data.dockSize === 'number' && isFinite(data.dockSize)) {
@@ -70,24 +75,42 @@ function sanitize(data: Record<string, unknown>): Partial<Settings> {
   }
   if (typeof data.autoHide === 'boolean') result.autoHide = data.autoHide;
   if (typeof data.wallpaper === 'string') result.wallpaper = data.wallpaper;
-  if (typeof data.wallpaperName === 'string') result.wallpaperName = data.wallpaperName;
+  if (typeof data.wallpaperName === 'string')
+    result.wallpaperName = data.wallpaperName;
 
-  if (typeof data.wallpaperCategory === 'string' && VALID_WALLPAPER_CATEGORY.has(data.wallpaperCategory)) {
-    result.wallpaperCategory = data.wallpaperCategory as Settings['wallpaperCategory'];
+  if (
+    typeof data.wallpaperCategory === 'string' &&
+    VALID_WALLPAPER_CATEGORY.has(data.wallpaperCategory)
+  ) {
+    result.wallpaperCategory =
+      data.wallpaperCategory as Settings['wallpaperCategory'];
   }
-  if (typeof data.wallpaperMode === 'string' && VALID_WALLPAPER_MODE.has(data.wallpaperMode)) {
+  if (
+    typeof data.wallpaperMode === 'string' &&
+    VALID_WALLPAPER_MODE.has(data.wallpaperMode)
+  ) {
     result.wallpaperMode = data.wallpaperMode as Settings['wallpaperMode'];
   }
-  if (typeof data.accentColor === 'string') result.accentColor = data.accentColor;
+  if (typeof data.accentColor === 'string')
+    result.accentColor = data.accentColor;
   if (typeof data.clock24h === 'boolean') result.clock24h = data.clock24h;
-  if (typeof data.clockSeconds === 'boolean') result.clockSeconds = data.clockSeconds;
-  if (typeof data.clockWeekday === 'boolean') result.clockWeekday = data.clockWeekday;
+  if (typeof data.clockSeconds === 'boolean')
+    result.clockSeconds = data.clockSeconds;
+  if (typeof data.clockWeekday === 'boolean')
+    result.clockWeekday = data.clockWeekday;
   if (typeof data.clockDate === 'boolean') result.clockDate = data.clockDate;
-  if (typeof data.fontSize === 'number' && isFinite(data.fontSize) && data.fontSize >= -1 && data.fontSize <= 2) {
+  if (
+    typeof data.fontSize === 'number' &&
+    isFinite(data.fontSize) &&
+    data.fontSize >= -1 &&
+    data.fontSize <= 2
+  ) {
     result.fontSize = data.fontSize;
   }
-  if (typeof data.reduceMotion === 'boolean') result.reduceMotion = data.reduceMotion;
-  if (typeof data.highContrast === 'boolean') result.highContrast = data.highContrast;
+  if (typeof data.reduceMotion === 'boolean')
+    result.reduceMotion = data.reduceMotion;
+  if (typeof data.highContrast === 'boolean')
+    result.highContrast = data.highContrast;
 
   return result;
 }
@@ -97,14 +120,19 @@ export function loadSettings(): Settings {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed: unknown = JSON.parse(raw);
-      if (typeof parsed !== 'object' || parsed === null || Array.isArray(parsed)) {
+      if (
+        typeof parsed !== 'object' ||
+        parsed === null ||
+        Array.isArray(parsed)
+      ) {
         return { ...DEFAULTS };
       }
       const data = parsed as Record<string, unknown>;
 
       // Migrate old wallpaperType → wallpaperCategory
       if (data.wallpaperType && !data.wallpaperCategory) {
-        data.wallpaperCategory = data.wallpaperType === 'video' ? 'animation' : data.wallpaperType;
+        data.wallpaperCategory =
+          data.wallpaperType === 'video' ? 'animation' : data.wallpaperType;
         delete data.wallpaperType;
       }
       // Migrate old 'video' category → 'animation' (all videos are now muted animations)
@@ -116,12 +144,18 @@ export function loadSettings(): Settings {
 
       return { ...DEFAULTS, ...sanitize(data) };
     }
-  } catch { /* ignore */ }
+  } catch {
+    /* ignore */
+  }
   return { ...DEFAULTS };
 }
 
 export function saveSettings(s: Settings, settingKey?: string) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch { /* ignore */ }
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  } catch {
+    /* ignore */
+  }
   if (userInteracted && settingKey) {
     track('setting-changed', { id: settingKey });
   }

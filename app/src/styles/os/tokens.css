@@ -4,7 +4,7 @@
 
 :root {
   /* Accent */
-  --os-accent: #3B82F6;
+  --os-accent: #3b82f6;
 
   /* Backgrounds */
   --os-bg-desktop: #1a1a2e;
@@ -37,24 +37,24 @@
   --os-orange-to: #ea580c;
 
   /* Extra semantic colors */
-  --os-red-from: #EF4444;
-  --os-red-to: #DC2626;
-  --os-amber-from: #F59E0B;
-  --os-amber-to: #D97706;
+  --os-red-from: #ef4444;
+  --os-red-to: #dc2626;
+  --os-amber-from: #f59e0b;
+  --os-amber-to: #d97706;
 
   /* Settings accent color picker */
-  --os-stg-blue: #3B82F6;
-  --os-stg-purple: #8B5CF6;
-  --os-stg-pink: #EC4899;
-  --os-stg-red: #EF4444;
-  --os-stg-amber: #F59E0B;
-  --os-stg-green: #10B981;
+  --os-stg-blue: #3b82f6;
+  --os-stg-purple: #8b5cf6;
+  --os-stg-pink: #ec4899;
+  --os-stg-red: #ef4444;
+  --os-stg-amber: #f59e0b;
+  --os-stg-green: #10b981;
 
   /* Accent palette (cyclic) */
-  --palette-0: #34D399;
-  --palette-1: #22D3EE;
-  --palette-2: #FBBF24;
-  --palette-3: #F472B6;
+  --palette-0: #34d399;
+  --palette-1: #22d3ee;
+  --palette-2: #fbbf24;
+  --palette-3: #f472b6;
   --palette-count: 4;
 
   /* Glassmorphism */
@@ -67,20 +67,21 @@
   --os-glass-tint: #8080ff06;
 
   /* Blur scale */
-  --os-blur-sm: 24px;   /* backdrop overlays, lockscreen */
-  --os-blur-lg: 60px;   /* glass panels, windows, menubar, dock */
+  --os-blur-sm: 24px; /* backdrop overlays, lockscreen */
+  --os-blur-lg: 60px; /* glass panels, windows, menubar, dock */
 
   /* Radius scale */
-  --os-radius-xs: 4px;     /* badges, small chips */
-  --os-radius-sm: 8px;     /* buttons, inputs, sidebar items */
-  --os-radius-md: 12px;    /* nav items, containers, menus */
-  --os-radius-lg: 16px;    /* cards, dock icons */
-  --os-radius-window: 24px;/* windows, dock, panels */
+  --os-radius-xs: 4px; /* badges, small chips */
+  --os-radius-sm: 8px; /* buttons, inputs, sidebar items */
+  --os-radius-md: 12px; /* nav items, containers, menus */
+  --os-radius-lg: 16px; /* cards, dock icons */
+  --os-radius-window: 24px; /* windows, dock, panels */
 
   /* Box shadows */
   --os-shadow-window: 0 12px 50px rgba(0, 0, 0, 0.15);
   --os-shadow-popup: 0 8px 40px rgba(0, 0, 0, 0.3);
-  --os-shadow-dock: 0 8px 40px rgba(0, 0, 0, 0.12), inset 0 0.5px 0 rgba(255, 255, 255, 0.2);
+  --os-shadow-dock:
+    0 8px 40px rgba(0, 0, 0, 0.12), inset 0 0.5px 0 rgba(255, 255, 255, 0.2);
 
   /* Sizing */
   --os-menubar-h: 28px;
@@ -113,7 +114,7 @@
    LIGHT MODE — Token Overrides
    ============================================ */
 
-:root[data-os-mode="light"] {
+:root[data-os-mode='light'] {
   --os-bg-desktop: #f0f0f5;
   --os-bg-glass: rgba(255, 255, 255, 0.85);
 
@@ -133,7 +134,9 @@
   );
   --os-glass-tint: rgba(255, 255, 255, 0.1);
 
-  --os-shadow-window: 0 12px 50px rgba(0, 0, 0, 0.1), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+  --os-shadow-window:
+    0 12px 50px rgba(0, 0, 0, 0.1), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
   --os-shadow-popup: 0 8px 40px rgba(0, 0, 0, 0.15);
-  --os-shadow-dock: 0 8px 40px rgba(0, 0, 0, 0.08), inset 0 0.5px 0 rgba(255, 255, 255, 0.6);
+  --os-shadow-dock:
+    0 8px 40px rgba(0, 0, 0, 0.08), inset 0 0.5px 0 rgba(255, 255, 255, 0.6);
 }

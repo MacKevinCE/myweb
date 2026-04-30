@@ -28,8 +28,15 @@
 }
 
 @keyframes st-pulse {
-  0%, 100% { opacity: 0.9; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.05); }
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
 }
 
 /* Status text */
@@ -102,7 +109,9 @@
   width: 0;
   border-radius: 2px;
   background: var(--os-accent);
-  transition: width 0.4s ease, background 0.4s ease;
+  transition:
+    width 0.4s ease,
+    background 0.4s ease;
 }
 
 /* Quality + retry row */
@@ -155,7 +164,10 @@
   color: var(--os-text-muted);
   cursor: pointer;
   border-radius: var(--os-radius-md);
-  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  transition:
+    color 0.15s,
+    background 0.15s,
+    border-color 0.15s;
   flex-shrink: 0;
 }
 
@@ -176,13 +188,19 @@
   font-size: var(--os-fs-13);
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.1s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.1s ease;
   width: 100%;
   max-width: 200px;
 }
 
-.st-btn:hover { opacity: 0.9; }
-.st-btn:active { transform: scale(0.98); }
+.st-btn:hover {
+  opacity: 0.9;
+}
+.st-btn:active {
+  transform: scale(0.98);
+}
 .st-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;

@@ -24,9 +24,13 @@ export function initAccent() {
 
 export function restoreAccent() {
   applyAccentColor(settings.accentColor);
-  const activeDot = document.querySelector<HTMLElement>(`[data-stg-color="${settings.accentColor}"]`);
+  const activeDot = document.querySelector<HTMLElement>(
+    `[data-stg-color="${settings.accentColor}"]`
+  );
   if (activeDot) {
-    document.querySelectorAll('[data-stg-color]').forEach((d) => d.classList.remove('stg-color-dot--selected'));
+    document
+      .querySelectorAll('[data-stg-color]')
+      .forEach((d) => d.classList.remove('stg-color-dot--selected'));
     activeDot.classList.add('stg-color-dot--selected');
   }
 }

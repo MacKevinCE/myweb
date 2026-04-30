@@ -15,8 +15,12 @@
   border-radius: var(--os-radius-window);
 }
 
-.lp-backdrop--opening { animation: lpFadeIn 0.2s ease-out; }
-.lp-backdrop--closing { animation: lpFadeOut 0.15s ease-in forwards; }
+.lp-backdrop--opening {
+  animation: lpFadeIn 0.2s ease-out;
+}
+.lp-backdrop--closing {
+  animation: lpFadeOut 0.15s ease-in forwards;
+}
 
 .lp-panel {
   display: flex;
@@ -30,7 +34,9 @@
   animation: lpPanelIn 0.25s ease-out;
 }
 
-.lp-backdrop--closing .lp-panel { animation: lpPanelOut 0.15s ease-in forwards; }
+.lp-backdrop--closing .lp-panel {
+  animation: lpPanelOut 0.15s ease-in forwards;
+}
 
 .lp-panel::before {
   content: '';
@@ -39,13 +45,19 @@
   border-radius: var(--os-radius-window);
   padding: 0.5px;
   background: var(--os-glass-border);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
 }
 
-.lp-header { padding: 16px 20px 8px; display: flex; justify-content: center; }
+.lp-header {
+  padding: 16px 20px 8px;
+  display: flex;
+  justify-content: center;
+}
 
 .lp-search {
   display: flex;
@@ -58,7 +70,10 @@
   border: 0.5px solid var(--os-fill-border);
 }
 
-.lp-search-icon { color: var(--os-text-muted); flex-shrink: 0; }
+.lp-search-icon {
+  color: var(--os-text-muted);
+  flex-shrink: 0;
+}
 
 .lp-search-input {
   background: none;
@@ -72,7 +87,9 @@
   caret-color: var(--os-text-muted);
 }
 
-.lp-search-input::placeholder { color: var(--os-text-muted); }
+.lp-search-input::placeholder {
+  color: var(--os-text-muted);
+}
 
 .lp-grid {
   display: grid;
@@ -95,9 +112,15 @@
   transition: transform 0.12s;
 }
 
-.lp-app:hover { transform: scale(1.08); }
-.lp-app:active { transform: scale(0.95); }
-.lp-app--hidden { display: none; }
+.lp-app:hover {
+  transform: scale(1.08);
+}
+.lp-app:active {
+  transform: scale(0.95);
+}
+.lp-app--hidden {
+  display: none;
+}
 
 .lp-app-icon {
   width: 52px;
@@ -116,7 +139,13 @@
   stroke-width: 1.5;
 }
 
-.lp-app-icon-text { font-family: 'Inter', sans-serif; font-size: var(--os-fs-26); font-style: italic; font-weight: 700; color: white; }
+.lp-app-icon-text {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-26);
+  font-style: italic;
+  font-weight: 700;
+  color: white;
+}
 
 .lp-app-label {
   font-family: 'Inter', sans-serif;

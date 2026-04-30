@@ -1,6 +1,8 @@
 ---
 import type { OsContent } from '../../types';
-interface Props { content: OsContent; }
+interface Props {
+  content: OsContent;
+}
 const { content } = Astro.props;
 ---
 
@@ -8,8 +10,13 @@ const { content } = Astro.props;
   <div class="os-dialog">
     <p class="os-dialog-message" id="os-dialog-message"></p>
     <div class="os-dialog-actions">
-      <button class="os-dialog-btn os-dialog-btn--cancel" id="os-dialog-cancel">Cancel</button>
-      <button class="os-dialog-btn os-dialog-btn--confirm" id="os-dialog-confirm">OK</button>
+      <button class="os-dialog-btn os-dialog-btn--cancel" id="os-dialog-cancel"
+        >Cancel</button
+      >
+      <button
+        class="os-dialog-btn os-dialog-btn--confirm"
+        id="os-dialog-confirm">OK</button
+      >
     </div>
   </div>
 </div>

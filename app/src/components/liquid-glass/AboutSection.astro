@@ -30,30 +30,38 @@ const { about } = content;
             class="relative w-[160px] h-[160px] rounded-full overflow-hidden flex items-center justify-center"
             style="background: linear-gradient(135deg, var(--accent-blue-30), var(--accent-violet-20)); border: 2px solid var(--glass-border-medium);"
           >
-            {about.avatarUrl ? (
-              <img
-                src={about.avatarUrl}
-                alt={about.avatar}
-                class="absolute inset-0 w-full h-full object-cover rounded-full"
-                onerror="this.style.display='none';this.nextElementSibling.style.display=''"
-              />
-              <span
-                class="text-[var(--text-primary)] text-[60px] font-light"
-                style="display:none; font-family: var(--font-display);"
-              >{about.avatar}</span>
-            ) : (
-              <span
-                class="text-[var(--text-primary)] text-[60px] font-light"
-                style="font-family: var(--font-display);"
-              >{about.avatar}</span>
-            )}
+            {
+              about.avatarUrl ? (
+                <>
+                  <img
+                    src={about.avatarUrl}
+                    alt={about.avatar}
+                    class="absolute inset-0 w-full h-full object-cover rounded-full"
+                    onerror="this.style.display='none';this.nextElementSibling.style.display=''"
+                  />
+                  <span
+                    class="text-[var(--text-primary)] text-[60px] font-light"
+                    style="display:none; font-family: var(--font-display);"
+                  >
+                    {about.avatar}
+                  </span>
+                </>
+              ) : (
+                <span
+                  class="text-[var(--text-primary)] text-[60px] font-light"
+                  style="font-family: var(--font-display);"
+                >
+                  {about.avatar}
+                </span>
+              )
+            }
           </div>
           <!-- Name & role below circle -->
           <div class="flex flex-col items-center gap-1">
             <span
               class="text-[var(--text-primary)] text-[28px] font-normal"
-              style="font-family: var(--font-display);"
-            >{about.avatarName}</span>
+              style="font-family: var(--font-display);">{about.avatarName}</span
+            >
             <span class="text-[var(--text-secondary)] text-sm">
               {about.avatarRole || about.role}
             </span>

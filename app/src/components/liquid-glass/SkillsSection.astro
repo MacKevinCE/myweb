@@ -12,13 +12,18 @@ const { skills } = content;
 
 /* Lucide SVG paths per category */
 const categoryIcons = [
-  /* code */    '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
-  /* layers */  '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+  /* code */ '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+  /* layers */ '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
   /* git-branch */ '<line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>',
-  /* wrench */  '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  /* wrench */ '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
 ];
 
-const categoryIconColors = [cycleColor(0), cycleColor(1), cycleColor(2), 'var(--text-primary)'];
+const categoryIconColors = [
+  cycleColor(0),
+  cycleColor(1),
+  cycleColor(2),
+  'var(--text-primary)',
+];
 
 /* Map numeric level to label + color */
 const labels = {
@@ -28,9 +33,26 @@ const labels = {
 };
 
 function levelInfo(level: number) {
-  if (level >= 85) return { label: labels.expert,       color: 'var(--accent-blue)', bg: 'var(--accent-blue-12)', border: 'var(--accent-blue-30)' };
-  if (level >= 70) return { label: labels.advanced,     color: 'var(--accent-violet)', bg: 'var(--accent-violet-0a)', border: 'var(--accent-violet-20)' };
-  return                  { label: labels.intermediate, color: 'var(--accent-cyan)', bg: 'var(--accent-cyan-08)', border: 'var(--accent-cyan-18)' };
+  if (level >= 85)
+    return {
+      label: labels.expert,
+      color: 'var(--accent-blue)',
+      bg: 'var(--accent-blue-12)',
+      border: 'var(--accent-blue-30)',
+    };
+  if (level >= 70)
+    return {
+      label: labels.advanced,
+      color: 'var(--accent-violet)',
+      bg: 'var(--accent-violet-0a)',
+      border: 'var(--accent-violet-20)',
+    };
+  return {
+    label: labels.intermediate,
+    color: 'var(--accent-cyan)',
+    bg: 'var(--accent-cyan-08)',
+    border: 'var(--accent-cyan-18)',
+  };
 }
 
 const skillCount = skills.categories.reduce(
@@ -48,10 +70,7 @@ const skillsSubtitle =
       style="padding: var(--section-padding-y) var(--section-padding-x);"
     >
       <div class="flex flex-col items-center gap-[60px]">
-        <SectionLabel
-          label={skills.label}
-          color="var(--accent-violet)"
-        />
+        <SectionLabel label={skills.label} color="var(--accent-violet)" />
         <h2 class="section-title">{skillsSubtitle || skills.title}</h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 w-full">
