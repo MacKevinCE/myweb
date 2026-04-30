@@ -1,0 +1,73 @@
+---
+import TerminalLayout from '../../layouts/TerminalLayout.astro';
+import BootSequence from '../../components/terminal/BootSequence.astro';
+import TerminalShell from '../../components/terminal/TerminalShell.astro';
+import HeroSection from '../../components/terminal/HeroSection.astro';
+import AboutSection from '../../components/terminal/AboutSection.astro';
+import SkillMatrix from '../../components/terminal/SkillMatrix.astro';
+import ExperienceLog from '../../components/terminal/ExperienceLog.astro';
+import ProjectFiles from '../../components/terminal/ProjectFiles.astro';
+import EducationSection from '../../components/terminal/EducationSection.astro';
+import ContactSection from '../../components/terminal/ContactSection.astro';
+import FooterSection from '../../components/terminal/FooterSection.astro';
+
+import { languages } from '../../utils/i18n';
+import { loadContent, loadLangSwitchTexts } from '../../utils/loadProfile';
+import type { TerminalContent } from '../../types';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const content = loadContent(lang!, 'terminal') as TerminalContent;
+const allLangSwitchTexts = loadLangSwitchTexts();
+---
+
+<TerminalLayout
+  title={content.meta.title}
+  description={content.meta.description}
+  lang={lang}
+>
+  <BootSequence content={content} />
+  <TerminalShell content={content} lang={lang!} />
+
+  <main class="pt-10">
+    <HeroSection content={content} />
+    <AboutSection content={content} />
+    <SkillMatrix content={content} />
+    <ExperienceLog content={content} />
+    <ProjectFiles content={content} />
+    <EducationSection content={content} />
+    <ContactSection content={content} />
+    <FooterSection content={content} />
+  </main>
+
+  <script
+    is:inline
+    id="lang-config"
+    type="application/json"
+    set:html={JSON.stringify({
+      lang,
+      languages,
+      textsByLang: allLangSwitchTexts,
+    })}
+  />
+
+  <script>
+    import { initBootSequence } from '../../scripts/terminal/bootSequence';
+    import { initTerminalScroll } from '../../scripts/terminal/terminalScroll';
+    import { initLangSuggest } from '../../scripts/shared/langSuggest';
+
+    initBootSequence();
+
+    setTimeout(() => {
+      initTerminalScroll();
+    }, 300);
+
+    const cfg = JSON.parse(
+      document.getElementById('lang-config')!.textContent!
+    );
+    initLangSuggest(cfg.lang, cfg.languages, cfg.textsByLang);
+  </script>
+</TerminalLayout>

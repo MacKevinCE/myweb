@@ -1,0 +1,29 @@
+---
+import TerminalIcon from './TerminalIcon.astro';
+import type { LiquidGlassContent } from '../../types';
+
+interface Props {
+  content: LiquidGlassContent;
+}
+
+const { content } = Astro.props;
+const { footer } = content;
+const brand = (content.about?.avatarName ?? '').toLowerCase().replace(/\s+/g, '_');
+---
+
+<div class="section-divider"></div>
+<footer style="padding: 24px var(--section-padding-x);">
+  <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+    <div class="flex items-center gap-2">
+      <TerminalIcon class="w-3.5 h-3.5 text-[var(--text-muted)]" />
+      <span class="text-[var(--text-muted)] font-mono text-xs"
+        >{brand}</span
+      >
+      <span class="text-[var(--text-muted)] text-xs">·</span>
+      <span class="text-[var(--text-muted)] text-xs">{footer.tagline}</span>
+    </div>
+    <div class="flex items-center gap-1.5 text-[var(--text-muted)] text-[11px]">
+      <span>{footer.copyright}</span>
+    </div>
+  </div>
+</footer>

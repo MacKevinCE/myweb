@@ -1,0 +1,120 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import { cycleColor } from '../../utils/colors';
+import type { LiquidGlassContent } from '../../types';
+
+interface Props {
+  content: LiquidGlassContent;
+}
+
+const { content } = Astro.props;
+const { about } = content;
+---
+
+<section
+  id="about"
+  class="bg-transparent"
+  style="padding: var(--section-padding-y) var(--section-padding-x);"
+>
+  <div class="flex flex-col items-center gap-[60px]">
+    <SectionLabel label={about.label} color="var(--accent-blue)" />
+
+    <div class="flex flex-col lg:flex-row gap-12 w-full">
+      <!-- Avatar -->
+      <div class="flex flex-col items-center lg:w-[360px] shrink-0">
+        <div
+          class="glass-card-glow flex flex-col items-center justify-center gap-5 w-[320px] h-[380px] p-6"
+        >
+          <!-- Avatar circle with gradient -->
+          <div
+            class="relative w-[160px] h-[160px] rounded-full overflow-hidden flex items-center justify-center"
+            style="background: linear-gradient(135deg, var(--accent-blue-30), var(--accent-violet-20)); border: 2px solid var(--glass-border-medium);"
+          >
+            {about.avatarUrl ? (
+              <img
+                src={about.avatarUrl}
+                alt={about.avatar}
+                class="absolute inset-0 w-full h-full object-cover rounded-full"
+                onerror="this.style.display='none';this.nextElementSibling.style.display=''"
+              />
+              <span
+                class="text-[var(--text-primary)] text-[60px] font-light"
+                style="display:none; font-family: var(--font-display);"
+              >{about.avatar}</span>
+            ) : (
+              <span
+                class="text-[var(--text-primary)] text-[60px] font-light"
+                style="font-family: var(--font-display);"
+              >{about.avatar}</span>
+            )}
+          </div>
+          <!-- Name & role below circle -->
+          <div class="flex flex-col items-center gap-1">
+            <span
+              class="text-[var(--text-primary)] text-[28px] font-normal"
+              style="font-family: var(--font-display);"
+            >{about.avatarName}</span>
+            <span class="text-[var(--text-secondary)] text-sm">
+              {about.avatarRole || about.role}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="flex flex-col gap-8 flex-1">
+        <h3
+          class="glass-reveal text-[var(--text-primary)] text-[40px] leading-[1.2]"
+          style="font-family: var(--font-display);"
+        >
+          {about.bioTitle}
+        </h3>
+
+        {
+          about.bio.map((paragraph) => (
+            <p class="glass-reveal text-[var(--text-secondary)] text-base leading-[1.7]">
+              {paragraph}
+            </p>
+          ))
+        }
+
+        <!-- Metrics -->
+        <div class="glass-reveal flex justify-between w-full">
+          {
+            about.metrics.map((m, i) => (
+              <div
+                class={`flex flex-col gap-1.5 py-5 ${i > 0 ? 'border-l border-[var(--border-glass)] pl-8' : ''}`}
+              >
+                <span
+                  class="text-[40px] font-light"
+                  style={`color: ${cycleColor(i)}; font-family: var(--font-display);`}
+                >
+                  {m.value}
+                </span>
+                <span class="text-[var(--text-secondary)] text-xs">
+                  {m.label}
+                </span>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Language badges -->
+        <div class="glass-reveal flex flex-wrap items-center gap-3">
+          <span class="text-[var(--text-muted)] text-xs">{about.langLabel}</span
+          >
+          {
+            about.languages.map((lang, i) => (
+              <span
+                class="px-3 py-1.5 text-[11px] rounded-full bg-[var(--glass-light)] border border-[var(--border-glass)]"
+                style={`color: ${cycleColor(i)};`}
+              >
+                {lang.text}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

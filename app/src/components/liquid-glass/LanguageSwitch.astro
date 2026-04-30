@@ -1,0 +1,107 @@
+---
+import GlobeIcon from '../shared/icons/GlobeIcon.astro';
+import { languages } from '../../utils/i18n';
+
+interface Props {
+  currentLang: string;
+  selectLabel?: string;
+  langNames?: Record<string, string>;
+}
+
+const {
+  currentLang,
+  selectLabel = 'Language',
+  langNames = {},
+} = Astro.props;
+const otherLangs = languages.filter((l) => l !== currentLang);
+---
+
+{otherLangs.length > 0 && (
+<div class="glass-lang-dropdown relative">
+  <button
+    class="glass-lang-toggle flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[var(--glass-light)] border border-[var(--glass-border-light)] text-[var(--text-secondary)] text-sm font-medium hover:border-[var(--accent-blue)] hover:text-[var(--text-primary)] transition-all duration-200 cursor-pointer backdrop-blur-sm"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    <GlobeIcon class="w-4 h-4 opacity-60" />
+    <span class="uppercase tracking-wider text-xs">{currentLang}</span>
+    <svg
+      class="w-3 h-3 fill-none stroke-current opacity-40 transition-transform duration-200 glass-arrow"
+      stroke-width="2.5"
+      viewBox="0 0 24 24"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  </button>
+
+  <div
+    class="glass-lang-menu absolute right-0 top-full mt-2 min-w-[160px] rounded-xl bg-[var(--bg-surface)] border border-[var(--glass-border-light)] backdrop-blur-2xl shadow-lg shadow-black/50 opacity-0 invisible translate-y-[-8px] transition-all duration-200 z-50 overflow-hidden"
+  >
+    <div class="px-4 py-2.5 text-[10px] uppercase tracking-[2px] text-[var(--text-muted)] border-b border-[var(--glass-border-faint)]">
+      {selectLabel}
+    </div>
+    {
+      otherLangs.map((lang) => (
+        <a
+          href={`/liquid-glass/${lang}`}
+          data-lang-switch={lang}
+          aria-label={`${lang}`}
+          class="flex items-center gap-3 px-4 py-2.5 text-[var(--text-secondary)] text-sm hover:bg-[var(--glass-light)] hover:text-[var(--text-primary)] transition-all duration-150"
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-blue)] opacity-50" />
+          <span class="font-medium">{langNames[lang] || lang}</span>
+          <span class="ml-auto text-[10px] uppercase tracking-wider text-[var(--text-muted)]">
+            {lang}
+          </span>
+        </a>
+      ))
+    }
+  </div>
+</div>
+)}
+
+<style>
+  .glass-lang-dropdown.open .glass-lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .glass-lang-dropdown.open .glass-arrow {
+    transform: rotate(180deg);
+  }
+  .glass-lang-dropdown.open .glass-lang-toggle {
+    border-color: var(--accent-blue);
+    color: var(--text-primary);
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.glass-lang-dropdown').forEach((dropdown) => {
+    const toggle = dropdown.querySelector('.glass-lang-toggle');
+
+    toggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.glass-lang-dropdown.open').forEach((d) => {
+      d.classList.remove('open');
+      d.querySelector('.glass-lang-toggle')?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Preserve /liquid-glass/ prefix if present, otherwise navigate to root /{lang}
+  document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const lang = a.dataset.langSwitch;
+      const prefix = window.location.pathname.startsWith('/liquid-glass/') ? '/liquid-glass/' : '/';
+      window.location.href = `${prefix}${lang}`;
+    });
+  });
+</script>

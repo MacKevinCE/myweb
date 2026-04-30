@@ -1,0 +1,89 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { cycleColor } from '../../utils/colors';
+import type { TerminalContent, SkillCategory } from '../../types';
+
+interface Props {
+  content: TerminalContent;
+}
+
+const { content } = Astro.props;
+const { skills } = content;
+
+// Color per category matching the design
+const categoryColors = [
+  'var(--green-terminal)', // languages
+  'var(--cyan-accent)', // frameworks
+  'var(--amber-warning)', // architecture
+  'var(--magenta-accent)', // tools
+];
+
+const skillCount = skills.categories.reduce(
+  (sum: number, cat: SkillCategory) => sum + cat.items.length,
+  0
+);
+const skillsSubtitle =
+  skills.subtitle?.replace('{count}', String(skillCount)) ?? '';
+
+// Cyclic bar colors per category — each row starts at a different palette offset
+const barColorsFn = (catIdx: number, itemIdx: number): string =>
+  cycleColor(catIdx + itemIdx);
+---
+
+{
+  skills.categories && skills.categories.length > 0 && (
+    <section
+      id="skills"
+      class="bg-[var(--bg-elevated)] font-mono"
+      style="padding: var(--section-padding-y) var(--section-padding-x);"
+    >
+      <div class="flex flex-col gap-12">
+        <SectionHeader command={skills.command} subtitle={skillsSubtitle} />
+
+        {/* Grid */}
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8">
+          {skills.categories.map((cat, catIdx) => (
+            <div class="terminal-line flex flex-col gap-4 p-6 bg-[var(--bg-primary)] border border-[var(--border-primary)]">
+              {/* Header with > icon and folder-style title */}
+              <div class="flex items-center gap-2">
+                <span
+                  class="text-base font-bold"
+                  style={`color: ${categoryColors[catIdx]}`}
+                >
+                  &gt;
+                </span>
+                <h3
+                  class="text-sm font-bold"
+                  style={`color: ${categoryColors[catIdx]}`}
+                >
+                  {cat.title
+                    .toLowerCase()
+                    .replace(/\s+/g, '_')
+                    .replace(/&/g, '+')}
+                  /
+                </h3>
+              </div>
+              <div class="h-px bg-[var(--border-primary)]" />
+              <div class="flex flex-col gap-3">
+                {cat.items.map((item, itemIdx) => (
+                  <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-primary)] text-[13px] min-w-[100px]">
+                      {item.name}
+                    </span>
+                    <div class="flex-1 h-1 bg-[var(--border-primary)] overflow-hidden">
+                      <div
+                        class="skill-bar-fill h-full"
+                        style={`background: ${barColorsFn(catIdx, itemIdx)};`}
+                        data-level={item.level}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

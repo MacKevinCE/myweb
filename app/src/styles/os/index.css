@@ -1,0 +1,20 @@
+@import './tokens.css';
+@import './base.css';
+@import './animations.css';
+@import './menu-bar.css';
+@import './desktop.css';
+@import './window.css';
+@import './dock.css';
+@import './lock-screen.css';
+@import './settings.css';
+@import './finder.css';
+@import './app-store.css';
+@import './launchpad.css';
+@import './browser.css';
+@import './notifications.css';
+@import './utilities.css';
+@import './responsive.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,0 +1,49 @@
+---
+import { windowTitles, W } from '../../data/os-apps';
+import WindowChrome from './shared/WindowChrome.astro';
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+const sk = content.stickies;
+---
+
+<div
+  class="os-window os-window--stickies"
+  id="stickies-window"
+  style="display: none;"
+>
+  <WindowChrome title={windowTitles[W.STICKIES]} windowId="stickies" titleClass="os-window-title--inter" />
+
+  <div class="sk-body">
+    <!-- Toolbar -->
+    <div class="sk-toolbar">
+      <button class="sk-add-btn" id="sk-add" title={sk.newNote}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        <span>{sk.newNote}</span>
+      </button>
+    </div>
+
+    <!-- Notes grid -->
+    <div class="sk-grid" id="sk-grid">
+      <!-- Empty state -->
+      <div class="sk-empty" id="sk-empty">
+        <span>{sk.empty}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- i18n data -->
+  <script type="application/json" id="sk-i18n" set:html={JSON.stringify(sk)} />
+</div>
+
+<style is:global>
+  @import '../../styles/os/stickies.css';
+</style>
+
+<script>
+  import '../../scripts/os/stickies';
+</script>

@@ -1,0 +1,38 @@
+---
+interface Props {
+  src?: string;
+  alt: string;
+  fallback: string;
+  fallbackClass?: string;
+  imgClass?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const {
+  src,
+  alt,
+  fallback,
+  fallbackClass = 'text-[var(--green-terminal)] text-6xl font-bold opacity-30',
+  imgClass = 'absolute inset-0 w-full h-full object-cover',
+  loading,
+} = Astro.props;
+---
+
+{
+  src ? (
+    <>
+      <img
+        src={src}
+        alt={alt}
+        class={imgClass}
+        loading={loading}
+        onerror="this.style.display='none';this.nextElementSibling.style.display=''"
+      />
+      <span class={fallbackClass} style="display:none">
+        {fallback}
+      </span>
+    </>
+  ) : (
+    <span class={fallbackClass}>{fallback}</span>
+  )
+}

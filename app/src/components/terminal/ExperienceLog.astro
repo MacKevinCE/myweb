@@ -1,0 +1,123 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import TagPill from './TagPill.astro';
+import { hashStr } from '../../utils/tags';
+import { cycleColor } from '../../utils/colors';
+import type { TerminalContent, Job } from '../../types';
+
+interface Props {
+  content: TerminalContent;
+}
+
+const { content } = Astro.props;
+const { experience } = content;
+
+const dotColors = [cycleColor(0), cycleColor(1), cycleColor(2), cycleColor(3)];
+const dotSizes = [16, 14, 12, 10];
+
+const jobCount = experience.jobs?.length ?? 0;
+const expSubtitle =
+  experience.subtitle?.replace('{count}', String(jobCount)) ?? '';
+
+function jobHash(job: Job): string {
+  const n = hashStr(job.company + job.role + job.startDate + job.endDate);
+  return n.toString(16).slice(0, 7);
+}
+---
+
+{
+  experience.jobs && experience.jobs.length > 0 && (
+    <section
+      id="experience"
+      class="bg-[var(--bg-primary)] font-mono"
+      style="padding: var(--section-padding-y) var(--section-padding-x);"
+    >
+      <div class="flex flex-col gap-12">
+        <SectionHeader command={experience.command} subtitle={expSubtitle} />
+
+        {/* Timeline */}
+        <div class="flex flex-col gap-6">
+          {experience.jobs.map((job, i) => {
+            const color = dotColors[i % dotColors.length];
+            const nextColor = dotColors[(i + 1) % dotColors.length];
+            const size = dotSizes[Math.min(i, dotSizes.length - 1)];
+            const isLast = i === experience.jobs.length - 1;
+            return (
+              <div class="flex">
+                {/* Timeline cell — dot at top, line stretches to next dot */}
+                <div class="hidden md:flex w-[60px] shrink-0 justify-center relative">
+                  <div
+                    class="absolute top-0 left-1/2 -translate-x-1/2 rounded-full z-10"
+                    style={`width: ${size}px; height: ${size}px; background: ${color}; box-shadow: 0 0 10px ${color}40;`}
+                  />
+                  {!isLast && (
+                    <div
+                      class="absolute left-1/2 -translate-x-1/2"
+                      style={`top: ${size}px; bottom: -24px; width: 2px; background: linear-gradient(180deg, ${color}, ${nextColor});`}
+                    />
+                  )}
+                </div>
+
+                {/* Job card */}
+                <div class="terminal-line flex flex-col gap-3 p-6 flex-1 border border-[var(--border-primary)] bg-[var(--bg-elevated)] relative">
+                  {/* Mobile dot */}
+                  <div
+                    class="md:hidden absolute -left-3 top-6 rounded-full"
+                    style={`width: ${size}px; height: ${size}px; background: ${color}; box-shadow: 0 0 8px ${color}40;`}
+                  />
+
+                  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <h3
+                      class="text-lg font-bold uppercase tracking-wide"
+                      style={`color: ${color}`}
+                    >
+                      {job.company}
+                    </h3>
+                    <span class="text-[var(--text-muted)] text-xs">
+                      {job.startDate} — {job.endDate}
+                    </span>
+                  </div>
+
+                  <div class="flex items-center gap-2">
+                    <span style={`color: ${color}`} class="text-sm">
+                      &gt;
+                    </span>
+                    <span class="text-[var(--cyan-accent)] text-sm">
+                      {job.role}
+                    </span>
+                  </div>
+
+                  <span class="text-[var(--text-muted)] text-xs">
+                    #{jobHash(job)}
+                  </span>
+
+                  <div class="flex flex-col gap-1.5">
+                    {job.description
+                      .split('. ')
+                      .filter((s: string) => s.trim())
+                      .map((sentence: string) => (
+                        <div class="flex gap-2 items-start">
+                          <span class="text-[var(--text-muted)] text-xs mt-1 shrink-0">
+                            ▸
+                          </span>
+                          <span class="text-[var(--text-secondary)] text-[13px] leading-relaxed font-secondary">
+                            {sentence.endsWith('.') ? sentence : sentence + '.'}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+
+                  <div class="flex flex-wrap gap-2 mt-1">
+                    {job.tags.map((tag) => (
+                      <TagPill tag={tag} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}

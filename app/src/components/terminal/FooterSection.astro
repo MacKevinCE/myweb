@@ -1,0 +1,51 @@
+---
+import type { TerminalContent } from '../../types';
+
+interface Props {
+  content: TerminalContent;
+}
+
+const { content } = Astro.props;
+const { footer } = content;
+const brand = (content.about?.avatarName ?? '').toLowerCase().replace(/\s+/g, '_');
+---
+
+<footer
+  class="bg-[var(--bg-deep)] font-mono"
+  style="padding: 40px var(--section-padding-x);"
+>
+  <div class="flex flex-col gap-6">
+    <div class="h-px bg-[var(--border-primary)]"></div>
+
+    <div class="flex flex-col sm:flex-row justify-between gap-4">
+      <!-- Left: Logo + tagline -->
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <span class="text-[var(--green-terminal)] text-lg font-bold"
+            >&gt;</span
+          >
+          <span class="text-[var(--text-primary)] text-base font-medium"
+            >{brand}</span
+          >
+        </div>
+        <span class="text-[var(--text-muted)] text-[11px] font-secondary"
+          >{footer.tagline}</span
+        >
+      </div>
+
+      <!-- Right: Version + Copyright -->
+      <div class="flex flex-col items-start sm:items-end gap-1">
+        <span class="text-[var(--text-muted)] text-xs"
+          >&gt; {footer.version} — {footer.lastUpdated} {footer.year}</span
+        >
+        <span class="text-[var(--text-muted)] text-[11px] font-secondary"
+          >{footer.copyright}</span
+        >
+      </div>
+    </div>
+
+    <p class="text-[var(--text-muted)] text-[11px]">
+      {footer.session}<span class="caret ml-1"></span>
+    </p>
+  </div>
+</footer>

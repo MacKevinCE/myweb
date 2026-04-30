@@ -1,0 +1,50 @@
+---
+import { defaultWallpaper } from '../../data/os-wallpapers';
+import { uiIcons } from '../../data/os-apps';
+import ImageWithFallback from '../shared/ImageWithFallback.astro';
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+const userName = content.about?.avatarName ?? '';
+const avatarUrl = content.about?.avatarUrl ?? '';
+---
+
+<div class="lockscreen" id="lock-screen">
+  <!-- Blurred wallpaper -->
+  <div class="lockscreen-bg" style={defaultWallpaper.category !== 'image' ? '' : `background-image: url('${defaultWallpaper.src}');`}>
+    {defaultWallpaper.category !== 'image' && (
+      <video src={defaultWallpaper.src} muted loop playsinline webkit-playsinline preload="auto" class="os-wallpaper-video"></video>
+    )}
+  </div>
+  <!-- Dark overlay -->
+  <div class="lockscreen-overlay"></div>
+
+  <!-- Center content -->
+  <div class="lockscreen-center">
+    <span class="lockscreen-time" id="lockscreen-time"></span>
+    <span class="lockscreen-date" id="lockscreen-date"></span>
+
+    <div class="lockscreen-spacer"></div>
+
+    <!-- Avatar -->
+    <div class="lockscreen-avatar-container">
+      <div class="lockscreen-avatar-ring">
+        <div class="lockscreen-avatar-inner">
+          <ImageWithFallback src={avatarUrl} alt={userName} fallback={userName[0] || '?'} imgClass="lockscreen-avatar-img" fallbackClass="lockscreen-avatar-img" />
+        </div>
+      </div>
+      <span class="lockscreen-username">{userName}</span>
+      <span class="lockscreen-hint">{content.lockScreen.clickToUnlock}</span>
+    </div>
+
+    <!-- Mobile: notifications + swipe hint (hidden on desktop) -->
+    <div class="lockscreen-notifs" id="lockscreen-notifs"></div>
+    <span class="lockscreen-swipe-hint" id="lockscreen-swipe-hint">{content.lockScreen.swipeToUnlock}</span>
+  </div>
+  <!-- Mobile: home indicator inside lockscreen so it swipes with it -->
+  <div class="lockscreen-home-indicator" aria-hidden="true"></div>
+</div>

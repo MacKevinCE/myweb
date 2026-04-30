@@ -1,0 +1,59 @@
+---
+/**
+ * Keyboard Shortcuts overlay — shows available shortcuts when pressing ?.
+ * Rendered once in the page; JS toggles visibility.
+ */
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+const s = content.shortcuts;
+---
+
+<div class="shortcuts-overlay" id="shortcuts-overlay" style="display: none;">
+  <div class="shortcuts-panel">
+    <div class="shortcuts-header">
+      <span class="shortcuts-title">{s.title}</span>
+      <span class="shortcuts-hint">{s.hint}</span>
+    </div>
+    <div class="shortcuts-body">
+      <div class="shortcuts-group">
+        <span class="shortcuts-group-title">{s.general}</span>
+        <div class="shortcuts-item">
+          <span class="shortcuts-desc">{s.openSettings}</span>
+          <span class="shortcuts-keys"><kbd>⌘</kbd><kbd>,</kbd></span>
+        </div>
+        <div class="shortcuts-item">
+          <span class="shortcuts-desc">{s.toggleLaunchpad}</span>
+          <span class="shortcuts-keys"><kbd>Alt</kbd><kbd>Space</kbd></span>
+        </div>
+        <div class="shortcuts-item">
+          <span class="shortcuts-desc">{s.notifCenter}</span>
+          <span class="shortcuts-keys"><kbd>Alt</kbd><kbd>N</kbd></span>
+        </div>
+        <div class="shortcuts-item">
+          <span class="shortcuts-desc">{s.keyboardShortcuts}</span>
+          <span class="shortcuts-keys"><kbd>?</kbd></span>
+        </div>
+        <div class="shortcuts-item">
+          <span class="shortcuts-desc">{s.closePanel}</span>
+          <span class="shortcuts-keys"><kbd>Esc</kbd></span>
+        </div>
+      </div>
+      <div class="shortcuts-group">
+        <span class="shortcuts-group-title">{s.windows}</span>
+        <div class="shortcuts-item">
+          <span class="shortcuts-desc">{s.switchWindows}</span>
+          <span class="shortcuts-keys"><kbd>Alt</kbd><kbd>Tab</kbd></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global>
+  @import '../../styles/os/shortcuts-overlay.css';
+</style>

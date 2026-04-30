@@ -1,0 +1,68 @@
+{
+  "langSwitch": {
+    "selectLabel": "// select language"
+  },
+  "shell": {
+    "toggleMenu": "Toggle menu",
+    "mobileNav": "Mobile navigation"
+  },
+  "hero": {
+    "codeBlockFile": "// Developer.swift",
+    "topBarSuffix": "portfolio",
+    "role": "ios_mobile_development_lead_specialist",
+    "tagline": "// building healthcare & banking iOS solutions since 2019",
+    "bootLines": [
+      { "text": "[boot] initializing portfolio v3.2.1...", "type": "info" },
+      { "text": "[ok] swift_runtime loaded", "type": "ok" },
+      { "text": "[ok] xcode_toolchain ready", "type": "ok" },
+      { "text": "[ok] connecting to developer_profile...", "type": "info" },
+      { "text": "[ok] session authenticated ✓", "type": "ok" },
+      { "text": "[ok] loading ui_components... done", "type": "accent" },
+      { "text": "[ok] theme: terminal_hacker applied", "type": "ok" },
+      { "text": "[boot] all systems ready", "type": "info" }
+    ],
+    "bootReady": "> ready. press any key or click to continue...",
+    "prompt": "$ whoami",
+    "terminalTitle": "zsh — 120×40",
+    "ctaPrimary": "view_projects",
+    "ctaSecondary": "download_cv"
+  },
+  "about": {
+    "command": "cat about_me.md",
+    "avatarLabel": "> {brand}.profile",
+    "bioTitle": "// who_am_i",
+    "langLabel": "// spoken_languages:"
+  },
+  "skills": {
+    "command": "swift package list --skills --verbose",
+    "subtitle": "// resolving dependencies... {count} packages found"
+  },
+  "experience": {
+    "command": "git log --career --oneline --graph",
+    "subtitle": "// displaying career progression... {count} commits found"
+  },
+  "projects": {
+    "command": "ls -la ~/projects/ --classified",
+    "subtitle": "// decrypting project files... access granted",
+    "allLabel": "All",
+    "featuredBadge": "[featured] personal_project",
+    "itemsBadge": "[encrypted]",
+    "openBtn": "$ open --github"
+  },
+  "education": {
+    "command": "cat /credentials/education.log",
+    "subtitle": "// reading academic records...",
+    "certsTitle": "// certifications & achievements"
+  },
+  "contact": {
+    "command": "ssh {brand}@collaborate",
+    "headline": "SHALL WE BUILD SOMETHING TOGETHER?",
+    "subtitle": "// always open to new challenges, collaborations and interesting projects"
+  },
+  "footer": {
+    "builtWith": "Built with Astro + TypeScript + TailwindCSS",
+    "tagline": "// built with passion & too much coffee",
+    "lastUpdated": "last updated",
+    "session": "[session ended] connection closed. thank you for visiting."
+  }
+}

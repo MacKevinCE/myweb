@@ -1,0 +1,36 @@
+{
+  "theme": "os",
+  "about": {
+    "avatar": "MK",
+    "avatarUrl": "https://assets.mackevince.com/public/profile.webp",
+    "avatarName": "Mac Kevin"
+  },
+  "codeBlock": [
+      [{ "t": "struct", "c": "keyword" }, { "t": " " }, { "t": "Developer", "c": "type" }, { "t": ":" }, { "t": " " }, { "t": "Identifiable", "c": "type" }, { "t": " " }, { "t": "{" }],
+      [{ "t": "    "}, { "t": "let", "c": "keyword" }, { "t": " " }, { "t": "name" }, { "t": " " }, { "t": "=" }, { "t": " " }, { "t": "Mac Kevin", "c": "string" }],
+      [{ "t": "    "},{ "t": "let", "c": "keyword" }, { "t": " " }, { "t": "role" }, { "t": ":" }, { "t": " " }, { "t": "Role", "c": "type" }, { "t": " " }, { "t": "=" }, { "t": " " }, { "t": ".seniorIOS", "c": "value" }],
+      [{ "t": "    "},{ "t": "let", "c": "keyword" }, { "t": " " }, { "t": "experience" }, { "t": ":" }, { "t": " " }, { "t": "Int", "c": "type" }, { "t": " " }, { "t": "=" }, { "t": " " }, { "t": "5", "c": "number" }],
+      [{ "t": "    "},{ "t": "let ", "c": "keyword" }, { "t": "passion: " }, { "t": "Level", "c": "type" }, { "t": " = " }, { "t": ".maximum", "c": "value" }],
+      [{ "t": " " }],
+      [{ "t": "    "},{ "t": "var", "c": "keyword" }, { "t": " " }, { "t": "status" }, { "t": ":" }, { "t": " " }, { "t": "Status", "c": "type" }, { "t": " " }, { "t": "{" }],
+      [{ "t": "    "},{ "t": "    "}, { "t": ".available_for_hire", "c": "value" }],
+      [{ "t": "    "},{ "t": "}" }],
+      [{ "t": "}" }]
+  ],
+  "contact": {
+    "links": {
+      "github": { "label": "GitHub", "url": "https://github.com/MacKevinCE", "displayText": "github.com/mackevin" },
+      "linkedin": { "label": "LinkedIn", "url": "https://www.linkedin.com/in/mackevince/", "displayText": "linkedin.com/in/mackevin" },
+      "email": { "label": "Email", "url": "mailto:mac@mackevince.com" , "displayText": "mac@mackevince.com" }
+    }
+  },
+  "browser": {
+    "bookmarks": [
+      { "name": "portfolio Terminal", "url": "https://profile-mac-profilemac-uz3yc1-d37437-194-26-100-37.traefik.me/terminal" },
+      { "name": "portfolio Liquid Glass", "url": "https://profile-mac-profilemac-uz3yc1-d37437-194-26-100-37.traefik.me/liquid-glass" }
+    ]
+  },
+  "footer": {
+    "tagline": "Senior iOS Developer"
+  }
+}

@@ -1,0 +1,15 @@
+---
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+---
+
+<footer class="os-footer">
+  <span class="os-footer-text">{content.footer.copyright}</span>
+  <span class="os-footer-text os-footer-text--small">{content.footer.tagline}</span>
+  <span class="os-footer-text os-footer-text--small">{content.footer.inspiration}</span>
+</footer>

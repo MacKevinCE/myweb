@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <!-- Window frame -->
+  <rect x="8" y="20" width="112" height="96" rx="12" fill="#1a1a2e" stroke="#3B82F6" stroke-width="3"/>
+  <!-- Title bar -->
+  <rect x="8" y="20" width="112" height="24" rx="12" fill="#2a2a4a"/>
+  <rect x="8" y="32" width="112" height="12" fill="#2a2a4a"/>
+  <!-- Traffic lights -->
+  <circle cx="26" cy="32" r="5" fill="#ef4444"/>
+  <circle cx="44" cy="32" r="5" fill="#fbbf24"/>
+  <circle cx="62" cy="32" r="5" fill="#34d399"/>
+  <!-- MK initials -->
+  <text x="64" y="88" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="36" font-weight="700" fill="#FFFFFF" letter-spacing="-1">MK</text>
+  <!-- Accent line -->
+  <rect x="32" y="102" width="64" height="3" rx="1.5" fill="#3B82F6" opacity="0.6"/>
+  <style>
+    @media (prefers-color-scheme: light) {
+      rect:first-of-type { fill: #f0f0f5; stroke: #3B82F6; }
+      rect:nth-of-type(2), rect:nth-of-type(3) { fill: #e5e5ea; }
+      text { fill: #1a1a2e; }
+    }
+  </style>
+</svg>

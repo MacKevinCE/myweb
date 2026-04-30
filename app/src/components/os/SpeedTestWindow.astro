@@ -1,0 +1,115 @@
+---
+import { windowTitles, W, uiIcons } from '../../data/os-apps';
+import WindowChrome from './shared/WindowChrome.astro';
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+const st = content.speedTest;
+---
+
+<div
+  class="os-window os-window--speed-test"
+  id="speed-test-window"
+  style="display: none;"
+  data-st-ready={st.ready}
+  data-st-testing={st.testing}
+  data-st-complete={st.complete}
+  data-st-failed={st.failed}
+  data-st-btn-run={st.btnRun}
+  data-st-btn-running={st.btnRunning}
+  data-st-btn-retry={st.btnRetry}
+  data-st-q-bad={st.qualityBad}
+  data-st-q-poor={st.qualityPoor}
+  data-st-q-average={st.qualityAverage}
+  data-st-q-good={st.qualityGood}
+  data-st-q-great={st.qualityGreat}
+>
+  <WindowChrome title={windowTitles[W.SPEED_TEST]} windowId="speed-test" titleClass="os-window-title--inter" />
+
+  <div class="speed-test-body">
+    <!-- Large WiFi icon -->
+    <div class="st-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <Fragment set:html={uiIcons.wifi} />
+      </svg>
+    </div>
+
+    <!-- Status text -->
+    <span class="st-status" id="st-status">{st.ready}</span>
+
+    <!-- Metrics grid: 2x2 -->
+    <div class="st-metrics">
+      <div class="st-metric" id="st-download">
+        <div class="st-metric-header">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><Fragment set:html={uiIcons.arrowDown} /></svg>
+          <span class="st-metric-label">{st.download}</span>
+        </div>
+        <span class="st-metric-value">—</span>
+        <span class="st-metric-unit">Mbps</span>
+        <div class="st-bar"><div class="st-bar-fill" id="st-download-bar"></div></div>
+      </div>
+
+      <div class="st-metric" id="st-upload">
+        <div class="st-metric-header">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><Fragment set:html={uiIcons.arrowUp} /></svg>
+          <span class="st-metric-label">{st.upload}</span>
+        </div>
+        <span class="st-metric-value">—</span>
+        <span class="st-metric-unit">Mbps</span>
+        <div class="st-bar"><div class="st-bar-fill" id="st-upload-bar"></div></div>
+      </div>
+
+      <div class="st-metric" id="st-latency">
+        <div class="st-metric-header">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><Fragment set:html={uiIcons.clock} /></svg>
+          <span class="st-metric-label">{st.latency}</span>
+        </div>
+        <span class="st-metric-value">—</span>
+        <span class="st-metric-unit">ms</span>
+        <div class="st-bar"><div class="st-bar-fill" id="st-latency-bar"></div></div>
+      </div>
+
+      <div class="st-metric" id="st-jitter">
+        <div class="st-metric-header">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><Fragment set:html={uiIcons.activity} /></svg>
+          <span class="st-metric-label">{st.jitter}</span>
+        </div>
+        <span class="st-metric-value">—</span>
+        <span class="st-metric-unit">ms</span>
+        <div class="st-bar"><div class="st-bar-fill" id="st-jitter-bar"></div></div>
+      </div>
+    </div>
+
+    <!-- Quality indicator + retry -->
+    <div class="st-result-row" id="st-quality" style="display: none;">
+      <div class="st-quality">
+        <div class="st-quality-dots">
+          <div class="st-dot"></div>
+          <div class="st-dot"></div>
+          <div class="st-dot"></div>
+          <div class="st-dot"></div>
+          <div class="st-dot"></div>
+        </div>
+        <span class="st-quality-label">—</span>
+      </div>
+      <button class="st-retry" id="st-retry" aria-label={st.btnRetry}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><Fragment set:html={uiIcons.refreshCw} /></svg>
+      </button>
+    </div>
+
+    <!-- Action button -->
+    <button class="st-btn" id="st-btn">{st.btnRun}</button>
+  </div>
+</div>
+
+<style is:global>
+  @import '../../styles/os/speed-test.css';
+</style>
+
+<script>
+  import '../../scripts/os/speedTest';
+</script>

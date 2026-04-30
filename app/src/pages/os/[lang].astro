@@ -1,0 +1,181 @@
+---
+import OSLayout from '../../layouts/OSLayout.astro';
+import MenuBar from '../../components/os/MenuBar.astro';
+import DesktopIcons from '../../components/os/DesktopIcons.astro';
+import Dock from '../../components/os/Dock.astro';
+import AboutWindow from '../../components/os/AboutWindow.astro';
+import ContactWindow from '../../components/os/ContactWindow.astro';
+import SkillsWindow from '../../components/os/SkillsWindow.astro';
+import EducationWindow from '../../components/os/EducationWindow.astro';
+import FinderWindow from '../../components/os/FinderWindow.astro';
+import SettingsWindow from '../../components/os/SettingsWindow.astro';
+import BrowserWindow from '../../components/os/BrowserWindow.astro';
+import AppStoreWindow from '../../components/os/AppStoreWindow.astro';
+import SpeedTestWindow from '../../components/os/SpeedTestWindow.astro';
+import TerminalWindow from '../../components/os/TerminalWindow.astro';
+import PreviewWindow from '../../components/os/PreviewWindow.astro';
+import NotesWindow from '../../components/os/NotesWindow.astro';
+import PlaygroundWindow from '../../components/os/PlaygroundWindow.astro';
+import StickiesWindow from '../../components/os/StickiesWindow.astro';
+import AchievementsWindow from '../../components/os/AchievementsWindow.astro';
+import NotificationCenter from '../../components/os/NotificationCenter.astro';
+import AppSwitcher from '../../components/os/AppSwitcher.astro';
+import ContextMenu from '../../components/os/ContextMenu.astro';
+import ShortcutsOverlay from '../../components/os/ShortcutsOverlay.astro';
+import Dialog from '../../components/os/Dialog.astro';
+import FooterOS from '../../components/os/FooterOS.astro';
+import LockScreen from '../../components/os/LockScreen.astro';
+import LaunchpadWindow from '../../components/os/LaunchpadWindow.astro';
+
+import { languages } from '../../utils/i18n';
+import { loadContent, loadLangSwitchTexts } from '../../utils/loadProfile';
+import { defaultWallpaper } from '../../data/os-wallpapers';
+import type { OsContent } from '../../types';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const content = loadContent(lang!, 'os') as OsContent;
+const allLangSwitchTexts = loadLangSwitchTexts();
+---
+
+<OSLayout
+  title={content.meta.title}
+  description={content.meta.description}
+  lang={lang}
+>
+  <div class="os-desktop">
+    <div class="os-wallpaper" style={defaultWallpaper.category !== 'image' ? '' : `background-image: url('${defaultWallpaper.src}');`}>
+      {defaultWallpaper.category !== 'image' && (
+        <video src={defaultWallpaper.src} muted loop playsinline webkit-playsinline preload="auto" class="os-wallpaper-video"></video>
+      )}
+    </div>
+
+    <MenuBar content={content} />
+    <DesktopIcons />
+    <AboutWindow content={content} />
+    <ContactWindow content={content} />
+    <SkillsWindow content={content} />
+    <EducationWindow content={content} />
+    <FinderWindow content={content} />
+    <SettingsWindow content={content} />
+    <BrowserWindow content={content} />
+    <AppStoreWindow content={content} />
+    <SpeedTestWindow content={content} />
+    <TerminalWindow content={content} />
+    <PreviewWindow content={content} />
+    <NotesWindow content={content} />
+    <PlaygroundWindow content={content} />
+    <StickiesWindow content={content} />
+    <AchievementsWindow content={content} />
+    <Dock />
+    <FooterOS content={content} />
+
+    <!-- Mobile swipe hint: indicates swipe-left opens launchpad -->
+    <div class="os-swipe-hint" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" preserveAspectRatio="none">
+        <path d="m15 20-6-8 6-8"/>
+      </svg>
+    </div>
+  </div>
+
+  <LaunchpadWindow content={content} />
+  <LockScreen content={content} />
+
+  <!-- Notification container -->
+  <div class="os-notif-container" id="os-notif-container" aria-live="polite"></div>
+
+  <!-- Notification Center panel -->
+  <NotificationCenter content={content} />
+
+  <!-- Context Menu (right-click) -->
+  <ContextMenu content={content} />
+
+  <!-- App Switcher (Alt+Tab) -->
+  <AppSwitcher />
+
+  <!-- Confirmation Dialog (OS alert sheet) -->
+  <Dialog content={content} />
+
+  <!-- Keyboard Shortcuts Overlay (?) -->
+  <ShortcutsOverlay content={content} />
+
+  <!-- Notification i18n data -->
+  <script type="application/json" id="os-notif-i18n" set:html={JSON.stringify(content.notifications)} />
+
+  <!-- Mobile home indicator (mobile only, visual-only) -->
+  <div class="os-home-indicator" aria-hidden="true"></div>
+
+  <!-- Early video bootstrap: runs synchronously before module scripts -->
+  <script is:inline>
+    (function() {
+      try {
+        var s = JSON.parse(localStorage.getItem('os-settings') || '{}');
+        var cat = s.wallpaperCategory || s.wallpaperType || 'animation';
+        var mode = cat === 'image' ? 'frame' : (s.wallpaperMode || 'loop');
+        var vids = document.querySelectorAll('.os-wallpaper-video');
+        for (var i = 0; i < vids.length; i++) {
+          var v = vids[i];
+          if (mode === 'loop') {
+            v.setAttribute('autoplay', '');
+            v.autoplay = true;
+            v.play && v.play().catch(function(){});
+          } else {
+            v.removeAttribute('autoplay');
+            v.autoplay = false;
+            v.addEventListener('loadeddata', function() {
+              this.currentTime = 0.001;
+              this.pause();
+            }, { once: true });
+          }
+        }
+      } catch(e) {}
+    })();
+  </script>
+
+  <script
+    is:inline
+    id="lang-config"
+    type="application/json"
+    set:html={JSON.stringify({
+      lang,
+      languages,
+      textsByLang: allLangSwitchTexts,
+    })}
+  />
+
+  <script>
+    import { initLangSuggest } from '../../scripts/shared/langSuggest';
+    import { initOS } from '../../scripts/os/bootstrap';
+    import { uiIcons } from '../../data/os-apps';
+
+    const cfg = JSON.parse(
+      document.getElementById('lang-config')!.textContent!
+    );
+    initLangSuggest(cfg.lang, cfg.languages, cfg.textsByLang, 'os');
+    initOS();
+
+    // Fullscreen toggle — only show button if API is available
+    const fsBtn = document.getElementById('os-fullscreen-btn');
+    const fsIconExpand = uiIcons.fullscreen;
+    const fsIconShrink = '<path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/><path d="M3 21l7-7"/>';
+    function updateFsIcon() {
+      if (!fsBtn) return;
+      const svg = fsBtn.querySelector('svg');
+      if (svg) svg.innerHTML = document.fullscreenElement ? fsIconShrink : fsIconExpand;
+    }
+    if (fsBtn && document.documentElement.requestFullscreen) {
+      fsBtn.style.display = '';
+      fsBtn.addEventListener('click', () => {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          document.documentElement.requestFullscreen();
+        }
+      });
+      document.addEventListener('fullscreenchange', updateFsIcon);
+    }
+  </script>
+</OSLayout>

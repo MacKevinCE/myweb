@@ -1,0 +1,54 @@
+/* ============================================
+   UTILITIES — Scrollbar, gradients, shadows
+   ============================================ */
+
+/* Scrollbar — thin, translucent, system-like */
+.os-desktop *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.os-desktop *::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.os-desktop *::-webkit-scrollbar-thumb {
+  background: var(--os-fill-strong);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.os-desktop *::-webkit-scrollbar-thumb:hover {
+  background: var(--os-text-muted);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Firefox */
+.os-desktop * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--os-fill-strong) transparent;
+}
+
+/* Icon color utilities */
+.os-gradient-green { background: linear-gradient(180deg, var(--os-green-from), var(--os-green-to)); }
+.os-gradient-yellow { background: linear-gradient(180deg, var(--os-yellow-from), var(--os-yellow-to)); }
+.os-gradient-blue { background: linear-gradient(180deg, var(--os-blue-from), var(--os-blue-to)); }
+.os-gradient-purple { background: linear-gradient(180deg, var(--os-purple-from), var(--os-purple-to)); }
+.os-gradient-pink { background: linear-gradient(180deg, var(--os-pink-from), var(--os-pink-to)); }
+.os-gradient-cyan { background: linear-gradient(180deg, var(--os-cyan-from), var(--os-cyan-to)); }
+.os-gradient-orange { background: linear-gradient(180deg, var(--os-orange-from), var(--os-orange-to)); }
+.os-gradient-slate { background: linear-gradient(180deg, #94a3b8, #64748b); }
+.os-gradient-finder { background: linear-gradient(180deg, #38bdf8, #0ea5e9); }
+.os-gradient-darkslate { background: linear-gradient(180deg, #64748b, #334155); }
+.os-gradient-appstore { background: linear-gradient(180deg, #38bdf8, #2563eb); }
+
+/* Shadow utilities for icon boxes */
+.os-shadow-green { box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); }
+.os-shadow-yellow { box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25); }
+.os-shadow-blue { box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25); }
+.os-shadow-purple { box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25); }
+.os-shadow-pink { box-shadow: 0 4px 12px rgba(236, 72, 153, 0.25); }
+.os-shadow-cyan { box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25); }
+.os-shadow-orange { box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25); }

@@ -1,0 +1,615 @@
+/* ============================================
+   OS THEME — Responsive Overrides
+   Stage Manager (tablet) + Mobile OS
+   ============================================ */
+
+/* ---- Tablet: Stage Manager (768–1023px) ---- */
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  /* Token overrides */
+  :root {
+    --os-web-border: 8px;
+    --os-radius-window: 16px;
+    --os-sidebar-w: 160px;
+  }
+
+  /* ---- Dock ---- */
+  .os-dock {
+    --dock-scale: 0.85;
+    bottom: 4px;
+    padding: calc(6px * var(--dock-scale)) 12px;
+  }
+
+  .os-dock-tooltip { display: none !important; }
+
+  /* ---- Menu Bar ---- */
+  .os-menubar-left,
+  .os-menubar-right { gap: 10px; }
+
+  .os-menubar-item:empty { display: none; }
+
+  /* ---- Desktop Icons ---- */
+  .os-icon-wrapper { width: 64px; }
+  .os-icon-box { width: 44px; height: 44px; }
+  .os-icon-box svg { width: 22px; height: 22px; }
+  .os-icon-label { font-size: var(--os-fs-10); }
+
+  /* ---- Lock Screen ---- */
+  .lockscreen-time { font-size: 80px; }
+  .lockscreen-date { font-size: var(--os-fs-20); }
+
+  /* ---- Launchpad ---- */
+  .lp-grid {
+    grid-template-columns: repeat(4, 72px);
+  }
+
+  .lp-app { width: 72px; }
+  .lp-app-label { width: 72px; }
+}
+
+/* ---- Mobile (< 768px) — mobile-style gesture navigation ---- */
+
+@media (max-width: 767px) {
+  /* Token overrides — keep web border for device frame feel */
+  :root {
+    --os-web-border: 8px;
+    --os-menubar-h: 44px;
+    --os-radius-window: 16px;
+    --os-sidebar-w: 0px;
+  }
+
+  /* ---- Dock: hidden on mobile (swipe gestures replace it) ---- */
+  .os-dock { display: none !important; }
+
+  /* ---- Menu Bar → Mobile Status Bar ---- */
+  .os-menubar {
+    padding: 0 24px !important;
+    background: var(--os-bg-glass) !important;
+    backdrop-filter: blur(var(--os-blur-sm)) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(var(--os-blur-sm)) saturate(180%) !important;
+  }
+
+  /* Left: only clock visible */
+  .os-menubar-left {
+    flex: 1 !important;
+    gap: 0 !important;
+  }
+
+  .os-menu-btn { display: none !important; }
+  .os-menubar-item { display: none !important; }
+  .os-menubar-app { display: none !important; }
+  .os-menu { display: none !important; }
+
+  /* Right: wifi only */
+  .os-menubar-right {
+    flex: 1 !important;
+    justify-content: flex-end !important;
+    gap: 0 !important;
+  }
+
+  .os-menubar-fs-btn { display: none !important; }
+  .os-menubar-lang-btn { display: none !important; }
+
+  /* Clock: position absolute on the left side (mobile style) */
+  .os-menubar-clock {
+    position: absolute !important;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--os-fs-16) !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.3px;
+  }
+
+  /* WiFi: smaller for status bar, hide tooltips/badge */
+  .os-menubar-wifi svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+  .mb-wifi-badge { display: none !important; }
+  .mb-wifi-tooltip { display: none !important; }
+
+  /* ---- Status Pill ---- */
+  .os-notch {
+    display: block !important;
+    width: 120px;
+    height: 34px;
+    background: #000;
+    border-radius: 22px;
+    flex-shrink: 0;
+  }
+
+  /* ---- Windows → Full-screen mobile style ---- */
+  .os-window {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    /* Background extends full screen, content inset from status bar + home indicator */
+    padding-top: var(--os-menubar-h) !important;
+    padding-bottom: 30px !important;
+  }
+
+  .os-resize { display: none !important; }
+
+  /* Hide titlebar completely on mobile */
+  .os-window-titlebar { display: none !important; }
+  .os-window-dots { display: none !important; }
+  .os-window-title { display: none !important; }
+  .os-window-titlespacer { display: none !important; }
+
+  /* Window animations — mobile style zoom in/out from center */
+  .os-window--opening,
+  .os-window--restoring {
+    transform-origin: center center !important;
+    animation: mobileAppOpen 0.3s cubic-bezier(0.2, 0.6, 0.35, 1) forwards !important;
+  }
+  .os-window--closing,
+  .os-window--minimizing {
+    transform-origin: center center !important;
+    animation: mobileAppClose 0.25s cubic-bezier(0.4, 0, 0.7, 0.2) forwards !important;
+  }
+
+  /* ---- Desktop Icons (mobile home screen grid) ---- */
+  .os-desktop-icons {
+    position: absolute;
+    top: 56px;
+    right: auto;
+    left: 0;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .os-icon-wrapper { width: auto; }
+  .os-icon-box { width: 48px; height: 48px; }
+  .os-icon-box svg { width: 24px; height: 24px; }
+  .os-icon-label { font-size: var(--os-fs-10); }
+
+  /* ---- Lock Screen ---- */
+  .lockscreen {
+    border-radius: 0;
+    inset: 0;
+  }
+
+  .lockscreen-time { font-size: 64px; }
+  .lockscreen-date { font-size: var(--os-fs-18); }
+
+  /* ---- Sidebars → Horizontal tabs ---- */
+  .os-sidebar,
+  .stg-sidebar,
+  .as-sidebar,
+  .finder-sidebar {
+    display: flex !important;
+    width: 100% !important;
+    flex-direction: row !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 8px 12px !important;
+    gap: 6px;
+    background: var(--os-fill);
+    border-bottom: 1px solid var(--os-fill-border);
+    flex-shrink: 0;
+  }
+
+  .stg-profile { display: none; }
+  .stg-sidebar-spacer { display: none; }
+
+  /* Sidebar nav items become horizontal pills */
+  .os-nav {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 6px 12px;
+  }
+
+  .os-nav-icon { display: none; }
+
+  /* Finder-specific sidebar overrides */
+  .finder-sidebar-label { display: none; }
+  .finder-sidebar-spacer { display: none; }
+  .finder-sidebar-divider {
+    width: 1px;
+    height: 20px;
+    align-self: center;
+    flex-shrink: 0;
+    background: var(--os-fill-border);
+  }
+  [data-finder-tags] {
+    flex-direction: row !important;
+    gap: 6px;
+  }
+
+  .finder-sidebar-item {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 6px 10px;
+  }
+
+  /* Finder detail: hidden by default, shown as full-screen slide-in */
+  .finder-detail { display: none !important; }
+
+  .finder-detail.finder-detail--mobile {
+    display: flex !important;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background: var(--os-bg-glass);
+    padding: 16px 20px;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .finder-detail.finder-detail--mobile-visible {
+    transform: translateX(0);
+  }
+
+  /* Window body stacks vertically on mobile */
+  .os-window-body {
+    flex-direction: column;
+  }
+
+  /* ---- Launchpad — off-screen overlay to the right ---- */
+  .lp-backdrop {
+    position: fixed;
+    inset: var(--os-web-border);
+    transform: translateX(calc(100% + var(--os-web-border)));
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                visibility 0s 0.3s;
+    z-index: 9500;
+    display: flex !important;
+    opacity: 1 !important;
+    animation: none !important;
+    pointer-events: auto;
+    border-radius: 0;
+    visibility: hidden;
+  }
+
+  /* Override opening/closing animations on mobile — slide only */
+  .lp-backdrop--opening,
+  .lp-backdrop--closing {
+    animation: none !important;
+  }
+
+  .lp-backdrop--closing .lp-panel {
+    animation: none !important;
+  }
+
+  .lp-backdrop .lp-panel {
+    animation: none !important;
+  }
+
+  .lp-backdrop--mobile-visible {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+
+  .lp-panel {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .lp-panel::before { border-radius: 0; }
+
+  .lp-grid {
+    grid-template-columns: repeat(4, 64px);
+  }
+
+  .lp-app { width: 64px; }
+  .lp-app-label { width: 64px; font-size: var(--os-fs-9); }
+
+
+  /* Center the grid vertically on mobile */
+  .lp-grid {
+    padding: 24px 20px;
+  }
+
+  /* ---- Home indicator bar ---- */
+  .os-home-indicator {
+    display: block !important;
+    position: fixed;
+    bottom: calc(var(--os-web-border) + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 134px;
+    height: 5px;
+    border-radius: 3px;
+    background: var(--os-text-muted);
+    opacity: 0;
+    z-index: 10000;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+
+  /* Expanded touch target via pseudo-element */
+  .os-home-indicator::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    right: -20px;
+    top: -20px;
+    bottom: -20px;
+  }
+
+  .os-home-indicator--visible {
+    opacity: 0.4;
+    pointer-events: auto;
+  }
+
+  /* ---- Swipe hint (right edge, center) ---- */
+  .os-swipe-hint {
+    display: flex !important;
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0.3;
+    z-index: 5;
+    pointer-events: none;
+    animation: swipeHintPulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes swipeHintPulse {
+    0%, 100% { opacity: 0.1; transform: translateY(-50%) translateX(0); }
+    50% { opacity: 0.5; transform: translateY(-50%) translateX(-10px); }
+  }
+
+  /* ---- Footer ---- */
+  .os-footer {
+    bottom: 24px;
+    right: 16px;
+  }
+
+  /* ---- Per-window mobile overrides ---- */
+
+  /* Finder: touch-friendly rows, hide toolbar buttons */
+  .finder-toolbar-btn { display: none; }
+  .finder-toolbar-spacer { display: none; }
+
+  .finder-row { height: 44px; }
+
+  /* Browser: compact URL bar */
+  .brw-urlbar {
+    padding: 0 8px;
+    gap: 6px;
+  }
+
+  .brw-url-input { height: 32px; }
+  .brw-home-btn { width: 32px; height: 32px; }
+
+  /* About: smaller layout */
+  .about-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .about-name {
+    font-size: var(--os-fs-20);
+    letter-spacing: 2px;
+  }
+
+  .about-body { padding: 20px 16px; gap: 16px; }
+
+  .about-metrics {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .about-bio { font-size: var(--os-fs-12); }
+
+  /* Contact: vertical + touch-friendly */
+  .contact-body {
+    padding: 24px 16px;
+    gap: 20px;
+  }
+
+  .contact-headline {
+    font-size: var(--os-fs-22);
+    letter-spacing: 1px;
+  }
+
+  .contact-sub { font-size: var(--os-fs-13); }
+
+  .contact-link {
+    padding: 12px 16px;
+  }
+
+  .contact-link-text { font-size: var(--os-fs-13); }
+
+  /* AppStore: mobile-optimized */
+  .as-app-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .as-app-info { align-items: center; }
+
+  .as-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .as-preview-img {
+    width: 200px;
+    height: 125px;
+  }
+
+  .as-content { padding: 16px; gap: 16px; }
+
+  /* AppStore sidebar overrides */
+  .as-sidebar-spacer { display: none; }
+  .as-sidebar-spacer-sm { display: none; }
+
+  .as-search {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    margin: 0;
+  }
+
+  /* Settings: adjust panel padding */
+  .stg-panel { padding: 20px 16px; gap: 16px; }
+  .stg-content-title { font-size: var(--os-fs-16); }
+
+  /* Settings theme previews smaller */
+  .stg-themes { flex-wrap: wrap; gap: 12px; }
+  .stg-theme-preview { width: 64px; height: 44px; }
+
+  /* Education: smaller padding */
+  .edu-header-block { padding: 20px 16px 0; }
+  .edu-scroll { padding: 16px; }
+  .edu-content-title { font-size: var(--os-fs-16); }
+
+  /* Skills: smaller padding */
+  .skills-header-block { padding: 20px 16px 0; }
+  .skills-scroll { padding: 16px; }
+  .skills-content-title { font-size: var(--os-fs-16); }
+
+
+  /* Contact window: auto height */
+  .os-window--contact { width: 100% !important; height: 100% !important; }
+
+  /* Education window: auto height */
+  .os-window--education { width: 100% !important; height: 100% !important; }
+
+  /* Preview: hide sidebar on mobile, full-width image */
+  .pv-sidebar { display: none !important; }
+  .pv-issuer { display: none; }
+
+  /* Notes: hide sidebar on mobile, full-width content */
+  .nt-sidebar { display: none !important; }
+  .nt-content { padding: 16px !important; }
+
+  /* Playground: hide sidebar, full-width code */
+  .pg-sidebar { display: none !important; }
+  .pg-code { font-size: var(--os-fs-11); }
+
+  /* Stickies: single column on mobile */
+  .sk-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Mobile back button — hidden by default ---- */
+.os-mobile-back {
+  display: none;
+}
+
+/* ---- Notch — hidden on non-mobile ---- */
+.os-notch {
+  display: none;
+}
+
+/* ---- Swipe hint — hidden on non-mobile ---- */
+.os-swipe-hint {
+  display: none;
+}
+
+/* ---- Home indicator — hidden on non-mobile ---- */
+.os-home-indicator {
+  display: none;
+}
+
+/* ============================================
+   Mobile Terminal-Only Mode
+   On mobile, OS theme shows ONLY the terminal
+   rotated to landscape, fullscreen.
+   ============================================ */
+
+@media (max-width: 767px) {
+  /* Hide ALL OS chrome on mobile */
+  .os-menubar,
+  .os-dock,
+  .os-desktop-icons,
+  .os-footer,
+  .os-swipe-hint,
+  .os-home-indicator,
+  .os-notch,
+  .os-notif-container,
+  .nc-overlay,
+  .nc-panel,
+  .os-context-menu,
+  .app-switcher,
+  .os-dialog-overlay,
+  .shortcuts-overlay,
+  .lp-backdrop {
+    display: none !important;
+  }
+
+  /* Hide lockscreen on mobile */
+  .lockscreen {
+    display: none !important;
+  }
+
+  /* Hide ALL windows except terminal */
+  .os-window:not(.os-window--terminal) {
+    display: none !important;
+  }
+
+  /* Terminal window: fullscreen, no padding, always visible */
+  .os-window--terminal {
+    display: flex !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    z-index: 9999 !important;
+    transform: rotate(90deg) !important;
+    transform-origin: center center !important;
+    /* Swap dimensions for landscape */
+    width: 100vh !important;
+    height: 100vw !important;
+    /* Center after rotation */
+    left: calc((100vw - 100vh) / 2) !important;
+    top: calc((100vh - 100vw) / 2) !important;
+  }
+
+  /* Terminal body fills entire rotated window */
+  .term-body {
+    border-radius: 0;
+  }
+
+  /* Show mobile suggestion chips */
+  .term-suggestions {
+    display: flex !important;
+  }
+
+  /* Safe area padding for rotated mode */
+  .term-output {
+    padding: 16px 20px 8px env(safe-area-inset-left, 16px);
+  }
+
+  .term-input-line {
+    padding: 8px 20px 16px env(safe-area-inset-left, 16px);
+  }
+
+  .term-suggestions {
+    padding: 6px 20px 12px env(safe-area-inset-left, 16px);
+  }
+
+  /* Wallpaper still visible behind (dark terminal covers it) */
+  .os-wallpaper {
+    background: #0d0d0d !important;
+  }
+
+  .os-wallpaper video {
+    display: none !important;
+  }
+}
+

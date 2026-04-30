@@ -1,0 +1,81 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import type { LiquidGlassContent } from '../../types';
+
+interface Props {
+  content: LiquidGlassContent;
+}
+
+const { content } = Astro.props;
+const { education } = content;
+---
+
+<section
+  id="education"
+  style="padding: var(--section-padding-y) var(--section-padding-x);"
+>
+  <div class="flex flex-col items-center gap-[60px]">
+    <SectionLabel
+      label={education.label}
+      color="var(--accent-violet)"
+    />
+    <h2 class="section-title">
+      {education.subtitle || education.title}
+    </h2>
+
+    <div class="flex flex-col lg:flex-row gap-8 w-full">
+      <!-- Degrees -->
+      <div class="flex flex-col gap-6 flex-1">
+        {
+          education.degrees.map((degree) => (
+            <div class="glass-reveal glass-card flex flex-col gap-5 p-8">
+              <div class="inline-flex self-start px-3.5 py-1.5 rounded-full bg-[var(--accent-cyan-08)] border border-[var(--accent-cyan-18)]">
+                <span class="text-[var(--accent-cyan)] text-[11px] font-medium">
+                  {degree.badge}
+                </span>
+              </div>
+              <h3 class="text-[var(--text-primary)] text-lg font-semibold">
+                {degree.institution}
+              </h3>
+              <span class="text-[var(--text-secondary)] text-[13px]">
+                {degree.period}
+              </span>
+              {degree.details && (
+                <div class="flex items-center gap-2">
+                  <span class="text-[var(--accent-cyan)] text-[10px]">▸</span>
+                  <span class="text-[var(--accent-cyan)] text-[13px]">
+                    {degree.details}
+                  </span>
+                </div>
+              )}
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Certifications -->
+      <div class="flex flex-col gap-4 flex-1">
+        <h4 class="glass-reveal text-[var(--text-muted)] text-xs">
+          {education.certsTitle}
+        </h4>
+        {
+          education.certifications.map((cert) => (
+            <div class="glass-reveal flex items-center gap-4 p-4 rounded-xl bg-[var(--glass-subtle)] border border-[var(--border-glass)]">
+              <div class="w-8 h-8 rounded-full bg-[var(--bg-surface)] flex items-center justify-center shrink-0">
+                <span class="text-[var(--accent-blue)] text-sm">✓</span>
+              </div>
+              <div class="flex flex-col gap-1 flex-1">
+                <span class="text-[var(--text-primary)] text-sm font-medium">
+                  {cert.name}
+                </span>
+                <span class="text-[var(--text-muted)] text-[11px]">
+                  {cert.year}
+                </span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

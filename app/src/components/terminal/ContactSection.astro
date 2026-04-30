@@ -1,0 +1,80 @@
+---
+import GithubIcon from '../shared/icons/GithubIcon.astro';
+import LinkedinIcon from '../shared/icons/LinkedinIcon.astro';
+import EmailIcon from '../shared/icons/EmailIcon.astro';
+import type { TerminalContent } from '../../types';
+
+interface Props {
+  content: TerminalContent;
+}
+
+const { content } = Astro.props;
+const { contact } = content;
+const brand = (content.about?.avatarName ?? '').toLowerCase().replace(/\s+/g, '_');
+const command = (contact.command ?? 'ssh {brand}@collaborate').replace('{brand}', brand);
+---
+
+<section
+  id="contact"
+  class="flex flex-col items-center gap-10 font-mono relative"
+  style="padding: var(--section-padding-y) var(--section-padding-x); background: var(--bg-contact);"
+>
+  <!-- Top glow -->
+  <div
+    class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--green-terminal)] to-transparent"
+  >
+  </div>
+
+  <div class="terminal-prompt">
+    <span class="dollar">$</span>
+    <span class="cmd">{command}</span>
+  </div>
+
+  <h2
+    class="terminal-line text-2xl sm:text-3xl md:text-[42px] font-bold text-center tracking-[3px] text-[var(--text-primary)] leading-tight glitch-text"
+    data-text={contact.headline}
+  >
+    {contact.headline}
+  </h2>
+
+  <p
+    class="terminal-line text-[var(--text-secondary)] text-[15px] font-secondary text-center max-w-2xl"
+  >
+    {contact.subtitle}
+  </p>
+
+  <!-- Contact links -->
+  <div class="flex flex-wrap items-center justify-center gap-5">
+    <a
+      href={contact.links.github.url}
+      target="_blank"
+      rel="noopener"
+      class="contact-link github font-mono text-[13px] font-medium glitch-hover"
+    >
+      <GithubIcon class="w-[18px] h-[18px] stroke-[var(--green-terminal)]" />
+      <span class="text-[var(--green-terminal)]"
+        >{contact.links.github.label.toLowerCase()}</span
+      >
+    </a>
+    <a
+      href={contact.links.linkedin.url}
+      target="_blank"
+      rel="noopener"
+      class="contact-link linkedin font-mono text-[13px] font-medium glitch-hover"
+    >
+      <LinkedinIcon class="w-[18px] h-[18px] stroke-[var(--cyan-accent)]" />
+      <span class="text-[var(--cyan-accent)]"
+        >{contact.links.linkedin.label.toLowerCase()}</span
+      >
+    </a>
+    <a
+      href={contact.links.email.url === '#' ? 'mailto:#' : `mailto:${contact.links.email.url}`}
+      class="contact-link email font-mono text-[13px] font-medium glitch-hover"
+    >
+      <EmailIcon class="w-[18px] h-[18px] stroke-[var(--amber-warning)]" />
+      <span class="text-[var(--amber-warning)]">
+        {contact.links.email.label.toLowerCase()}
+      </span>
+    </a>
+  </div>
+</section>

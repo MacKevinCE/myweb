@@ -1,0 +1,123 @@
+---
+import type { LiquidGlassContent } from '../../types';
+
+interface Props {
+  content: LiquidGlassContent;
+}
+
+const { content } = Astro.props;
+const { hero, about } = content;
+---
+
+<section
+  id="hero"
+  class="relative min-h-screen flex flex-col justify-center items-center overflow-hidden"
+  style="background: var(--bg-hero);"
+>
+  <!-- Glow orb -->
+  <div
+    class="absolute w-[800px] h-[600px] top-[100px] left-1/2 -translate-x-1/2 rounded-full opacity-50 pointer-events-none"
+    style="background: radial-gradient(ellipse, var(--bg-hero-glow-1) 0%, var(--bg-hero-glow-2) 50%, transparent 100%);"
+  >
+  </div>
+
+  <!-- Deco lines -->
+  <div
+    class="absolute left-[100px] top-[350px] w-px h-[200px] hidden xl:block"
+    style="background: linear-gradient(180deg, var(--accent-blue-00), var(--accent-blue-40) 50%, var(--accent-blue-00));"
+  >
+  </div>
+  <div
+    class="absolute right-[100px] top-[350px] w-px h-[200px] hidden xl:block"
+    style="background: linear-gradient(180deg, var(--accent-violet-00), var(--accent-violet-40) 50%, var(--accent-violet-00));"
+  >
+  </div>
+
+  <div
+    class="relative z-10 flex flex-col items-center gap-7 px-[var(--section-padding-x)] text-center max-w-4xl"
+  >
+    <!-- Dynamic island -->
+    <div
+      class="glass-reveal flex items-center gap-2.5 px-5 py-2 rounded-full bg-[var(--glass-medium)] border border-[var(--glass-border-medium)]"
+    >
+      <span class="w-2 h-2 rounded-full bg-[var(--accent-cyan)]"></span>
+      <span class="text-[var(--text-secondary)] text-[13px] font-medium"
+        >{about.available}</span
+      >
+    </div>
+
+    <!-- Name -->
+    <h1
+      class="glass-reveal text-6xl sm:text-7xl md:text-8xl lg:text-[96px] font-light tracking-[-2px] text-[var(--text-primary)]"
+      style="font-family: var(--font-display);"
+    >
+      {about.avatarName}
+    </h1>
+
+    <!-- Role with decorative lines -->
+    <div class="glass-reveal flex items-center gap-4">
+      <div
+        class="w-10 h-px"
+        style="background: linear-gradient(90deg, var(--accent-blue-00), var(--accent-blue));"
+      >
+      </div>
+      <span
+        class="text-[var(--accent-blue)] text-xl tracking-[2px]"
+        style="font-family: var(--font-body);">{about.role}</span
+      >
+      <div
+        class="w-10 h-px"
+        style="background: linear-gradient(90deg, var(--accent-blue), var(--accent-blue-00));"
+      >
+      </div>
+    </div>
+
+    <!-- Tagline (italic serif) -->
+    <p
+      class="glass-reveal text-[var(--text-secondary)] text-2xl italic"
+      style="font-family: var(--font-display);"
+    >
+      {about.tagline}
+    </p>
+
+    <!-- CTAs -->
+    <div class="glass-reveal flex items-center gap-4 mt-4">
+      <a
+        href="#projects"
+        class="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-[14px] text-white text-[15px] font-semibold gradient-primary"
+        style="box-shadow: 0 4px 30px var(--accent-blue-40);"
+      >
+        <svg class="w-[18px] h-[18px] fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        {hero.ctaPrimary}
+      </a>
+      <a
+        href="#contact"
+        class="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-[14px] bg-[var(--glass-medium-12)] border border-[var(--glass-border-heavy)] text-[var(--text-primary)] text-[15px] font-medium hover:bg-[var(--glass-strong)] transition-all"
+      >
+        <svg class="w-[18px] h-[18px] fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        {hero.ctaSecondary}
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 flex flex-col items-center gap-2">
+    <div
+      class="w-6 h-10 rounded-xl border border-[var(--glass-border-strong)] flex justify-center pt-2"
+    >
+      <span class="w-1 h-2 rounded-full bg-[var(--accent-blue)]"></span>
+    </div>
+    <span
+      class="text-[var(--text-muted)] text-[11px] tracking-[2px] uppercase"
+      style="font-family: var(--font-body);">{hero.scrollHint}</span
+    >
+  </div>
+</section>

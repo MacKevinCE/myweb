@@ -1,0 +1,199 @@
+/* ============================================
+   NOTES WINDOW (Blog/Articles)
+   ============================================ */
+
+.os-window--notes {
+  display: flex;
+  flex-direction: column;
+}
+
+.nt-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.nt-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--os-fill);
+  border-right: 1px solid var(--os-fill-border);
+}
+
+.nt-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--os-fill-border);
+  color: var(--os-text-muted);
+}
+
+.nt-search {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--os-text-primary);
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-13);
+}
+
+.nt-search::placeholder {
+  color: var(--os-text-muted);
+}
+
+.nt-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.nt-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 14px;
+  border: none;
+  border-bottom: 1px solid var(--os-fill-border);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.nt-item:hover {
+  background: var(--os-fill-border);
+}
+
+.nt-item--active {
+  background: color-mix(in srgb, var(--os-accent) 12%, transparent);
+}
+
+.nt-item--active:hover {
+  background: color-mix(in srgb, var(--os-accent) 16%, transparent);
+}
+
+.nt-item-title {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-13);
+  font-weight: 600;
+  color: var(--os-text-primary);
+  line-height: 1.3;
+}
+
+.nt-item--active .nt-item-title {
+  color: var(--os-accent);
+}
+
+.nt-item-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-10);
+  color: var(--os-text-muted);
+}
+
+.nt-item-summary {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-11);
+  color: var(--os-text-secondary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Content area */
+.nt-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 32px;
+  min-width: 0;
+}
+
+.nt-article-title {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-24);
+  font-weight: 700;
+  color: var(--os-text-primary);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.nt-article-meta {
+  display: flex;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-12);
+  color: var(--os-text-muted);
+  margin-bottom: 12px;
+}
+
+.nt-article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 20px;
+}
+
+.nt-tag {
+  padding: 2px 8px;
+  border-radius: var(--os-radius-xs);
+  background: var(--os-fill);
+  border: 1px solid var(--os-fill-border);
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-10);
+  font-weight: 500;
+  color: var(--os-text-secondary);
+}
+
+/* Article body — rendered markdown */
+.nt-article-body {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-14);
+  line-height: 1.7;
+  color: var(--os-text-secondary);
+}
+
+.nt-h2 {
+  font-size: var(--os-fs-16);
+  font-weight: 700;
+  color: var(--os-text-primary);
+  margin: 24px 0 8px;
+}
+
+.nt-p {
+  margin: 0 0 12px;
+}
+
+.nt-list-ul, .nt-list-ol {
+  margin: 0 0 12px;
+  padding-left: 20px;
+}
+
+.nt-list-ul li, .nt-list-ol li {
+  margin-bottom: 4px;
+}
+
+.nt-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--os-fs-12);
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--os-fill);
+  color: var(--os-accent);
+}
+
+.nt-article-body strong {
+  font-weight: 600;
+  color: var(--os-text-primary);
+}
+
+/* Scrollbars */
+.nt-list::-webkit-scrollbar, .nt-content::-webkit-scrollbar { width: 6px; }
+.nt-list::-webkit-scrollbar-track, .nt-content::-webkit-scrollbar-track { background: transparent; }
+.nt-list::-webkit-scrollbar-thumb, .nt-content::-webkit-scrollbar-thumb { background: var(--os-fill-border); border-radius: 3px; }

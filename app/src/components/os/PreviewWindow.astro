@@ -1,0 +1,107 @@
+---
+import { windowTitles, W, uiIcons } from '../../data/os-apps';
+import WindowChrome from './shared/WindowChrome.astro';
+import ImageWithFallback from '../shared/ImageWithFallback.astro';
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+const certs = content.education?.certifications ?? [];
+const pv = content.preview;
+---
+
+<div
+  class="os-window os-window--preview"
+  id="preview-window"
+  style="display: none;"
+>
+  <WindowChrome title={windowTitles[W.PREVIEW]} windowId="preview" titleClass="os-window-title--inter" />
+
+  <div class="pv-body">
+    <!-- Sidebar: certificate list -->
+    <div class="pv-sidebar">
+      {certs.map((cert, i) => (
+        <button
+          class={`pv-thumb ${i === 0 ? 'pv-thumb--active' : ''}`}
+          data-pv-index={i}
+        >
+          <ImageWithFallback src={cert.image} alt={cert.name} fallback={cert.name[0]} imgClass="pv-thumb-img" fallbackClass="pv-thumb-fallback" loading="lazy" />
+          <span class="pv-thumb-name">{cert.name}</span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Main viewer -->
+    <div class="pv-main">
+      <div class="pv-image-wrap" id="pv-image-wrap">
+        {certs.length > 0 ? (
+          <ImageWithFallback src={certs[0].image} alt={certs[0].name} fallback={certs[0].name[0]} imgClass="pv-image" fallbackClass="pv-image-fallback" />
+        ) : (
+          <span class="pv-no-image">{pv.noImage}</span>
+        )}
+      </div>
+
+      <!-- Bottom toolbar -->
+      <div class="pv-toolbar">
+        <button class="pv-nav-btn" id="pv-prev" aria-label="Previous">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <Fragment set:html={uiIcons.chevronLeft} />
+          </svg>
+        </button>
+
+        <span class="pv-counter" id="pv-counter">
+          {certs.length > 0 ? `1 ${pv.of} ${certs.length}` : ''}
+        </span>
+
+        <button class="pv-nav-btn" id="pv-next" aria-label="Next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </button>
+
+        <div class="pv-toolbar-spacer"></div>
+
+        <div class="pv-info" id="pv-info">
+          <span class="pv-issuer" id="pv-issuer">
+            {certs.length > 0 ? `${pv.issuer} ${certs[0].issuer}` : ''}
+          </span>
+        </div>
+
+        <a
+          class="pv-verify-btn"
+          id="pv-verify"
+          href={certs.length > 0 && certs[0].verifyUrl ? certs[0].verifyUrl : '#'}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={certs.length > 0 && certs[0].verifyUrl ? '' : 'display:none;'}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <Fragment set:html={uiIcons.externalLink} />
+          </svg>
+          <span>{pv.verify}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cert data for JS -->
+  <script type="application/json" id="pv-data" set:html={JSON.stringify(certs.map(c => ({
+    name: c.name,
+    image: c.image,
+    issuer: c.issuer,
+    verifyUrl: c.verifyUrl || '',
+    year: c.year,
+  })))} />
+  <script type="application/json" id="pv-i18n" set:html={JSON.stringify(pv)} />
+</div>
+
+<style is:global>
+  @import '../../styles/os/preview.css';
+</style>
+
+<script>
+  import '../../scripts/os/preview';
+</script>

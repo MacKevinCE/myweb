@@ -1,0 +1,17 @@
+---
+import { tagColor } from '../../utils/tags';
+
+interface Props {
+  tag: string;
+  size?: 'sm' | 'md';
+}
+
+const { tag, size = 'sm' } = Astro.props;
+const c = tagColor(tag);
+const cls =
+  size === 'md'
+    ? 'px-2.5 py-1 text-[11px] font-mono'
+    : 'px-2 py-0.5 text-[10px] font-mono';
+---
+
+<span class={cls} style={`background: ${size === 'md' ? c.bgStrong : c.bg}; color: ${c.text};`}>{tag}</span>

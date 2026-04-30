@@ -1,0 +1,100 @@
+---
+import { windowTitles, W, uiIcons } from '../../data/os-apps';
+import WindowChrome from './shared/WindowChrome.astro';
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+const bookmarks = content.browser?.bookmarks ?? [];
+---
+
+<div
+  class="os-window os-window--browser"
+  id="browser-window"
+  style="display: none;"
+>
+  <WindowChrome title={windowTitles[W.BROWSER]} windowId="browser" titleClass="os-window-title--inter" />
+
+  <!-- Toolbar -->
+  <div class="brw-toolbar">
+    <!-- Home button -->
+    <button class="brw-toolbar-btn" id="brw-home" aria-label={content.browser.home} title={content.browser.home}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <Fragment set:html={uiIcons.home} />
+      </svg>
+    </button>
+    <!-- Reload button -->
+    <button class="brw-toolbar-btn" id="brw-reload" aria-label={content.browser.reload} title={content.browser.reload}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <Fragment set:html={uiIcons.refreshCw} />
+      </svg>
+    </button>
+
+    <!-- URL display (read-only) -->
+    <div class="brw-url-display" id="brw-url-display">
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="brw-lock-icon">
+        <Fragment set:html={uiIcons.lock} />
+      </svg>
+      <span class="brw-url-text" id="brw-url-text"></span>
+    </div>
+
+    <!-- Open external button -->
+    <button class="brw-toolbar-btn" id="brw-external" aria-label={content.browser.openExternal} title={content.browser.openExternal}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <Fragment set:html={uiIcons.externalLink} />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Bookmarks Bar -->
+  <div class="brw-bookmarks" id="brw-bookmarks">
+    {bookmarks.map((bm) => (
+      <button class="brw-bookmark" data-brw-url={bm.url}>
+        <img class="brw-bookmark-favicon" src={`https://www.google.com/s2/favicons?domain=${new URL(bm.url).hostname}&sz=16`} width="16" height="16" alt="" loading="lazy" />
+        <span class="brw-bookmark-name">{bm.name}</span>
+      </button>
+    ))}
+  </div>
+
+  <!-- Divider -->
+  <div class="os-divider"></div>
+
+  <!-- Loading bar -->
+  <div class="brw-loading" id="brw-loading"></div>
+
+  <!-- Start Page (visible by default) -->
+  <div class="brw-start" id="brw-start">
+    <span class="brw-start-title">{content.browser.favorites}</span>
+    <div class="brw-start-grid">
+      {bookmarks.map((bm) => (
+        <button class="brw-tile" data-brw-url={bm.url}>
+          <img class="brw-tile-favicon" src={`https://www.google.com/s2/favicons?domain=${new URL(bm.url).hostname}&sz=32`} width="32" height="32" alt="" loading="lazy" />
+          <span class="brw-tile-name">{bm.name}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Web content (hidden by default) -->
+  <div class="brw-content" id="brw-content" style="display: none;">
+    <iframe
+      id="brw-iframe"
+      class="brw-iframe"
+      title={content.browser.title}
+      sandbox="allow-scripts allow-popups allow-forms allow-modals"
+      referrerpolicy="no-referrer"
+      loading="lazy"
+    ></iframe>
+    <!-- Fallback if iframe blocked -->
+    <div class="brw-fallback" id="brw-fallback" style="display: none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--os-text-muted);">
+        <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
+      </svg>
+      <span class="brw-fallback-text">{content.browser.contentBlocked}</span>
+      <a class="brw-fallback-link" id="brw-fallback-link" href="#" target="_blank" rel="noopener noreferrer">{content.browser.openInNewTab}</a>
+    </div>
+  </div>
+</div>

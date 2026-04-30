@@ -1,0 +1,91 @@
+---
+import { languages } from '../../utils/i18n';
+
+interface Props {
+  currentLang: string;
+  selectLabel?: string;
+}
+
+const { currentLang, selectLabel = '// select language' } = Astro.props;
+const otherLangs = languages.filter((l) => l !== currentLang);
+---
+
+{otherLangs.length > 0 && (
+<div class="lang-dropdown relative">
+  <button
+    class="lang-toggle inline-flex items-center gap-2 px-3 py-1 border border-[var(--border-primary)] text-[var(--text-muted)] text-xs font-mono hover:border-[var(--green-terminal)] hover:text-[var(--green-terminal)] transition-all duration-200 cursor-pointer bg-transparent"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    <span class="text-[var(--green-terminal)]">&gt;</span>
+    <span>lang [{currentLang}]</span>
+    <span
+      class="text-[var(--text-muted)] transition-transform duration-200 arrow"
+      >▾</span
+    >
+  </button>
+
+  <div
+    class="lang-menu absolute right-0 top-full mt-1 min-w-[160px] border border-[var(--border-primary)] bg-[var(--bg-elevated)] shadow-lg shadow-black/40 opacity-0 invisible translate-y-[-4px] transition-all duration-150 z-50"
+  >
+    <div
+      class="px-3 py-1.5 text-[10px] text-[var(--text-muted)] font-mono border-b border-[var(--border-primary)]"
+    >
+      {selectLabel}
+    </div>
+    {
+      otherLangs.map((lang) => (
+        <a
+          href={`/terminal/${lang}`}
+          data-lang-switch={lang}
+          aria-label={`lang --set ${lang}`}
+          class="flex items-center gap-2 px-3 py-1.5 text-[var(--text-muted)] text-xs font-mono hover:bg-[var(--green-terminal)]/10 hover:text-[var(--green-terminal)] transition-all duration-150"
+        >
+          <span class="text-[var(--green-terminal)]">$</span>
+          <span>lang --set {lang}</span>
+        </a>
+      ))
+    }
+  </div>
+</div>
+)}
+
+<style>
+  .lang-dropdown.open .lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .lang-dropdown.open .arrow {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.lang-dropdown').forEach((dropdown) => {
+    const toggle = dropdown.querySelector('.lang-toggle');
+
+    toggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.lang-dropdown.open').forEach((d) => {
+      d.classList.remove('open');
+      d.querySelector('.lang-toggle')?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Preserve /terminal/ prefix if present, otherwise navigate to root /{lang}
+  document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const lang = a.dataset.langSwitch;
+      const prefix = window.location.pathname.startsWith('/terminal/') ? '/terminal/' : '/';
+      window.location.href = `${prefix}${lang}`;
+    });
+  });
+</script>

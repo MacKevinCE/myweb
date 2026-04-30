@@ -1,0 +1,650 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   TERMINAL HACKER THEME — Design Tokens
+   Mapped from Pencil variables
+   ============================================ */
+
+:root {
+  /* Backgrounds */
+  --bg-primary: #0a0a0a;
+  --bg-elevated: #0f0f0f;
+  --bg-surface: #141414;
+  --bg-card: #1a1a1a;
+  --bg-deep: #050505;
+  --bg-hero-mid: #0F1A14;
+
+  /* Semantic backgrounds */
+  --bg-hero: radial-gradient(ellipse at center 40%, var(--bg-hero-mid) 0%, var(--bg-primary) 70%, var(--bg-deep) 100%);
+  --bg-contact: radial-gradient(ellipse at center 30%, var(--bg-hero-mid) 0%, var(--bg-primary) 80%);
+
+  /* Palette with alpha */
+  --palette-0-alpha: #10b98120;
+  --palette-1-alpha: #06b6d420;
+
+  /* Borders */
+  --border-primary: #2a2a2a;
+  --border-accent: #333333;
+
+  /* Text */
+  --text-primary: #fafafa;
+  --text-secondary: #6b7280;
+  --text-muted: #4b5563;
+
+  /* Terminal Colors */
+  --green-terminal: #10b981;
+  --green-glow: #10b98140;
+  --cyan-accent: #06b6d4;
+  --amber-warning: #f59e0b;
+  --magenta-accent: #ec4899;
+  --red-alert: #ef4444;
+
+  /* Accent palette (cyclic) */
+  --palette-0: var(--green-terminal);
+  --palette-1: var(--cyan-accent);
+  --palette-2: var(--amber-warning);
+  --palette-3: var(--magenta-accent);
+  --palette-count: 4;
+
+  /* Code Syntax (semantic tokens) */
+  --code-keyword: var(--magenta-accent);
+  --code-type: var(--cyan-accent);
+  --code-string: var(--amber-warning);
+  --code-number: var(--amber-warning);
+  --code-value: var(--green-terminal);
+
+  /* Fonts */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  --font-secondary: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --section-padding-y: 80px;
+  --section-padding-x: 120px;
+  --content-gap: 48px;
+}
+
+/* ============================================
+   FONT LOADING
+   ============================================ */
+@layer base {
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  .font-secondary {
+    font-family: var(--font-secondary);
+  }
+
+  html,
+  body {
+    overscroll-behavior: none;
+    height: 100%;
+  }
+
+  html {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    scroll-behavior: smooth;
+    scroll-padding-top: 3.5rem;
+  }
+
+  body {
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: var(--green-terminal);
+    color: var(--bg-primary);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--green-terminal);
+  }
+}
+
+/* ============================================
+   CRT SCANLINES & CURVATURE
+   ============================================ */
+
+.crt-container {
+  position: relative;
+  overflow-x: hidden;
+}
+
+.crt-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(16, 185, 129, 0.015) 2px,
+    rgba(16, 185, 129, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.crt-container::after {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    transparent 70%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ============================================
+   TERMINAL PROMPT LINE
+   ============================================ */
+
+.terminal-prompt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.terminal-prompt .dollar {
+  color: var(--green-terminal);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.terminal-prompt .cmd {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* ============================================
+   BLINKING CARET
+   ============================================ */
+
+.caret {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background-color: var(--green-terminal);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   GLITCH EFFECT (hover micro-interaction)
+   ============================================ */
+
+.glitch-hover {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.glitch-hover:hover {
+  text-shadow:
+    -2px 0 var(--cyan-accent),
+    2px 0 var(--magenta-accent);
+  animation: glitch-micro 0.3s ease;
+}
+
+@keyframes glitch-micro {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 1px);
+  }
+  40% {
+    transform: translate(2px, -1px);
+  }
+  60% {
+    transform: translate(-1px, 0);
+  }
+  80% {
+    transform: translate(1px, 1px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Big glitch for name */
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.glitch-text:hover::before {
+  opacity: 0.8;
+  color: var(--cyan-accent);
+  animation: glitch-1 0.4s linear;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.glitch-text:hover::after {
+  opacity: 0.8;
+  color: var(--magenta-accent);
+  animation: glitch-2 0.4s linear;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-1 {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-3px, -1px);
+  }
+  40% {
+    transform: translate(3px, 1px);
+  }
+  60% {
+    transform: translate(-2px, 0);
+  }
+  80% {
+    transform: translate(2px, -1px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-2 {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(3px, 1px);
+  }
+  40% {
+    transform: translate(-3px, -1px);
+  }
+  60% {
+    transform: translate(2px, 0);
+  }
+  80% {
+    transform: translate(-2px, 1px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* ============================================
+   BOOT SEQUENCE
+   ============================================ */
+
+.boot-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 80px;
+  background: var(--bg-primary);
+  cursor: pointer;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+}
+
+.boot-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.boot-line {
+  opacity: 0;
+  font-size: 13px;
+  line-height: 1.8;
+  transition: opacity 0.15s ease;
+}
+
+.boot-line.visible {
+  opacity: 1;
+}
+
+.boot-line.ok {
+  color: var(--green-terminal);
+}
+.boot-line.info {
+  color: var(--text-muted);
+}
+.boot-line.warn {
+  color: var(--amber-warning);
+}
+.boot-line.accent {
+  color: var(--cyan-accent);
+}
+
+/* ============================================
+   TERMINAL LINE REVEAL (ScrollTrigger)
+   ============================================ */
+
+.terminal-line {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+/* Code syntax highlighting (semantic tokens) */
+.terminal-code-line    { font-family: var(--font-mono); font-size: 13px; white-space: pre; color: var(--text-primary); }
+.terminal-code-keyword { color: var(--code-keyword); }
+.terminal-code-type    { color: var(--code-type); }
+.terminal-code-string  { color: var(--code-string); }
+.terminal-code-number  { color: var(--code-number); }
+.terminal-code-value   { color: var(--code-value); }
+
+/* ============================================
+   PROJECT CARDS — FILE DECRYPT EFFECT
+   ============================================ */
+
+.project-card {
+  border: 1px solid var(--border-primary);
+  background: var(--bg-primary);
+  padding: 24px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  border-color: var(--green-terminal);
+  box-shadow: 0 0 20px var(--green-glow);
+}
+
+/* ============================================
+   EXPERIENCE TIMELINE
+   ============================================ */
+
+/* ============================================
+   FILTER CHIPS
+   ============================================ */
+
+.filter-chip {
+  padding: 6px 16px;
+  border: 1px solid var(--border-primary);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+  border-color: var(--green-terminal);
+  color: var(--green-terminal);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+/* ============================================
+   SKILL BARS
+   ============================================ */
+
+.skill-bar-fill {
+  height: 100%;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================
+   CONTACT LINKS
+   ============================================ */
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--bg-surface);
+  transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.contact-link.github {
+  border: 1px solid var(--green-terminal);
+}
+.contact-link.linkedin {
+  border: 1px solid var(--cyan-accent);
+}
+.contact-link.email {
+  border: 1px solid var(--amber-warning);
+}
+
+/* ============================================
+   MOBILE HAMBURGER MENU
+   ============================================ */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--green-terminal);
+  transition: all 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg-primary);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  transition: right 0.4s ease;
+}
+
+.mobile-nav.open {
+  right: 0;
+}
+
+.mobile-nav a {
+  font-size: 18px;
+  padding: 16px 0;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-primary);
+  transition: color 0.2s ease;
+}
+
+.mobile-nav a:hover {
+  color: var(--green-terminal);
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+@media (max-width: 1440px) {
+  :root {
+    --section-padding-x: 80px;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --section-padding-x: 40px;
+    --section-padding-y: 60px;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-padding-x: 24px;
+    --section-padding-y: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-padding-x: 16px;
+    --section-padding-y: 32px;
+  }
+}
+
+/* ============================================
+   Language Suggestion Banner — Terminal
+   ============================================ */
+
+[data-theme="terminal"].lang-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 24px;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--green-terminal);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  transform: translateY(100%);
+  opacity: 0;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+[data-theme="terminal"].lang-banner .lang-banner__badge {
+  display: none;
+}
+
+[data-theme="terminal"].lang-banner.lang-banner--open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+[data-theme="terminal"].lang-banner .lang-banner__text {
+  color: var(--text-secondary);
+}
+
+[data-theme="terminal"].lang-banner .lang-banner__text::before {
+  content: '>';
+  color: var(--green-terminal);
+  margin-right: 6px;
+}
+
+[data-theme="terminal"].lang-banner .lang-banner__actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+[data-theme="terminal"].lang-banner .lang-banner__btn {
+  padding: 4px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+[data-theme="terminal"].lang-banner .lang-banner__accept {
+  color: var(--bg-primary);
+  background: var(--green-terminal);
+  border: 1px solid var(--green-terminal);
+  text-decoration: none;
+}
+
+[data-theme="terminal"].lang-banner .lang-banner__accept:hover {
+  background: transparent;
+  color: var(--green-terminal);
+}
+
+[data-theme="terminal"].lang-banner .lang-banner__dismiss {
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border-primary);
+}
+
+[data-theme="terminal"].lang-banner .lang-banner__dismiss:hover {
+  border-color: var(--text-muted);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  [data-theme="terminal"].lang-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px 16px;
+  }
+}

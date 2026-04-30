@@ -1,0 +1,71 @@
+---
+import { windowTitles, W } from '../../data/os-apps';
+import WindowChrome from './shared/WindowChrome.astro';
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+
+// Build serializable profile data for the terminal filesystem
+const terminalData = {
+  about: content.about,
+  skills: content.skills,
+  experience: content.experience,
+  projects: content.projects,
+  education: content.education,
+  contact: content.contact,
+};
+---
+
+<div
+  class="os-window os-window--terminal"
+  id="terminal-window"
+  style="display: none;"
+>
+  <WindowChrome title={windowTitles[W.TERMINAL]} windowId="terminal" />
+
+  <div class="term-body" id="term-body">
+    <div class="term-output" id="term-output"></div>
+    <div class="term-input-line">
+      <span class="term-prompt" id="term-prompt">kevin@portfolio:~$</span>
+      <input
+        class="term-input"
+        id="term-input"
+        type="text"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+      />
+    </div>
+    <!-- Mobile suggestion chips -->
+    <div class="term-suggestions" id="term-suggestions">
+      <button class="term-chip" data-cmd="help">help</button>
+      <button class="term-chip" data-cmd="ls">ls</button>
+      <button class="term-chip" data-cmd="whoami">whoami</button>
+      <button class="term-chip" data-cmd="skills">skills</button>
+      <button class="term-chip" data-cmd="projects">projects</button>
+      <button class="term-chip" data-cmd="experience">experience</button>
+      <button class="term-chip" data-cmd="contact">contact</button>
+      <button class="term-chip" data-cmd="neofetch">neofetch</button>
+      <button class="term-chip" data-cmd="set">set</button>
+      <button class="term-chip" data-cmd="clear">clear</button>
+    </div>
+  </div>
+
+  <!-- Profile data for terminal filesystem -->
+  <script type="application/json" id="term-data" set:html={JSON.stringify(terminalData)} />
+  <!-- Terminal UI i18n strings -->
+  <script type="application/json" id="term-i18n" set:html={JSON.stringify(content.terminal)} />
+</div>
+
+<style is:global>
+  @import '../../styles/os/terminal.css';
+</style>
+
+<script>
+  import '../../scripts/os/terminal/index';
+</script>

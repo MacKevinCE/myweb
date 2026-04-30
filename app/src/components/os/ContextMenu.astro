@@ -1,0 +1,16 @@
+---
+import type { OsContent } from '../../types';
+interface Props { content: OsContent; }
+const { content } = Astro.props;
+const cm = content.contextMenu;
+---
+
+<div class="ctx-menu" id="ctx-menu" style="display: none;">
+  <div class="ctx-menu-items" id="ctx-menu-items"></div>
+</div>
+
+<script type="application/json" id="ctx-i18n" set:html={JSON.stringify(cm)} />
+
+<style is:global>
+  @import '../../styles/os/context-menu.css';
+</style>

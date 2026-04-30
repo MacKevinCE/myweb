@@ -1,0 +1,50 @@
+{
+  "langSwitch": {
+    "selectLabel": "Idioma"
+  },
+  "hero": {
+    "ctaPrimary": "Ver Proyectos",
+    "ctaSecondary": "Descargar CV",
+    "scrollHint": "Desplaza para explorar"
+  },
+  "about": {
+    "label": "SOBRE MÍ",
+    "bioTitle": "Construyendo el futuro,\nuna app a la vez.",
+    "langLabel": "Idiomas:"
+  },
+  "skills": {
+    "label": "TECNOLOGÍAS",
+    "title": "{count} tecnologías",
+    "subtitle": "Herramientas del oficio",
+    "levelExpert": "Experto",
+    "levelAdvanced": "Avanzado",
+    "levelIntermediate": "Intermedio"
+  },
+  "experience": {
+    "label": "EXPERIENCIA",
+    "title": "{count} posiciones",
+    "subtitle": "El camino recorrido"
+  },
+  "projects": {
+    "label": "PROYECTOS",
+    "title": "Trabajos seleccionados",
+    "subtitle": "Trabajos seleccionados",
+    "allLabel": "Todos",
+    "featuredBadge": "Proyecto Destacado",
+    "openBtn": "Ver en GitHub"
+  },
+  "education": {
+    "label": "EDUCACIÓN Y CERTS",
+    "title": "Fundamentos y credenciales",
+    "subtitle": "Fundamentos y credenciales",
+    "certsTitle": "Certificaciones"
+  },
+  "contact": {
+    "headline": "Construyamos algo\ngenial juntos",
+    "subtitle": "¿Tienes un proyecto en mente? Siempre estoy abierto a discutir nuevas oportunidades, colaboraciones o simplemente hablar sobre Swift e iOS.",
+    "emailLabel": "Escríbeme"
+  },
+  "footer": {
+    "builtWith": "Diseñado con amor y Swift"
+  }
+}

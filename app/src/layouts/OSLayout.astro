@@ -1,0 +1,96 @@
+---
+import '../styles/os/index.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: string;
+}
+
+const { title, description, lang } = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} data-os-mode="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Mac Kevin" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#1a1a2e" id="meta-theme-color" />
+    <title>{title}</title>
+
+    <!-- Resolve appearance before paint to prevent flash -->
+    <script is:inline>
+      (function() {
+        try {
+          var s = JSON.parse(localStorage.getItem('os-settings') || '{}');
+          var pref = s.appearance || 'auto';
+          var mode = pref === 'auto'
+            ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+            : pref;
+          document.documentElement.setAttribute('data-os-mode', mode);
+          var mc = document.getElementById('meta-theme-color');
+          if (mc) mc.setAttribute('content', mode === 'light' ? '#f0f0f5' : '#1a1a2e');
+          // Accessibility — apply before paint
+          if (s.reduceMotion) document.documentElement.classList.add('os-reduce-motion');
+          if (s.highContrast) document.documentElement.classList.add('os-high-contrast');
+          // Font size scale
+          var fss = { '-1': 0.85, '0': 1, '1': 1.15, '2': 1.3 };
+          var sc = fss[s.fontSize || 0] || 1;
+          if (sc !== 1) {
+            [7,9,10,11,12,13,14,16,18,20,22,24,26].forEach(function(px) {
+              document.documentElement.style.setProperty('--os-fs-' + px, Math.round(px * sc) + 'px');
+            });
+          }
+        } catch(e) {}
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Boot splash — black screen until page is ready (like device powering on) -->
+    <div id="os-boot-splash" style="position:fixed;inset:0;z-index:99999;background:#000;display:flex;align-items:center;justify-content:center;transition:opacity 0.6s ease;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 128 128" fill="none" style="opacity:0.8;">
+        <rect x="8" y="20" width="112" height="96" rx="12" fill="transparent" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
+        <rect x="8" y="20" width="112" height="24" rx="12" fill="rgba(255,255,255,0.08)"/>
+        <rect x="8" y="32" width="112" height="12" fill="rgba(255,255,255,0.08)"/>
+        <circle cx="26" cy="32" r="4" fill="#ef4444" opacity="0.6"/>
+        <circle cx="40" cy="32" r="4" fill="#fbbf24" opacity="0.6"/>
+        <circle cx="54" cy="32" r="4" fill="#34d399" opacity="0.6"/>
+        <text x="64" y="88" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="36" font-weight="700" fill="white">MK</text>
+      </svg>
+    </div>
+    <slot />
+    <script is:inline>
+      window.addEventListener('load', function() {
+        var splash = document.getElementById('os-boot-splash');
+        if (!splash) return;
+        splash.style.opacity = '0';
+        splash.addEventListener('transitionend', function() {
+          splash.remove();
+        });
+      });
+    </script>
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      }
+    </script>
+  </body>
+</html>

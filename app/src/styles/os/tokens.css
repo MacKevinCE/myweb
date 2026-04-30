@@ -1,0 +1,139 @@
+/* ============================================
+   OS THEME — Desktop Design Tokens
+   ============================================ */
+
+:root {
+  /* Accent */
+  --os-accent: #3B82F6;
+
+  /* Backgrounds */
+  --os-bg-desktop: #1a1a2e;
+  --os-bg-glass: #1a1a2ecc;
+
+  /* Text scale */
+  --os-text-primary: #f0f0f5;
+  --os-text-secondary: #a0a0bc;
+  --os-text-muted: #ffffff80;
+
+  /* Fills / surfaces */
+  --os-fill: rgba(255, 255, 255, 0.03);
+  --os-fill-border: rgba(255, 255, 255, 0.08);
+  --os-fill-strong: rgba(255, 255, 255, 0.15);
+
+  /* Icon gradients */
+  --os-green-from: #34d399;
+  --os-green-to: #10b981;
+  --os-yellow-from: #fcd34d;
+  --os-yellow-to: #f59e0b;
+  --os-blue-from: #60a5fa;
+  --os-blue-to: #3b82f6;
+  --os-purple-from: #a78bfa;
+  --os-purple-to: #8b5cf6;
+  --os-pink-from: #f472b6;
+  --os-pink-to: #ec4899;
+  --os-cyan-from: #22d3ee;
+  --os-cyan-to: #06b6d4;
+  --os-orange-from: #f97316;
+  --os-orange-to: #ea580c;
+
+  /* Extra semantic colors */
+  --os-red-from: #EF4444;
+  --os-red-to: #DC2626;
+  --os-amber-from: #F59E0B;
+  --os-amber-to: #D97706;
+
+  /* Settings accent color picker */
+  --os-stg-blue: #3B82F6;
+  --os-stg-purple: #8B5CF6;
+  --os-stg-pink: #EC4899;
+  --os-stg-red: #EF4444;
+  --os-stg-amber: #F59E0B;
+  --os-stg-green: #10B981;
+
+  /* Accent palette (cyclic) */
+  --palette-0: #34D399;
+  --palette-1: #22D3EE;
+  --palette-2: #FBBF24;
+  --palette-3: #F472B6;
+  --palette-count: 4;
+
+  /* Glassmorphism */
+  --os-glass-border: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.21) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  --os-glass-tint: #8080ff06;
+
+  /* Blur scale */
+  --os-blur-sm: 24px;   /* backdrop overlays, lockscreen */
+  --os-blur-lg: 60px;   /* glass panels, windows, menubar, dock */
+
+  /* Radius scale */
+  --os-radius-xs: 4px;     /* badges, small chips */
+  --os-radius-sm: 8px;     /* buttons, inputs, sidebar items */
+  --os-radius-md: 12px;    /* nav items, containers, menus */
+  --os-radius-lg: 16px;    /* cards, dock icons */
+  --os-radius-window: 24px;/* windows, dock, panels */
+
+  /* Box shadows */
+  --os-shadow-window: 0 12px 50px rgba(0, 0, 0, 0.15);
+  --os-shadow-popup: 0 8px 40px rgba(0, 0, 0, 0.3);
+  --os-shadow-dock: 0 8px 40px rgba(0, 0, 0, 0.12), inset 0 0.5px 0 rgba(255, 255, 255, 0.2);
+
+  /* Sizing */
+  --os-menubar-h: 28px;
+  --os-bar-h: 38px;
+  --os-sidebar-w: 180px;
+
+  /* Font */
+  --os-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Font size scale (overridden by accessibility settings) */
+  --os-fs-7: 7px;
+  --os-fs-9: 9px;
+  --os-fs-10: 10px;
+  --os-fs-11: 11px;
+  --os-fs-12: 12px;
+  --os-fs-13: 13px;
+  --os-fs-14: 14px;
+  --os-fs-16: 16px;
+  --os-fs-18: 18px;
+  --os-fs-20: 20px;
+  --os-fs-22: 22px;
+  --os-fs-24: 24px;
+  --os-fs-26: 26px;
+
+  /* Web border — inset around the entire viewport */
+  --os-web-border: 12px;
+}
+
+/* ============================================
+   LIGHT MODE — Token Overrides
+   ============================================ */
+
+:root[data-os-mode="light"] {
+  --os-bg-desktop: #f0f0f5;
+  --os-bg-glass: rgba(255, 255, 255, 0.85);
+
+  --os-text-primary: #1d1d1f;
+  --os-text-secondary: #86868b;
+  --os-text-muted: rgba(0, 0, 0, 0.4);
+
+  --os-fill: rgba(0, 0, 0, 0.03);
+  --os-fill-border: rgba(0, 0, 0, 0.08);
+  --os-fill-strong: rgba(0, 0, 0, 0.12);
+
+  --os-glass-border: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.06) 0%,
+    rgba(0, 0, 0, 0.015) 50%,
+    rgba(0, 0, 0, 0.04) 100%
+  );
+  --os-glass-tint: rgba(255, 255, 255, 0.1);
+
+  --os-shadow-window: 0 12px 50px rgba(0, 0, 0, 0.1), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+  --os-shadow-popup: 0 8px 40px rgba(0, 0, 0, 0.15);
+  --os-shadow-dock: 0 8px 40px rgba(0, 0, 0, 0.08), inset 0 0.5px 0 rgba(255, 255, 255, 0.6);
+}

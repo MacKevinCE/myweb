@@ -1,0 +1,23 @@
+---
+interface Props {
+  command: string;
+  subtitle?: string;
+}
+
+const { command, subtitle } = Astro.props;
+---
+
+<div class="flex flex-col gap-4">
+  <div class="terminal-prompt">
+    <span class="dollar">$</span>
+    <span class="cmd">{command}</span>
+  </div>
+  {
+    subtitle && (
+      <span class="terminal-line text-[var(--text-muted)] text-[13px] font-secondary">
+        {subtitle}
+      </span>
+    )
+  }
+  <div class="h-px bg-[var(--border-primary)]"></div>
+</div>

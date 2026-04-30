@@ -1,0 +1,112 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import TagPill from './TagPill.astro';
+import { cycleColor } from '../../utils/colors';
+import type { LiquidGlassContent } from '../../types';
+
+interface Props {
+  content: LiquidGlassContent;
+}
+
+const { content } = Astro.props;
+const { experience } = content;
+
+const dotColors = [cycleColor(0), cycleColor(1), cycleColor(2), cycleColor(3)];
+const borderColors = ['var(--accent-blue-20)', 'var(--accent-violet-15)', 'var(--accent-cyan-18)', 'var(--glass-light)'];
+
+const jobCount = experience.jobs?.length ?? 0;
+const expSubtitle =
+  experience.subtitle?.replace('{count}', String(jobCount)) ?? '';
+---
+
+{
+  experience.jobs && experience.jobs.length > 0 && (
+    <section
+      id="experience"
+      style="padding: var(--section-padding-y) var(--section-padding-x);"
+    >
+      <div class="flex flex-col items-center gap-[60px]">
+        <SectionLabel
+          label={experience.label}
+          color="var(--accent-cyan)"
+        />
+        <h2 class="section-title">
+          {expSubtitle || experience.title}
+        </h2>
+
+        <div class="flex flex-col w-full">
+          {experience.jobs.map((job, i) => {
+            const color = dotColors[i % dotColors.length];
+            const border = borderColors[i % borderColors.length];
+            return (
+              <div class="glass-reveal flex gap-8 w-full">
+                {/* Left: period */}
+                <div class="hidden md:flex flex-col items-end gap-1 w-[160px] shrink-0 pt-4">
+                  <span
+                    class="text-xs font-medium"
+                    style={`color: ${color}`}
+                  >
+                    {job.startDate} — {job.endDate}
+                  </span>
+                </div>
+
+                {/* Center: dot + line */}
+                <div class="hidden md:flex flex-col items-center w-8">
+                  <div
+                    class="w-3 h-3 rounded-full mt-4 z-10"
+                    style={`background: ${color}; box-shadow: 0 0 10px ${color}40;`}
+                  />
+                  {i < experience.jobs.length - 1 && (
+                    <div
+                      class="w-px flex-1"
+                      style={`background: linear-gradient(180deg, ${color}40, ${dotColors[(i + 1) % dotColors.length]}20);`}
+                    />
+                  )}
+                </div>
+
+                {/* Card */}
+                <div
+                  class="flex flex-col gap-3 p-6 pb-8 flex-1 rounded-2xl mb-6"
+                  style={`background: var(--glass-faint); border: 1px solid ${border};`}
+                >
+                  <span class="md:hidden text-xs" style={`color: ${color}`}>
+                    {job.startDate} — {job.endDate}
+                  </span>
+                  <h3
+                    class="text-lg font-semibold"
+                    style={`color: ${color}`}
+                  >
+                    {job.company}
+                  </h3>
+                  <span class="text-[var(--accent-blue)] text-sm">
+                    {job.role}
+                  </span>
+                  <div class="flex flex-col gap-1.5 mt-1">
+                    {job.description
+                      .split('. ')
+                      .filter((s: string) => s.trim())
+                      .map((sentence: string) => (
+                        <div class="flex gap-2 items-start">
+                          <span class="text-[var(--text-muted)] text-xs mt-1 shrink-0">
+                            ▸
+                          </span>
+                          <span class="text-[var(--text-secondary)] text-[13px] leading-relaxed">
+                            {sentence.endsWith('.') ? sentence : sentence + '.'}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+                  <div class="flex flex-wrap gap-2 mt-2">
+                    {job.tags.map((tag) => (
+                      <TagPill tag={tag} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}

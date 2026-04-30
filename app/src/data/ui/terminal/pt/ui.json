@@ -1,0 +1,68 @@
+{
+  "langSwitch": {
+    "selectLabel": "// selecionar idioma"
+  },
+  "shell": {
+    "toggleMenu": "Alternar menu",
+    "mobileNav": "Navegação móvel"
+  },
+  "hero": {
+    "codeBlockFile": "// Developer.swift",
+    "topBarSuffix": "portfólio",
+    "role": "especialista_líder_desenvolvimento_móvel_ios",
+    "tagline": "// construindo soluções iOS de saúde e banking desde 2019",
+    "bootLines": [
+      { "text": "[boot] initializing portfolio v3.2.1...", "type": "info" },
+      { "text": "[ok] swift_runtime loaded", "type": "ok" },
+      { "text": "[ok] xcode_toolchain ready", "type": "ok" },
+      { "text": "[ok] connecting to developer_profile...", "type": "info" },
+      { "text": "[ok] session authenticated ✓", "type": "ok" },
+      { "text": "[ok] carregando ui_components... pronto", "type": "accent" },
+      { "text": "[ok] tema: terminal_hacker aplicado", "type": "ok" },
+      { "text": "[boot] todos os sistemas prontos", "type": "info" }
+    ],
+    "bootReady": "> pronto. pressione qualquer tecla ou clique para continuar...",
+    "prompt": "$ whoami",
+    "terminalTitle": "zsh — 120×40",
+    "ctaPrimary": "ver_projetos",
+    "ctaSecondary": "baixar_cv"
+  },
+  "about": {
+    "command": "cat about_me.md",
+    "avatarLabel": "> {brand}.perfil",
+    "bioTitle": "// quem_sou_eu",
+    "langLabel": "// idiomas_falados:"
+  },
+  "skills": {
+    "command": "swift package list --skills --verbose",
+    "subtitle": "// resolvendo dependências... {count} pacotes encontrados"
+  },
+  "experience": {
+    "command": "git log --career --oneline --graph",
+    "subtitle": "// exibindo progressão profissional... {count} commits encontrados"
+  },
+  "projects": {
+    "command": "ls -la ~/projects/ --classified",
+    "subtitle": "// descriptografando arquivos de projeto... acesso concedido",
+    "allLabel": "Todos",
+    "featuredBadge": "[destaque] projeto_pessoal",
+    "itemsBadge": "[criptografado]",
+    "openBtn": "$ open --github"
+  },
+  "education": {
+    "command": "cat /credentials/education.log",
+    "subtitle": "// lendo registros acadêmicos...",
+    "certsTitle": "// certificações & conquistas"
+  },
+  "contact": {
+    "command": "ssh {brand}@colaborar",
+    "headline": "VAMOS CONSTRUIR ALGO JUNTOS?",
+    "subtitle": "// sempre aberto a novos desafios, colaborações e projetos interessantes"
+  },
+  "footer": {
+    "builtWith": "Construído com Astro + TypeScript + TailwindCSS",
+    "tagline": "// construído com paixão & muito café",
+    "lastUpdated": "última atualização",
+    "session": "[session ended] conexão encerrada. obrigado pela visita."
+  }
+}

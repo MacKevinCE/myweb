@@ -1,0 +1,219 @@
+/* ============================================
+   LOCK SCREEN
+   ============================================ */
+
+.lockscreen {
+  position: fixed;
+  inset: var(--os-web-border);
+  z-index: 9100;
+  overflow: hidden;
+  cursor: pointer;
+  transition: opacity 0.6s ease;
+  border-radius: var(--os-radius-window);
+}
+
+.lockscreen--unlocking { opacity: 0; pointer-events: none; }
+
+/* Hide desktop while locked — prevents flash of desktop before lockscreen paints */
+html:not(.os-unlocked) .os-desktop { visibility: hidden; }
+
+.lockscreen-bg {
+  position: absolute;
+  inset: -60px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(var(--os-blur-sm));
+}
+
+.lockscreen-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.25); }
+
+.lockscreen-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lockscreen-time {
+  font-family: 'Inter', sans-serif;
+  font-size: 108px;
+  font-weight: 100;
+  color: #ffffff;
+  letter-spacing: -4px;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.375);
+}
+
+.lockscreen-date {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-24);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.8px;
+  margin-top: 8px;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
+}
+
+.lockscreen-spacer { height: 60px; }
+
+.lockscreen-avatar-container { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+
+.lockscreen-avatar-ring {
+  width: 74px;
+  height: 74px;
+  border-radius: 37px;
+  background: rgba(255, 255, 255, 0.125);
+  border: 2px solid rgba(255, 255, 255, 0.19);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.lockscreen-avatar-inner { width: 64px; height: 64px; border-radius: 32px; overflow: hidden; }
+.lockscreen-avatar-img { width: 100%; height: 100%; object-fit: cover; }
+.lockscreen-username { font-family: 'Inter', sans-serif; font-size: var(--os-fs-16); font-weight: 400; color: #ffffff; letter-spacing: 0.2px; }
+.lockscreen-hint { font-family: 'Inter', sans-serif; font-size: var(--os-fs-12); font-weight: 400; color: rgba(255, 255, 255, 0.375); }
+
+.lockscreen-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.lockscreen-bottom-left, .lockscreen-bottom-right { display: flex; align-items: center; gap: 8px; }
+.lockscreen-bottom-right { gap: 14px; }
+.lockscreen-bottom-text { font-family: 'Inter', sans-serif; font-size: var(--os-fs-12); font-weight: 400; }
+
+/* Lock screen - keep dark as it overlays wallpaper */
+
+/* ── Mobile lock screen redesign ─────────────────────────────────── */
+
+@media (max-width: 767px) {
+  /* Reposition time/date to top */
+  .lockscreen-center {
+    justify-content: flex-start;
+    padding-top: 60px;
+  }
+
+  /* Hide avatar on mobile */
+  .lockscreen-avatar-container { display: none; }
+  .lockscreen-spacer { display: none; }
+
+  /* Notification list in center */
+  .lockscreen-notifs {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 360px;
+    padding: 32px 16px;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .lockscreen-notif-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .lockscreen-notif-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .lockscreen-notif-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .lockscreen-notif-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .lockscreen-notif-body {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .lockscreen-notif-time {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+  }
+
+  /* Swipe hint text */
+  .lockscreen-swipe-hint {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    padding-bottom: 24px;
+    animation: swipeHintPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes swipeHintPulse {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(-6px); opacity: 1; }
+  }
+
+  /* Home indicator inside lockscreen */
+  .lockscreen-home-indicator {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 134px;
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.4);
+  }
+
+  /* During swipe: lockscreen follows finger, hint hidden */
+  .lockscreen--swiping {
+    transition: none !important;
+  }
+
+  .lockscreen--swiping .lockscreen-swipe-hint {
+    opacity: 0 !important;
+    animation: none !important;
+  }
+}
+
+/* Desktop: hide mobile-only elements */
+@media (min-width: 768px) {
+  .lockscreen-notifs { display: none; }
+  .lockscreen-swipe-hint { display: none; }
+  .lockscreen-home-indicator { display: none; }
+}

@@ -1,0 +1,14 @@
+---
+interface Props {
+  label: string;
+  color?: string;
+}
+
+const { label, color = 'var(--accent-blue)' } = Astro.props;
+---
+
+<div class="section-label">
+  <div class="section-label-line" style={`background: ${color};`}></div>
+  <span class="section-label-text" style={`color: ${color};`}>{label}</span>
+  <div class="section-label-line" style={`background: ${color};`}></div>
+</div>

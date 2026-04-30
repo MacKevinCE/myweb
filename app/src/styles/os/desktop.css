@@ -1,0 +1,102 @@
+/* ============================================
+   DESKTOP — Wallpaper & Icons
+   ============================================ */
+
+/* Wallpaper image layer */
+.os-wallpaper {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+/* Desktop wallpaper video */
+.os-wallpaper-video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+/* Desktop Icons grid — columns flow right-to-left, wrap when reaching bottom */
+.os-desktop-icons {
+  position: absolute;
+  top: 50px;
+  right: 40px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap-reverse;
+  align-content: flex-end;
+  gap: 20px;
+  max-height: calc(100vh - 50px - 100px); /* menubar top offset + 100px from bottom */
+}
+
+/* Individual desktop icon */
+.os-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 80px;
+  cursor: pointer;
+}
+
+.os-icon-wrapper:hover .os-icon-box {
+  transform: scale(1.08);
+}
+
+.os-icon-wrapper:active .os-icon-box {
+  transform: scale(0.95);
+}
+
+.os-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--os-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.os-icon-box svg {
+  width: 28px;
+  height: 28px;
+  color: white;
+  stroke-width: 1.5;
+}
+
+.os-icon-label {
+  font-size: var(--os-fs-11);
+  font-weight: 400;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  line-height: 1.2;
+}
+
+/* Footer */
+.os-footer {
+  position: absolute;
+  bottom: 12px;
+  right: 40px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  opacity: 0.5;
+}
+
+.os-footer-text {
+  font-size: var(--os-fs-10);
+  font-weight: 400;
+  color: white;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.os-footer-text--small {
+  font-size: var(--os-fs-9);
+}

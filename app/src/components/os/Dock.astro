@@ -1,0 +1,59 @@
+---
+/**
+ * Dock layout:
+ *   [fixed-left items]  |  {dynamic running apps}  |  [fixed-right items]
+ *
+ * Fixed items are always present. Dynamic items appear when a window opens
+ * and are removed when the window is closed. The dot under each icon
+ * indicates the window is open or minimized.
+ */
+import { dockFixedLeft, dockFixedRight, dockRegistry, getIconPath } from '../../data/os-apps';
+---
+
+<nav class="os-dock" aria-label="Dock">
+  <!-- Fixed left icons -->
+  {dockFixedLeft.map((app) => (
+    <div
+      class="os-dock-slot"
+      data-dock-fixed
+      {...(app.id === 'launchpad' ? { 'data-open-launchpad': true } : { 'data-open-window': app.id, 'data-dock-id': app.id })}
+    >
+      <span class="os-dock-tooltip">{app.name}</span>
+      <div class={`os-dock-icon ${app.gradient}`}>
+        {app.isText ? (
+          <span class="dock-icon-text">{app.icon}</span>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <Fragment set:html={getIconPath(app.icon)} />
+          </svg>
+        )}
+      </div>
+      <div class="os-dock-dot os-dock-dot--hidden" />
+    </div>
+  ))}
+
+  <!-- Divider between fixed and dynamic -->
+  <div class="os-dock-divider" id="dock-divider-left" />
+
+  <!-- Dynamic running apps zone -->
+  <div id="dock-dynamic" style="display:contents;"></div>
+
+  <!-- Divider before right fixed items -->
+  <div class="os-dock-divider" id="dock-divider-right" style="display:none;" />
+
+  <!-- Fixed right icons -->
+  {dockFixedRight.map((app) => (
+    <div class="os-dock-slot" data-dock-fixed data-open-window={app.id} data-dock-id={app.id}>
+      <span class="os-dock-tooltip">{app.name}</span>
+      <div class={`os-dock-icon ${app.gradient}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <Fragment set:html={getIconPath(app.icon)} />
+        </svg>
+      </div>
+      <div class="os-dock-dot os-dock-dot--hidden" />
+    </div>
+  ))}
+</nav>
+
+<!-- Dock icon registry for dynamic icons (consumed by JS) -->
+<script is:inline id="dock-icon-registry" type="application/json" set:html={JSON.stringify(dockRegistry)} />

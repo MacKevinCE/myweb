@@ -1,0 +1,16 @@
+---
+import { desktopApps, getIconPath } from '../../data/os-apps';
+---
+
+<div class="os-desktop-icons">
+  {desktopApps.map((app) => (
+    <div class="os-icon-wrapper" role="button" tabindex="0" data-open-window={app.id}>
+      <div class={`os-icon-box ${app.gradient} ${app.shadow}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <Fragment set:html={getIconPath(app.icon)} />
+        </svg>
+      </div>
+      <span class="os-icon-label">{app.desktopLabel}</span>
+    </div>
+  ))}
+</div>

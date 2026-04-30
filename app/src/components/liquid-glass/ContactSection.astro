@@ -1,0 +1,64 @@
+---
+import GithubIcon from '../shared/icons/GithubIcon.astro';
+import LinkedinIcon from '../shared/icons/LinkedinIcon.astro';
+import EmailIcon from '../shared/icons/EmailIcon.astro';
+import type { LiquidGlassContent } from '../../types';
+
+interface Props {
+  content: LiquidGlassContent;
+}
+
+const { content } = Astro.props;
+const { contact } = content;
+---
+
+<section
+  id="contact"
+  class="flex flex-col items-center"
+  style="padding: var(--section-padding-y) var(--section-padding-x) 60px;"
+>
+  <div class="flex flex-col items-center gap-8 max-w-[700px] text-center">
+    <h2
+      class="glass-reveal text-[var(--text-primary)] text-4xl sm:text-5xl font-light leading-[1.2]"
+      style="font-family: var(--font-display);"
+    >
+      {contact.headline}
+    </h2>
+
+    <p class="glass-reveal text-[var(--text-secondary)] text-base leading-[1.7]">
+      {contact.subtitle}
+    </p>
+
+    <div class="glass-reveal flex flex-wrap items-center justify-center gap-4">
+      <a
+        href={contact.links.github.url}
+        target="_blank"
+        rel="noopener"
+        class="contact-link-glass text-[var(--text-primary)] text-[13px] font-medium"
+      >
+        <GithubIcon />
+        {contact.links.github.label}
+      </a>
+      <a
+        href={contact.links.linkedin.url}
+        target="_blank"
+        rel="noopener"
+        class="contact-link-glass text-[var(--text-primary)] text-[13px] font-medium"
+      >
+        <LinkedinIcon />
+        {contact.links.linkedin.label}
+      </a>
+      {
+        contact.links.email && (
+          <a
+            href={contact.links.email.url === '#' ? '#contact' : `mailto:${contact.links.email.url}`}
+            class="contact-link-gradient text-white text-sm font-semibold"
+          >
+            <EmailIcon />
+            {contact.emailLabel || contact.links.email.label}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,104 @@
+---
+import { windowTitles, W, uiIcons } from '../../data/os-apps';
+import WindowChrome from './shared/WindowChrome.astro';
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+const articles = content.articles ?? [];
+const nt = content.notes;
+
+// Calculate read time (avg 200 words per minute)
+function readTime(text: string): number {
+  return Math.max(1, Math.ceil(text.split(/\s+/).length / 200));
+}
+
+// Format date
+function formatDate(dateStr: string, lang: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString(lang, { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+const lang = Astro.url?.pathname?.split('/')[2] || 'en';
+---
+
+<div
+  class="os-window os-window--notes"
+  id="notes-window"
+  style="display: none;"
+>
+  <WindowChrome title={windowTitles[W.NOTES]} windowId="notes" titleClass="os-window-title--inter" />
+
+  <div class="nt-body">
+    <!-- Sidebar -->
+    <div class="nt-sidebar">
+      <div class="nt-search-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <Fragment set:html={uiIcons.search} />
+        </svg>
+        <input
+          class="nt-search"
+          id="nt-search"
+          type="text"
+          placeholder={nt.search}
+          autocomplete="off"
+        />
+      </div>
+      <div class="nt-list" id="nt-list">
+        {articles.map((article, i) => (
+          <button
+            class={`nt-item ${i === 0 ? 'nt-item--active' : ''}`}
+            data-nt-index={i}
+          >
+            <span class="nt-item-title">{article.title}</span>
+            <span class="nt-item-meta">
+              {formatDate(article.date, lang)} · {nt.readTime.replace('{min}', String(readTime(article.content)))}
+            </span>
+            <span class="nt-item-summary">{article.summary}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Content area -->
+    <div class="nt-content" id="nt-content">
+      {articles.length > 0 && (
+        <div class="nt-article" id="nt-article">
+          <h1 class="nt-article-title" id="nt-article-title">{articles[0].title}</h1>
+          <div class="nt-article-meta" id="nt-article-meta">
+            <span>{formatDate(articles[0].date, lang)}</span>
+            <span>&middot;</span>
+            <span>{nt.readTime.replace('{min}', String(readTime(articles[0].content)))}</span>
+          </div>
+          <div class="nt-article-tags" id="nt-article-tags">
+            {articles[0].tags.map(tag => (
+              <span class="nt-tag">{tag}</span>
+            ))}
+          </div>
+          <div class="nt-article-body" id="nt-article-body"></div>
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- Article data for JS -->
+  <script type="application/json" id="nt-data" set:html={JSON.stringify(articles.map(a => ({
+    title: a.title,
+    date: a.date,
+    tags: a.tags,
+    summary: a.summary,
+    content: a.content,
+  })))} />
+  <script type="application/json" id="nt-i18n" set:html={JSON.stringify({ ...nt, lang })} />
+</div>
+
+<style is:global>
+  @import '../../styles/os/notes.css';
+</style>
+
+<script>
+  import '../../scripts/os/notes';
+</script>

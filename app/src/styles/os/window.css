@@ -1,0 +1,154 @@
+/* ============================================
+   SHARED WINDOW STYLES
+   ============================================ */
+
+.os-window {
+  position: absolute;
+  z-index: 30;
+  border-radius: var(--os-radius-window);
+  overflow: hidden;
+  backdrop-filter: blur(var(--os-blur-lg));
+  -webkit-backdrop-filter: blur(var(--os-blur-lg));
+  background: var(--os-bg-glass);
+  box-shadow: var(--os-shadow-window);
+}
+
+.os-window::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--os-radius-window);
+  padding: 0.5px;
+  background: var(--os-glass-border);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.os-window::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--os-glass-tint);
+  pointer-events: none;
+}
+
+/* Title bar */
+.os-window-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--os-bar-h);
+  padding: 0 16px;
+  border-radius: var(--os-radius-window) var(--os-radius-window) 0 0;
+  cursor: grab;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.os-window-titlebar:active {
+  cursor: grabbing;
+}
+
+/* Traffic lights */
+.os-window-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.os-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: default;
+}
+
+.os-dot--red {
+  background: #ef4444;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.os-dot--red:hover {
+  filter: brightness(1.2);
+}
+
+.os-dot--yellow {
+  background: #fbbf24;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.os-dot--yellow:hover {
+  filter: brightness(1.2);
+}
+
+.os-dot--green {
+  background: #34d399;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.os-dot--green:hover:not(.os-dot--disabled) {
+  filter: brightness(1.2);
+}
+
+.os-dot--disabled {
+  background: var(--os-fill-border);
+  cursor: default;
+  pointer-events: none;
+}
+
+.os-window-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--os-fs-11);
+  font-weight: 400;
+  color: var(--os-text-secondary);
+  position: relative;
+  z-index: 2;
+}
+
+.os-window-title--inter {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-13);
+}
+
+.os-window-titlespacer {
+  width: 56px;
+  flex-shrink: 0;
+}
+
+/* Window animations */
+.os-window--opening {
+  animation: windowOpen 0.25s ease-out forwards;
+}
+
+.os-window--closing {
+  animation: windowClose 0.2s ease-in forwards;
+}
+
+.os-window--minimizing {
+  animation: windowMinimize 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.os-window--restoring {
+  animation: windowRestore 0.45s cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+/* Fullscreen override — keep radius when web-border is active */
+.os-window--fullscreen::before {
+  border-radius: 0;
+}
+
+/* Resize handles (invisible, only cursor) */
+.os-resize {
+  background: transparent;
+}

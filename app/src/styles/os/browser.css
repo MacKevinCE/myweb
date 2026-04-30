@@ -1,0 +1,219 @@
+/* ============================================
+   BROWSER WINDOW
+   ============================================ */
+
+.os-window--browser {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Toolbar */
+.brw-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  height: var(--os-bar-h);
+  flex-shrink: 0;
+}
+
+.brw-toolbar-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--os-radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--os-text-muted);
+  transition: background 0.15s;
+}
+.brw-toolbar-btn:hover:not(:disabled) {
+  background: var(--os-fill-border);
+}
+.brw-toolbar-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* URL display (read-only) */
+.brw-url-display {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--os-radius-sm);
+  background: var(--os-fill-border);
+  min-width: 0;
+  min-height: 28px;
+}
+
+.brw-lock-icon {
+  color: var(--os-text-muted);
+  flex-shrink: 0;
+}
+
+.brw-url-text {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-12);
+  color: var(--os-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bookmarks bar */
+.brw-bookmarks {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  overflow-x: auto;
+  flex-shrink: 0;
+}
+.brw-bookmarks::-webkit-scrollbar { height: 0; }
+
+.brw-bookmark {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: none;
+  background: transparent;
+  border-radius: var(--os-radius-xs);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--os-font);
+  font-size: var(--os-fs-11);
+  color: var(--os-text-secondary);
+  transition: background 0.15s;
+}
+.brw-bookmark:hover {
+  background: var(--os-fill);
+}
+.brw-bookmark-favicon {
+  border-radius: 2px;
+}
+
+/* Loading bar */
+.brw-loading {
+  height: 2px;
+  background: transparent;
+  position: relative;
+  flex-shrink: 0;
+}
+.brw-loading--active {
+  background: var(--os-fill-border);
+}
+.brw-loading--active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30%;
+  background: var(--os-accent, #3B82F6);
+  border-radius: 1px;
+  animation: brwLoad 1.5s ease-in-out infinite;
+}
+@keyframes brwLoad {
+  0% { left: -30%; }
+  100% { left: 100%; }
+}
+
+/* Start Page */
+.brw-start {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 40px 20px;
+  background: var(--os-bg-solid);
+}
+.brw-start-title {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-15);
+  font-weight: 600;
+  color: var(--os-text-primary);
+}
+.brw-start-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 100px));
+  gap: 20px;
+  justify-content: center;
+  max-width: 500px;
+}
+.brw-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  border: none;
+  background: var(--os-fill);
+  border-radius: var(--os-radius-md);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s;
+}
+.brw-tile:hover {
+  background: var(--os-fill-strong);
+  transform: scale(1.05);
+}
+.brw-tile-favicon {
+  border-radius: var(--os-radius-xs);
+}
+.brw-tile-name {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-11);
+  color: var(--os-text-primary);
+  text-align: center;
+}
+
+/* Web content */
+.brw-content {
+  flex: 1;
+  background: var(--os-bg-solid);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.brw-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.brw-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--os-bg-solid);
+}
+
+.brw-fallback-text {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-14);
+  font-weight: 400;
+  color: var(--os-text-secondary);
+}
+
+.brw-fallback-link {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-13);
+  font-weight: 500;
+  color: var(--os-accent);
+  text-decoration: none;
+}
+
+.brw-fallback-link:hover { text-decoration: underline; }

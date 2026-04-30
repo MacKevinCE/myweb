@@ -1,0 +1,50 @@
+{
+  "langSwitch": {
+    "selectLabel": "Language"
+  },
+  "hero": {
+    "ctaPrimary": "View Projects",
+    "ctaSecondary": "Download CV",
+    "scrollHint": "Scroll to explore"
+  },
+  "about": {
+    "label": "ABOUT ME",
+    "bioTitle": "Building the future,\none app at a time.",
+    "langLabel": "Languages:"
+  },
+  "skills": {
+    "label": "TECH STACK",
+    "title": "{count} technologies",
+    "subtitle": "Tools of the craft",
+    "levelExpert": "Expert",
+    "levelAdvanced": "Advanced",
+    "levelIntermediate": "Intermediate"
+  },
+  "experience": {
+    "label": "EXPERIENCE",
+    "title": "{count} positions",
+    "subtitle": "The journey so far"
+  },
+  "projects": {
+    "label": "PROJECTS",
+    "title": "Selected works",
+    "subtitle": "Selected works",
+    "allLabel": "All",
+    "featuredBadge": "Featured Project",
+    "openBtn": "View on GitHub"
+  },
+  "education": {
+    "label": "EDUCATION & CERTS",
+    "title": "Foundations & credentials",
+    "subtitle": "Foundations & credentials",
+    "certsTitle": "Certifications"
+  },
+  "contact": {
+    "headline": "Let's build\nsomething great together",
+    "subtitle": "Got a project in mind? I'm always open to discussing new opportunities, collaborations, or just geeking out about Swift and iOS.",
+    "emailLabel": "Email Me"
+  },
+  "footer": {
+    "builtWith": "Designed with love and Swift"
+  }
+}

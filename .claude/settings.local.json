@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(echo '')",
+      "Bash(echo '# MinIO asset-up CF token from Keychain')",
+      "Bash(echo 'export MACKEVINCE_CF_TOKEN=$\\(security find-generic-password -a \"$USER\" -s \"MACKEVINCE_CF_TOKEN\" -w\\)')"
+    ]
+  }
+}

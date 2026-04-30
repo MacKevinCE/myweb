@@ -1,0 +1,31 @@
+services:
+  dev:
+    container_name: astro_dev
+    build: ./docker/dev
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+      - ~/.ssh:/root/.ssh:ro
+    ports:
+      - "4321:4321"
+    command: ["sh", "-c", "npm install && npm run dev --host"]
+    networks:
+      - webnet
+
+  prod:
+    container_name: astro_prod
+    build:
+      context: .
+      dockerfile: ./docker/prod/Dockerfile
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    ports:
+      - "8080:80"
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge

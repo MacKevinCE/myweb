@@ -1,0 +1,31 @@
+---
+import { languages, defaultLang } from '../../utils/i18n';
+
+interface Props {
+  basePath: string;
+}
+
+const { basePath } = Astro.props;
+---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script is:inline define:vars={{ languages, defaultLang, basePath }}>
+      const browserLangs = navigator.languages || [navigator.language];
+      let target = defaultLang;
+      for (const bl of browserLangs) {
+        const code = bl.toLowerCase().split('-')[0];
+        if (languages.includes(code)) {
+          target = code;
+          break;
+        }
+      }
+      window.location.replace(basePath + '/' + target);
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content={`0;url=${basePath}/${defaultLang}`} />
+    </noscript>
+  </head>
+  <body></body>
+</html>

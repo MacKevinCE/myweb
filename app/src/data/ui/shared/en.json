@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "about": "about",
+    "skills": "skills",
+    "experience": "experience",
+    "projects": "projects",
+    "education": "education",
+    "contact": "contact"
+  },
+  "langSwitch": {
+    "translateAlert": "This site is available in ENGLISH. Would you like to switch?",
+    "translateSwitch": "Switch language",
+    "translateDismiss": "No, thanks"
+  }
+}

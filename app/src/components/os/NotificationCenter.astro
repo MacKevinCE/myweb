@@ -1,0 +1,236 @@
+---
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+const nc = content.notificationCenter;
+---
+
+<div class="nc-overlay" id="nc-overlay"></div>
+<div class="nc-panel" id="nc-panel">
+  <div class="nc-header">
+    <span class="nc-title">{nc.title}</span>
+    <button class="nc-clear-all" id="nc-clear-all">{nc.clearAll}</button>
+  </div>
+  <div class="nc-list" id="nc-list">
+    <div class="nc-empty" id="nc-empty">{nc.empty}</div>
+  </div>
+</div>
+
+<script type="application/json" id="nc-i18n" set:html={JSON.stringify(nc)} />
+
+<style is:global>
+  @import '../../styles/os/notification-center.css';
+</style>
+
+<script>
+  import {
+    getNotificationHistory,
+    dismissNotification,
+    clearAllNotifications,
+    DEFAULT_NOTIF_ICON,
+  } from '../../scripts/os/notifications';
+  import { track } from '../../scripts/os/achievements';
+
+  let cachedI18n: Record<string, string> | null = null;
+
+  function getI18n(): Record<string, string> {
+    if (cachedI18n) return cachedI18n;
+    try {
+      const el = document.getElementById('nc-i18n');
+      cachedI18n = el ? JSON.parse(el.textContent || '{}') : {};
+    } catch {
+      cachedI18n = {};
+    }
+    return cachedI18n!;
+  }
+
+  function relativeTime(timestamp: number): string {
+    const t = getI18n();
+    const diff = Math.floor((Date.now() - timestamp) / 1000);
+    if (diff < 60) return t.timeNow || 'just now';
+    const mins = Math.floor(diff / 60);
+    if (mins < 60) return (t.timeMinutes || '{n}m ago').replace('{n}', String(mins));
+    const hours = Math.floor(mins / 60);
+    return (t.timeHours || '{n}h ago').replace('{n}', String(hours));
+  }
+
+  let closePanelFn: (() => void) | null = null;
+
+  function renderNotifications() {
+    const list = document.getElementById('nc-list');
+    const emptyEl = document.getElementById('nc-empty');
+    const clearBtn = document.getElementById('nc-clear-all');
+    if (!list) return;
+
+    const history = getNotificationHistory();
+
+    // Show/hide empty state
+    if (emptyEl) emptyEl.style.display = history.length === 0 ? 'block' : 'none';
+    if (clearBtn) clearBtn.style.display = history.length === 0 ? 'none' : '';
+
+    // Remove old cards (keep empty element)
+    list.querySelectorAll('.nc-card').forEach((el) => el.remove());
+
+    for (const notif of history) {
+      const card = document.createElement('div');
+      card.className = 'nc-card';
+      card.dataset.ncId = notif.id;
+
+      // Dismiss button
+      const dismissBtn = document.createElement('button');
+      dismissBtn.className = 'nc-dismiss';
+      dismissBtn.innerHTML = '&times;';
+      dismissBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dismissNotification(notif.id);
+        card.classList.add('nc-card--dismissing');
+        card.addEventListener(
+          'transitionend',
+          () => {
+            card.remove();
+            const remaining = getNotificationHistory();
+            if (emptyEl) emptyEl.style.display = remaining.length === 0 ? 'block' : 'none';
+            if (clearBtn) clearBtn.style.display = remaining.length === 0 ? 'none' : '';
+          },
+          { once: true },
+        );
+      });
+
+      // Icon — identical to toast: app gradient background + white stroke icon
+      const iconEl = document.createElement('div');
+      const isAppIcon = notif.icon && notif.icon !== DEFAULT_NOTIF_ICON;
+      iconEl.className = isAppIcon ? `nc-icon ${notif.iconGradient || ''}` : 'nc-icon nc-icon--default';
+      iconEl.innerHTML = isAppIcon
+        ? `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${notif.icon}</svg>`
+        : `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">${DEFAULT_NOTIF_ICON}</svg>`;
+
+      // Content
+      const contentEl = document.createElement('div');
+      contentEl.className = 'nc-content';
+
+      const titleEl = document.createElement('div');
+      titleEl.className = 'nc-card-title';
+      titleEl.textContent = notif.title;
+
+      const bodyEl = document.createElement('div');
+      bodyEl.className = 'nc-card-body';
+      bodyEl.textContent = notif.body;
+
+      const timeEl = document.createElement('div');
+      timeEl.className = 'nc-card-time';
+      timeEl.textContent = relativeTime(notif.timestamp);
+
+      contentEl.appendChild(titleEl);
+      contentEl.appendChild(bodyEl);
+      contentEl.appendChild(timeEl);
+
+      // Click to open associated window (if action exists)
+      if (notif.action) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+          if ((e.target as HTMLElement).closest('.nc-dismiss')) return;
+          const win = document.getElementById(notif.action!);
+          if (win) {
+            document.dispatchEvent(new CustomEvent('open-window', { detail: { el: win } }));
+            closePanelFn?.();
+          }
+        });
+      }
+
+      card.appendChild(dismissBtn);
+      card.appendChild(iconEl);
+      card.appendChild(contentEl);
+      list.appendChild(card);
+    }
+  }
+
+  function initNotificationCenter() {
+    const panel = document.getElementById('nc-panel');
+    const overlay = document.getElementById('nc-overlay');
+    const clock = document.getElementById('os-clock');
+    const clearBtn = document.getElementById('nc-clear-all');
+
+    if (!panel || !clock) return;
+
+    function openPanel() {
+      panel!.classList.add('nc-panel--open');
+      overlay?.classList.add('nc-overlay--visible');
+      renderNotifications();
+      track('notif-center');
+    }
+
+    function closePanel() {
+      panel!.classList.remove('nc-panel--open');
+      overlay?.classList.remove('nc-overlay--visible');
+    }
+    closePanelFn = closePanel;
+
+    function togglePanel() {
+      if (panel!.classList.contains('nc-panel--open')) {
+        closePanel();
+      } else {
+        openPanel();
+      }
+    }
+
+    clock.style.cursor = 'pointer';
+    clock.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePanel();
+    });
+
+    // Close on overlay click
+    overlay?.addEventListener('click', closePanel);
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && panel!.classList.contains('nc-panel--open')) {
+        closePanel();
+      }
+    });
+
+    // Clear all button
+    clearBtn?.addEventListener('click', () => {
+      clearAllNotifications();
+      renderNotifications();
+    });
+
+    // Live update when new notification arrives
+    document.addEventListener('notification-added', () => {
+      if (panel!.classList.contains('nc-panel--open')) {
+        renderNotifications();
+      }
+    });
+
+    // Mobile: swipe down on menubar opens NC
+    const menubar = document.querySelector('.os-menubar') as HTMLElement | null;
+    if (menubar) {
+      let touchStartY = 0;
+      let touchStartX = 0;
+
+      menubar.addEventListener('touchstart', (e) => {
+        if (window.innerWidth < 768) return; // mobile uses lockscreen for NC
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+
+      menubar.addEventListener('touchend', (e) => {
+        if (window.innerWidth < 768) return;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+        if (dy > 40 && dy > dx) {
+          if (!panel!.classList.contains('nc-panel--open')) {
+            openPanel();
+          }
+        }
+      }, { passive: true });
+    }
+  }
+
+  // Auto-init
+  initNotificationCenter();
+</script>

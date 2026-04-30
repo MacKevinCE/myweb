@@ -1,0 +1,108 @@
+/* ============================================
+   APP SWITCHER (Alt+Tab overlay)
+   ============================================ */
+
+.app-switcher {
+  position: fixed;
+  inset: 0;
+  z-index: 9600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.app-switcher-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px;
+  border-radius: var(--os-radius-window);
+  background: var(--os-bg-glass);
+  backdrop-filter: blur(var(--os-blur-lg));
+  -webkit-backdrop-filter: blur(var(--os-blur-lg));
+  box-shadow: var(--os-shadow-dock);
+  pointer-events: auto;
+}
+
+/* Glass border — matches dock styling */
+.app-switcher-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--os-radius-window);
+  padding: 0.5px;
+  background: var(--os-glass-border);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.app-switcher-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  border-radius: var(--os-radius-md);
+  min-width: 72px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.app-switcher-item:hover {
+  background: var(--os-fill);
+}
+
+.app-switcher-item--active {
+  background: var(--os-fill-strong);
+}
+
+.app-switcher-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--os-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-switcher-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+  stroke-width: 1.5;
+}
+
+.app-switcher-name {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-11);
+  color: var(--os-text-primary);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Fade in */
+.app-switcher--visible {
+  animation: switcherIn 0.15s ease-out;
+}
+
+@keyframes switcherIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hide on mobile — Alt+Tab doesn't apply */
+@media (max-width: 767px) {
+  .app-switcher {
+    display: none !important;
+  }
+}

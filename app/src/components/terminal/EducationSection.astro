@@ -1,0 +1,81 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import type { TerminalContent } from '../../types';
+
+interface Props {
+  content: TerminalContent;
+}
+
+const { content } = Astro.props;
+const { education } = content;
+---
+
+<section
+  id="education"
+  class="bg-[var(--bg-primary)] font-mono"
+  style="padding: var(--section-padding-y) var(--section-padding-x);"
+>
+  <div class="flex flex-col gap-12">
+    <SectionHeader command={education.command} subtitle={education.subtitle} />
+
+    <!-- Content -->
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Degrees -->
+      <div class="flex flex-col gap-6 flex-1">
+        {
+          education.degrees.map((degree) => (
+            <div class="terminal-line flex flex-col gap-4 p-6 border border-[var(--green-terminal)] bg-[var(--bg-surface)]">
+              <div class="inline-flex self-start px-2.5 py-1 bg-[var(--palette-0-alpha)]">
+                <span class="text-[var(--green-terminal)] text-[11px] font-medium">
+                  {degree.extra + " " + degree.badge}
+                </span>
+              </div>
+
+              <h3 class="text-[var(--text-primary)] text-lg font-bold">
+                {degree.institution}
+              </h3>
+              <span class="text-[var(--text-secondary)] text-[13px] font-secondary">
+                {degree.period}
+              </span>
+
+              {degree.details && (
+                <div class="flex items-center gap-2">
+                  <span class="text-[var(--cyan-accent)] text-[10px]">▸</span>
+                  <span class="text-[var(--cyan-accent)] text-[13px] font-secondary">
+                    {degree.details}
+                  </span>
+                </div>
+              )}
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Certifications -->
+      <div class="flex flex-col gap-4 flex-1">
+        <h4
+          class="terminal-line text-[var(--text-muted)] text-xs font-secondary"
+        >
+          {education.certsTitle}
+        </h4>
+        {
+          education.certifications.map((cert) => (
+            <div class="terminal-line flex items-center gap-4 p-4 border border-[var(--border-primary)] bg-[var(--bg-elevated)]">
+              <div class="w-8 h-8 rounded-full bg-[var(--bg-surface)] flex items-center justify-center shrink-0">
+                <span class="text-[var(--green-terminal)] text-sm">✓</span>
+              </div>
+              <div class="flex flex-col gap-1 flex-1">
+                <span class="text-[var(--text-primary)] text-sm font-medium">
+                  {cert.name}
+                </span>
+                <span class="text-[var(--text-muted)] text-[11px]">
+                  {cert.year}
+                </span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

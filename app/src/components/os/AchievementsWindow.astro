@@ -1,0 +1,214 @@
+---
+import { windowTitles, W } from '../../data/os-apps';
+import WindowChrome from './shared/WindowChrome.astro';
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+const ach = content.achievements;
+---
+
+<div
+  class="os-window os-window--achievements"
+  id="achievements-window"
+  style="display: none;"
+>
+  <WindowChrome title={windowTitles[W.ACHIEVEMENTS]} windowId="achievements" titleClass="os-window-title--inter" />
+
+  <div class="ach-body">
+    <!-- Header -->
+    <div class="ach-header">
+      <span class="ach-title">{ach.windowTitle}</span>
+      <span class="ach-counter" id="ach-counter"></span>
+    </div>
+
+    <!-- Achievement grid -->
+    <div class="ach-grid" id="ach-grid"></div>
+  </div>
+
+  <!-- i18n data -->
+  <script type="application/json" id="ach-i18n" set:html={JSON.stringify(ach)} />
+</div>
+
+<style is:global>
+  @import '../../styles/os/achievements.css';
+</style>
+
+<script>
+  import { getAchievements, getProgress } from '../../scripts/os/achievements';
+
+  /* --- 1a. Cached i18n: parse JSON only once --- */
+  let cachedI18n: Record<string, any> | null = null;
+  function getI18n(): Record<string, any> {
+    if (cachedI18n) return cachedI18n;
+    try {
+      const el = document.getElementById('ach-i18n');
+      cachedI18n = el ? JSON.parse(el.textContent || '{}') : {};
+    } catch { cachedI18n = {}; }
+    return cachedI18n!;
+  }
+
+  function formatDate(iso: string): string {
+    try {
+      return new Date(iso).toLocaleDateString(undefined, {
+        month: 'short', day: 'numeric',
+      });
+    } catch { return iso; }
+  }
+
+  /* --- 1c. Lightweight counter-only update --- */
+  function updateCounter() {
+    const counterEl = document.getElementById('ach-counter');
+    if (!counterEl) return;
+    const t = getI18n();
+    const progress = getProgress();
+    counterEl.textContent = (t.counter || '{unlocked}/{total} Unlocked')
+      .replace('{unlocked}', String(progress.unlocked))
+      .replace('{total}', String(progress.total));
+  }
+
+  function renderAchievements() {
+    const grid = document.getElementById('ach-grid');
+    if (!grid) return;
+
+    const t = getI18n();
+    const achievements = getAchievements();
+
+    // Update counter separately
+    updateCounter();
+
+    grid.innerHTML = '';
+
+    for (const a of achievements) {
+      const achI18n = (t[a.id] as { name?: string; desc?: string }) || {};
+      const isUnlocked = a.unlocked;
+
+      const card = document.createElement('div');
+      card.className = `ach-card ${isUnlocked ? 'ach-card--unlocked' : 'ach-card--locked'}`;
+      card.dataset.achievementId = a.id;
+
+      // Icon
+      const iconEl = document.createElement('div');
+      iconEl.className = 'ach-icon';
+      iconEl.textContent = a.icon;
+      if (!isUnlocked) {
+        const lockEl = document.createElement('span');
+        lockEl.className = 'ach-lock';
+        lockEl.textContent = '\u{1F512}';
+        iconEl.appendChild(lockEl);
+      }
+      card.appendChild(iconEl);
+
+      // Name
+      const nameEl = document.createElement('div');
+      nameEl.className = 'ach-name';
+      nameEl.textContent = achI18n.name || a.id;
+      card.appendChild(nameEl);
+
+      // Description — always visible so users know how to complete
+      const descEl = document.createElement('div');
+      descEl.className = 'ach-desc';
+      descEl.textContent = achI18n.desc || '';
+      card.appendChild(descEl);
+
+      // Progress bar + label (for multi-step, only when locked)
+      if (!isUnlocked && a.threshold > 1) {
+        const barWrap = document.createElement('div');
+        barWrap.className = 'ach-progress';
+        const barFill = document.createElement('div');
+        barFill.className = 'ach-progress-fill';
+        const pct = Math.min(100, Math.round((a.progress / a.threshold) * 100));
+        barFill.style.width = `${pct}%`;
+        barWrap.appendChild(barFill);
+        card.appendChild(barWrap);
+
+        const progLabel = document.createElement('div');
+        progLabel.className = 'ach-progress-label';
+        progLabel.textContent = `${a.progress}/${a.threshold}`;
+        card.appendChild(progLabel);
+      }
+
+      // Unlocked date
+      if (isUnlocked && a.unlockedAt) {
+        const dateEl = document.createElement('div');
+        dateEl.className = 'ach-date';
+        dateEl.textContent = (t.unlockedAt || 'Unlocked: {date}')
+          .replace('{date}', formatDate(a.unlockedAt));
+        card.appendChild(dateEl);
+      }
+
+      grid.appendChild(card);
+    }
+  }
+
+  // Initial render when window becomes visible
+  const win = document.getElementById('achievements-window');
+  if (win) {
+    /* --- Fix 3: Track previous visibility to avoid redundant renders --- */
+    let wasVisible = false;
+    const observer = new MutationObserver(() => {
+      const isVisible = win.style.display !== 'none';
+      if (isVisible && !wasVisible) {
+        renderAchievements();
+      }
+      wasVisible = isVisible;
+    });
+    observer.observe(win, { attributes: true, attributeFilter: ['style'] });
+  }
+
+  /* --- 1b. Incremental update on achievement unlock --- */
+  document.addEventListener('achievement-unlocked', (e) => {
+    const detail = (e as CustomEvent).detail;
+    const id = detail?.id;
+    if (!id) return;
+
+    const grid = document.getElementById('ach-grid');
+    const card = grid?.querySelector<HTMLElement>(
+      `.ach-card[data-achievement-id="${id}"]`,
+    );
+
+    if (card) {
+      const t = getI18n();
+      const achI18n = (t[id] as { name?: string; desc?: string }) || {};
+
+      // Switch locked → unlocked classes
+      card.classList.remove('ach-card--locked');
+      card.classList.add('ach-card--unlocked', 'ach-card--just-unlocked');
+
+      // Remove lock overlay from icon
+      const lockEl = card.querySelector('.ach-lock');
+      if (lockEl) lockEl.remove();
+
+      // Update description → show real description
+      const descEl = card.querySelector('.ach-desc');
+      if (descEl) descEl.textContent = achI18n.desc || '';
+
+      // Remove progress bar if present
+      const progressEl = card.querySelector('.ach-progress');
+      if (progressEl) progressEl.remove();
+
+      // Add unlocked date
+      if (detail.unlockedAt) {
+        const dateEl = document.createElement('div');
+        dateEl.className = 'ach-date';
+        dateEl.textContent = (t.unlockedAt || 'Unlocked: {date}')
+          .replace('{date}', formatDate(detail.unlockedAt));
+        card.appendChild(dateEl);
+      }
+
+      // Update counter
+      updateCounter();
+
+      // Clean up animation class when done
+      card.addEventListener('animationend', () => {
+        card.classList.remove('ach-card--just-unlocked');
+      }, { once: true });
+    } else {
+      // Fallback: full render if card not found
+      renderAchievements();
+    }
+  });
+</script>

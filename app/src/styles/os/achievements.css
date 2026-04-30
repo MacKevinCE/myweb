@@ -1,0 +1,186 @@
+/* ============================================
+   ACHIEVEMENTS WINDOW (Game Center)
+   ============================================ */
+
+.os-window--achievements {
+  display: flex;
+  flex-direction: column;
+}
+
+.ach-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Header */
+.ach-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--os-fill-border);
+  flex-shrink: 0;
+}
+
+.ach-title {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-15);
+  font-weight: 600;
+  color: var(--os-text-primary);
+}
+
+.ach-counter {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-12);
+  font-weight: 500;
+  color: var(--os-text-muted);
+  background: var(--os-fill);
+  padding: 3px 10px;
+  border-radius: var(--os-radius-md);
+}
+
+/* Achievement grid */
+.ach-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  align-content: start;
+}
+
+/* Achievement card */
+.ach-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 14px 8px 12px;
+  border-radius: var(--os-radius-sm);
+  border: 1px solid var(--os-fill-border);
+  background: var(--os-fill);
+  transition: opacity 0.3s, filter 0.3s, transform 0.3s;
+  will-change: transform;
+  position: relative;
+}
+
+/* Locked state */
+.ach-card--locked {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+/* Unlocked state */
+.ach-card--unlocked {
+  filter: none;
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(167, 139, 250, 0.2); /* --os-purple-from */
+}
+
+.ach-card--unlocked:hover {
+  box-shadow: 0 0 18px rgba(167, 139, 250, 0.35); /* --os-purple-from */
+  transform: translateY(-1px);
+}
+
+/* Unlock animation */
+.ach-card--just-unlocked {
+  animation: achUnlock 0.5s ease-out;
+}
+
+@keyframes achUnlock {
+  0% { transform: scale(0.9); opacity: 0.5; filter: grayscale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; filter: grayscale(0); }
+}
+
+/* Icon */
+.ach-icon {
+  font-size: 32px;
+  line-height: 1;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+/* Lock overlay */
+.ach-lock {
+  position: absolute;
+  top: -4px;
+  right: -10px;
+  font-size: var(--os-fs-14);
+}
+
+/* Name */
+.ach-name {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-12);
+  font-weight: 600;
+  color: var(--os-text-primary);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+/* Description */
+.ach-desc {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-10);
+  color: var(--os-text-muted);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+/* Progress bar */
+.ach-progress {
+  width: 100%;
+  height: 4px;
+  background: var(--os-fill-border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.ach-progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--os-accent, #3B82F6);
+  transition: width 0.4s ease;
+}
+
+/* Progress label (e.g. "3/10") */
+.ach-progress-label {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-9);
+  color: var(--os-text-muted);
+  margin-top: 2px;
+  opacity: 0.7;
+}
+
+/* Unlocked date */
+.ach-date {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-9);
+  color: var(--os-text-muted);
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+/* Responsive: 2 columns on smaller widths */
+@container (max-width: 420px) {
+  .ach-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Fallback for browsers without container queries */
+@media (max-width: 480px) {
+  .ach-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Scrollbar */
+.ach-grid::-webkit-scrollbar { width: 6px; }
+.ach-grid::-webkit-scrollbar-track { background: transparent; }
+.ach-grid::-webkit-scrollbar-thumb { background: var(--os-fill-border); border-radius: 3px; }

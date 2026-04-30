@@ -1,0 +1,73 @@
+---
+import LiquidGlassLayout from '../../layouts/LiquidGlassLayout.astro';
+import NavBar from '../../components/liquid-glass/NavBar.astro';
+import HeroSection from '../../components/liquid-glass/HeroSection.astro';
+import AboutSection from '../../components/liquid-glass/AboutSection.astro';
+import SkillsSection from '../../components/liquid-glass/SkillsSection.astro';
+import ExperienceSection from '../../components/liquid-glass/ExperienceSection.astro';
+import ProjectsSection from '../../components/liquid-glass/ProjectsSection.astro';
+import EducationSection from '../../components/liquid-glass/EducationSection.astro';
+import ContactSection from '../../components/liquid-glass/ContactSection.astro';
+import FooterSection from '../../components/liquid-glass/FooterSection.astro';
+
+import { languages } from '../../utils/i18n';
+import { loadContent, loadLangSwitchTexts } from '../../utils/loadProfile';
+import type { LiquidGlassContent } from '../../types';
+
+export function getStaticPaths() {
+  return languages.map((lang) => ({ params: { lang } }));
+}
+
+const { lang } = Astro.params;
+const content = loadContent(lang!, 'liquid-glass') as LiquidGlassContent;
+const allLangSwitchTexts = loadLangSwitchTexts();
+---
+
+<LiquidGlassLayout
+  title={content.meta.title}
+  description={content.meta.description}
+  lang={lang}
+>
+  <NavBar content={content} lang={lang!} />
+  <HeroSection content={content} />
+
+  <div class="section-divider"></div>
+  <AboutSection content={content} />
+
+  <div class="section-divider"></div>
+  <SkillsSection content={content} />
+
+  <div class="section-divider"></div>
+  <ExperienceSection content={content} />
+
+  <div class="section-divider"></div>
+  <ProjectsSection content={content} />
+
+  <div class="section-divider"></div>
+  <EducationSection content={content} />
+
+  <div class="section-divider"></div>
+  <ContactSection content={content} />
+
+  <FooterSection content={content} />
+
+  <script
+    is:inline
+    id="lang-config"
+    type="application/json"
+    set:html={JSON.stringify({
+      lang,
+      languages,
+      textsByLang: allLangSwitchTexts,
+    })}
+  />
+
+  <script>
+    import { initLangSuggest } from '../../scripts/shared/langSuggest';
+
+    const cfg = JSON.parse(
+      document.getElementById('lang-config')!.textContent!
+    );
+    initLangSuggest(cfg.lang, cfg.languages, cfg.textsByLang, 'liquid-glass');
+  </script>
+</LiquidGlassLayout>

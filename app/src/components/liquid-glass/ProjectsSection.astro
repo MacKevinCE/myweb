@@ -1,0 +1,204 @@
+---
+import SectionLabel from './SectionLabel.astro';
+import ImageWithFallback from '../shared/ImageWithFallback.astro';
+import TagPill from './TagPill.astro';
+import type { LiquidGlassContent } from '../../types';
+
+interface Props {
+  content: LiquidGlassContent;
+}
+
+const { content } = Astro.props;
+const { projects } = content;
+
+const showFeatured = projects.featured?.visible !== false;
+const hasItems = projects.items && projects.items.length > 0;
+const showSection = showFeatured || hasItems;
+
+const allTags = hasItems
+  ? ([
+      ...new Set(projects.items.flatMap((p) => p.tags)),
+    ].sort() as string[])
+  : [];
+const filterChips = [projects.allLabel, ...allTags];
+---
+
+{
+  showSection && (
+    <section
+      id="projects"
+      style="padding: var(--section-padding-y) var(--section-padding-x);"
+    >
+      <div class="flex flex-col items-center gap-[60px]">
+        <SectionLabel
+          label={projects.label}
+          color="var(--accent-blue)"
+        />
+        <h2 class="section-title">{projects.subtitle || projects.title}</h2>
+
+        {/* Featured project */}
+        {showFeatured && (
+          <div
+            class="glass-reveal glass-card-glow flex flex-col lg:flex-row overflow-hidden w-full"
+            style="height: 420px;"
+            data-tags={projects.featured.tags.join(',')}
+          >
+            <div
+              class="w-full lg:w-[480px] h-[240px] lg:h-full shrink-0 flex items-center justify-center overflow-hidden relative"
+              style="background: linear-gradient(135deg, var(--bg-project-dark), var(--bg-project-mid) 50%, var(--bg-project-dark));"
+            >
+              <ImageWithFallback
+                src={projects.featured.image}
+                alt={projects.featured.name}
+                fallback={projects.featured.name[0]}
+                fallbackClass="text-[var(--accent-blue)] text-8xl font-light opacity-15"
+              />
+            </div>
+
+            <div class="flex flex-col justify-center gap-5 p-10 flex-1">
+              <div class="inline-flex self-start px-3.5 py-1.5 rounded-[20px] bg-[var(--accent-blue-15)] border border-[var(--accent-blue-30)]">
+                <span class="text-[var(--accent-blue)] text-[11px] font-semibold">
+                  {projects.featuredBadge}
+                </span>
+              </div>
+
+              <h3
+                class="text-[var(--text-primary)] text-5xl font-light"
+                style="font-family: var(--font-display);"
+              >
+                {projects.featured.name}
+              </h3>
+
+              <p class="text-[var(--text-secondary)] text-[15px] leading-[1.7]">
+                {projects.featured.description}
+              </p>
+
+              <div class="flex flex-wrap gap-2">
+                {projects.featured.tags.map((tag) => (
+                  <TagPill tag={tag} size="md" />
+                ))}
+              </div>
+
+              {projects.featured.repo && (
+                <a
+                  href={projects.featured.repo}
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex self-start items-center gap-2 px-6 py-3 rounded-xl bg-[var(--glass-light)] border border-[var(--glass-border-strong)] text-[var(--text-primary)] text-xs font-medium hover:bg-[var(--glass-hover)] transition-all"
+                >
+                  {projects.openBtn}
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Filter + Grid */}
+        {hasItems && (
+          <Fragment>
+            <div class="flex flex-wrap gap-2" id="filter-chips">
+              {filterChips.map((tag, i) => (
+                <button
+                  class={`px-4 py-2 text-xs rounded-full border transition-all cursor-pointer ${
+                    i === 0
+                      ? 'border-[var(--accent-blue)] text-[var(--accent-blue)] bg-[var(--accent-blue-10)]'
+                      : 'border-[var(--border-glass)] text-[var(--text-secondary)] bg-transparent'
+                  }`}
+                  data-filter={tag}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full"
+              id="projects-grid"
+            >
+              {projects.items.map((proj) => (
+                <a
+                  href={proj.repo || '#'}
+                  target="_blank"
+                  rel="noopener"
+                  class="glass-reveal glass-card flex flex-col overflow-hidden hover:border-[var(--accent-blue)] transition-all group"
+                  data-tags={proj.tags.join(',')}
+                >
+                  <div
+                    class="w-full h-[140px] flex items-center justify-center overflow-hidden relative"
+                    style="background: linear-gradient(135deg, var(--bg-project-card-start), var(--bg-project-card-end));"
+                  >
+                    <ImageWithFallback
+                      src={proj.image}
+                      alt={proj.name}
+                      fallback={proj.name[0]}
+                      fallbackClass="text-[var(--text-muted)] text-4xl font-light opacity-10"
+                    />
+                  </div>
+
+                  <div class="flex flex-col gap-3 p-5 flex-1">
+                    <h4 class="text-[var(--text-primary)] text-base font-medium group-hover:text-[var(--accent-blue)] transition-colors">
+                      {proj.name}
+                    </h4>
+                    <p class="text-[var(--text-secondary)] text-xs leading-relaxed">
+                      {proj.description}
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 mt-auto">
+                      {proj.tags.map((tag) => (
+                        <TagPill tag={tag} />
+                      ))}
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </Fragment>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<script>
+  document.querySelectorAll('#filter-chips button').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      document
+        .querySelectorAll('#filter-chips button')
+        .forEach((c) => {
+          c.classList.remove(
+            'border-[var(--accent-blue)]',
+            'text-[var(--accent-blue)]',
+            'bg-[var(--accent-blue-10)]'
+          );
+          c.classList.add(
+            'border-[var(--border-glass)]',
+            'text-[var(--text-secondary)]',
+            'bg-transparent'
+          );
+        });
+      chip.classList.remove(
+        'border-[var(--border-glass)]',
+        'text-[var(--text-secondary)]',
+        'bg-transparent'
+      );
+      chip.classList.add(
+        'border-[var(--accent-blue)]',
+        'text-[var(--accent-blue)]',
+        'bg-[var(--accent-blue-10)]'
+      );
+
+      const filter = chip.getAttribute('data-filter') || '';
+      const chips = Array.from(
+        document.querySelectorAll('#filter-chips button')
+      );
+      const allTag = chip === chips[0];
+
+      document
+        .querySelectorAll('#projects-grid [data-tags]')
+        .forEach((card) => {
+          const el = card as HTMLElement;
+          const tags = el.getAttribute('data-tags') || '';
+          el.style.display = allTag || tags.includes(filter) ? '' : 'none';
+        });
+    });
+  });
+</script>

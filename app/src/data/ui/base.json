@@ -1,0 +1,13 @@
+{
+  "langSwitch": {
+    "langNames": {
+      "en": "English",
+      "es": "Español",
+      "pt": "Português"
+    }
+  },
+  "footer": {
+    "version": "v3.2.1",
+    "year": "2025"
+  }
+}

@@ -1,0 +1,117 @@
+---
+import LanguageSwitch from './LanguageSwitch.astro';
+import type { TerminalContent } from '../../types';
+
+interface Props {
+  content: TerminalContent;
+  lang: string;
+}
+
+const { content, lang } = Astro.props;
+const brand = (content.about?.avatarName ?? '').toLowerCase().replace(/\s+/g, '_');
+const topBarTitle = `${brand} — ${content.hero?.topBarSuffix ?? ''}`;
+
+const navItems = [
+  'about',
+  'skills',
+  'experience',
+  'projects',
+  'education',
+  'contact',
+] as const;
+---
+
+<!-- Top Bar -->
+<header
+  id="terminal-top-bar"
+  class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between h-10 px-6 md:px-10 bg-[var(--bg-elevated)] border-b border-[var(--border-primary)]"
+>
+  <div class="flex items-center gap-3">
+    <div class="flex items-center gap-1.5">
+      <span class="w-3 h-3 rounded-full bg-[var(--red-alert)]"></span>
+      <span class="w-3 h-3 rounded-full bg-[var(--amber-warning)]"></span>
+      <span class="w-3 h-3 rounded-full bg-[var(--green-terminal)]"></span>
+    </div>
+    <span class="text-[var(--text-muted)] text-xs font-mono hidden sm:inline"
+      >{topBarTitle}</span
+    >
+  </div>
+
+  <!-- Desktop nav -->
+  <nav class="hidden lg:flex items-center gap-6">
+    {
+      navItems.map((key) => (
+        <a
+          href={`#${key}`}
+          class="text-[var(--text-muted)] text-xs font-mono hover:text-[var(--green-terminal)] transition-colors glitch-hover"
+        >
+          {content.nav[key]}
+        </a>
+      ))
+    }
+    <LanguageSwitch
+      currentLang={lang}
+
+      selectLabel={content.langSwitch?.selectLabel}
+    />
+  </nav>
+
+  <div class="flex items-center gap-4 lg:hidden">
+    <LanguageSwitch
+      currentLang={lang}
+
+      selectLabel={content.langSwitch?.selectLabel}
+    />
+    <button
+      id="hamburger-btn"
+      class="hamburger"
+      aria-label={content.shell?.toggleMenu ?? 'Toggle menu'}
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <span class="text-[var(--text-muted)] text-xs font-mono hidden xl:inline"
+    >{content.hero.terminalTitle}</span
+  >
+</header>
+
+<!-- Mobile Nav -->
+<nav
+  id="mobile-nav"
+  class="mobile-nav font-mono"
+  role="navigation"
+  aria-label={content.shell?.mobileNav ?? 'Mobile navigation'}
+>
+  {
+    navItems.map((key) => (
+      <a href={`#${key}`} class="mobile-nav-link">
+        &gt; {content.nav[key]}
+      </a>
+    ))
+  }
+</nav>
+
+<script>
+  const hamburger = document.getElementById('hamburger-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav?.classList.toggle('open');
+    const isOpen = mobileNav?.classList.contains('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  mobileNav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      hamburger?.classList.remove('open');
+      mobileNav?.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>

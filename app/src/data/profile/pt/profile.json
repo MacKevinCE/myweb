@@ -1,0 +1,683 @@
+{
+  "meta": {
+    "title": "Mac Kevin — Especialista Líder em Desenvolvimento Móvel iOS",
+    "description": "Portfólio de Mac Kevin, especialista líder em desenvolvimento móvel iOS com mais de 5 anos construindo apps de saúde e banking em Swift."
+  },
+  "about": {
+    "role": "Especialista Senior em Desenvolvimento iOS",
+    "tagline": "Criando experiências iOS pixel-perfect",
+    "location": "Lima, Peru",
+    "available": "Disponível para novos desafios",
+    "avatarRole": "Especialista iOS",
+    "bio": [
+      "Engenheiro de Computação com mais de 5 anos de experiência em desenvolvimento de aplicações móveis iOS, especializado em Swift, arquiteturas MVC/MVVM/VIPER e gestão ágil de projetos.",
+      "Reconhecido pela capacidade analítica, pensamento criativo e habilidade para resolver problemas complexos com soluções escaláveis.",
+      "Liderou e contribuiu em projetos para banking, seguros e saúde digital no Peru, Chile, México e Espanha, garantindo alta qualidade, manutenibilidade e cumprimento de prazos."
+    ],
+    "metrics": [
+      {
+        "value": "+5",
+        "label": "anos_exp"
+      },
+      {
+        "value": "+6",
+        "label": "apps_produção"
+      },
+      {
+        "value": "4",
+        "label": "países"
+      },
+      {
+        "value": "3",
+        "label": "idiomas"
+      }
+    ],
+    "languages": [
+      {
+        "text": "espanhol [nativo]"
+      },
+      {
+        "text": "inglês [profissional]"
+      },
+      {
+        "text": "português [básico]"
+      }
+    ],
+    "statusBar": [
+      {
+        "key": "status",
+        "value": "online"
+      },
+      {
+        "key": "localização",
+        "value": "remoto / global"
+      },
+      {
+        "key": "aberto a",
+        "value": "novas oportunidades"
+      }
+    ]
+  },
+  "skills": {
+    "categories": [
+      {
+        "title": "Linguagens",
+        "items": [
+          { "name": "Swift", "level": 95 },
+          { "name": "C#", "level": 95 },
+          { "name": "JavaScript", "level": 95 },
+          { "name": "TypeScript", "level": 60 },
+          { "name": "Kotlin", "level": 55 },
+          { "name": "Python", "level": 55 }
+        ]
+      },
+      {
+        "title": "Frameworks",
+        "items": [
+          { "name": "UIKit", "level": 90 },
+          { "name": "SwiftUI", "level": 85 },
+          { "name": "Cocoa Touch", "level": 85 },
+          { "name": "Astro", "level": 85 },
+          { "name": "React Native", "level": 55 },
+          { "name": "Node.js", "level": 55 }
+        ]
+      },
+      {
+        "title": "Bibliotecas",
+        "items": [
+          { "name": "Combine", "level": 80 },
+          { "name": "RxSwift", "level": 75 },
+          { "name": "Alamofire", "level": 85 },
+          { "name": "PromiseKit", "level": 75 }
+        ]
+      },
+      {
+        "title": "Arquitetura",
+        "items": [
+          { "name": "MVC", "level": 90 },
+          { "name": "MVVM", "level": 90 },
+          { "name": "VIPER", "level": 85 },
+          { "name": "Clean Architecture", "level": 85 }
+        ]
+      },
+      {
+        "title": "Testes",
+        "items": [
+          { "name": "TDD", "level": 80 },
+          { "name": "Unit Testing", "level": 85 },
+          { "name": "UI Testing", "level": 75 }
+        ]
+      },
+      {
+        "title": "Ferramentas",
+        "items": [
+          { "name": "Xcode", "level": 95 },
+          { "name": "Git", "level": 90 },
+          { "name": "CocoaPods", "level": 85 },
+          { "name": "Swift Package Manager", "level": 85 },
+          { "name": "TestFlight", "level": 85 },
+          { "name": "Firebase", "level": 75 },
+          { "name": "PostgreSQL", "level": 60 }
+        ]
+      },
+      {
+        "title": "DevOps",
+        "items": [
+          { "name": "CI/CD Pipelines", "level": 80 },
+          { "name": "Docker", "level": 90 },
+          { "name": "Fastlane", "level": 90 },
+          { "name": "App Store Connect", "level": 85 },
+          { "name": "Crashlytics", "level": 85 }
+        ]
+      }
+    ]
+  },
+  "experience": {
+    "jobs": [
+      {
+        "company": "Aviantica Technologies S.A.C.",
+        "role": "Software Engineer III",
+        "startDate": "Jun 2022",
+        "endDate": "Presente",
+        "location": "Lima, Peru",
+        "description": "Desenvolvimento de aplicações iOS para Scotiabank Peru usando arquitetura MVC e Swift Package Manager. Construção de interfaces dinâmicas e componentes reutilizáveis em Swift. Otimização de performance, redução de dívida técnica e automação de testes unitários para melhorar cobertura e reduzir incidentes em produção.",
+        "tags": [
+          "Swift",
+          "MVC",
+          "SPM",
+          "Unit Testing",
+          "UIKit"
+        ]
+      },
+      {
+        "company": "NTT DATA Europe & Latam",
+        "role": "Leader Specialist Center",
+        "startDate": "Dez 2021",
+        "endDate": "Jun 2022",
+        "location": "Madri, Espanha",
+        "description": "Liderou o desenvolvimento iOS do app Transbank (Chile), implementando fluxos de venda e processamento de pagamentos. Gestão de desenvolvimento de UI com Storyboard/XIB e gerenciamento de dependências com CocoaPods.",
+        "tags": [
+          "Swift",
+          "UIKit",
+          "CocoaPods",
+          "Storyboard",
+          "XIB"
+        ]
+      },
+      {
+        "company": "Indra",
+        "role": "Technical Analyst",
+        "startDate": "Nov 2020",
+        "endDate": "Dez 2021",
+        "location": "Lima, Peru",
+        "description": "Desenvolvimento do app Mundo Rimac para Rimac Seguros (Peru) usando arquitetura VIPER. Construção de serviços de rede com Alamofire e PromiseKit. Integração com Firebase e distribuição via TestFlight.",
+        "tags": [
+          "Swift",
+          "VIPER",
+          "Alamofire",
+          "PromiseKit",
+          "Firebase"
+        ]
+      },
+      {
+        "company": "Everis Peru S.A.C.",
+        "role": "Center Developer",
+        "startDate": "Jul 2020",
+        "endDate": "Out 2020",
+        "location": "Madri, Espanha",
+        "description": "Desenvolvimento de aplicações iOS de saúde para hospitais na Espanha e México, incluindo ehCOS Remote Health e SJD Hospital. Implementação de funcionalidades de telemedicina, gestão de dados de pacientes, notificações push e bibliotecas modulares para integração de dispositivos médicos usando padrão VIPER.",
+        "tags": [
+          "Swift",
+          "VIPER",
+          "Healthcare",
+          "Push Notifications",
+          "UIKit"
+        ]
+      },
+      {
+        "company": "Freelancer",
+        "role": "iOS Developer",
+        "startDate": "Jul 2019",
+        "endDate": "Jul 2020",
+        "location": "Remoto",
+        "description": "Desenvolvimento das aplicações BlackBook e QManage usando Cocoa Touch e frameworks nativos do iOS. Integração de APIs do sistema de calendário, mensagens e eventos para experiências de usuário enriquecidas.",
+        "tags": [
+          "Swift",
+          "Cocoa Touch",
+          "UIKit",
+          "MVC",
+          "Native APIs"
+        ]
+      },
+      {
+        "company": "Freelancer",
+        "role": "React Native Developer",
+        "startDate": "Abr 2019",
+        "endDate": "Jun 2019",
+        "location": "Remoto",
+        "description": "Desenvolvimento de mapas interativos em apps como Instafit e Trident. Implementação de frontend em React Native e backend com Django (Python).",
+        "tags": [
+          "React Native",
+          "Django",
+          "Python",
+          "Maps",
+          "Mobile"
+        ]
+      },
+      {
+        "company": "Cooperativa de Ahorro y Crédito Integra Perú",
+        "role": "Programmer Analyst",
+        "startDate": "Jan 2019",
+        "endDate": "Mar 2019",
+        "location": "Lima, Peru",
+        "description": "Redesign de interfaces móveis para melhorar a usabilidade e a velocidade de resposta. Modelagem e otimização de processos de negócio internos.",
+        "tags": [
+          "Mobile",
+          "UX/UI",
+          "Process Optimization"
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "featured": {
+      "visible": true,
+      "name": "Portfolio Tema OS",
+      "shortDesc": "Portfolio interativo estilo macOS",
+      "category": "portfolio",
+      "description": "Portfolio interativo que replica um desktop macOS completo no navegador. Inclui janelas arrastáveis/redimensionáveis, magnificação do dock, terminal com sistema de arquivos virtual, sistema de conquistas, centro de notificações, persistência de configurações e suporte PWA. Construído com Astro SSG e TypeScript vanilla.",
+      "tags": [
+        "Astro",
+        "TypeScript",
+        "CSS",
+        "PWA"
+      ],
+      "image": "/icons/icon.svg",
+      "repo": "https://github.com/MacKevinCE/Portfolio-web"
+    },
+    "items": [
+      {
+        "name": "Portfolio Tema Terminal",
+        "shortDesc": "Portfolio estilo terminal CRT hacker",
+        "category": "portfolio",
+        "description": "Portfolio de desenvolvedor com estética retrô de terminal CRT. Animação de sequência de boot, shell interativo com seções destacadas, efeitos de scanline e design responsivo. Construído com Astro e Tailwind CSS.",
+        "tags": [
+          "Astro",
+          "Tailwind CSS",
+          "TypeScript",
+          "CRT"
+        ],
+        "repo": "https://github.com/MacKevinCE/Portfolio-web"
+      },
+      {
+        "name": "Portfolio Tema Liquid Glass",
+        "shortDesc": "Portfolio com design glassmorphism",
+        "category": "portfolio",
+        "description": "Portfolio moderno com linguagem de design glassmorphism. Painéis de vidro fosco, acentos com gradientes, animações de scroll suaves e tipografia elegante. Construído com Astro e Tailwind CSS.",
+        "tags": [
+          "Astro",
+          "Tailwind CSS",
+          "Glassmorphism",
+          "Design"
+        ],
+        "repo": "https://github.com/MacKevinCE/Portfolio-web"
+      },
+      {
+        "name": "MasterApi",
+        "shortDesc": "Gerador dinâmico de APIs CRUD",
+        "category": "open-source",
+        "description": "API RESTful em TypeScript que auto-gera endpoints CRUD a partir do esquema PostgreSQL. Suporta queries dinâmicos, stored procedures, operações em lote, autenticação JWT, Socket.io em tempo real e paginação — zero boilerplate manual de rotas/controllers.",
+        "tags": [
+          "TypeScript",
+          "Node.js",
+          "PostgreSQL",
+          "JWT"
+        ],
+        "repo": "https://github.com/MacKevinCE/MasterApi"
+      },
+      {
+        "name": "Processamento de Imagem",
+        "shortDesc": "Restauração de fotos familiares com visão computacional",
+        "category": "open-source",
+        "description": "Sistema de restauração de imagens em Python para fotografias familiares danificadas. Usa interpolação de pirâmide gaussiana, detecção de bordas Canny, inpainting em 8 direções e interpolação bicúbica para reconstrução multiescala. Inclui métricas de qualidade MSE e demos em Jupyter.",
+        "tags": [
+          "Python",
+          "NumPy",
+          "Computer Vision",
+          "Image Processing"
+        ],
+        "repo": "https://github.com/MacKevinCE/ProcesamientoImagen"
+      },
+      {
+        "name": "Decele",
+        "shortDesc": "Toolkit open-source para desenvolvimento iOS",
+        "category": "open-source",
+        "description": "Biblioteca Swift open-source que oferece soluções para networking (padrão Repository com Combine), armazenamento seguro (Keychain + UserDefaults criptografado), debugging em tempo real (Chuck), gestão de fontes de ícones (Fonts), criptografia (AES-GCM, HMAC-SHA512) e componentes UI reutilizáveis. Usada em apps em produção.",
+        "tags": [
+          "Swift",
+          "Open Source",
+          "CocoaPods",
+          "Combine",
+          "CryptoKit"
+        ],
+        "repo": "https://github.com/MacKevinCE/Decele"
+      },
+      {
+        "name": "Chuck",
+        "shortDesc": "Ferramenta de logging e debugging iOS em tempo real",
+        "category": "open-source",
+        "description": "Ferramenta de debugging dentro do app que captura logs, requisições de rede, mudanças de dados persistidos e eventos de memória em tempo real. Ativada com gesto de agitar o dispositivo, exibe um painel visual com busca, filtragem e inspeção detalhada — sem necessidade do console do Xcode.",
+        "tags": [
+          "Swift",
+          "UIKit",
+          "Combine",
+          "Debugging"
+        ],
+        "repo": "https://github.com/MacKevinCE/Decele"
+      },
+      {
+        "name": "Fonts",
+        "shortDesc": "Carregador dinâmico de fontes de ícones para iOS",
+        "category": "open-source",
+        "description": "Sistema de gestão de fontes de ícones que carrega dinamicamente fontes personalizadas (TTF, OTF, WOFF) via CoreText e gera UIImages estilizadas a partir de caracteres de ícones. Suporta Bootstrap Icons, Font Awesome e Material Icons com uma API unificada baseada em protocolos.",
+        "tags": [
+          "Swift",
+          "CoreText",
+          "UIKit",
+          "Icon Fonts"
+        ],
+        "repo": "https://github.com/MacKevinCE/Decele"
+      }
+    ]
+  },
+  "education": {
+    "degrees": [
+      {
+        "extra": "[graduação]",
+        "badge": "Eng. Informática",
+        "title": "Engenharia Informática",
+        "institution": "Universidad Nacional de Trujillo",
+        "period": "2015 — 2019",
+        "details": "Graduação em Engenharia Informática com foco em desenvolvimento de software e arquitetura de sistemas."
+      },
+      {
+        "extra": "[intercâmbio]",
+        "badge": "Intercâmbio Acadêmico",
+        "title": "Ciência da Computação (Intercâmbio Acadêmico)",
+        "institution": "ICMC — Universidade de São Paulo, São Carlos, Brasil",
+        "period": "2018",
+        "details": "Programa de intercâmbio acadêmico internacional de 1 ano focado em fundamentos de Ciência da Computação e pesquisa."
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Certificado Profissional Scrum Foundation",
+        "year": "2023",
+        "issuer": "SCRUMstudy - Accreditation Body for Scrum and Agile",
+        "image": "https://assets.mackevince.com/public/images/certs/SCRUMstudy.jpeg",
+        "verifyUrl": "https://c46e136a583f7e334124-ac22991740ab4ff17e21daf2ed577041.ssl.cf1.rackcdn.com/Certificate/ScrumFundamentalsCertified-HermesMacKevinCabanillasEncarnacion-1006045.pdf"
+      },
+      {
+        "name": "Desenvolvimento Seguro em iOS com Swift",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-860cd4e1-5898-4431-ace9-81a9ee4e3bd6.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-860cd4e1-5898-4431-ace9-81a9ee4e3bd6"
+      },
+      {
+        "name": "Concorrência em iOS com Swift",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-db039428-2f67-4f32-a0f1-40c46e74995f.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-db039428-2f67-4f32-a0f1-40c46e74995f"
+      },
+      {
+        "name": "Flutter Avançado: Leve seu conhecimento ao próximo nível",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-986cd773-b735-4df3-8119-4a3209b91244.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-986cd773-b735-4df3-8119-4a3209b91244"
+      },
+      {
+        "name": "iOS e Swift 5.5 Curso Completo De Zero a Profissional",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-6559f114-fd71-4b3e-857d-f1c64ca99de9.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-6559f114-fd71-4b3e-857d-f1c64ca99de9"
+      },
+      {
+        "name": "The Complete Android 12 & Kotlin Development Masterclass",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-3345a744-cc80-485e-8776-f96f5a629a9f.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-3345a744-cc80-485e-8776-f96f5a629a9f"
+      },
+      {
+        "name": "Flutter: Guia completo de desenvolvimento para iOS e Android",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-052fd9bb-4cf6-4b12-b245-64ee83139c98.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-052fd9bb-4cf6-4b12-b245-64ee83139c98"
+      },
+      {
+        "name": "Aprenda a programar Android com Kotlin + Firebase + Google",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-a89bc866-724c-4772-ab02-652494287082.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-a89bc866-724c-4772-ab02-652494287082"
+      },
+      {
+        "name": "React Native: Aplicativos nativos para iOS e Android",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-05d28992-3458-4493-8f4a-101aa9afede0.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-05d28992-3458-4493-8f4a-101aa9afede0"
+      },
+      {
+        "name": "React PRO: Leve suas bases ao próximo nível",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-b7b86965-e51d-4065-8bd9-43ddfe461b08.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-b7b86965-e51d-4065-8bd9-43ddfe461b08"
+      },
+      {
+        "name": "React: De zero a especialista (Hooks e MERN)",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-97842072-20f2-4885-9368-3e9350e6c059.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-97842072-20f2-4885-9368-3e9350e6c059"
+      },
+      {
+        "name": "Node: De zero a especialista",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-5f2be9c0-cc05-412b-a109-8298643316a9.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-5f2be9c0-cc05-412b-a109-8298643316a9"
+      },
+      {
+        "name": "TypeScript: Seu guia completo e manual de mão",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-24b9134d-5d14-42c3-8ce1-2244141b0599.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-24b9134d-5d14-42c3-8ce1-2244141b0599"
+      },
+      {
+        "name": "React: Aplicações em tempo real com Socket.io",
+        "year": "2022",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-3bc83eba-bae4-4ba4-b002-03ad6802f3fc.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-3bc83eba-bae4-4ba4-b002-03ad6802f3fc"
+      },
+      {
+        "name": "Curso completo de iOS 13 com SwiftUI 5.2: de zero a especialista",
+        "year": "2021",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-364d3678-2263-476e-8a07-1360d157b6dd.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-364d3678-2263-476e-8a07-1360d157b6dd"
+      },
+      {
+        "name": "Curso completo de iOS 11 e Swift: de zero a especialista",
+        "year": "2021",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-1954ce12-77b0-4fae-be7a-0505e5d5add6.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-1954ce12-77b0-4fae-be7a-0505e5d5add6"
+      },
+      {
+        "name": "Build Responsive Real-World Websites with HTML and CSS",
+        "year": "2021",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-587adc75-c481-424b-a95b-1a7d2e6e7da2.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-587adc75-c481-424b-a95b-1a7d2e6e7da2"
+      },
+      {
+        "name": "Up and Running with jQuery",
+        "year": "2021",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-51a18009-f930-4995-90d5-15912907cc08.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-51a18009-f930-4995-90d5-15912907cc08"
+      },
+      {
+        "name": "GIT+GitHub: Sistema completo de controle de versão do zero",
+        "year": "2021",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-6889e85b-33b1-400c-a485-bcf99e3ae5bb.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-6889e85b-33b1-400c-a485-bcf99e3ae5bb"
+      },
+      {
+        "name": "Master CI/CD for iOS Developers",
+        "year": "2021",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-be359b27-918d-46ec-a395-3a4e36d8a9b6.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-be359b27-918d-46ec-a395-3a4e36d8a9b6"
+      },
+      {
+        "name": "iOS & Swift - The Complete iOS App Development Bootcamp",
+        "year": "2021",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-178dd9c3-75df-45e8-9195-b299ea033d0c.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-178dd9c3-75df-45e8-9195-b299ea033d0c"
+      },
+      {
+        "name": "SwiftUI Masterclass 2021 - iOS 14 App Development & Swift 5",
+        "year": "2021",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-55f49660-5f59-45f9-873d-46b4e1682456.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-55f49660-5f59-45f9-873d-46b4e1682456"
+      },
+      {
+        "name": "Programa Especializado - Swift 5 iOS Application Developer",
+        "year": "2020",
+        "issuer": "LearnQuest",
+        "image": "https://assets.mackevince.com/public/images/certs/CourseraS26PWJH7FQ7W.png",
+        "verifyUrl": "https://www.coursera.org/account/accomplishments/specialization/certificate/S26PWJH7FQ7W"
+      },
+      {
+        "name": "Swift 5 - De Junior a Senior iOS 13 - Xcode 11.2",
+        "year": "2020",
+        "issuer": "Udemy",
+        "image": "https://udemy-certificate.s3.amazonaws.com/image/UC-a570ea15-7d03-43df-baea-facb44046b69.jpg",
+        "verifyUrl": "https://www.udemy.com/certificate/UC-a570ea15-7d03-43df-baea-facb44046b69"
+      }
+    ]
+  },
+  "codeSnippets": [
+    {
+      "title": "Magnificação do Dock — Queda Gaussiana",
+      "language": "typescript",
+      "description": "Magnificação do dock estilo macOS usando queda quadrática por distância. Ícones escalam pela proximidade do cursor, com ajuste automático à largura do viewport.",
+      "code": "const INFLUENCE = 120;\nconst BASE_ICON_SIZE = 48;\n\nfunction onMove(e: MouseEvent) {\n  if (maxScale <= 1) { resetIcons(); return; }\n\n  const scale = parseFloat(\n    dock.style.getPropertyValue('--dock-scale') || '1'\n  );\n  const baseSize = BASE_ICON_SIZE * scale;\n\n  for (let i = 0; i < icons.length; i++) {\n    const rect = slots[i].getBoundingClientRect();\n    const center = rect.left + rect.width / 2;\n    const dist = Math.abs(e.clientX - center);\n\n    // Quadratic falloff — smooth Gaussian-like curve\n    const factor = Math.max(0, 1 - (dist / INFLUENCE) ** 2);\n    const s = 1 + (maxScale - 1) * factor;\n    const size = Math.round(baseSize * s);\n\n    icons[i].style.width = size + 'px';\n    icons[i].style.height = size + 'px';\n    icons[i].style.transform =\n      `translateY(${-Math.round((size - baseSize) * 0.5)}px)`;\n  }\n}",
+      "output": "✓ Queda quadrática: escalamento suave baseado em distância\n✓ Ícones redimensionam fisicamente — flex layout desloca vizinhos\n✓ Auto-ajuste: escalamento com clamp ao viewport\n✓ Raio de influência 120px, tamanho base 48px\n✓ Offset translateY mantém o dock alinhado embaixo\n\nMagnificação do dock pronta — passe o cursor para interagir"
+    },
+    {
+      "title": "Sistema de Arquivos Virtual — Motor de Resolução de Caminhos",
+      "language": "typescript",
+      "description": "Constrói um sistema de arquivos virtual a partir de dados JSON do portfolio. Resolução completa de caminhos com ~, .., / e caminhos relativos — alimentando o terminal interativo.",
+      "code": "interface FSNode {\n  type: 'file' | 'dir';\n  name: string;\n  children?: FSNode[];\n  content?: string;\n}\n\nfunction buildFS(data: ProfileData): FSNode {\n  const root: FSNode = { type: 'dir', name: '~', children: [] };\n\n  root.children!.push({\n    type: 'file', name: 'about.txt',\n    content: `${data.about.role}\\n${data.about.bio.join('\\n\\n')}`\n  });\n\n  const projDir: FSNode = { type: 'dir', name: 'projects', children: [] };\n  for (const p of data.projects.items) {\n    projDir.children!.push({\n      type: 'file', name: `${slugify(p.name)}.md`,\n      content: `# ${p.name}\\n\\n${p.description}\\nTags: ${p.tags.join(', ')}`\n    });\n  }\n  root.children!.push(projDir);\n  return root;\n}\n\nfunction resolvePath(path: string): string {\n  if (path === '/' || path === '~') return '~';\n  if (path.startsWith('~/'))\n    return normParts(['~', ...path.slice(2).split('/')]);\n  const base = state.cwd === '~' ? ['~'] : state.cwd.split('/');\n  return normParts([...base, ...path.split('/')]);\n}\n\nfunction normParts(parts: string[]): string {\n  const result: string[] = ['~'];\n  for (const seg of parts.slice(1)) {\n    if (seg === '.' || seg === '') continue;\n    if (seg === '..') { if (result.length > 1) result.pop(); }\n    else result.push(seg);\n  }\n  return result.join('/');\n}",
+      "output": "✓ Árvore FSNode construída a partir do JSON do portfolio\n✓ Diretórios: ~/projects/, ~/experience/, ~/skills/\n✓ Resolução de caminhos: ~, /, .., caminhos relativos\n✓ normParts() lida com casos extremos (barra dupla, ponto final)\n✓ getNode() percorre a árvore com busca O(profundidade)\n\nSistema de arquivos montado — 5 diretórios, 18 arquivos"
+    },
+    {
+      "title": "Motor de Conquistas — Tracking de Eventos O(1)",
+      "language": "typescript",
+      "description": "Sistema de conquistas estilo Game Center com mapas de eventos pré-computados, tracking único via Sets, inicialização lazy e salvamento em lotes.",
+      "code": "type AchievementEvent = 'window-opened' | 'terminal-command' | ...;\n\ninterface AchievementDef {\n  id: string;\n  event: AchievementEvent;\n  threshold: number;\n  trackUnique?: boolean;\n}\n\n// O(1) event lookup — pre-built at module load\nconst EVENT_MAP = new Map<AchievementEvent, AchievementDef[]>();\nfor (const a of ACHIEVEMENTS) {\n  const list = EVENT_MAP.get(a.event) || [];\n  list.push(a);\n  EVENT_MAP.set(a.event, list);\n}\n\n// Runtime Sets for O(1) unique tracking\nconst uniqueSets = new Map<string, Set<string>>();\n\nfunction track(event: AchievementEvent, payload?: { id?: string }) {\n  ensureInit(); // lazy load from localStorage\n\n  const matching = EVENT_MAP.get(event);\n  if (!matching) return;\n\n  let dirty = false;\n\n  for (const def of matching) {\n    const state = store.states[def.id];\n    if (!state || state.unlocked) continue;\n\n    if (def.trackUnique) {\n      let set = uniqueSets.get(def.id);\n      if (!set) { set = new Set(); uniqueSets.set(def.id, set); }\n      const uid = payload?.id ?? '';\n      if (uid && !set.has(uid)) {\n        set.add(uid);\n        state.progress = set.size;\n        dirty = true;\n      }\n    } else {\n      state.progress++;\n      dirty = true;\n    }\n\n    if (state.progress >= def.threshold) {\n      state.unlocked = true;\n      state.unlockedAt = new Date().toISOString();\n      notifyUnlock(def);\n    }\n  }\n\n  if (dirty) save(); // single save per batch\n}",
+      "output": "✓ EVENT_MAP: busca O(1) vs filtro O(n) por evento\n✓ uniqueSets: Set<string> para tracking de valores distintos\n✓ Init lazy — leitura do localStorage só no primeiro acesso\n✓ Um único save() por chamada a track() — sem escritas redundantes\n✓ Idempotente: conquistas já desbloqueadas são ignoradas\n✓ 21 conquistas, 20 tipos de evento, 0 desperdício de performance\n\nMotor de conquistas inicializado — tracking ativo"
+    },
+    {
+      "title": "Arrasto de Janelas — Limiar de Micro-Movimento",
+      "language": "typescript",
+      "description": "Saída adiada de tela cheia ao arrastar: ignora micro-movimentos (<3px) para prevenir saídas acidentais. Restaura geometria anterior ao arrastar realmente.",
+      "code": "let pendingExit = false;\nlet startMouseX = 0;\nlet startMouseY = 0;\n\nconst onMouseMove = (e: MouseEvent) => {\n  if (!dragging) return;\n\n  if (pendingExit) {\n    const dx = Math.abs(e.clientX - startMouseX);\n    const dy = Math.abs(e.clientY - startMouseY);\n    if (dx < 3 && dy < 3) return; // ignore micro-movements\n\n    const state = windowStates.get(win.id);\n    if (state) {\n      // Restore previous window size\n      const prevW = state.fullscreen\n        ? parseFloat(state.preFullWidth) || win.offsetWidth * 0.6\n        : parseFloat(state.preZoomWidth) || win.offsetWidth * 0.6;\n      const prevH = state.fullscreen\n        ? parseFloat(state.preFullHeight) || win.offsetHeight * 0.6\n        : parseFloat(state.preZoomHeight) || win.offsetHeight * 0.6;\n\n      if (state.fullscreen) {\n        state.fullscreen = false;\n        win.classList.remove('os-window--fullscreen');\n      }\n      state.zoomed = false;\n\n      // Center window under cursor\n      win.style.transition = 'none';\n      win.style.left =\n        `${Math.max(8, e.clientX - prevW / 2)}px`;\n      win.style.top =\n        `${Math.max(32, e.clientY - 20)}px`;\n      win.style.width = `${prevW}px`;\n      win.style.height = `${prevH}px`;\n\n      offsetX = e.clientX - win.offsetLeft;\n      offsetY = e.clientY - win.offsetTop;\n    }\n    pendingExit = false;\n    return;\n  }\n\n  // Normal drag — clamp to desktop bounds\n  const x = Math.max(8, Math.min(e.clientX - offsetX, dw - ww - 8));\n  const y = Math.max(32, Math.min(e.clientY - offsetY, dh - wh - 8));\n  win.style.left = `${x}px`;\n  win.style.top = `${y}px`;\n};",
+      "output": "✓ Limiar de micro-movimento de 3px previne saídas acidentais\n✓ Adiado: saída de fullscreen/zoom só ao arrastar realmente\n✓ Restauração de geometria: largura/altura anterior preservada\n✓ Centraliza janela sob o cursor ao sair\n✓ Clamp aos limites do desktop em cada frame\n✓ Zero transição durante arrasto — resposta instantânea\n\nSistema de arrasto pronto — agarre qualquer barra de título"
+    },
+    {
+      "title": "Container DI — Task Coalescing",
+      "language": "swift",
+      "description": "Container de Injeção de Dependências com task coalescing para singletons async, 4 tipos de scope, detecção de dependências circulares via TaskLocal e arquitetura Sendable-safe.",
+      "code": "public enum DependencyScope {\n    case singleton  // Shared globally\n    case transient  // New instance each time\n    case scoped     // Singleton within a child container\n    case weak       // Singleton with weak reference\n}\n\nfinal class ServiceRegistration<T>: @unchecked Sendable {\n    private var cachedInstance: T?\n    private weak var weakInstance: AnyObject?\n    private var inflightTask: Task<T, any Error>?\n    private let lock = NSLock()\n\n    // Fast path: return cached without Task allocation\n    private func getCachedInstance() -> T? {\n        lock.lock()\n        defer { lock.unlock() }\n        if let cached = cachedInstance { return cached }\n        if scope == .weak, let cached = weakInstance as? T { return cached }\n        return nil\n    }\n\n    // Task coalescing: reuse inflight task for concurrent resolves\n    private func getOrCreateInflightTask(\n        resolver: Resolver\n    ) -> Task<T, any Error> {\n        lock.lock()\n        defer { lock.unlock() }\n        if let cached = cachedInstance { return Task { cached } }\n        if let task = inflightTask { return task }\n\n        let task = Task<T, any Error> { [self] in\n            try await self.invokeFactory(using: resolver)\n        }\n        inflightTask = task\n        return task\n    }\n\n    private func finalizeCachedInstance(_ instance: T) -> T {\n        lock.lock()\n        defer { lock.unlock() }\n        inflightTask = nil\n        if let cached = cachedInstance { return cached }\n        cachedInstance = instance\n        return instance\n    }\n}",
+      "output": "✓ 4 scopes: singleton, transient, scoped, weak\n✓ Task coalescing previne init async duplicado\n✓ Fast-path cache evita alocação desnecessária de Task\n✓ NSLock para acesso concorrente thread-safe\n✓ Sendable-safe com @unchecked Sendable\n✓ Detecção de dependências circulares via TaskLocal\n\nContainer pronto — 0 inicializações duplicadas"
+    },
+    {
+      "title": "Keychain Storage — API SecItem com Codable",
+      "language": "swift",
+      "description": "Wrapper de Keychain com suporte Codable. Padrão update-or-insert com mapeamento de erros OSStatus e isolamento por serviço.",
+      "code": "final class KeychainStorage: StorageProtocol {\n    private let service: String\n\n    init(service: String = Bundle.main.bundleIdentifier\n        ?? String(describing: KeychainStorage.self)) {\n        self.service = service\n    }\n\n    func save<T: Codable>(_ value: T, for key: String) throws {\n        let data = try JSONEncoder().encode(value)\n\n        let query: [String: Any] = [\n            kSecClass as String: kSecClassGenericPassword,\n            kSecAttrService as String: service,\n            kSecAttrAccount as String: key,\n        ]\n        let attributes: [String: Any] = [\n            kSecValueData as String: data,\n        ]\n\n        // Update-or-insert pattern\n        let status = SecItemUpdate(\n            query as CFDictionary, attributes as CFDictionary\n        )\n        if status == errSecItemNotFound {\n            let insertQuery = query.merging(attributes) { $1 }\n            let insertStatus = SecItemAdd(\n                insertQuery as CFDictionary, nil\n            )\n            guard insertStatus == errSecSuccess else {\n                throw mapStatus(insertStatus)\n            }\n        } else if status != errSecSuccess {\n            throw mapStatus(status)\n        }\n    }\n\n    func read<T: Codable>(_ type: T.Type, for key: String) throws -> T {\n        let query: [String: Any] = [\n            kSecClass as String: kSecClassGenericPassword,\n            kSecAttrService as String: service,\n            kSecAttrAccount as String: key,\n            kSecReturnData as String: true,\n            kSecMatchLimit as String: kSecMatchLimitOne,\n        ]\n        var item: AnyObject?\n        let status = SecItemCopyMatching(\n            query as CFDictionary, &item\n        )\n        guard status == errSecSuccess,\n              let data = item as? Data else {\n            throw mapStatus(status)\n        }\n        return try JSONDecoder().decode(T.self, from: data)\n    }\n}",
+      "output": "✓ Save/read genérico com Codable e JSON encoding\n✓ Update-or-insert: SecItemUpdate → fallback SecItemAdd\n✓ Isolamento por serviço baseado em bundle ID\n✓ Mapeamento OSStatus → StorageError tipado\n✓ kSecClassGenericPassword para armazenamento seguro\n\nKeychain storage pronto — segredos cifrados em repouso"
+    },
+    {
+      "title": "Event Channel — Pub/Sub Async Tipado",
+      "language": "swift",
+      "description": "Canal de eventos async com tipagem forte e modo sticky para assinantes tardios. Baseado em AsyncStream com limpeza automática ao encerrar a assinatura.",
+      "code": "@MainActor\nfinal class EventChannel<Payload>: AnyEventChannel {\n    private var continuations:\n        [UUID: AsyncStream<Payload>.Continuation] = [:]\n    private let sticky: Bool\n    private var lastValue: Payload?\n\n    init(sticky: Bool = false) {\n        self.sticky = sticky\n    }\n\n    func subscribe() -> AsyncStream<Payload> {\n        let id = UUID()\n        let cachedValue = sticky ? lastValue : nil\n\n        return AsyncStream { continuation in\n            // Replay cached value for sticky channels\n            if let cachedValue {\n                continuation.yield(cachedValue)\n            }\n            self.continuations[id] = continuation\n\n            continuation.onTermination = { @Sendable _ in\n                Task { @MainActor in\n                    self.continuations.removeValue(forKey: id)\n                }\n            }\n        }\n    }\n\n    func send(_ payload: Payload) {\n        if sticky { lastValue = payload }\n        for continuation in continuations.values {\n            continuation.yield(payload)\n        }\n    }\n\n    func finish() {\n        for continuation in continuations.values {\n            continuation.finish()\n        }\n        continuations.removeAll()\n        lastValue = nil\n    }\n}\n\n// Usage in Coordinator:\n// lazy var iconChannel = registerChannel(\n//     EventChannel<IconResponse>(sticky: true)\n// )\n//\n// Usage in ViewModel:\n// observeChannel(coordinator.iconChannel) { icon in\n//     self.setIcon(icon)\n// }",
+      "output": "✓ Payloads tipados — segurança em tempo de compilação\n✓ Modo sticky: assinantes tardios recebem último valor\n✓ Baseado em AsyncStream com ciclo de vida de continuation\n✓ Assinaturas com UUID para add/remove O(1)\n✓ Limpeza automática via handler onTermination\n✓ @MainActor para entrega segura na UI\n\nCanal de eventos ativo — 0 assinaturas com leak"
+    },
+    {
+      "title": "Certificate Pinning — Avaliação por Host",
+      "language": "swift",
+      "description": "SSL certificate pinning com callbacks de avaliação por host. Intercepta challenges de URLSession para validar server trust contra certificados fixados.",
+      "code": "class CertificatePinningManager {\n    typealias HostEvaluation = (SecTrust) -> Bool\n    private(set) var hostEvaluations:\n        [String: HostEvaluation] = [:]\n\n    func fetchCertificates(\n        withExtensions exts: Set<String>,\n        in bundle: Bundle\n    ) -> Set<Data> {\n        var certs: Set<Data> = []\n        for ext in exts {\n            let urls = bundle.urls(\n                forResourcesWithExtension: ext,\n                subdirectory: nil\n            ) ?? []\n            for url in urls {\n                guard let data = try? Data(contentsOf: url)\n                else { continue }\n                certs.insert(data)\n            }\n        }\n        return certs\n    }\n\n    func register(\n        evaluation: @escaping HostEvaluation,\n        for host: String\n    ) {\n        hostEvaluations[host] = evaluation\n    }\n}\n\n// URLSessionDelegate integration\nextension CertificatePinningManager {\n    func urlSession(\n        _ session: URLSession,\n        didReceive challenge: URLAuthenticationChallenge,\n        completionHandler: @escaping\n            (URLSession.AuthChallengeDisposition,\n             URLCredential?) -> Void\n    ) {\n        guard challenge.protectionSpace\n            .authenticationMethod ==\n            NSURLAuthenticationMethodServerTrust\n        else {\n            completionHandler(.performDefaultHandling, nil)\n            return\n        }\n        let host = challenge.protectionSpace.host\n        guard let evaluation = hostEvaluations[host],\n              let trust = challenge.protectionSpace.serverTrust,\n              evaluation(trust)\n        else {\n            completionHandler(.cancelAuthenticationChallenge, nil)\n            return\n        }\n        completionHandler(\n            .useCredential, URLCredential(trust: trust)\n        )\n    }\n}",
+      "output": "✓ Callbacks de avaliação por host — pinning flexível\n✓ Carregamento de certificados do bundle (.cer, .der)\n✓ Validação SecTrust via delegate de URLSession\n✓ Rejeita hosts não confiáveis com .cancelAuthenticationChallenge\n✓ Fallthrough para tratamento padrão em hosts desconhecidos\n\nCertificate pinning ativo — proteção MITM habilitada"
+    },
+    {
+      "title": "App Security — Máquina de Estados de Bloqueio por Inatividade",
+      "language": "swift",
+      "description": "Bloqueio de segurança baseado em tempo com três estados: desbloqueado → aviso → bloqueado. Publishers reativos com Combine para binding de UI, com timeout e countdown configuráveis.",
+      "code": "protocol AppSecurityServicing: AnyObject {\n    var lockState: AnyPublisher<AppSecurity.LockState, Never> { get }\n    var state: AppSecurity.LockState { get }\n    func unlock()\n    func userInteraction()\n    func lock()\n}\n\nfinal class AppSecurity: AppSecurityServicing {\n    enum LockState: Equatable {\n        case unlocked\n        case warning(TimeInterval)\n        case locked\n    }\n\n    private let lockStateSubject =\n        CurrentValueSubject<LockState, Never>(.locked)\n    var lockState: AnyPublisher<LockState, Never> {\n        lockStateSubject.receive(on: DispatchQueue.main)\n            .eraseToAnyPublisher()\n    }\n    private var timer: Timer?\n    private let warningTimeout: TimeInterval = 5\n    private let lockTimeout: TimeInterval = 5 * 60\n\n    var state: LockState { lockStateSubject.value }\n\n    func unlock() { startInactivityTimer() }\n\n    func userInteraction() {\n        guard state != .locked else { return }\n        startInactivityTimer()\n    }\n\n    func lock() {\n        guard state != .locked else { return }\n        lockStateSubject.send(.locked)\n        stopTimer()\n    }\n\n    private func startInactivityTimer() {\n        stopTimer()\n        lockStateSubject.send(.unlocked)\n        timer = Timer.scheduledTimer(\n            withTimeInterval: lockTimeout - warningTimeout,\n            repeats: false\n        ) { [weak self] _ in\n            self?.startCountdown()\n        }\n    }\n\n    private func startCountdown() {\n        stopTimer()\n        var seconds = warningTimeout\n        lockStateSubject.send(.warning(seconds))\n        timer = Timer.scheduledTimer(\n            withTimeInterval: 1, repeats: true\n        ) { [weak self] _ in\n            seconds -= 1\n            self?.lockStateSubject.send(.warning(seconds))\n        }\n    }\n\n    private func stopTimer() {\n        timer?.invalidate()\n        timer = nil\n    }\n}",
+      "output": "✓ Máquina de três estados: unlocked → warning → locked\n✓ Timeout de inatividade de 5 minutos com contagem regressiva de 5s\n✓ Publisher Combine para binding reativo de UI\n✓ userInteraction() reinicia timer em qualquer toque\n✓ Limpeza de Timer previne memory leaks\n✓ Orientado a protocolos para testabilidade\n\nBloqueio de segurança ativo — auto-bloqueio em 5:00"
+    },
+    {
+      "title": "Crypto — AES-GCM + HMAC com Generics",
+      "language": "swift",
+      "description": "Criptografia/descriptografia type-safe usando CryptoKit. Sealed boxes AES-GCM e assinaturas HMAC-SHA512 com suporte genérico Codable e base64 URL-safe.",
+      "code": "import CryptoKit\nimport Foundation\n\npublic enum Crypto {\n    public static func getSymmetricKey(pass: String?) -> SymmetricKey? {\n        guard let pass, let data = pass.data(using: .utf8)\n        else { return nil }\n        return SymmetricKey(data: SHA256.hash(data: data))\n    }\n\n    public static func signatureHMAC<T: Encodable>(\n        _ value: T, pass: String?\n    ) -> String? {\n        guard let key = getSymmetricKey(pass: pass),\n              let data = value.encode\n        else { return nil }\n        return Data(\n            HMAC<SHA512>.authenticationCode(for: data, using: key)\n        ).base64EncodedString().urlEncoded\n    }\n\n    public static func createSealedBox<T: Encodable>(\n        _ value: T, pass: String?\n    ) -> Data? {\n        guard let key = getSymmetricKey(pass: pass),\n              let data = value.encode\n        else { return nil }\n        guard let sealedBox = try? AES.GCM.seal(\n            data, using: key, nonce: AES.GCM.Nonce()\n        ) else { return nil }\n        return sealedBox.combined\n    }\n\n    public static func openSealedBox<T: Decodable>(\n        _ sealedBox: Data?, pass: String?\n    ) -> T? {\n        guard let data = sealedBox,\n              let key = getSymmetricKey(pass: pass),\n              let box = try? AES.GCM.SealedBox(combined: data),\n              let decrypted = try? AES.GCM.open(box, using: key)\n        else { return nil }\n        return T(from: decrypted)\n    }\n}",
+      "output": "✓ Derivação SHA256 de password → SymmetricKey\n✓ Encrypt/decrypt AES-GCM com Nonce\n✓ Assinaturas HMAC-SHA512 para integridade de dados\n✓ Generics Encodable/Decodable — criptografa qualquer tipo Codable\n✓ Encoding base64 URL-safe para transporte\n✓ Métodos sobrecarregados: retorno Data e String\n\nMódulo crypto pronto — criptografia AES-256 ativa"
+    },
+    {
+      "title": "Cadeia de Validadores — Chain of Responsibility",
+      "language": "swift",
+      "description": "Validação de texto composável usando o padrão Chain of Responsibility. Factory methods estáticos para comprimento, regex, email e caracteres que se encadeiam entre si.",
+      "code": "open class Validator {\n    private var next: Validator?\n    private let failText: String\n\n    public init(failText: String, next: Validator?) {\n        self.next = next\n        self.failText = failText\n    }\n\n    public func failed() -> String? { failText }\n\n    open func validate(_ text: String) -> String? {\n        next?.validate(text)\n    }\n\n    // Static factory methods — composable chain\n    public static func maxLength(\n        max: Int, failText: String = \"MaxLength\",\n        next: Validator? = nil\n    ) -> Validator {\n        LengthValidator(\n            length: max, compareOptions: .greaterEqual,\n            failText: failText, next: next\n        )\n    }\n\n    public static func minLength(\n        min: Int, failText: String = \"MinLength\",\n        next: Validator? = nil\n    ) -> Validator {\n        LengthValidator(\n            length: min, compareOptions: .lessEqual,\n            failText: failText, next: next\n        )\n    }\n\n    public static func regex(\n        regex: String, failText: String = \"Regex\",\n        next: Validator? = nil\n    ) -> Validator {\n        SearchValidator(\n            text: regex, compareOptions: .regularExpression,\n            rangeOptions: .equal, failText: failText, next: next\n        )\n    }\n\n    public static func email(\n        failText: String = \"Email\", next: Validator? = nil\n    ) -> Validator {\n        .regex(\n            regex: \"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+\"\n                + \"@[a-zA-Z0-9-]+(?:\\\\.[a-zA-Z0-9-]+)*$\",\n            failText: failText, next: next\n        )\n    }\n}\n\n// Usage:\n// let validator: Validator = .minLength(min: 3, next:\n//     .maxLength(max: 50, next:\n//         .email()))\n// let error = validator.validate(input) // nil = valid",
+      "output": "✓ Chain of Responsibility — padrão GoF clássico\n✓ Factory methods estáticos para cadeias composáveis\n✓ Incluídos: comprimento, regex, email, caracteres, data\n✓ Cada validador retorna nil (passa) ou string de erro\n✓ Classe open — estenda com validadores custom\n✓ API fluida: .minLength(next: .maxLength(next: .email()))\n\nCadeia de validadores pronta — 6 validadores incluídos"
+    },
+    {
+      "title": "Token Interceptor — Refresh Thread-Safe",
+      "language": "swift",
+      "description": "RequestInterceptor do Alamofire com refresh de token thread-safe usando NSLock. Padrão template method com hooks sobrescrevíveis para gestão do ciclo de vida do token.",
+      "code": "open class TokenInterceptor: RequestInterceptor {\n    private var isRefreshing = false\n    private let lock = NSLock()\n\n    public func adapt(\n        _ urlRequest: URLRequest,\n        for session: Session,\n        completion: @escaping (Result<URLRequest, Error>) -> Void\n    ) {\n        var adapted = urlRequest\n        if let token = getToken() {\n            createHeader(token: token).forEach {\n                adapted.addValue($0.value, forHTTPHeaderField: $0.name)\n            }\n        }\n        completion(.success(adapted))\n    }\n\n    public func retry(\n        _ request: Request, for session: Session,\n        dueTo error: Error,\n        completion: @escaping (RetryResult) -> Void\n    ) {\n        lock.lock(); defer { lock.unlock() }\n\n        if isRefreshing {\n            isRefreshing = false\n            if conditionToRefresh(\n                request, for: session,\n                dueTo: error, token: getToken()\n            ) {\n                refreshToken { [weak self] result in\n                    switch result {\n                    case let .success(token):\n                        self?.saveToken(token)\n                        completion(.retry)\n                    case .failure:\n                        completion(.doNotRetry)\n                    }\n                }\n            } else {\n                completion(.doNotRetry)\n            }\n        } else {\n            isRefreshing = true\n            completion(.doNotRetry)\n        }\n    }\n\n    // Template method hooks — override in subclass\n    open func getToken() -> TokenProtocol? { nil }\n    open func saveToken(_ token: TokenProtocol) {}\n    open func refreshToken(\n        _ completion: @escaping (Result<TokenProtocol, Error>) -> Void\n    ) {}\n    open func conditionToRefresh(\n        _ request: Request, for session: Session,\n        dueTo error: Error, token: TokenProtocol?\n    ) -> Bool { false }\n    open func createHeader(token: TokenProtocol) -> [HTTPHeader] {\n        [.authorization(bearerToken: token.accessToken)]\n    }\n}",
+      "output": "✓ NSLock thread safety para requests concorrentes\n✓ Padrão template method — 5 hooks sobrescrevíveis\n✓ Injeção automática de Bearer token via adapt()\n✓ Retry inteligente: refresh uma vez, depois doNotRetry\n✓ Weak self capture previne retain cycles\n✓ Funciona com qualquer Session do Alamofire\n\nInterceptor ativo — token refresh armado"
+    }
+  ],
+  "articles": [
+    {
+      "title": "Otimizando o desempenho no Scotiabank",
+      "date": "2024-12-15",
+      "tags": ["Swift", "Performance", "Banking"],
+      "summary": "Como reduzi os tempos de carregamento em 40% no app iOS do Scotiabank Peru com lazy loading, cache de imagens e chamadas de rede otimizadas.",
+      "content": "Quando entrei no projeto do Scotiabank, o dashboard principal demorava mais de 3 segundos para carregar. Os usuários estavam frustrados e as métricas mostravam 15% de abandono.\n\n## O Problema\n\nO dashboard carregava todos os dados sincronicamente — saldos, transações recentes, promoções e notificações — tudo em uma única chamada bloqueante.\n\n## A Solução\n\n**1. Lazy Loading**: Dividi a chamada monolítica em módulos independentes que carregam em paralelo. O saldo (crítico) carrega primeiro, enquanto transações e promoções carregam assincronamente.\n\n**2. Cache de Imagens**: Os banners promocionais eram re-baixados a cada sessão. Implementei um cache em disco com NSCache que reduziu a largura de banda em 60%.\n\n**3. Prefetching**: Usando a API de prefetch do URLSession, o app começa a carregar os dados da próxima tela antes do usuário navegar.\n\n## Resultados\n\n- Tempo de carregamento: 3.2s → 1.1s (65% de redução)\n- Taxa de crashes: -40%\n- Retenção de usuários: +12% no primeiro mês\n\nA lição chave: otimização de desempenho não é sobre algoritmos inteligentes — é sobre entender o comportamento do usuário e carregar primeiro o que importa."
+    },
+    {
+      "title": "VIPER vs MVVM na prática",
+      "date": "2024-08-20",
+      "tags": ["Architecture", "VIPER", "MVVM", "Swift"],
+      "summary": "Depois de usar ambos padrões extensivamente em produção, minha opinião honesta sobre quando usar cada um.",
+      "content": "Construí apps em produção tanto com VIPER quanto com MVVM. Aqui está o que aprendi.\n\n## MVVM: Quando usar\n\nMVVM brilha em apps pequenos a médios. O ViewModel gerencia a lógica de negócio e a View observa as mudanças. É simples, testável, e a maioria dos desenvolvedores iOS entende.\n\n**Prós:**\n- Rápido de implementar\n- Fácil testar ViewModels\n- Funciona muito bem com Combine/RxSwift\n- Pouco boilerplate\n\n**Contras:**\n- ViewModels podem ficar massivos\n- Lógica de navegação fica confusa\n- Difícil impor limites em times grandes\n\n## VIPER: Quando usar\n\nVIPER é construído para escalar. Cada módulo tem responsabilidades claras: View, Interactor, Presenter, Entity, Router.\n\n**Prós:**\n- Separação de responsabilidades cristalina\n- Cada componente é testável independentemente\n- O Router gerencia a navegação de forma limpa\n- Perfeito para times grandes\n\n**Contras:**\n- Boilerplate significativo\n- Excessivo para telas simples\n- Curva de aprendizado para novos desenvolvedores\n\n## Minha regra\n\n- Solo/time pequeno, < 20 telas → MVVM\n- Time grande, > 20 telas, banking/enterprise → VIPER\n- Misto: VIPER para módulos complexos, MVVM para simples\n\nA arquitetura deve servir ao time, não o contrário."
+    },
+    {
+      "title": "Unit Testing: O investimento que compensa",
+      "date": "2024-05-10",
+      "tags": ["Testing", "TDD", "Swift", "XCTest"],
+      "summary": "Por que insisto em +80% de cobertura de testes e como nos salvou de 3 bugs críticos em produção no Scotiabank.",
+      "content": "Quando propus aumentar a cobertura de testes de 30% para 80% no Scotiabank, o time resistiu. 'Não temos tempo para testes.' Assim os convenci.\n\n## O custo de não testar\n\nNo Q1 2023, tivemos 3 bugs críticos em produção:\n\n1. **Bug de formatação de moeda** — valores sem decimais para transações em pesos chilenos\n2. **Race condition de sessão** — usuários podiam iniciar transferências com tokens expirados\n3. **Invalidação de cache** — saldos desatualizados após transferências\n\nTodos os três seriam pegos por testes unitários básicos.\n\n## A abordagem\n\nNão pedi permissão para parar o desenvolvimento. Em vez disso:\n\n1. **Testes junto com features** — cada PR novo exigia testes para o código novo\n2. **Testar o que dá medo primeiro** — processamento de pagamentos, autenticação, mapeamento de dados\n3. **Automatizar no CI** — testes rodam em cada PR, gate de cobertura em 80%\n\n## O retorno\n\nDepois de 6 meses:\n- Cobertura: 32% → 84%\n- Bugs em produção: -60%\n- Confiança do time: incalculável\n- Tempo de onboarding: -30% (testes como documentação)\n\nO melhor teste é o que pega um bug antes dos seus usuários."
+    },
+    {
+      "title": "De React Native a Swift: Por que mudei",
+      "date": "2023-11-05",
+      "tags": ["React Native", "Swift", "Career"],
+      "summary": "Minha jornada de cross-platform para desenvolvimento iOS nativo, e por que nunca olhei para trás.",
+      "content": "Comecei minha carreira mobile com React Native. Construí mapas, features em tempo real e interfaces interativas com JavaScript. Era rápido, produtivo, e o hot reload era viciante.\n\n## Por que mudei\n\n**Teto de desempenho**: Para os apps de saúde que eu estava construindo (ehCOS Remote Health), a bridge do React Native era um gargalo. A integração com dispositivos médicos exigia módulos nativos de qualquer forma.\n\n**Profundidade de plataforma**: iOS tem APIs incríveis — HealthKit, Core Bluetooth, ARKit — que React Native wrappea mal ou simplesmente não.\n\n**Trajetória de carreira**: As vagas iOS mais bem pagas exigem conhecimento profundo da plataforma. Desenvolvedores React Native são mais substituíveis.\n\n## O que ficou\n\nReact Native me ensinou:\n- Pensamento baseado em componentes (aplica a SwiftUI)\n- Padrões de gerenciamento de estado (aplica a Combine)\n- Mentalidade de iteração rápida\n\n## O veredicto\n\nReact Native é ótimo para MVPs e apps de conteúdo. Mas se você está construindo apps bancários, sistemas de saúde, ou qualquer coisa que precise parecer truly native — vá de native.\n\nNão me arrependo dos anos com React Native. Eles me fizeram um melhor desenvolvedor iOS."
+    },
+    {
+      "title": "Construindo Interoperabilidade de Carteiras Digitais no Scotiabank",
+      "date": "2025-03-10",
+      "tags": ["Swift", "Banking", "Security", "P2P"],
+      "summary": "Como implementei transferências P2P entre carteiras no Scotiabank Peru, habilitando interoperabilidade com mais de 20 instituições financeiras com padrões QR e protocolos de segurança rigorosos.",
+      "content": "Liderei a implementação de interoperabilidade de carteiras digitais no Scotiabank Peru — uma funcionalidade que permite transferências P2P entre mais de 20 bancos e carteiras digitais usando códigos QR, regulada pela SBS.\n\n## O Desafio\n\nTornar as transferências fluidas entre instituições com sistemas, APIs e padrões de segurança diferentes. O usuário escaneia um QR ou digita um número de telefone, e o dinheiro se move entre qualquer carteira participante — Scotiabank, BCP, Interbank, BBVA, Yape, Plin, e mais.\n\n## O Maior Problema: Exposição de Dados\n\nDurante os testes iniciais, descobrimos um problema crítico de privacidade. Quando um usuário digitava um número de telefone para transferir dinheiro, a API retornava o **nome legal completo** do destinatário. Os usuários rapidamente perceberam e começaram a usar o fluxo de transferência como ferramenta de busca — digitavam qualquer número e obtinham o nome completo da pessoa.\n\nEssa era uma vulnerabilidade séria de privacidade. Trabalhamos com o time de backend para implementar:\n- **Mascaramento de nomes**: Mostrar apenas nomes parciais (ex: \"J*** Pérez G***\")\n- **Limite de consultas**: Limitando tentativas de busca por usuário por hora\n- **Monitoramento comportamental**: Sinalizando contas que consultavam nomes sem completar transferências\n\n## Segurança em Cada Passo\n\nCada funcionalidade passou por revisão de segurança rigorosa. Alguns exemplos:\n- Validação de códigos QR para prevenir que códigos manipulados redirecionem fundos\n- Assinatura de transações para garantir que valores não possam ser modificados em trânsito\n- Validação de sessão em cada etapa do fluxo de transferência\n- Confirmação biométrica antes de executar transferências\n\n## Integração do Centro de Ajuda\n\nTambém construímos um centro de ajuda dentro do app (promovido por regulação da SBS) que guia os usuários passo a passo pelo processo de interoperabilidade — com tutoriais visuais, perguntas frequentes e canais de suporte direto.\n\n## Impacto\n\nEssa funcionalidade colocou o Scotiabank Peru no mapa da interoperabilidade, permitindo que os usuários enviem e recebam dinheiro por todo o ecossistema financeiro peruano sem sair do app. A lição chave: em banco, segurança não é uma funcionalidade — é a fundação."
+    },
+    {
+      "title": "Eliminando Singletons: Migrando para Injeção de Dependências",
+      "date": "2025-06-20",
+      "tags": ["Architecture", "DI", "Testing", "Swift"],
+      "summary": "Como estou liderando a migração de MVVM baseado em singletons para injeção de dependências baseada em protocolos no Scotiabank, melhorando a testabilidade e reduzindo o acoplamento.",
+      "content": "O app iOS do Scotiabank Peru foi construído com MVVM — mas uma versão limitada. Os ViewModels acessavam serviços através de singletons, tornando os testes unitários praticamente impossíveis e criando dependências ocultas por todo lado.\n\n## O Problema com Singletons\n\nSingletons parecem convenientes até que você precise:\n- **Testar isoladamente**: Você não pode mockar um singleton sem swizzling ou hacks de estado global\n- **Entender dependências**: Um ViewModel que chama `NetworkManager.shared` não dá pista do que realmente precisa\n- **Rodar testes em paralelo**: Estado mutável compartilhado entre testes causa resultados inconsistentes\n\n## A Estratégia de Migração\n\nNão propus uma reescrita total. Em vez disso:\n\n**1. Protocolos primeiro**: Cada serviço tem um protocolo. `NetworkManager` vira `NetworkManaging`. A classe concreta conforma, mas os consumidores só conhecem o protocolo.\n\n**2. Injeção por construtor**: ViewModels recebem suas dependências pelo init. Sem mais chamadas `.shared` dentro da lógica de negócio.\n\n**3. Container DI**: Um container centralizado registra e resolve dependências. Singletons ainda existem no nível do container, mas o resto do código não sabe nem se importa.\n\n**4. Adoção incremental**: Features novas usam DI desde o primeiro dia. As existentes migram quando são tocadas para bug fixes ou melhorias.\n\n## Reduzindo Dependências Legacy\n\nJunto com a migração para DI, reduzi as dependências de bibliotecas de terceiros em 90%. Muitas eram bibliotecas legacy que tinham substituições nativas no iOS moderno — URLSession em vez de wrappers de networking custom, Codable em vez de parsing JSON manual, async/await em vez de bibliotecas baseadas em callbacks.\n\n## Caçando Referências Circulares\n\nCom o codebase sob a lupa, também auditei em busca de retain cycles usando o Memory Graph Debugger do Xcode. Encontrei várias referências circulares entre ViewModels e suas closures, coordinators com referências fortes para coordinators filhos, e padrões delegate sem declarações `weak`. Cada correção reduziu o consumo de memória do app.\n\n## O Resultado\n\nO app está progressivamente se tornando mais testável, mais manutenível e mais leve. O time está escrevendo testes para funcionalidades que antes eram impossíveis de testar. A arquitetura evolui sem quebrar nada em produção.\n\nA lição: você não precisa de permissão para melhorar a arquitetura. Apenas faça cada PR um pouco melhor do que o que havia antes."
+    },
+    {
+      "title": "Lições de Segurança do Desenvolvimento de Apps Bancários",
+      "date": "2024-09-15",
+      "tags": ["Security", "iOS", "Banking", "Best Practices"],
+      "summary": "Desafios de segurança reais que enfrentei construindo apps bancários — de certificate pinning a exposição de dados, e a mudança de mentalidade necessária para software financeiro.",
+      "content": "Depois de anos construindo apps bancários, aprendi que segurança no desenvolvimento mobile não é sobre adicionar uma biblioteca — é sobre pensar diferente em cada camada.\n\n## Certificate Pinning: Não Confie em Ninguém\n\nEm um app bancário, você não pode confiar na rede. Ataques man-in-the-middle são reais, especialmente em WiFi público. Implementamos certificate pinning com avaliação por host — cada endpoint de API é validado contra certificados fixados incluídos no app.\n\nA parte difícil: rotação de certificados. Se o servidor atualiza seu certificado e você não publicou uma atualização do app com o novo pin, seus usuários ficam bloqueados. Mantemos uma cadeia de avaliação com fallback e coordenamos as rotações com o time de backend com semanas de antecedência.\n\n## A Armadilha da Privacidade\n\nA funcionalidade de interoperabilidade nos ensinou uma lição dura: **qualquer dado que você retorna ao cliente pode ser abusado**. Retornávamos nomes completos de destinatários para confirmação de transferência, e os usuários transformaram isso em um serviço de busca de nomes. Agora cada dado passa por uma revisão de privacidade: \"Qual é o mínimo que o usuário precisa ver?\"\n\n## Autenticação Biométrica Bem Feita\n\nFaceID/TouchID parecem simples, mas em banco:\n- Você precisa de um fallback (PIN) para quando biometria falha\n- Deve lidar com mudanças biométricas do dispositivo (novo rosto registrado = re-autenticar)\n- Tokens de sessão devem ser armazenados no Secure Enclave, não apenas no Keychain\n- Precisa distinguir entre autenticação no nível do app e no nível da transação\n\n## Camadas de Armazenamento Seguro\n\nNem tudo vai no Keychain. Usamos uma abordagem escalonada:\n- **Keychain** (Secure Enclave): Tokens de autenticação, chaves biométricas\n- **UserDefaults criptografado**: Preferências do usuário, configuração não sensível\n- **Apenas memória**: Dados de transação, estado de sessão (nunca persistidos)\n\n## A Mudança de Mentalidade\n\nEm apps de consumo, você otimiza para velocidade e UX. Em banco, você otimiza para **correção e auditabilidade**. Cada chamada API é registrada. Cada transição de estado é validada. Cada erro é um potencial evento de segurança.\n\nA ferramenta de segurança mais importante não é uma biblioteca — é a pergunta: \"O que acontece se alguém malicioso usar essa funcionalidade?\""
+    }
+  ],
+  "footer": {
+    "copyright": "© 2026 Mac Kevin. Todos os direitos reservados."
+  }
+}

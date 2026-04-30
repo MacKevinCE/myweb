@@ -1,0 +1,61 @@
+---
+import LanguageSwitch from './LanguageSwitch.astro';
+import TerminalIcon from './TerminalIcon.astro';
+import type { LiquidGlassContent } from '../../types';
+
+interface Props {
+  content: LiquidGlassContent;
+  lang: string;
+}
+
+const { content, lang } = Astro.props;
+
+const navItems = Object.keys(content.nav) as (keyof typeof content.nav)[];
+---
+
+<header
+  id="glass-nav"
+  class="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl"
+>
+  <nav
+    class="flex items-center justify-between px-8 py-4 rounded-[20px] bg-[var(--glass-faint)] border border-[var(--glass-border-dim)] backdrop-blur-xl"
+  >
+    <!-- Logo -->
+    <div class="flex items-center gap-2.5">
+      <TerminalIcon class="w-5 h-5 text-[var(--accent-blue)]" />
+      <span
+        class="text-[var(--text-primary)] font-mono text-lg font-bold tracking-[3px]"
+        >{content.about.avatar}</span
+      >
+    </div>
+
+    <!-- Desktop links -->
+    <div class="hidden lg:flex items-center gap-8">
+      {
+        navItems.map((key) => (
+          <a
+            href={`#${key}`}
+            class="text-[var(--text-secondary)] text-sm font-medium hover:text-[var(--text-primary)] transition-colors"
+          >
+            {content.nav[key]}
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Right: Language + CTA -->
+    <div class="flex items-center gap-4">
+      <LanguageSwitch
+        currentLang={lang}
+        selectLabel={content.langSwitch?.selectLabel}
+        langNames={content.langSwitch?.langNames}
+      />
+      <a
+        href="#contact"
+        class="hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-xl text-white text-sm font-semibold gradient-primary"
+      >
+        {content.nav.contact}
+      </a>
+    </div>
+  </nav>
+</header>

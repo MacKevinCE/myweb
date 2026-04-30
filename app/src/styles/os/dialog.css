@@ -1,0 +1,95 @@
+/* ============================================
+   OS DIALOG — Alert Sheet
+   ============================================ */
+
+.os-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  animation: dialogFadeIn 0.15s ease-out;
+}
+
+.os-dialog {
+  position: relative;
+  width: 280px;
+  padding: 20px;
+  border-radius: var(--os-radius-window);
+  background: var(--os-bg-glass);
+  backdrop-filter: blur(var(--os-blur-lg));
+  -webkit-backdrop-filter: blur(var(--os-blur-lg));
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* Glass border */
+.os-dialog::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--os-radius-window);
+  padding: 0.5px;
+  background: var(--os-glass-border);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.os-dialog-message {
+  font-family: var(--os-font);
+  font-size: var(--os-fs-13);
+  font-weight: 500;
+  color: var(--os-text-primary);
+  margin: 0 0 20px;
+  line-height: 1.4;
+}
+
+.os-dialog-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.os-dialog-btn {
+  flex: 1;
+  padding: 6px 16px;
+  border-radius: var(--os-radius-sm);
+  border: none;
+  font-family: var(--os-font);
+  font-size: var(--os-fs-13);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.os-dialog-btn--cancel {
+  background: var(--os-fill);
+  color: var(--os-text-primary);
+}
+
+.os-dialog-btn--cancel:hover {
+  background: var(--os-fill-strong);
+}
+
+.os-dialog-btn--confirm {
+  background: var(--os-accent, #3B82F6);
+  color: white;
+}
+
+.os-dialog-btn--confirm:hover {
+  filter: brightness(1.1);
+}
+
+/* Focus ring for keyboard navigation */
+.os-dialog-btn:focus-visible {
+  outline: 2px solid var(--os-accent, #3B82F6);
+  outline-offset: 2px;
+}
+
+@keyframes dialogFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -1,0 +1,61 @@
+---
+/**
+ * Launchpad — fullscreen overlay with app grid and search.
+ * Cannot be moved or resized. Click app to open, click outside to close.
+ */
+import { launchpadApps, getIconPath, uiIcons } from '../../data/os-apps';
+import type { OsContent } from '../../types';
+
+interface Props {
+  content: OsContent;
+}
+
+const { content } = Astro.props;
+---
+
+<!-- Launchpad backdrop (click to close) -->
+<div class="lp-backdrop" id="launchpad-backdrop" style="display:none;">
+  <!-- Launchpad panel -->
+  <div class="lp-panel" id="launchpad-panel">
+    <!-- Search header -->
+    <div class="lp-header">
+      <div class="lp-search" role="search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lp-search-icon">
+          <Fragment set:html={uiIcons.search} />
+        </svg>
+        <input
+          type="text"
+          class="lp-search-input"
+          id="launchpad-search"
+          placeholder={content.launchpad?.searchPlaceholder}
+          aria-label="Search apps"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <div class="os-divider" />
+
+    <!-- App grid -->
+    <div class="lp-grid" id="launchpad-grid">
+      {launchpadApps.map((app) => (
+        <button
+          class="lp-app"
+          data-lp-name={app.name.toLowerCase()}
+          data-lp-window={app.id}
+        >
+          <div class={`lp-app-icon ${app.gradient} ${app.shadow}`}>
+            {app.isText ? (
+              <span class="lp-app-icon-text">{app.icon}</span>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <Fragment set:html={getIconPath(app.icon)} />
+              </svg>
+            )}
+          </div>
+          <span class="lp-app-label">{app.name}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</div>

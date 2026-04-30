@@ -1,0 +1,15 @@
+{
+  "nav": {
+    "about": "sobre_mim",
+    "skills": "habilidades",
+    "experience": "experiência",
+    "projects": "projetos",
+    "education": "educação",
+    "contact": "contato"
+  },
+  "langSwitch": {
+    "translateAlert": "Este site está disponível em PORTUGUÊS. Deseja mudar?",
+    "translateSwitch": "Mudar idioma",
+    "translateDismiss": "Não, obrigado"
+  }
+}

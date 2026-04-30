@@ -1,0 +1,190 @@
+/* ============================================
+   SPEED TEST WINDOW
+   ============================================ */
+
+.os-window--speed-test {
+  display: flex;
+  flex-direction: column;
+}
+
+.speed-test-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 28px;
+  gap: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* WiFi icon */
+.st-icon {
+  color: var(--os-accent);
+  opacity: 0.9;
+}
+
+.st-icon--pulse {
+  animation: st-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes st-pulse {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.05); }
+}
+
+/* Status text */
+.st-status {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-13);
+  font-weight: 500;
+  color: var(--os-text-muted);
+  text-align: center;
+}
+
+/* Metrics grid */
+.st-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.st-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  border-radius: var(--os-radius-md);
+  background: var(--os-fill);
+  border: 1px solid var(--os-fill-border);
+}
+
+.st-metric-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--os-text-muted);
+}
+
+.st-metric-label {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-11);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.st-metric-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--os-fs-24);
+  font-weight: 700;
+  color: var(--os-text-primary);
+  line-height: 1;
+}
+
+.st-metric-unit {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-11);
+  color: var(--os-text-muted);
+}
+
+/* Progress bars */
+.st-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--os-fill-border);
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.st-bar-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 2px;
+  background: var(--os-accent);
+  transition: width 0.4s ease, background 0.4s ease;
+}
+
+/* Quality + retry row */
+.st-result-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Quality indicator */
+.st-quality {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: var(--os-radius-md);
+  background: var(--os-fill);
+  border: 1px solid var(--os-fill-border);
+}
+
+.st-quality-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.st-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--os-fill-strong);
+  transition: background 0.3s ease;
+}
+
+.st-quality-label {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-13);
+  font-weight: 600;
+  color: var(--os-text-secondary);
+  flex: 1;
+}
+
+.st-retry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--os-fill);
+  border: 1px solid var(--os-fill-border);
+  padding: 10px;
+  color: var(--os-text-muted);
+  cursor: pointer;
+  border-radius: var(--os-radius-md);
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.st-retry:hover {
+  color: var(--os-accent);
+  background: var(--os-fill-border);
+  border-color: var(--os-fill-strong);
+}
+
+/* Action button */
+.st-btn {
+  padding: 10px 32px;
+  border-radius: var(--os-radius-sm);
+  border: none;
+  background: var(--os-accent);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: var(--os-fs-13);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  width: 100%;
+  max-width: 200px;
+}
+
+.st-btn:hover { opacity: 0.9; }
+.st-btn:active { transform: scale(0.98); }
+.st-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
