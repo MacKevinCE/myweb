@@ -27,5 +27,9 @@ const { basePath } = Astro.props;
       <meta http-equiv="refresh" content={`0;url=${basePath}/${defaultLang}`} />
     </noscript>
   </head>
-  <body></body>
+  <body>
+    <noscript>
+      <p>Redirecting to <a href={`${basePath}/${defaultLang}`}>{`${basePath}/${defaultLang}`}</a></p>
+    </noscript>
+  </body>
 </html>

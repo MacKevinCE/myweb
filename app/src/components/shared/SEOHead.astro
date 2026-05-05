@@ -1,0 +1,112 @@
+---
+import { languages, defaultLang } from '../../utils/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: string;
+  theme?: string;
+  ogImage?: string;
+  type?: 'website' | 'profile';
+  themeColor?: string;
+}
+
+const {
+  title,
+  description,
+  lang,
+  theme,
+  ogImage = '/og-image.svg',
+  type = 'website',
+  themeColor,
+} = Astro.props;
+
+const site = Astro.site!;
+const canonicalURL = new URL(Astro.url.pathname, site).href;
+const ogImageURL = new URL(ogImage, site).href;
+
+const localeMap: Record<string, string> = {
+  en: 'en_US',
+  es: 'es_AR',
+  pt: 'pt_BR',
+};
+
+// Build hreflang alternates for the current page
+// If theme is set, alternates are /{theme}/{lang}; otherwise /{lang}
+function buildAlternates() {
+  const alternates: { lang: string; href: string }[] = [];
+  for (const l of languages) {
+    const path = theme ? `/${theme}/${l}` : `/${l}`;
+    alternates.push({ lang: l, href: new URL(path, site).href });
+  }
+  return alternates;
+}
+
+const alternates = buildAlternates();
+const xDefaultLang = defaultLang;
+const xDefaultHref = alternates.find((a) => a.lang === xDefaultLang)?.href;
+
+// Structured Data — Person + WebSite
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Mac Kevin',
+    url: site.href,
+    image: 'https://assets.mackevince.com/public/profile.webp',
+    jobTitle: 'Senior iOS Development Specialist',
+    sameAs: [
+      'https://github.com/MacKevinCE',
+      'https://www.linkedin.com/in/mackevince/',
+    ],
+  },
+};
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Mac Kevin — Portfolio',
+  url: site.href,
+};
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+<meta name="robots" content="index, follow" />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content={localeMap[lang] || 'en_US'} />
+<meta property="og:site_name" content="Mac Kevin — Portfolio" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageURL} />
+
+<!-- Theme Color -->
+{themeColor && <meta name="theme-color" content={themeColor} />}
+
+<!-- Hreflang alternates -->
+{alternates.map((alt) => (
+  <link rel="alternate" hreflang={alt.lang} href={alt.href} />
+))}
+{xDefaultHref && <link rel="alternate" hreflang="x-default" href={xDefaultHref} />}
+
+<!-- Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />

@@ -6,6 +6,9 @@ interface Props {
   fallbackClass?: string;
   imgClass?: string;
   loading?: 'lazy' | 'eager';
+  width?: number;
+  height?: number;
+  fetchpriority?: 'high' | 'low' | 'auto';
 }
 
 const {
@@ -15,6 +18,9 @@ const {
   fallbackClass = 'text-[var(--green-terminal)] text-6xl font-bold opacity-30',
   imgClass = 'absolute inset-0 w-full h-full object-cover',
   loading,
+  width,
+  height,
+  fetchpriority,
 } = Astro.props;
 ---
 
@@ -26,6 +32,10 @@ const {
         alt={alt}
         class={imgClass}
         loading={loading}
+        decoding="async"
+        width={width}
+        height={height}
+        fetchpriority={fetchpriority}
         onerror="this.style.display='none';this.nextElementSibling.style.display=''"
       />
       <span class={fallbackClass} style="display:none">

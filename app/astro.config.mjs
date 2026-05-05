@@ -83,6 +83,7 @@ function rootLangPages() {
 }
 
 export default defineConfig({
+  site: 'https://mackevince.com',
   integrations: [
     validateDataIntegration(),
     tailwind(),

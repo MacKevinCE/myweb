@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b14"/>
+      <stop offset="50%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0a0b14"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="260" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="72" font-weight="700" fill="white" letter-spacing="-2">Mac Kevin</text>
+  <text x="600" y="330" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="28" font-weight="400" fill="#6C8CFF">Senior iOS Development Specialist</text>
+  <line x1="450" y1="370" x2="750" y2="370" stroke="#6C8CFF" stroke-width="2" opacity="0.4"/>
+  <text x="600" y="420" text-anchor="middle" font-family="system-ui,-apple-system,sans-serif" font-size="20" font-weight="400" fill="rgba(255,255,255,0.6)">mackevince.com</text>
+</svg>

@@ -2,6 +2,7 @@
 import { languages } from '../../utils/i18n';
 import { loadContent } from '../../utils/loadProfile';
 import type { OsContent } from '../../types';
+import SEOHead from '../../components/shared/SEOHead.astro';
 
 export function getStaticPaths() {
   return languages.map((lang) => ({ params: { lang } }));
@@ -16,14 +17,20 @@ const experience = content.experience;
 const projects = content.projects;
 const education = content.education;
 const contact = content.contact?.links;
+
+const cvTitle = `CV — ${content.about.avatarRole || 'Mac Kevin'}`;
+const cvDescription = content.meta?.description || `CV of ${content.about.avatarName || 'Mac Kevin'}`;
 ---
 
 <!doctype html>
 <html lang={lang}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CV — {content.about.avatarRole || 'Mac Kevin'}</title>
+    <SEOHead
+      title={cvTitle}
+      description={cvDescription}
+      lang={lang!}
+      type="profile"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
