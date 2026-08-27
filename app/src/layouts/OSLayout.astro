@@ -14,12 +14,7 @@ const { title, description, lang } = Astro.props;
 <!doctype html>
 <html lang={lang} data-os-mode="dark">
   <head>
-    <SEOHead
-      title={title}
-      description={description}
-      lang={lang}
-      theme="os"
-    />
+    <SEOHead title={title} description={description} lang={lang} theme="os" />
     <meta name="theme-color" content="#1a1a2e" id="meta-theme-color" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="mobile-web-app-capable" content="yes" />
