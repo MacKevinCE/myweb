@@ -1,0 +1,20 @@
+# El Dockerfile de prod hace `COPY ./app /app` y luego `pnpm install`.
+# Sin esto, un node_modules/ o dist/ local se copia al context y se pisa
+# con el install de adentro: build mas lento y cache invalidada en cada cambio.
+**/node_modules
+**/dist
+**/.astro
+**/.pnpm-store
+**/npm-debug.log*
+**/pnpm-debug.log*
+
+.git
+.github
+.claude
+.idea
+.vscode
+**/.DS_Store
+
+# secretos: nunca deben entrar a una layer
+**/.env
+**/.env.*
