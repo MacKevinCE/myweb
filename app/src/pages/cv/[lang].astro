@@ -19,7 +19,9 @@ const education = content.education;
 const contact = content.contact?.links;
 
 const cvTitle = `CV — ${content.about.avatarRole || 'Mac Kevin'}`;
-const cvDescription = content.meta?.description || `CV of ${content.about.avatarName || 'Mac Kevin'}`;
+const cvDescription =
+  content.meta?.description ||
+  `CV of ${content.about.avatarName || 'Mac Kevin'}`;
 ---
 
 <!doctype html>
