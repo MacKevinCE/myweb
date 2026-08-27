@@ -4,7 +4,7 @@ FROM node:22-alpine AS builder
 WORKDIR /app
 
 # Instalar PNPM
-RUN npm install -g pnpm
+RUN npm install -g pnpm@9
 
 ENV CI=true
 

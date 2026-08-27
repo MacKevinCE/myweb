@@ -18,9 +18,12 @@ services:
     build:
       context: .
       dockerfile: ./docker/prod/Dockerfile
-    working_dir: /app
-    volumes:
-      - ./app:/app
+    restart: unless-stopped
+    # Sin `volumes` ni `working_dir`: la imagen de prod es nginx sirviendo
+    # /usr/share/nginx/html (el `dist` ya copiado en el build). Montar ./app:/app
+    # no tenia efecto — solo confundia. El puerto es para probar prod en local;
+    # en el server un docker-compose.override.yml lo quita y lo mueve a la red
+    # del reverse proxy.
     ports:
       - "8080:80"
     networks:
