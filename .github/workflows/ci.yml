@@ -25,10 +25,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Sin `version:` a proposito — pnpm/action-setup toma la version de
+      # `packageManager` en app/package.json. Declararla en los dos lados
+      # hace que la action falle si difieren.
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - name: Setup Node 22
         uses: actions/setup-node@v4
