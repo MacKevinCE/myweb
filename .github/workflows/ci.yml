@@ -25,10 +25,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Sin `version:` a proposito — la version sale de `packageManager` en
+      # app/package.json. Declararla tambien aca hace fallar a la action si
+      # difieren. `package_json_file` es necesario porque la action mira la
+      # raiz del repo por defecto, y este proyecto vive en app/ (el
+      # `working-directory: app` de defaults solo aplica a los pasos `run`).
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 9
+          package_json_file: app/package.json
 
       - name: Setup Node 22
         uses: actions/setup-node@v4

@@ -3,13 +3,17 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Instalar PNPM
-RUN npm install -g pnpm@9
-
-ENV CI=true
+ENV CI=true \
+    COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 
 # Copiar proyecto
 COPY ./app /app
+
+# Activar la version de pnpm declarada en package.json -> packageManager.
+# Antes esto era `npm install -g pnpm` sin pinear, que con el tiempo empezo a
+# resolver a pnpm 11 y rompia el build contra un lockfile v9. Ahora Dockerfile
+# y CI toman la version del mismo lugar y no pueden divergir.
+RUN corepack enable && corepack prepare --activate
 
 # Instalar dependencias y construir
 RUN pnpm install --frozen-lockfile
